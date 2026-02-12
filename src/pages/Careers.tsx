@@ -2,7 +2,7 @@ import { MapPin, ArrowRight, Briefcase, Users, Heart, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import AnimatedSection from "@/components/AnimatedSection";
+import AnimatedSection, { StaggerContainer, StaggerItem } from "@/components/AnimatedSection";
 
 const perks = [
   { icon: Heart, title: "Health & Wellness", desc: "Comprehensive health, dental, and vision coverage for you and your family." },

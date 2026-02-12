@@ -2,7 +2,7 @@ import { Cloud, Server, Shield, Zap, Database, Globe, ArrowRight, CheckCircle2 }
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import AnimatedSection from "@/components/AnimatedSection";
+import AnimatedSection, { StaggerContainer, StaggerItem } from "@/components/AnimatedSection";
 
 const solutions = [
   {
@@ -70,9 +70,9 @@ const Solutions = () => {
       {/* Solutions Grid */}
       <section className="py-24">
         <div className="container mx-auto px-6">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {solutions.map((s, i) => (
-              <AnimatedSection key={s.title} delay={i * 0.1} direction="scale">
+          <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-8" staggerDelay={0.12}>
+            {solutions.map((s) => (
+              <StaggerItem key={s.title}>
                 <div className="card-cloud rounded-2xl p-8 h-full flex flex-col">
                   <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-6">
                     <s.icon className="w-6 h-6 text-primary" />
@@ -88,9 +88,9 @@ const Solutions = () => {
                     ))}
                   </ul>
                 </div>
-              </AnimatedSection>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </section>
 

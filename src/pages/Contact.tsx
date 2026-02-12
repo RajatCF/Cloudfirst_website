@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import AnimatedSection from "@/components/AnimatedSection";
+import AnimatedSection, { StaggerContainer, StaggerItem } from "@/components/AnimatedSection";
 
 const Contact = () => {
   const [form, setForm] = useState({ name: "", email: "", company: "", phone: "", service: "", message: "" });

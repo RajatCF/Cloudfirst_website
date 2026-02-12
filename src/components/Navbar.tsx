@@ -31,19 +31,19 @@ const Navbar = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-5xl"
+      className="fixed top-4 z-50 w-full flex justify-center px-4"
     >
-      <nav className={`nav-floating rounded-full px-6 py-3 flex items-center justify-between transition-all duration-300 ${isScrolled ? "shadow-lg" : ""}`}>
-        <Link to="/" className="flex items-center gap-2">
+      <nav className={`nav-floating rounded-full px-6 py-3 flex items-center gap-8 transition-all duration-300 w-full max-w-4xl ${isScrolled ? "shadow-lg" : ""}`}>
+        <Link to="/" className="flex items-center gap-2 flex-shrink-0">
           <div className="w-8 h-8 rounded-lg btn-cta flex items-center justify-center">
             <Cloud className="w-5 h-5 text-primary-foreground" />
           </div>
           <span className="text-lg font-bold text-primary-foreground">CloudFirst</span>
         </Link>
 
-        {/* Desktop nav */}
-        <div className="hidden md:flex items-center gap-1">
-          {navLinks.map((link) => (
+        {/* Desktop nav - centered */}
+        <div className="hidden md:flex items-center gap-1 flex-1 justify-center">
+          {navLinks.slice(0, -1).map((link) => (
             <Link
               key={link.path}
               to={link.path}
@@ -58,19 +58,19 @@ const Navbar = () => {
           ))}
         </div>
 
-        <div className="hidden md:flex items-center gap-3">
+        <div className="hidden md:flex items-center flex-shrink-0">
           <Link
             to="/contact"
             className="btn-cta px-5 py-2 rounded-full text-sm font-semibold text-primary-foreground"
           >
-            Get Started
+            Contact Us
           </Link>
         </div>
 
         {/* Mobile toggle */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden text-primary-foreground p-2"
+          className="md:hidden text-primary-foreground p-2 ml-auto"
         >
           {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
@@ -83,7 +83,7 @@ const Navbar = () => {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="nav-floating mt-2 rounded-2xl p-4 md:hidden"
+            className="nav-floating mt-2 rounded-2xl p-4 md:hidden absolute top-full left-4 right-4"
           >
             {navLinks.map((link) => (
               <Link
@@ -98,12 +98,6 @@ const Navbar = () => {
                 {link.label}
               </Link>
             ))}
-            <Link
-              to="/contact"
-              className="block mt-2 btn-cta px-5 py-3 rounded-xl text-sm font-semibold text-primary-foreground text-center"
-            >
-              Get Started
-            </Link>
           </motion.div>
         )}
       </AnimatePresence>
