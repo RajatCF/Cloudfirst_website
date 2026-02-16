@@ -10,7 +10,7 @@ const Footer = () => {
       <div className="absolute inset-0 dot-pattern opacity-10" />
 
       {/* Newsletter CTA strip */}
-      <div className="relative z-10 border-b border-border/30">
+      {/* <div className="relative z-10 border-b border-border/30">
         <div className="container mx-auto px-6 py-12">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
@@ -21,7 +21,7 @@ const Footer = () => {
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 md:w-72 px-4 py-3 rounded-xl bg-secondary/50 border border-border/50 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 backdrop-blur-sm"
+                className="flex-1 md:w-72 px-4 py-3 rounded-xl bg-secondary/50 border border-border text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30"
               />
               <button className="btn-cta px-6 py-3 rounded-xl text-primary-foreground font-semibold text-sm whitespace-nowrap inline-flex items-center gap-2">
                 Subscribe <ArrowRight className="w-4 h-4" />
@@ -29,7 +29,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div className="container mx-auto px-6 py-16 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
@@ -57,7 +57,7 @@ const Footer = () => {
                 <a
                   key={i}
                   href={href}
-                  className="w-9 h-9 rounded-lg border border-border/50 bg-secondary/30 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/30 transition-all duration-300"
+                  className="w-9 h-9 rounded-lg border border-border bg-secondary/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/30 transition-all duration-300"
                 >
                   <Icon className="w-4 h-4" />
                 </a>

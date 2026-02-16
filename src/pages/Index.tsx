@@ -6,13 +6,121 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AnimatedSection, { ParallaxSection, StaggerContainer, StaggerItem } from "@/components/AnimatedSection";
 
+// Carousel component for testimonials
+const TestimonialCarousel = ({ testimonials, direction = "left" }) => {
+  const [index, setIndex] = useState(0);
+  // Auto-advance every 3.5s
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % testimonials.length);
+    }, 3500);
+    return () => clearInterval(timer);
+  }, [testimonials.length]);
+
+  // Slide direction
+  const variants = {
+    enter: (dir) => ({
+      x: dir === "left" ? 300 : -300,
+      opacity: 0,
+      position: "absolute"
+    }),
+    center: { x: 0, opacity: 1, position: "relative" },
+    exit: (dir) => ({
+      x: dir === "left" ? -300 : 300,
+      opacity: 0,
+      position: "absolute"
+    })
+  };
+
+  return (
+    <div className="relative flex justify-center items-center mb-10 min-h-[220px]">
+      <AnimatePresence initial={false} custom={direction}>
+        <motion.div
+          key={index}
+          custom={direction}
+          variants={variants}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          transition={{ x: { type: "spring", stiffness: 60, damping: 20 }, opacity: { duration: 0.3 } }}
+          className={`w-full max-w-xl mx-auto bg-gradient-to-br ${testimonials[index].gradient} rounded-2xl p-8 flex flex-col justify-between relative overflow-hidden shadow-lg`}
+        >
+          <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent" />
+          <div className="relative z-10">
+            <p className="text-primary-foreground text-lg font-medium leading-relaxed mb-8">
+              "{testimonials[index].quote}"
+            </p>
+            <div>
+              <p className="text-primary-foreground font-bold">{testimonials[index].name}</p>
+              <p className="text-primary-foreground/70 text-sm">{testimonials[index].role}</p>
+            </div>
+          </div>
+        </motion.div>
+      </AnimatePresence>
+      {/* Dots */}
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+        {testimonials.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setIndex(i)}
+            className={`w-2.5 h-2.5 rounded-full border border-white/40 ${i === index ? "bg-white/80" : "bg-white/30"}`}
+            aria-label={`Go to testimonial ${i + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
 const services = [
-  { icon: Cloud, title: "Cloud Migration", desc: "Seamlessly migrate your workloads to AWS with zero downtime strategies and proven methodology.", color: "from-blue-500/20 to-cyan-500/20", iconColor: "text-blue-400" },
-  { icon: Shield, title: "Cloud Security", desc: "Enterprise-grade security architecture, compliance frameworks, and 24/7 threat detection.", color: "from-emerald-500/20 to-green-500/20", iconColor: "text-emerald-400" },
-  { icon: Zap, title: "DevOps & CI/CD", desc: "Automate deployments with modern DevOps pipelines, GitOps workflows, and IaC best practices.", color: "from-amber-500/20 to-orange-500/20", iconColor: "text-amber-400" },
-  { icon: Server, title: "Managed Services", desc: "24/7 monitoring, optimization, and management of your cloud infrastructure by certified engineers.", color: "from-purple-500/20 to-violet-500/20", iconColor: "text-purple-400" },
-  { icon: Database, title: "Data & Analytics", desc: "Build scalable data lakes, real-time analytics, and ML pipelines on AWS.", color: "from-pink-500/20 to-rose-500/20", iconColor: "text-pink-400" },
-  { icon: Globe, title: "Multi-Cloud Strategy", desc: "Design resilient architectures across multiple cloud providers with unified governance.", color: "from-sky-500/20 to-indigo-500/20", iconColor: "text-sky-400" },
+  {
+    icon: Cloud,
+    title: "Cloud Infrastructure",
+    desc: "Design, deploy, and scale secure cloud environments on AWS, Azure, or GCP.",
+    color: "from-blue-500/10 to-cyan-500/10",
+    iconColor: "text-blue-600",
+    badge: "AWS | Azure | GCP"
+  },
+  {
+    icon: Shield,
+    title: "Cloud Security & Compliance",
+    desc: "Protect your workloads with advanced security, IAM, and compliance automation.",
+    color: "from-emerald-500/10 to-green-500/10",
+    iconColor: "text-emerald-600",
+    badge: "SOC2 | ISO | IAM"
+  },
+  {
+    icon: Zap,
+    title: "DevOps Automation",
+    desc: "CI/CD pipelines, GitOps, and infrastructure as code for rapid, reliable releases.",
+    color: "from-amber-500/10 to-orange-500/10",
+    iconColor: "text-amber-600",
+    badge: "Terraform | GitHub Actions"
+  },
+  {
+    icon: Server,
+    title: "Managed Cloud Services",
+    desc: "24/7 monitoring, patching, and optimization by certified cloud engineers.",
+    color: "from-purple-500/10 to-violet-500/10",
+    iconColor: "text-purple-600",
+    badge: "SRE | Monitoring"
+  },
+  {
+    icon: Database,
+    title: "Data & AI Solutions",
+    desc: "Modern data lakes, analytics, and AI/ML pipelines for actionable insights.",
+    color: "from-pink-500/10 to-rose-500/10",
+    iconColor: "text-pink-600",
+    badge: "BigQuery | ML | ETL"
+  },
+  {
+    icon: Globe,
+    title: "Multi-Cloud & Hybrid",
+    desc: "Unified management and seamless connectivity across clouds and on-premises.",
+    color: "from-sky-500/10 to-indigo-500/10",
+    iconColor: "text-sky-600",
+    badge: "Hybrid | VPN | DR"
+  },
 ];
 
 const stats = [
@@ -78,7 +186,7 @@ const ParticleField = () => {
       {Array.from({ length: 30 }).map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-1 h-1 rounded-full bg-primary/30"
+          className="absolute w-1 h-1 rounded-full bg-primary/20"
           style={{
             left: `${Math.random() * 100}%`,
             top: `${Math.random() * 100}%`,
@@ -107,17 +215,17 @@ const FloatingShapes = () => (
     <motion.div
       animate={{ rotate: 360 }}
       transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-      className="absolute top-20 right-[15%] w-32 h-32 border border-primary/10 rounded-2xl"
+      className="absolute top-20 right-[15%] w-32 h-32 border border-primary/8 rounded-2xl"
     />
     <motion.div
       animate={{ rotate: -360 }}
       transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-      className="absolute bottom-40 left-[10%] w-24 h-24 border border-cyan-500/10 rounded-full"
+      className="absolute bottom-40 left-[10%] w-24 h-24 border border-cyan-500/8 rounded-full"
     />
     <motion.div
       animate={{ rotate: 360, scale: [1, 1.2, 1] }}
       transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-      className="absolute top-1/3 left-[5%] w-16 h-16 border border-purple-500/10 rounded-lg"
+      className="absolute top-1/3 left-[5%] w-16 h-16 border border-purple-500/8 rounded-lg"
     />
   </div>
 );
@@ -162,85 +270,70 @@ const Index = () => {
       <Navbar />
 
       {/* ===== HERO SECTION ===== */}
-      <section ref={heroRef} className="hero-gradient relative overflow-hidden pt-32 pb-24 lg:pt-44 lg:pb-36 min-h-screen flex items-center">
-        <div className="absolute inset-0 perspective-grid opacity-20" />
-        <ParticleField />
-        <FloatingShapes />
+      <section ref={heroRef} className="relative overflow-hidden min-h-screen flex items-center">
+        {/* Background Video */}
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/bg-video.mp4" type="video/mp4" />
+        </video>
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/50" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/30" />
 
-        {/* Glowing orbs */}
-        <motion.div
-          style={{ x: springX, y: springY }}
-          className="orb orb-blue w-[500px] h-[500px] -top-40 -right-40"
-        />
-        <motion.div
-          animate={{ scale: [1, 1.3, 1] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="orb orb-purple w-[400px] h-[400px] bottom-0 left-0"
-        />
-        <motion.div
-          animate={{ scale: [1.2, 1, 1.2] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-          className="orb orb-cyan w-[300px] h-[300px] top-1/2 left-1/3"
-        />
+        {/* Subtle animated particles over video */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none z-[2]">
+          {Array.from({ length: 20 }).map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-1 h-1 rounded-full bg-white/20"
+              style={{ left: `${Math.random() * 100}%`, top: `${Math.random() * 100}%` }}
+              animate={{ y: [0, -40, 0], opacity: [0, 0.6, 0] }}
+              transition={{ duration: 4 + Math.random() * 4, repeat: Infinity, delay: Math.random() * 5 }}
+            />
+          ))}
+        </div>
 
-        <motion.div style={{ y: heroY, opacity: heroOpacity }} className="container mx-auto px-6 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <motion.div style={{ y: heroY, opacity: heroOpacity }} className="container mx-auto px-6 relative z-10 py-32 lg:py-44">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+
+            {/* LEFT — Text Content */}
             <div>
               <motion.div
                 initial={{ opacity: 0, y: 60 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                className="max-w-xl"
               >
                 {/* Badge */}
                 <motion.div
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/5 text-primary text-sm font-medium mb-8 backdrop-blur-sm"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 bg-white/10 backdrop-blur text-xs font-semibold text-white/90 mb-7 shadow-sm"
                 >
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
-                  </span>
-                  AWS Premier Partner
+                  <Cloud className="w-4 h-4 text-cyan-300" />
+                  Enterprise Cloud Experts
                 </motion.div>
 
-                {/* Main heading */}
-                <h1 className="text-5xl lg:text-7xl xl:text-8xl font-black leading-[0.95] tracking-tight text-foreground mb-8 font-display">
-                  <motion.span
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.9, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                    className="block"
-                  >
-                    Cloud solutions
-                  </motion.span>
-                  <motion.span
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.9, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                    className="block"
-                  >
-                    made{" "}
-                    <span className="text-gradient relative">
-                      simple
-                      <motion.span
-                        className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-primary to-cyan-400 rounded-full"
-                        initial={{ scaleX: 0 }}
-                        animate={{ scaleX: 1 }}
-                        transition={{ duration: 0.8, delay: 0.8 }}
-                      />
-                    </span>
-                  </motion.span>
+                {/* Heading */}
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight mb-6 font-display text-white drop-shadow-lg">
+                  <span className="block">Modern Cloud</span>
+                  <span className="block">Solutions for</span>
+                  <span className="block text-gradient bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-300 bg-clip-text text-transparent">Ambitious Teams</span>
                 </h1>
 
                 <motion.p
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.5 }}
-                  className="text-lg lg:text-xl text-muted-foreground max-w-lg mb-10 leading-relaxed"
+                  className="text-base md:text-lg text-white/80 max-w-md mb-8 leading-relaxed font-medium"
                 >
-                  Stop managing infrastructure headaches. Built for teams who need reliable, scalable, and secure cloud solutions.
+                  Accelerate innovation, reduce risk, and scale with confidence. Trusted by leading enterprises worldwide.
                 </motion.p>
 
                 <motion.div
@@ -251,87 +344,123 @@ const Index = () => {
                 >
                   <Link
                     to="/contact"
-                    className="btn-cta inline-flex items-center gap-2 px-8 py-4 rounded-full text-primary-foreground font-semibold text-base group"
+                    className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-gradient-to-r from-blue-500 via-cyan-500 to-blue-400 text-white font-semibold text-base shadow-lg hover:scale-105 transition-transform"
                   >
-                    Book a Consultation
-                    <motion.span
-                      className="inline-block"
-                      animate={{ x: [0, 4, 0] }}
-                      transition={{ duration: 1.5, repeat: Infinity }}
-                    >
-                      <ArrowRight className="w-5 h-5" />
-                    </motion.span>
+                    <ArrowRight className="w-5 h-5" />
+                    Book Consultation
                   </Link>
                   <Link
                     to="/solutions"
-                    className="btn-ghost inline-flex items-center gap-2 px-8 py-4 rounded-full text-foreground font-semibold text-base"
+                    className="inline-flex items-center gap-2 px-7 py-3 rounded-full border border-white/20 bg-white/10 backdrop-blur text-white font-semibold text-base hover:bg-white/20 transition-all"
                   >
                     Explore Solutions
                   </Link>
                 </motion.div>
+
+                {/* Trusted by */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.8, delay: 1 }}
+                  className="mt-12 flex items-center gap-5"
+                >
+                  <div className="flex -space-x-2">
+                    {["from-blue-400 to-blue-600", "from-cyan-400 to-teal-600", "from-violet-400 to-purple-600", "from-amber-400 to-orange-600", "from-rose-400 to-pink-600"].map((grad, i) => (
+                      <div key={i} className={`w-8 h-8 rounded-full border-2 border-white/20 bg-gradient-to-br ${grad} flex items-center justify-center text-xs font-bold text-white shadow-md`}>
+                        {String.fromCharCode(65 + i)}
+                      </div>
+                    ))}
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-1 mb-0.5">
+                      {[1,2,3,4,5].map((i) => (
+                        <svg key={i} className="w-4 h-4 text-amber-400 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+                      ))}
+                    </div>
+                    <p className="text-xs text-white/60 font-medium">Trusted by 50+ enterprises</p>
+                  </div>
+                </motion.div>
               </motion.div>
             </div>
 
-            {/* Hero Form */}
+            {/* RIGHT — Glass Form */}
             <motion.div
-              initial={{ opacity: 0, x: 80, rotateY: -10 }}
+              initial={{ opacity: 0, x: 80, rotateY: -8 }}
               animate={{ opacity: 1, x: 0, rotateY: 0 }}
               transition={{ duration: 1.2, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="card-glass rounded-2xl p-8 relative"
+              className="relative"
             >
-              {/* Animated border glow */}
-              <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-r from-primary/50 via-cyan-500/50 to-purple-500/50 opacity-20 blur-sm" />
-              <div className="relative">
-                <div className="flex items-center gap-3 mb-6">
-                  <motion.div
-                    animate={{ rotate: [0, 10, -10, 0] }}
-                    transition={{ duration: 4, repeat: Infinity }}
-                    className="w-10 h-10 rounded-xl btn-cta flex items-center justify-center"
-                  >
-                    <Cloud className="w-5 h-5 text-primary-foreground" />
-                  </motion.div>
+              {/* Outer glow */}
+              <div className="absolute -inset-4 rounded-3xl blur-2xl opacity-60" />
+
+              {/* Glass card */}
+              <div className="relative rounded-3xl bg-white/[0.10] backdrop-blur-2xl border border-white/[0.15] p-10 lg:p-12 shadow-2xl shadow-black/20 min-w-[320px] max-w-md mx-auto">
+                {/* Top shimmer line */}
+                <div className="absolute top-0 left-8 right-8 h-[1.5px] bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+
+                <div className="flex items-center gap-3 mb-8">
+                  <Cloud className="w-8 h-8 text-cyan-300" />
                   <div>
-                    <h3 className="font-bold text-foreground">Free Cloud Assessment</h3>
-                    <p className="text-sm text-muted-foreground">Get your personalized report</p>
+                    <h3 className="font-bold text-white text-lg tracking-tight">Request a Cloud Assessment</h3>
+                    <p className="text-xs text-white/60">Get a tailored roadmap for your business</p>
                   </div>
                 </div>
-                <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-                  {[
-                    { key: "name", placeholder: "Full Name", type: "text" },
-                    { key: "email", placeholder: "Work Email", type: "email" },
-                    { key: "company", placeholder: "Company Name", type: "text" },
-                  ].map((field, idx) => (
-                    <motion.div
-                      key={field.key}
-                      initial={{ opacity: 0, x: 40 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.6, delay: 0.6 + idx * 0.12 }}
-                    >
-                      <input
-                        type={field.type}
-                        placeholder={field.placeholder}
-                        className="w-full px-4 py-3.5 rounded-xl bg-secondary/50 border border-border/50 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/40 transition-all backdrop-blur-sm"
-                        value={formData[field.key as keyof typeof formData]}
-                        onChange={(e) => setFormData({ ...formData, [field.key]: e.target.value })}
-                      />
-                    </motion.div>
-                  ))}
-                  <motion.button
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.96 }}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
+
+                <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+                  <div className="grid grid-cols-1 gap-4">
+                    <input
+                      type="text"
+                      placeholder="Full Name"
+                      className="w-full px-5 py-3 rounded-xl bg-white/15 border border-white/15 text-sm text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-blue-400/40 focus:border-blue-400/30 transition-all font-medium"
+                      value={formData.name}
+                      onChange={e => setFormData({ ...formData, name: e.target.value })}
+                      autoComplete="name"
+                    />
+                    <input
+                      type="email"
+                      placeholder="Work Email"
+                      className="w-full px-5 py-3 rounded-xl bg-white/15 border border-white/15 text-sm text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-blue-400/40 focus:border-blue-400/30 transition-all font-medium"
+                      value={formData.email}
+                      onChange={e => setFormData({ ...formData, email: e.target.value })}
+                      autoComplete="email"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Company Name"
+                      className="w-full px-5 py-3 rounded-xl bg-white/15 border border-white/15 text-sm text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-blue-400/40 focus:border-blue-400/30 transition-all font-medium"
+                      value={formData.company}
+                      onChange={e => setFormData({ ...formData, company: e.target.value })}
+                      autoComplete="organization"
+                    />
+                    <textarea
+                      placeholder="Tell us about your cloud needs..."
+                      rows={3}
+                      className="w-full px-5 py-3 rounded-xl bg-white/15 border border-white/15 text-sm text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-blue-400/40 focus:border-blue-400/30 transition-all font-medium resize-none"
+                      value={formData.message}
+                      onChange={e => setFormData({ ...formData, message: e.target.value })}
+                    />
+                  </div>
+                  <button
                     type="submit"
-                    className="w-full btn-cta py-4 rounded-xl text-primary-foreground font-semibold text-sm"
+                    className="w-full py-3 rounded-xl bg-gradient-to-r from-blue-500 via-blue-600 to-cyan-500 text-white font-semibold text-base shadow-lg shadow-blue-500/25 flex items-center justify-center gap-2 relative overflow-hidden group hover:scale-[1.03] transition-transform"
                   >
-                    Get Free Assessment →
-                  </motion.button>
+                    <span className="relative">Get Free Assessment</span>
+                    <ArrowRight className="w-5 h-5 relative" />
+                  </button>
                 </form>
+
+                {/* Bottom trust indicator */}
+                <div className="mt-7 flex items-center justify-center gap-2 text-white/40 text-xs">
+                  <Lock className="w-4 h-4" />
+                  <span>256-bit SSL encrypted • No spam, ever</span>
+                </div>
               </div>
             </motion.div>
           </div>
         </motion.div>
+
+        {/* Bottom fade to page bg */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent z-10" />
       </section>
 
       {/* ===== PARTNER LOGOS MARQUEE ===== */}
@@ -347,15 +476,54 @@ const Index = () => {
             Trusted Technology Partners
           </motion.p>
         </div>
-        <div className="flex animate-marquee">
-          {[...partners, ...partners, ...partners].map((p, i) => (
-            <div
-              key={i}
-              className="flex-shrink-0 mx-6 px-8 py-3 rounded-full border border-border/50 bg-secondary/30 text-muted-foreground font-semibold text-sm backdrop-blur-sm hover:border-primary/30 hover:text-foreground transition-all duration-300"
-            >
-              {p}
-            </div>
-          ))}
+        {/* Modern animated logo carousel */}
+        <div className="relative w-full overflow-x-hidden">
+          <div className="flex gap-10 animate-marquee group items-center py-2">
+            {[
+              'acunetic.png',
+              'aws-logo.png',
+              'backupify.png',
+              'big-cloud.png',
+              'cisco-meraki.png',
+             
+              'google-cloud-logo.png',
+              'microsoft_azure-logo.png',
+              'my.png',
+              'netmagic-logo.png',
+              'path-logo.png',
+              'redif.png',
+              'wma.png',
+            ].concat([
+              'acunetic.png',
+              'aws-logo.png',
+              'backupify.png',
+              'big-cloud.png',
+              'cisco-meraki.png',
+              
+              'google-cloud-logo.png',
+              'microsoft_azure-logo.png',
+              'my.png',
+              'netmagic-logo.png',
+              'path-logo.png',
+              'redif.png',
+              'wma.png',
+            ]).map((logo, i) => (
+              <div
+                key={i}
+                className="flex-shrink-0 flex items-center justify-center h-16 w-36 bg-white/10 rounded-2xl shadow-md border border-white/10 mx-2 transition-transform duration-300 hover:scale-105 hover:shadow-lg group-hover:opacity-80"
+              >
+                <img
+                  src={`/logo/${logo}`}
+                  alt={logo.replace(/[-_]/g, ' ').replace(/\.png$/, '')}
+                  className="h-10 max-w-[120px] object-contain grayscale hover:grayscale-0 transition-all duration-300"
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </div>
+          {/* Fade overlays for edge fade effect */}
+          <div className="pointer-events-none absolute left-0 top-0 h-full w-16 bg-gradient-to-r from-background via-background/80 to-transparent z-10" />
+          <div className="pointer-events-none absolute right-0 top-0 h-full w-16 bg-gradient-to-l from-background via-background/80 to-transparent z-10" />
         </div>
       </section>
       <div className="section-divider" />
@@ -375,32 +543,173 @@ const Index = () => {
               Everything you need to build, deploy, and scale on the cloud — engineered for the enterprise.
             </p>
           </AnimatedSection>
-
-          <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-6" staggerDelay={0.1}>
-            {services.map((service, idx) => (
-              <StaggerItem key={service.title}>
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  className="card-glow rounded-2xl p-8 h-full group cursor-pointer relative overflow-hidden"
+          {/* Fixed 2 row × 5 column grid */}
+          <div className="grid grid-rows-2 grid-cols-5 gap-6">
+            {/* Tall card in col 2, spans both rows */}
+            {(() => {
+              const Icon = services[1].icon;
+              return (
+                <div
+                  className="rounded-2xl p-8 h-full relative overflow-hidden border border-border shadow-lg bg-[#F6F3FF] row-span-2 flex flex-col justify-between"
+                  style={{ gridRow: '1 / span 2', gridColumn: 2 }}
                 >
-                  {/* Background gradient on hover */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+                  {/* Decorative background icon */}
+                  <Shield className="absolute right-4 bottom-4 w-20 h-20 text-emerald-100 opacity-30 z-0" />
                   <div className="relative z-10">
                     <div className="flex items-start justify-between mb-6">
-                      <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-4`}>
-                        <service.icon className={`w-6 h-6 ${service.iconColor}`} />
+                      <div className="w-14 h-14 rounded-xl flex items-center justify-center mb-4 bg-white/50 shadow-lg">
+                        <Icon className={`w-9 h-9 ${services[1].iconColor}`} />
                       </div>
-                      <div className="w-10 h-10 rounded-full border border-border/50 flex items-center justify-center group-hover:bg-primary group-hover:border-primary transition-all duration-300">
-                        <ChevronRight className="w-4 h-4 text-muted-foreground group-hover:text-primary-foreground transition-colors" />
+                      <div className="w-10 h-10 rounded-full border border-border flex items-center justify-center bg-white/60">
+                        <ChevronRight className="w-4 h-4 text-muted-foreground" />
                       </div>
                     </div>
-                    <h3 className="text-xl font-bold text-foreground mb-3">{service.title}</h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed">{service.desc}</p>
+                    <span className="inline-block px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 text-xs font-semibold mb-2">{services[1].badge}</span>
+                    <h3 className="text-2xl font-bold text-foreground mb-3">{services[1].title}</h3>
+                    <p className="text-muted-foreground text-base leading-relaxed">{services[1].desc}</p>
                   </div>
-                </motion.div>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
+                  <div className="flex items-center gap-3 mt-8 z-10">
+                    <Lock className="w-7 h-7 text-emerald-400 bg-white/70 rounded-lg p-1" />
+                    <span className="text-emerald-700 font-medium text-sm">Continuous Compliance</span>
+                  </div>
+                </div>
+              );
+            })()}
+            {/* Tall card in col 4, spans both rows */}
+            {(() => {
+              const Icon = services[3].icon;
+              return (
+                <div
+                  className="rounded-2xl p-8 h-full relative overflow-hidden border border-border shadow-lg bg-[#F6F3FF] row-span-2 flex flex-col justify-between"
+                  style={{ gridRow: '1 / span 2', gridColumn: 4 }}
+                >
+                  {/* Decorative background icon */}
+                  <Server className="absolute right-4 bottom-4 w-20 h-20 text-purple-100 opacity-30 z-0" />
+                  <div className="relative z-10">
+                    <div className="flex items-start justify-between mb-6">
+                      <div className="w-14 h-14 rounded-xl flex items-center justify-center mb-4 bg-white/50 shadow-lg">
+                        <Icon className={`w-9 h-9 ${services[3].iconColor}`} />
+                      </div>
+                      <div className="w-10 h-10 rounded-full border border-border flex items-center justify-center bg-white/60">
+                        <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                      </div>
+                    </div>
+                    <span className="inline-block px-3 py-1 rounded-full bg-purple-100 text-purple-700 text-xs font-semibold mb-2">{services[3].badge}</span>
+                    <h3 className="text-2xl font-bold text-foreground mb-3">{services[3].title}</h3>
+                    <p className="text-muted-foreground text-base leading-relaxed">{services[3].desc}</p>
+                  </div>
+                  <div className="flex items-center gap-3 mt-8 z-10">
+                    <BarChart3 className="w-7 h-7 text-purple-400 bg-white/70 rounded-lg p-1" />
+                    <span className="text-purple-700 font-medium text-sm">Proactive Monitoring</span>
+                  </div>
+                </div>
+              );
+            })()}
+            {/* Small cards for remaining cells */}
+            {/* Row 1, Col 1 */}
+            {(() => {
+              const Icon = services[0].icon;
+              return (
+                <div
+                  className="rounded-2xl p-8 h-full relative overflow-hidden border border-border shadow-lg bg-[#F6F3FF]"
+                  style={{ gridRow: 1, gridColumn: 1 }}
+                >
+                  <div className="relative z-10">
+                    <div className="flex items-start justify-between mb-6">
+                      <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 bg-white/40">
+                        <Icon className={`w-7 h-7 ${services[0].iconColor}`} />
+                      </div>
+                      <div className="w-10 h-10 rounded-full border border-border flex items-center justify-center bg-white/60">
+                        <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                      </div>
+                    </div>
+                    <div className="mb-2">
+                      <span className="inline-block px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-semibold mb-2">{services[0].badge}</span>
+                    </div>
+                    <h3 className="text-xl font-bold text-foreground mb-3">{services[0].title}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">{services[0].desc}</p>
+                  </div>
+                </div>
+              );
+            })()}
+            {/* Row 1, Col 3 */}
+            {(() => {
+              const Icon = services[2].icon;
+              return (
+                <div
+                  className="rounded-2xl p-8 h-full relative overflow-hidden border border-border shadow-lg bg-[#F6F3FF]"
+                  style={{ gridRow: 1, gridColumn: 3 }}
+                >
+                  <div className="relative z-10">
+                    <div className="flex items-start justify-between mb-6">
+                      <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 bg-white/40">
+                        <Icon className={`w-7 h-7 ${services[2].iconColor}`} />
+                      </div>
+                      <div className="w-10 h-10 rounded-full border border-border flex items-center justify-center bg-white/60">
+                        <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                      </div>
+                    </div>
+                    <div className="mb-2">
+                      <span className="inline-block px-3 py-1 rounded-full bg-amber-100 text-amber-700 text-xs font-semibold mb-2">{services[2].badge}</span>
+                    </div>
+                    <h3 className="text-xl font-bold text-foreground mb-3">{services[2].title}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">{services[2].desc}</p>
+                  </div>
+                </div>
+              );
+            })()}
+            {/* Row 1, Col 5 (placeholder) */}
+            <div
+              className="rounded-2xl p-8 h-full relative overflow-hidden border border-dashed border-border shadow-lg bg-[#F6F3FF] flex items-center justify-center text-muted-foreground"
+              style={{ gridRow: 1, gridColumn: 5 }}
+            >
+              <span className="text-lg font-semibold">Coming Soon</span>
+            </div>
+            {/* Row 2, Col 1 */}
+            {(() => {
+              const Icon = services[5].icon;
+              return (
+                <div
+                  className="rounded-2xl p-8 h-full relative overflow-hidden border border-border shadow-lg bg-[#F6F3FF]"
+                  style={{ gridRow: 2, gridColumn: 1 }}
+                >
+                  <div className="relative z-10">
+                    <div className="flex items-start justify-between mb-6">
+                      <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 bg-white/40">
+                        <Icon className={`w-7 h-7 ${services[5].iconColor}`} />
+                      </div>
+                      <div className="w-10 h-10 rounded-full border border-border flex items-center justify-center bg-white/60">
+                        <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                      </div>
+                    </div>
+                    <div className="mb-2">
+                      <span className="inline-block px-3 py-1 rounded-full bg-sky-100 text-sky-700 text-xs font-semibold mb-2">{services[5].badge}</span>
+                    </div>
+                    <h3 className="text-xl font-bold text-foreground mb-3">{services[5].title}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">{services[5].desc}</p>
+                  </div>
+                </div>
+              );
+            })()}
+            {/* Row 2, Col 3 */}
+            {/* Row 2, Col 3 (placeholder) */}
+            <div
+              className="rounded-2xl p-8 h-full relative overflow-hidden border border-dashed border-border shadow-lg bg-[#F6F3FF] flex flex-col items-center justify-center text-muted-foreground"
+              style={{ gridRow: 2, gridColumn: 3 }}
+            >
+              <Cpu className="w-10 h-10 mb-2 text-sky-400" />
+              <span className="text-lg font-semibold">AI Cloud Integrations</span>
+            </div>
+            {/* Row 2, Col 5 */}
+            {/* Row 2, Col 5 (placeholder) */}
+            <div
+              className="rounded-2xl p-8 h-full relative overflow-hidden border border-dashed border-border shadow-lg bg-[#F6F3FF] flex flex-col items-center justify-center text-muted-foreground"
+              style={{ gridRow: 2, gridColumn: 5 }}
+            >
+              <Layers className="w-10 h-10 mb-2 text-indigo-400" />
+              <span className="text-lg font-semibold">Cloud Marketplace</span>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -413,7 +722,7 @@ const Index = () => {
             <motion.div
               key={i}
               style={{ scale: perspScale }}
-              className="absolute border border-primary/10 rounded-3xl"
+              className="absolute border border-black/20 rounded-3xl"
               initial={{ width: `${35 + i * 15}%`, height: `${25 + i * 15}%` }}
             />
           ))}
@@ -522,48 +831,18 @@ const Index = () => {
 
           <AnimatedSection direction="zoom">
             <div className="card-glow rounded-3xl overflow-hidden relative group max-w-5xl mx-auto">
-              <div className="aspect-video bg-gradient-to-br from-secondary to-background flex items-center justify-center relative">
-                {/* Cloud infrastructure animated visualization */}
-                <div className="absolute inset-0 dot-pattern opacity-20" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="relative">
-                    {/* Central node */}
-                    <motion.div
-                      animate={{ scale: [1, 1.1, 1] }}
-                      transition={{ duration: 3, repeat: Infinity }}
-                      className="w-20 h-20 rounded-2xl bg-primary/20 border border-primary/40 flex items-center justify-center glow-pulse"
-                    >
-                      <Cloud className="w-10 h-10 text-primary" />
-                    </motion.div>
-                    {/* Orbiting nodes */}
-                    {[0, 60, 120, 180, 240, 300].map((angle, i) => (
-                      <motion.div
-                        key={i}
-                        animate={{ rotate: 360 }}
-                        transition={{ duration: 15 + i * 2, repeat: Infinity, ease: "linear" }}
-                        className="absolute top-1/2 left-1/2"
-                        style={{ width: `${140 + i * 30}px`, height: `${140 + i * 30}px`, marginLeft: `-${(140 + i * 30) / 2}px`, marginTop: `-${(140 + i * 30) / 2}px` }}
-                      >
-                        <div
-                          className="absolute w-8 h-8 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center"
-                          style={{ top: 0, left: '50%', marginLeft: '-16px' }}
-                        >
-                          {[Server, Database, Shield, Globe, Zap, Layers][i] && (() => {
-                            const Icon = [Server, Database, Shield, Globe, Zap, Layers][i];
-                            return <Icon className="w-4 h-4 text-primary/60" />;
-                          })()}
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
-                {/* Play button overlay */}
-                <motion.div
-                  whileHover={{ scale: 1.1 }}
-                  className="absolute z-20 w-20 h-20 rounded-full bg-primary/90 flex items-center justify-center cursor-pointer glow-pulse"
-                >
-                  <Play className="w-8 h-8 text-primary-foreground ml-1" />
-                </motion.div>
+              <div className="aspect-video bg-black flex items-center justify-center relative">
+                {/* Real video demo */}
+                <video
+                  src="/bg2.mp4"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+                {/* Optional: overlay for readability */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/20 pointer-events-none" />
               </div>
             </div>
           </AnimatedSection>
@@ -655,7 +934,7 @@ const Index = () => {
                     </div>
                     <div className="flex-1 card-glass rounded-xl p-4">
                       <p className="text-xs text-muted-foreground mb-1">Uptime</p>
-                      <p className="text-2xl font-bold text-emerald-400 font-display">99.99%</p>
+                      <p className="text-2xl font-bold text-emerald-600 font-display">99.99%</p>
                       <div className="mt-2 h-1 bg-secondary rounded-full overflow-hidden">
                         <motion.div
                           initial={{ width: 0 }}
@@ -685,7 +964,7 @@ const Index = () => {
                   <div className="flex gap-4">
                     <div className="flex-1 card-glass rounded-xl p-4 flex items-center gap-3">
                       <div className="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center">
-                        <Shield className="w-4 h-4 text-emerald-400" />
+                        <Shield className="w-4 h-4 text-emerald-600" />
                       </div>
                       <div>
                         <p className="text-xs text-muted-foreground">Security Score</p>
@@ -694,7 +973,7 @@ const Index = () => {
                     </div>
                     <div className="flex-1 card-glass rounded-xl p-4 flex items-center gap-3">
                       <div className="w-8 h-8 rounded-lg bg-amber-500/10 flex items-center justify-center">
-                        <Zap className="w-4 h-4 text-amber-400" />
+                        <Zap className="w-4 h-4 text-amber-600" />
                       </div>
                       <div>
                         <p className="text-xs text-muted-foreground">Deploy Speed</p>
@@ -709,9 +988,9 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ===== TESTIMONIALS ===== */}
+      {/* ===== TESTIMONIALS (Carousel Redesign) ===== */}
       <section className="py-28 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-secondary/30 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-secondary/50 to-transparent" />
         <div className="container mx-auto px-6 relative z-10">
           <AnimatedSection className="text-center mb-16">
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs font-semibold uppercase tracking-wider mb-6">
@@ -726,27 +1005,10 @@ const Index = () => {
             </p>
           </AnimatedSection>
 
-          <StaggerContainer className="grid md:grid-cols-3 gap-6" staggerDelay={0.12}>
-            {testimonials.map((t) => (
-              <StaggerItem key={t.name}>
-                <motion.div
-                  whileHover={{ scale: 1.03 }}
-                  className={`bg-gradient-to-br ${t.gradient} rounded-2xl p-8 h-full flex flex-col justify-between relative overflow-hidden group`}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-                  <div className="relative z-10">
-                    <p className="text-primary-foreground text-lg font-medium leading-relaxed mb-8">
-                      "{t.quote}"
-                    </p>
-                    <div>
-                      <p className="text-primary-foreground font-bold">{t.name}</p>
-                      <p className="text-primary-foreground/70 text-sm">{t.role}</p>
-                    </div>
-                  </div>
-                </motion.div>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
+          {/* Carousel Row 1 */}
+          <TestimonialCarousel testimonials={testimonials} direction="left" />
+          {/* Carousel Row 2 */}
+          <TestimonialCarousel testimonials={testimonials} direction="right" />
         </div>
       </section>
 

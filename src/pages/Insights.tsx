@@ -59,12 +59,12 @@ const articles = [
 ];
 
 const categoryColors: Record<string, string> = {
-  "Cloud Strategy": "border-blue-500/30 text-blue-400 bg-blue-500/10",
-  "AWS": "border-amber-500/30 text-amber-400 bg-amber-500/10",
-  "DevOps": "border-green-500/30 text-green-400 bg-green-500/10",
-  "Security": "border-red-500/30 text-red-400 bg-red-500/10",
-  "Migration": "border-purple-500/30 text-purple-400 bg-purple-500/10",
-  "AI/ML": "border-pink-500/30 text-pink-400 bg-pink-500/10",
+  "Cloud Strategy": "border-blue-500/30 text-blue-600 bg-blue-500/10",
+  "AWS": "border-amber-500/30 text-amber-600 bg-amber-500/10",
+  "DevOps": "border-green-500/30 text-green-600 bg-green-500/10",
+  "Security": "border-red-500/30 text-red-600 bg-red-500/10",
+  "Migration": "border-purple-500/30 text-purple-600 bg-purple-500/10",
+  "AI/ML": "border-pink-500/30 text-pink-600 bg-pink-500/10",
 };
 
 const Insights = () => {
@@ -76,22 +76,19 @@ const Insights = () => {
       <Navbar />
 
       {/* Hero */}
-      <section className="hero-gradient pt-32 pb-24 lg:pt-44 lg:pb-32 relative overflow-hidden min-h-[60vh] flex items-center">
-        <div className="absolute inset-0 perspective-grid opacity-15" />
-        <motion.div
-          animate={{ scale: [1, 1.3, 1] }}
-          transition={{ duration: 8, repeat: Infinity }}
-          className="orb orb-purple w-[500px] h-[500px] -top-40 right-0"
-        />
-        <div className="container mx-auto px-6 relative z-10 text-center">
+      <section className="hero-bg-img pt-32 pb-24 lg:pt-44 lg:pb-32 relative overflow-hidden min-h-[60vh] flex items-center">
+        <div className="hero-bg-cover" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=2070&auto=format&fit=crop')" }} />
+        <div className="hero-bg-overlay" />
+        <div className="absolute inset-0 perspective-grid opacity-10" />
+        <div className="container mx-auto px-6 hero-content text-center">
           <AnimatedSection>
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/5 text-primary text-xs font-semibold uppercase tracking-wider mb-8">
+            <span className="badge-hero inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider mb-8">
               <BookOpen className="w-3.5 h-3.5" /> Insights & Blog
             </span>
-            <h1 className="text-5xl lg:text-7xl xl:text-8xl font-black text-foreground mb-6 font-display">
+            <h1 className="text-5xl lg:text-7xl xl:text-8xl font-black mb-6 font-display">
               Cloud <span className="text-gradient">insights</span>
             </h1>
-            <p className="text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg lg:text-xl max-w-2xl mx-auto" style={{ color: "rgba(255,255,255,0.75)" }}>
               Expert perspectives on cloud architecture, DevOps, security, and emerging technologies.
             </p>
           </AnimatedSection>
@@ -115,7 +112,7 @@ const Insights = () => {
                   <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold border ${categoryColors[featured.category]}`}>
                     {featured.category}
                   </span>
-                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full border border-amber-500/30 text-amber-400 bg-amber-500/10 text-xs font-semibold">
+                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full border border-amber-500/30 text-amber-600 bg-amber-500/10 text-xs font-semibold">
                     <TrendingUp className="w-3 h-3" /> Featured
                   </span>
                 </div>

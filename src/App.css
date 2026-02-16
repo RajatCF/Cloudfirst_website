@@ -1,3 +1,31 @@
+/* Marquee reverse animation for testimonials second row */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+/* Combined and enhanced marquee class */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+  will-change: transform;
+  display: inline-flex;
+  min-width: max-content;
+}
+
+@keyframes marquee-reverse {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+.animate-marquee-reverse {
+  animation: marquee-reverse 40s linear infinite;
+  will-change: transform;
+  display: inline-flex;
+  min-width: max-content;
+}
 #root {
   max-width: 1280px;
   margin: 0 auto;

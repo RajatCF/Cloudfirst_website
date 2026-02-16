@@ -11,48 +11,48 @@ const solutions = [
     title: "Cloud Migration",
     desc: "Seamlessly migrate your on-premise workloads to AWS with our proven 6-phase methodology. Zero downtime, full data integrity.",
     features: ["Lift & Shift", "Re-platforming", "Re-architecting", "Hybrid Cloud"],
-    color: "from-blue-500/20 to-cyan-500/20",
-    iconColor: "text-blue-400",
+    color: "from-blue-500/10 to-cyan-500/10",
+    iconColor: "text-blue-600",
   },
   {
     icon: Shield,
     title: "Cloud Security",
     desc: "Enterprise-grade security posture management, compliance automation, and threat detection across your cloud estate.",
     features: ["IAM & Access Control", "Compliance (SOC2, HIPAA)", "Threat Detection", "Security Audits"],
-    color: "from-emerald-500/20 to-green-500/20",
-    iconColor: "text-emerald-400",
+    color: "from-emerald-500/10 to-green-500/10",
+    iconColor: "text-emerald-600",
   },
   {
     icon: Zap,
     title: "DevOps & Automation",
     desc: "Accelerate software delivery with CI/CD pipelines, infrastructure as code, and automated testing frameworks.",
     features: ["CI/CD Pipelines", "Infrastructure as Code", "Container Orchestration", "GitOps"],
-    color: "from-amber-500/20 to-orange-500/20",
-    iconColor: "text-amber-400",
+    color: "from-amber-500/10 to-orange-500/10",
+    iconColor: "text-amber-600",
   },
   {
     icon: Server,
     title: "Managed Services",
     desc: "24/7 monitoring, incident response, and optimization of your cloud infrastructure by certified AWS engineers.",
     features: ["24/7 Monitoring", "Cost Optimization", "Performance Tuning", "Incident Response"],
-    color: "from-purple-500/20 to-violet-500/20",
-    iconColor: "text-purple-400",
+    color: "from-purple-500/10 to-violet-500/10",
+    iconColor: "text-purple-600",
   },
   {
     icon: Database,
     title: "Data & Analytics",
     desc: "Build scalable data platforms with real-time analytics, data lakes, and machine learning pipelines on AWS.",
     features: ["Data Lakes", "Real-time Analytics", "ML Pipelines", "BI Dashboards"],
-    color: "from-pink-500/20 to-rose-500/20",
-    iconColor: "text-pink-400",
+    color: "from-pink-500/10 to-rose-500/10",
+    iconColor: "text-pink-600",
   },
   {
     icon: Globe,
     title: "Multi-Cloud & Hybrid",
     desc: "Design resilient architectures that span multiple cloud providers with unified management and governance.",
     features: ["Multi-Cloud Strategy", "Disaster Recovery", "Edge Computing", "Global CDN"],
-    color: "from-sky-500/20 to-indigo-500/20",
-    iconColor: "text-sky-400",
+    color: "from-sky-500/10 to-indigo-500/10",
+    iconColor: "text-sky-600",
   },
 ];
 
@@ -71,33 +71,25 @@ const Solutions = () => {
       <Navbar />
 
       {/* Hero */}
-      <section className="hero-gradient pt-32 pb-24 lg:pt-44 lg:pb-32 relative overflow-hidden min-h-[70vh] flex items-center">
-        <div className="absolute inset-0 perspective-grid opacity-15" />
-        <motion.div
-          animate={{ scale: [1, 1.2, 1] }}
-          transition={{ duration: 8, repeat: Infinity }}
-          className="orb orb-blue w-[500px] h-[500px] -top-40 -right-40"
-        />
-        <motion.div
-          animate={{ scale: [1.2, 1, 1.2] }}
-          transition={{ duration: 10, repeat: Infinity }}
-          className="orb orb-purple w-[400px] h-[400px] bottom-0 left-0"
-        />
-        <div className="container mx-auto px-6 relative z-10 text-center">
+      <section className="hero-bg-img pt-32 pb-24 lg:pt-44 lg:pb-32 relative overflow-hidden min-h-[70vh] flex items-center">
+        <div className="hero-bg-cover" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=2068&auto=format&fit=crop')" }} />
+        <div className="hero-bg-overlay" />
+        <div className="absolute inset-0 perspective-grid opacity-10" />
+        <div className="container mx-auto px-6 hero-content text-center">
           <AnimatedSection>
             <motion.span
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/5 text-primary text-xs font-semibold uppercase tracking-wider mb-8"
+              className="badge-hero inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider mb-8"
             >
               <Sparkles className="w-3.5 h-3.5" /> Our Solutions
             </motion.span>
-            <h1 className="text-5xl lg:text-7xl xl:text-8xl font-black text-foreground mb-6 font-display">
+            <h1 className="text-5xl lg:text-7xl xl:text-8xl font-black mb-6 font-display">
               Cloud solutions for <br />
               <span className="text-gradient">every challenge</span>
             </h1>
-            <p className="text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg lg:text-xl max-w-2xl mx-auto" style={{ color: "rgba(255,255,255,0.75)" }}>
               From migration to managed services, we provide end-to-end cloud solutions engineered for the enterprise.
             </p>
           </AnimatedSection>

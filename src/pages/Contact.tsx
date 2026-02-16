@@ -20,34 +20,26 @@ const Contact = () => {
   ];
 
   const inputClasses =
-    "w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-sm text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/40 transition-all backdrop-blur-sm";
+    "w-full px-4 py-3 rounded-xl bg-secondary/50 border border-border text-sm text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/30 transition-all";
 
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
 
       {/* Hero */}
-      <section className="hero-gradient pt-32 pb-24 lg:pt-44 lg:pb-32 relative overflow-hidden min-h-[55vh] flex items-center">
-        <div className="absolute inset-0 perspective-grid opacity-15" />
-        <motion.div
-          animate={{ scale: [1, 1.3, 1] }}
-          transition={{ duration: 8, repeat: Infinity }}
-          className="orb orb-blue w-[500px] h-[500px] -top-40 right-0"
-        />
-        <motion.div
-          animate={{ scale: [1.2, 1, 1.2] }}
-          transition={{ duration: 10, repeat: Infinity }}
-          className="orb orb-cyan w-[300px] h-[300px] bottom-0 -left-20"
-        />
-        <div className="container mx-auto px-6 relative z-10 text-center">
+      <section className="hero-bg-img pt-32 pb-24 lg:pt-44 lg:pb-32 relative overflow-hidden min-h-[55vh] flex items-center">
+        <div className="hero-bg-cover" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop')" }} />
+        <div className="hero-bg-overlay" />
+        <div className="absolute inset-0 perspective-grid opacity-10" />
+        <div className="container mx-auto px-6 hero-content text-center">
           <AnimatedSection>
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/5 text-primary text-xs font-semibold uppercase tracking-wider mb-8">
+            <span className="badge-hero inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider mb-8">
               <MessageSquare className="w-3.5 h-3.5" /> Contact Us
             </span>
-            <h1 className="text-5xl lg:text-7xl xl:text-8xl font-black text-foreground mb-6 font-display">
+            <h1 className="text-5xl lg:text-7xl xl:text-8xl font-black mb-6 font-display">
               Let's <span className="text-gradient">connect</span>
             </h1>
-            <p className="text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg lg:text-xl max-w-2xl mx-auto" style={{ color: "rgba(255,255,255,0.75)" }}>
               Ready to start your cloud journey? Get in touch and we'll respond within 24 hours.
             </p>
           </AnimatedSection>
@@ -90,7 +82,7 @@ const Contact = () => {
 
                 {/* Mini map placeholder */}
                 <div className="card-glow rounded-2xl p-6 mt-8">
-                  <div className="aspect-video rounded-xl bg-white/[0.03] border border-white/10 flex items-center justify-center">
+                  <div className="aspect-video rounded-xl bg-secondary/50 border border-border flex items-center justify-center">
                     <div className="text-center">
                       <MapPin className="w-8 h-8 text-primary mx-auto mb-2 opacity-50" />
                       <p className="text-xs text-muted-foreground">San Francisco, CA</p>
