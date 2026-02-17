@@ -2,9 +2,9 @@
 import { MapPin, ArrowRight, Briefcase, Users, Heart, Zap, Sparkles, Rocket, Clock, Calendar, DollarSign, RefreshCw, X, Mail, Phone, User, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import Footer from "@/components/Footer";3
 import AnimatedSection, { StaggerContainer, StaggerItem } from "@/components/AnimatedSection";
 
 const perks = [
@@ -68,9 +68,19 @@ const Careers = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [validationErrors, setValidationErrors] = useState<{[key: string]: string}>({});
 
+  // Ref for modal to ensure focus when opened
+  const modalRef = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
     loadJobs();
   }, []);
+
+  // Focus the modal when it becomes visible (improves reliability on some browsers)
+  useEffect(() => {
+    if (showApplicationForm) {
+      setTimeout(() => modalRef.current?.focus(), 50);
+    }
+  }, [showApplicationForm]);
 
   const loadJobs = async () => {
     try {
@@ -137,10 +147,15 @@ const Careers = () => {
 
   // Form handlers
   const openApplicationForm = (job: JobPosting) => {
-    console.log('openApplicationForm called', job);
+    if (!job) {
+      console.warn('openApplicationForm called without a job');
+      return;
+    }
+    
     setSelectedJob(job);
     setFormData(prev => ({ ...prev, position: job.title }));
     setShowApplicationForm(true);
+    // ensure modal is visible above other elements
     document.body.style.overflow = 'hidden';
   };
   const closeApplicationForm = () => {
@@ -374,8 +389,9 @@ const Careers = () => {
                         </div>
                       </div>
                       <button
-                        onClick={() => openApplicationForm(job)}
-                        className="w-full lg:w-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl"
+                        type="button"
+                        onClick={() => {openApplicationForm(job); }}
+                        className="w-full lg:w-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl z-40"
                       >
                         Apply Now
                       </button>
@@ -464,9 +480,11 @@ const Careers = () => {
 
       {/* Job Application Modal */}
       {showApplicationForm && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[9999] p-4" role="dialog" aria-modal="true">
           <motion.div
-            className="bg-background rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+            ref={modalRef}
+            tabIndex={-1}
+            className="bg-background rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto outline-none"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}

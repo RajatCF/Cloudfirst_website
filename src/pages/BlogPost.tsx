@@ -41,11 +41,23 @@ const BlogPost = () => {
         return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     }
 
+    // Extract the first <img src="..."> from HTML content (returns {src, cleanedContent})
+    function extractFirstImageFromHtml(content: string): { src: string | null; cleaned: string } {
+        if (!content) return { src: null, cleaned: content };
+        const imgRegex = /<img[^>]+src=\"([^\"']+)\"[^>]*>/i;
+        const match = content.match(imgRegex);
+        if (!match) return { src: null, cleaned: content };
+        const src = match[1];
+        // remove only the first matched <img ...> tag
+        const cleaned = content.replace(imgRegex, '').trim();
+        return { src, cleaned };
+    }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-[#f6fafd] dark:from-background dark:to-[#0a1622] flex flex-col">
       <Navbar />
       <section className="container mx-auto px-4 md:px-8 pt-36 pb-16 flex-1">
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <Link to="/blog" className="inline-flex items-center gap-2 text-primary font-semibold mb-8">
             <ArrowLeft className="w-4 h-4" /> Back to Blog
           </Link>
@@ -59,18 +71,34 @@ const BlogPost = () => {
             <div className="text-center py-32 text-muted-foreground text-lg">Blog post not found.</div>
           ) : (
             <AnimatedSection className="bg-white/90 dark:bg-[#101624] rounded-3xl shadow-xl border border-border p-8 md:p-12">
-              {post.coverImage && (
-                <img src={post.coverImage || post.imagePath} alt={post.title} className="w-full h-64 object-cover object-center rounded-2xl mb-8" />
-              )}
-              <h1 className="text-3xl md:text-4xl font-black mb-4 font-display text-foreground drop-shadow-lg leading-tight">{post.title}</h1>
-              <div className="flex items-center gap-2 text-xs text-muted-foreground mb-6">
-                <Calendar className="w-4 h-4" />
-                <span>{new Date(post.createdAt || post.date).toLocaleDateString()}</span>
-                {post.author && <span className="ml-2">by {post.author}</span>}
-              </div>
-            <div className="prose prose-lg max-w-none text-foreground" 
-              dangerouslySetInnerHTML={{ __html: removeDuplicateTitle(post.content, post.title) }} 
-            />
+                  {/* show cover: prefer post.coverImage -> post.imagePath -> first <img> inside content */}
+              {(() => {
+                const rawContent = post.content || "";
+                const { src: firstImgSrc, cleaned } = extractFirstImageFromHtml(rawContent);
+                const coverSrc = post.coverImage || post.imagePath || firstImgSrc;
+                return (
+                  <>
+                    {coverSrc && (
+                      <img src={coverSrc} alt={post.title} className="w-full h-64 object-cover object-center rounded-2xl mb-8" />
+                    )}
+                    <h1 className="text-3xl md:text-4xl font-black mb-4 font-display text-foreground drop-shadow-lg leading-tight">{post.title}</h1>
+                    <div className="flex items-center gap-2 text-xs text-muted-foreground mb-6">
+                      <Calendar className="w-4 h-4" />
+                      <span>{new Date(post.createdAt || post.date).toLocaleDateString()}</span>
+                      {post.author && <span className="ml-2">by {post.author}</span>}
+                    </div>
+                    <div className="prose prose-lg max-w-none text-foreground" 
+                      dangerouslySetInnerHTML={{ __html: removeDuplicateTitle(cleaned, post.title) }} 
+                    />
+                    {/* Bottom back-link (same as top) */}
+                    <div className="mt-8">
+                      <Link to="/blog" className="inline-flex items-center gap-2 text-primary font-semibold">
+                        <ArrowLeft className="w-4 h-4" /> Back to Blog
+                      </Link>
+                    </div>
+                  </>
+                );
+              })() }
             </AnimatedSection>
           )}
         </div>

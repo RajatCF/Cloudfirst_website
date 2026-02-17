@@ -4,15 +4,42 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Cloud, Sparkles } from "lucide-react";
 
 const navLinks = [
-  { label: "Home", path: "/" },
-  { label: "Solutions", path: "/solutions" },
-  { label: "Industries", path: "/industries" },
+  
+  {
+    label: "Solutions",
+    path: "/solutions",
+    dropdown: [
+      { label: "Cloud Migration", path: "/solutions/cloud-migration" },
+      { label: "VDI Solutions", path: "/solutions/vdi-solutions" },
+      { label: "Cloud Data Analytics", path: "/solutions/cloud-data-analytics" },
+      { label: "Managed Cloud Services", path: "/solutions/managed-cloud-services" },
+    ],
+  },
+  {
+    label: "Industries",
+    path: "/industries",
+    dropdown: [
+      { label: "Media & Entertainment", path: "/industries/media" },
+      { label: "Healthcare", path: "/industries/healthcare" },
+      { label: "Retail", path: "/industries/retail" },
+      { label: "Manufacturing", path: "/industries/manufacturing" },
+    ],
+  },
   {
     label: "Insights",
     path: "/insights",
     dropdown: [
       { label: "Blog", path: "/blog" },
       { label: "Event", path: "/event" },
+    ],
+  },
+  {
+    label: "About",
+    path: "/about-us",
+    dropdown: [
+      { label: "About Us", path: "/about-us" },
+      { label: "Our Team", path: "/our-team" },
+      { label: "Our Partner", path: "/our-partner" },
     ],
   },
   { label: "Careers", path: "/careers" },
@@ -85,14 +112,17 @@ const Navbar = () => {
                 tabIndex={0}
               >
                 <button
+                  aria-expanded={openDropdown === link.label}
                   className={`relative px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 flex items-center gap-1 ${location.pathname.startsWith(link.path) ? "text-primary" : "text-muted-foreground hover:text-foreground"}`}
                   tabIndex={-1}
                 >
                   {link.label}
-                  <svg className="w-3 h-3 ml-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
+                  <svg className={`w-3 h-3 ml-1 transform transition-transform duration-200 ${openDropdown === link.label ? "rotate-90" : "rotate-0"}`} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                  </svg>
                 </button>
                 <div
-                  className={`absolute left-0 top-full mt-2 min-w-[140px] bg-white border border-border rounded-xl shadow-lg z-40 transition-all ${openDropdown === link.label ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+                  className={`absolute left-0 top-full mt-2 min-w-[200px] bg-white border border-border rounded-xl shadow-lg z-40 transition-all ${openDropdown === link.label ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
                   onMouseEnter={() => handleDropdownEnter(link.label)}
                   onMouseLeave={handleDropdownLeave}
                 >
@@ -100,7 +130,7 @@ const Navbar = () => {
                     <Link
                       key={sublink.path}
                       to={sublink.path}
-                      className={`block px-5 py-2 text-sm rounded-xl transition-colors ${location.pathname === sublink.path ? "bg-primary/10 text-primary" : "text-muted-foreground hover:text-foreground hover:bg-secondary"}`}
+                      className={`block px-5 py-2 text-sm rounded-xl transition-colors whitespace-nowrap ${location.pathname === sublink.path ? "bg-primary/10 text-primary" : "text-muted-foreground hover:text-foreground hover:bg-secondary"}`}
                     >
                       {sublink.label}
                     </Link>
@@ -176,7 +206,7 @@ const Navbar = () => {
                 >
                   <div className="block px-4 py-3 rounded-xl text-sm font-medium transition-colors">
                     <span className="flex items-center gap-1">{link.label}
-                      <svg className="w-3 h-3 ml-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
+                      <svg className="w-3 h-3 ml-1 transform rotate-90" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
                     </span>
                     <div className="pl-3 mt-1">
                       {link.dropdown.map((sublink) => (

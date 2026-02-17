@@ -112,7 +112,7 @@ const Blog = () => {
                     <span>{new Date(post.createdAt).toLocaleDateString()}</span>
                     {post.author && <span className="ml-2">by {post.author}</span>}
                   </div>
-                  <p className="text-muted-foreground text-sm mb-4 line-clamp-4" dangerouslySetInnerHTML={{ __html: post.content }} />
+                 
                   <div className="mt-auto pt-2">
                     <a
                       href={`/blog/${post.id}`}

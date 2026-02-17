@@ -14,9 +14,9 @@ const Contact = () => {
   };
 
   const contactItems = [
-    { icon: Mail, label: "Email", value: "info@cloudfirst.com" },
-    { icon: Phone, label: "Phone", value: "+1 (555) 123-4567" },
-    { icon: MapPin, label: "Office", value: "123 Cloud Street\nSan Francisco, CA 94105" },
+    { icon: Mail, label: "E-Mail", value: "solutions@cloudfirst.in\nsupport@cloudfirst.in" },
+    { icon: Phone, label: "Phone", value: "+91-8448440769" },
+    { icon: MapPin, label: "Office", value: "San Francisco, CA" },
   ];
 
   const inputClasses =

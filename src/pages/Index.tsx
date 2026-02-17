@@ -449,11 +449,7 @@ const Index = () => {
                   </button>
                 </form>
 
-                {/* Bottom trust indicator */}
-                <div className="mt-7 flex items-center justify-center gap-2 text-white/40 text-xs">
-                  <Lock className="w-4 h-4" />
-                  <span>256-bit SSL encrypted • No spam, ever</span>
-                </div>
+               
               </div>
             </motion.div>
           </div>
@@ -543,19 +539,18 @@ const Index = () => {
               Everything you need to build, deploy, and scale on the cloud — engineered for the enterprise.
             </p>
           </AnimatedSection>
-          {/* Fixed 2 row × 5 column grid */}
-          <div className="grid grid-rows-2 grid-cols-5 gap-6">
+          {/* Fixed 2 row × 5 column grid (responsive) */}
+          <div className="grid auto-rows-min grid-rows-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-rows-2 lg:grid-cols-5 gap-6">
             {/* Tall card in col 2, spans both rows */}
             {(() => {
               const Icon = services[1].icon;
               return (
                 <div
-                  className="rounded-2xl p-8 h-full relative overflow-hidden border border-border shadow-lg bg-[#F6F3FF] row-span-2 flex flex-col justify-between"
-                  style={{ gridRow: '1 / span 2', gridColumn: 2 }}
+                  className="rounded-2xl p-8 h-full relative overflow-hidden border border-border shadow-lg bg-[#F6F3FF] lg:row-span-2 lg:col-start-2 flex flex-col justify-start"
                 >
                   {/* Decorative background icon */}
                   <Shield className="absolute right-4 bottom-4 w-20 h-20 text-emerald-100 opacity-30 z-0" />
-                  <div className="relative z-10">
+                  <div className="relative z-10 space-y-4">
                     <div className="flex items-start justify-between mb-6">
                       <div className="w-14 h-14 rounded-xl flex items-center justify-center mb-4 bg-white/50 shadow-lg">
                         <Icon className={`w-9 h-9 ${services[1].iconColor}`} />
@@ -567,6 +562,40 @@ const Index = () => {
                     <span className="inline-block px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 text-xs font-semibold mb-2">{services[1].badge}</span>
                     <h3 className="text-2xl font-bold text-foreground mb-3">{services[1].title}</h3>
                     <p className="text-muted-foreground text-base leading-relaxed">{services[1].desc}</p>
+
+                    {/* Added bullets: quick highlights for Cloud Security & Compliance */}
+                    <ul className="mt-6 grid gap-3 text-sm text-muted-foreground leading-relaxed">
+                      <li className="flex items-start gap-3">
+                        <CheckCircle2 className="w-4 h-4 mt-1 text-emerald-400 flex-shrink-0" />
+                        <span>Identity &amp; Access Management — fine‑grained IAM & least‑privilege</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle2 className="w-4 h-4 mt-1 text-emerald-400 flex-shrink-0" />
+                        <span>Continuous compliance &amp; audit — SOC2 / ISO automation</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle2 className="w-4 h-4 mt-1 text-emerald-400 flex-shrink-0" />
+                        <span>Threat detection &amp; incident response — SIEM / GuardDuty</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle2 className="w-4 h-4 mt-1 text-emerald-400 flex-shrink-0" />
+                        <span>Encryption &amp; key management — KMS, envelope encryption</span>
+                      </li>
+                    </ul>
+
+                    {/* Mini preview — Security & Compliance */}
+                    <div className="mt-8 hidden sm:flex gap-4 max-w-[460px]">
+                      <div className="rounded-lg bg-white p-3 border border-white/10 shadow-sm flex flex-col items-start gap-2 w-1/2">
+                        <div className="h-2 w-10 rounded-full bg-emerald-100" />
+                        <p className="text-xs font-semibold text-foreground">Audit logs</p>
+                        <div className="mt-2 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-xs font-semibold">View</div>
+                      </div>
+                      <div className="rounded-lg bg-white p-3 border border-white/10 shadow-sm flex flex-col items-start gap-2 w-1/2">
+                        <div className="h-2 w-10 rounded-full bg-amber-100" />
+                        <p className="text-xs font-semibold text-foreground">Drift detection</p>
+                        <div className="mt-2 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 text-xs font-semibold">Resolve</div>
+                      </div>
+                    </div>
                   </div>
                   <div className="flex items-center gap-3 mt-8 z-10">
                     <Lock className="w-7 h-7 text-emerald-400 bg-white/70 rounded-lg p-1" />
@@ -580,8 +609,7 @@ const Index = () => {
               const Icon = services[3].icon;
               return (
                 <div
-                  className="rounded-2xl p-8 h-full relative overflow-hidden border border-border shadow-lg bg-[#F6F3FF] row-span-2 flex flex-col justify-between"
-                  style={{ gridRow: '1 / span 2', gridColumn: 4 }}
+                  className="rounded-2xl p-8 h-full relative overflow-hidden border border-border shadow-lg bg-[#F6F3FF] lg:row-span-2 lg:col-start-4 flex flex-col justify-start"
                 >
                   {/* Decorative background icon */}
                   <Server className="absolute right-4 bottom-4 w-20 h-20 text-purple-100 opacity-30 z-0" />
@@ -597,6 +625,40 @@ const Index = () => {
                     <span className="inline-block px-3 py-1 rounded-full bg-purple-100 text-purple-700 text-xs font-semibold mb-2">{services[3].badge}</span>
                     <h3 className="text-2xl font-bold text-foreground mb-3">{services[3].title}</h3>
                     <p className="text-muted-foreground text-base leading-relaxed">{services[3].desc}</p>
+
+                    {/* Bullet highlights — Managed Cloud Services */}
+                    <ul className="mt-6 grid gap-3 text-sm text-muted-foreground leading-relaxed">
+                      <li className="flex items-start gap-3">
+                        <CheckCircle2 className="w-4 h-4 mt-1 text-purple-400 flex-shrink-0" />
+                        <span>24/7 monitoring &amp; incident response</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle2 className="w-4 h-4 mt-1 text-purple-400 flex-shrink-0" />
+                        <span>Proactive performance tuning &amp; cost optimization</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle2 className="w-4 h-4 mt-1 text-purple-400 flex-shrink-0" />
+                        <span>Patch management &amp; automated maintenance</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <CheckCircle2 className="w-4 h-4 mt-1 text-purple-400 flex-shrink-0" />
+                        <span>Runbooks &amp; SRE-driven operational SLAs</span>
+                      </li>
+                    </ul>
+
+                    {/* Mini preview — Managed Services */}
+                    <div className="mt-8 hidden sm:flex gap-4 max-w-[520px]">
+                      <div className="rounded-lg bg-white p-3 border border-white/10 shadow-sm flex flex-col items-start gap-2 w-1/2">
+                        <div className="h-2 w-10 rounded-full bg-purple-100" />
+                        <p className="text-xs font-semibold text-foreground">SLA 99.99%</p>
+                        <div className="mt-2 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-50 text-xs font-semibold">View SLA</div>
+                      </div>
+                      <div className="rounded-lg bg-white p-3 border border-white/10 shadow-sm flex flex-col items-start gap-2 w-1/2">
+                        <div className="h-2 w-10 rounded-full bg-indigo-100" />
+                        <p className="text-xs font-semibold text-foreground">24/7 Ops</p>
+                        <div className="mt-2 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 text-xs font-semibold">Contact</div>
+                      </div>
+                    </div>
                   </div>
                   <div className="flex items-center gap-3 mt-8 z-10">
                     <BarChart3 className="w-7 h-7 text-purple-400 bg-white/70 rounded-lg p-1" />
@@ -611,10 +673,9 @@ const Index = () => {
               const Icon = services[0].icon;
               return (
                 <div
-                  className="rounded-2xl p-8 h-full relative overflow-hidden border border-border shadow-lg bg-[#F6F3FF]"
-                  style={{ gridRow: 1, gridColumn: 1 }}
+                  className="rounded-2xl p-10 relative overflow-hidden border border-border shadow-lg bg-[#F6F3FF] pb-6 lg:row-start-1 lg:col-start-1"
                 >
-                  <div className="relative z-10">
+                  <div className="relative z-10 space-y-4">
                     <div className="flex items-start justify-between mb-6">
                       <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 bg-white/40">
                         <Icon className={`w-7 h-7 ${services[0].iconColor}`} />
@@ -628,6 +689,9 @@ const Index = () => {
                     </div>
                     <h3 className="text-xl font-bold text-foreground mb-3">{services[0].title}</h3>
                     <p className="text-muted-foreground text-sm leading-relaxed">{services[0].desc}</p>
+
+                    {/* Mini preview — Cloud Infrastructure */}
+                   
                   </div>
                 </div>
               );
@@ -637,10 +701,9 @@ const Index = () => {
               const Icon = services[2].icon;
               return (
                 <div
-                  className="rounded-2xl p-8 h-full relative overflow-hidden border border-border shadow-lg bg-[#F6F3FF]"
-                  style={{ gridRow: 1, gridColumn: 3 }}
+                  className="rounded-2xl p-10 relative overflow-hidden border border-border shadow-lg bg-[#F6F3FF] pb-6 lg:row-start-1 lg:col-start-3"
                 >
-                  <div className="relative z-10">
+                  <div className="relative z-10 space-y-4">
                     <div className="flex items-start justify-between mb-6">
                       <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 bg-white/40">
                         <Icon className={`w-7 h-7 ${services[2].iconColor}`} />
@@ -654,26 +717,40 @@ const Index = () => {
                     </div>
                     <h3 className="text-xl font-bold text-foreground mb-3">{services[2].title}</h3>
                     <p className="text-muted-foreground text-sm leading-relaxed">{services[2].desc}</p>
+
+                    
                   </div>
                 </div>
               );
             })()}
-            {/* Row 1, Col 5 (placeholder) */}
+            {/* Row 1, Col 5 — Data & AI Solutions (replaced placeholder) */}
             <div
-              className="rounded-2xl p-8 h-full relative overflow-hidden border border-dashed border-border shadow-lg bg-[#F6F3FF] flex items-center justify-center text-muted-foreground"
-              style={{ gridRow: 1, gridColumn: 5 }}
+              className="rounded-2xl p-8 h-full relative overflow-hidden border border-border shadow-lg bg-[#F6F3FF] lg:row-start-1 lg:col-start-5"
             >
-              <span className="text-lg font-semibold">Coming Soon</span>
+              <div className="relative z-10">
+                <div className="flex items-start justify-between mb-6">
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 bg-white/40">
+                    <Database className="w-7 h-7 text-pink-600" />
+                  </div>
+                  <div className="w-10 h-10 rounded-full border border-border flex items-center justify-center bg-white/60">
+                    <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                  </div>
+                </div>
+                <div className="mb-2">
+                  <span className="inline-block px-3 py-1 rounded-full bg-pink-100 text-pink-700 text-xs font-semibold mb-2">BigQuery · ML · ETL</span>
+                </div>
+                <h3 className="text-xl font-bold text-foreground mb-3">Data & AI Solutions</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">Modern data lakes, analytics, and AI/ML pipelines for actionable insights.</p>
+              </div>
             </div>
             {/* Row 2, Col 1 */}
             {(() => {
               const Icon = services[5].icon;
               return (
                 <div
-                  className="rounded-2xl p-8 h-full relative overflow-hidden border border-border shadow-lg bg-[#F6F3FF]"
-                  style={{ gridRow: 2, gridColumn: 1 }}
+                  className="rounded-2xl p-10 relative overflow-hidden border border-border shadow-lg bg-[#F6F3FF] pb-6 lg:row-start-2 lg:col-start-1"
                 >
-                  <div className="relative z-10">
+                  <div className="relative z-10 space-y-4">
                     <div className="flex items-start justify-between mb-6">
                       <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 bg-white/40">
                         <Icon className={`w-7 h-7 ${services[5].iconColor}`} />
@@ -687,27 +764,52 @@ const Index = () => {
                     </div>
                     <h3 className="text-xl font-bold text-foreground mb-3">{services[5].title}</h3>
                     <p className="text-muted-foreground text-sm leading-relaxed">{services[5].desc}</p>
+
+                    
                   </div>
                 </div>
               );
             })()}
             {/* Row 2, Col 3 */}
-            {/* Row 2, Col 3 (placeholder) */}
+            {/* Row 2, Col 3 — AI Cloud Integrations (filled) */}
             <div
-              className="rounded-2xl p-8 h-full relative overflow-hidden border border-dashed border-border shadow-lg bg-[#F6F3FF] flex flex-col items-center justify-center text-muted-foreground"
-              style={{ gridRow: 2, gridColumn: 3 }}
+              className="rounded-2xl p-8 h-full relative overflow-hidden border border-border shadow-lg bg-[#F6F3FF] lg:row-start-2 lg:col-start-3"
             >
-              <Cpu className="w-10 h-10 mb-2 text-sky-400" />
-              <span className="text-lg font-semibold">AI Cloud Integrations</span>
+              <div className="relative z-10">
+                <div className="flex items-start justify-between mb-6">
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 bg-white/40">
+                    <Cpu className="w-7 h-7 text-sky-600" />
+                  </div>
+                  <div className="w-10 h-10 rounded-full border border-border flex items-center justify-center bg-white/60">
+                    <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                  </div>
+                </div>
+                <div className="mb-2">
+                  <span className="inline-block px-3 py-1 rounded-full bg-sky-100 text-sky-700 text-xs font-semibold mb-2">AI · ML · Pipelines</span>
+                </div>
+                <h3 className="text-xl font-bold text-foreground mb-3">AI Cloud Integrations</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">Integrate LLMs and AI services with cloud-native pipelines and data stores.</p>
+                
+              </div>
             </div>
             {/* Row 2, Col 5 */}
-            {/* Row 2, Col 5 (placeholder) */}
+            {/* Row 2, Col 5 — Cloud Marketplace (filled) */}
             <div
-              className="rounded-2xl p-8 h-full relative overflow-hidden border border-dashed border-border shadow-lg bg-[#F6F3FF] flex flex-col items-center justify-center text-muted-foreground"
-              style={{ gridRow: 2, gridColumn: 5 }}
+              className="rounded-2xl p-8 h-full relative overflow-hidden border border-border shadow-lg bg-[#F6F3FF] lg:row-start-2 lg:col-start-5"
             >
-              <Layers className="w-10 h-10 mb-2 text-indigo-400" />
-              <span className="text-lg font-semibold">Cloud Marketplace</span>
+              <div className="relative z-10">
+                <div className="flex items-start justify-between mb-6">
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 bg-white/40">
+                    <Layers className="w-7 h-7 text-indigo-600" />
+                  </div>
+                  <div className="w-10 h-10 rounded-full border border-border flex items-center justify-center bg-white/60">
+                    <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                  </div>
+                </div>
+                <h3 className="text-xl font-bold text-foreground mb-3">Cloud Marketplace</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">Pre-built marketplace images, templates and ISV integrations to speed delivery.</p>
+             
+              </div>
             </div>
           </div>
         </div>

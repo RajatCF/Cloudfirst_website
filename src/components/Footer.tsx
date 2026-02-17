@@ -32,7 +32,7 @@ const Footer = () => {
       </div> */}
 
       <div className="container mx-auto px-6 py-16 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10">
           {/* Brand */}
           <div className="lg:col-span-2">
             <Link to="/" className="flex items-center gap-2.5 mb-5 group">
@@ -69,29 +69,11 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold mb-5 text-xs uppercase tracking-[0.15em] text-muted-foreground">Solutions</h4>
             <ul className="space-y-3">
-              {["Cloud Migration", "Cloud Security", "DevOps & CI/CD", "Managed Services", "Data & Analytics", "Multi-Cloud"].map((item) => (
-                <li key={item}>
-                  <Link
-                    to="/solutions"
-                    className="text-muted-foreground hover:text-foreground text-sm transition-colors duration-200 flex items-center gap-1 group"
-                  >
-                    <span className="w-0 group-hover:w-2 h-[1px] bg-primary transition-all duration-200" />
-                    {item}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Company */}
-          <div>
-            <h4 className="font-semibold mb-5 text-xs uppercase tracking-[0.15em] text-muted-foreground">Company</h4>
-            <ul className="space-y-3">
-              {[
-                { label: "Solutions", path: "/solutions" },
-                { label: "Insights", path: "/insights" },
-                { label: "Careers", path: "/careers" },
-                { label: "Contact Us", path: "/contact" },
+              {[ 
+                { label: "Cloud Migration", path: "/solutions/cloud-migration" },
+                { label: "VDI Solutions", path: "/solutions/vdi-solutions" },
+                { label: "Cloud Data Analytics", path: "/solutions/cloud-data-analytics" },
+                { label: "Managed Cloud Services", path: "/solutions/managed-cloud-services" }
               ].map((item) => (
                 <li key={item.label}>
                   <Link
@@ -106,6 +88,59 @@ const Footer = () => {
             </ul>
           </div>
 
+          {/* Company */}
+          <div>
+            <h4 className="font-semibold mb-5 text-xs uppercase tracking-[0.15em] text-muted-foreground">Quick Links</h4>
+            <ul className="space-y-3">
+              {[
+                { label: "About Us", path: "/about-us" },
+                { label: "Our Team", path: "/our-team" },
+                { label: "Our Partner", path: "/our-partner" },
+                { label: "Careers", path: "/careers" },
+                { label: "Blog", path: "/blog" },
+                { label: "Event", path: "/event" },
+                { label: "Contact Us", path: "/contact" }
+              ].map((item) => (
+                <li key={item.label}>
+                  <Link
+                    to={item.path}
+                    className="text-muted-foreground hover:text-foreground text-sm transition-colors duration-200 flex items-center gap-1 group"
+                  >
+                    <span className="w-0 group-hover:w-2 h-[1px] bg-primary transition-all duration-200" />
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Industries */}
+          <div>
+            <h4 className="font-semibold mb-5 text-xs uppercase tracking-[0.15em] text-muted-foreground">Industries</h4>
+            <ul className="space-y-3">
+              {[
+                { label: "Industries Home", path: "/industries" },
+                { label: "Media & Entertainment", path: "/industries/media" },
+                { label: "Healthcare", path: "/industries/healthcare" },
+                { label: "Retail", path: "/industries/retail" },
+                { label: "Manufacturing", path: "/industries/manufacturing" }
+              ].map((item) => (
+                <li key={item.label}>
+                  <Link
+                    to={item.path}
+                    className="text-muted-foreground hover:text-foreground text-sm transition-colors duration-200 flex items-center gap-1 group"
+                  >
+                    <span className="w-0 group-hover:w-2 h-[1px] bg-primary transition-all duration-200" />
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          
+         
+
           {/* Contact */}
           <div>
             <h4 className="font-semibold mb-5 text-xs uppercase tracking-[0.15em] text-muted-foreground">Contact</h4>
@@ -114,13 +149,15 @@ const Footer = () => {
                 <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
                   <Mail className="w-3.5 h-3.5 text-primary" />
                 </div>
-                info@cloudfirst.com
+                <div>
+                  solutions@cloudfirst.in<br />support@cloudfirst.in
+                </div>
               </li>
               <li className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
                   <Phone className="w-3.5 h-3.5 text-primary" />
                 </div>
-                +1 (555) 123-4567
+                +91-8448440769
               </li>
               <li className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
@@ -137,8 +174,8 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-muted-foreground">
           <p>© 2026 CloudFirst Technology. All rights reserved.</p>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-foreground transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-foreground transition-colors">Terms of Service</a>
+            <Link to="/privacy-policy" className="hover:text-foreground transition-colors">Privacy Policy</Link>
+              <Link to="/terms-and-conditions" className="hover:text-foreground transition-colors">Terms & Conditions</Link>
             <span className="text-primary/60">AWS Partner Network Member</span>
           </div>
         </div>
