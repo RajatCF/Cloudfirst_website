@@ -17,12 +17,34 @@ interface CarouselProps {
 
 const Carousel: React.FC<CarouselProps> = ({ items }) => {
   const [active, setActive] = React.useState(0);
+  const [isPaused, setIsPaused] = React.useState(false);
 
   const prev = () => setActive(a => (a === 0 ? items.length - 1 : a - 1));
   const next = () => setActive(a => (a === items.length - 1 ? 0 : a + 1));
 
+  // Keyboard navigation
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') prev();
+      if (e.key === 'ArrowRight') next();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  // Auto-play - advances every 4 seconds unless paused
+  React.useEffect(() => {
+    if (isPaused) return;
+    const interval = setInterval(next, 4000);
+    return () => clearInterval(interval);
+  }, [active, isPaused]);
+
   return (
-    <div className="relative flex flex-col items-center py-16">
+    <div 
+      className="relative flex flex-col items-center py-16"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
       {/* Timeline indicator */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 flex flex-col items-center">
         <div className="w-1 h-12 bg-bright-blue" />
@@ -53,13 +75,15 @@ const Carousel: React.FC<CarouselProps> = ({ items }) => {
             return (
               <div
                 key={i}
-                className="absolute top-0 left-1/2 transition-all duration-500"
+                className="absolute top-0 left-1/2 transition-all duration-500 cursor-pointer"
                 style={{
-                  transform: `translateX(${translateX}px) scale(${scale})`,
+                  transform: `translateX(calc(-50% + ${translateX}px)) scale(${scale})`,
                   opacity,
                   filter: `blur(${blur}px)`,
                   zIndex,
+                  pointerEvents: offset === 0 ? 'auto' : 'none',
                 }}
+                onClick={() => setActive(i)}
               >
                 <div className="w-[480px] h-[320px] rounded-2xl overflow-hidden shadow-lg bg-card relative flex flex-col justify-end">
                   {item.image && (
@@ -97,6 +121,20 @@ const Carousel: React.FC<CarouselProps> = ({ items }) => {
         <button onClick={next} className="ml-4 p-2 rounded-full bg-muted hover:bg-bright-blue/10 transition">
           <ChevronRight className="w-6 h-6 text-bright-blue" />
         </button>
+      </div>
+      
+      {/* Dots indicator */}
+      <div className="flex gap-2 mt-8">
+        {items.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setActive(i)}
+            className={`w-2 h-2 rounded-full transition-all duration-300 ${
+              i === active ? 'bg-bright-blue w-8' : 'bg-muted hover:bg-bright-blue/50'
+            }`}
+            aria-label={`Go to slide ${i + 1}`}
+          />
+        ))}
       </div>
     </div>
   );
