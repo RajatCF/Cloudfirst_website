@@ -1,18 +1,51 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Search, Menu, X } from 'lucide-react';
 
 const navLinks = [
   { label: 'services', path: '/solutions' },
   { label: 'industries', path: '/industries' },
-  { label: 'insights', path: '/insights' },
-  { label: 'join us', path: '/about' },
+  { label: 'insights', path: '/insights', hasDropdown: true },
+  { label: 'join us', path: '/current-openings' },
   { label: 'who we are', path: '/about' },
+];
+
+const insightsDropdown = [
+  { title: 'Blog', path: '/insights/blog', desc: 'Latest articles, thought leadership, and company news.' },
+  { title: 'Events', path: '/insights/events', desc: 'Upcoming and past events, conferences, and webinars.' },
+  { title: 'Case Studies', path: '/insights/case-studies', desc: 'Success stories and real-world impact from our clients.' },
+  { title: 'News', path: '/insights/news', desc: 'Press releases, media coverage, and announcements.' },
+  { title: 'Webinars', path: '/insights/webinars', desc: 'On-demand and live webinars with industry experts.' },
+  { title: 'Join With Us', path: '/current-openings', desc: 'Explore job openings and apply to join our team.' },
+];
+
+// mega menu data
+const megaServices = [
+  { title: 'Cloud Migration', desc: 'Seamless migration of workloads and data to the cloud for agility and scale.', icon: '☁️', path: '/solutions/cloud-migration' },
+  { title: 'Data Analytic', desc: 'Unlock insights and drive decisions with advanced analytics and data solutions.', icon: '📊', path: '/solutions/data-analytic' },
+  { title: 'Managed Cloud Service', desc: 'End-to-end management and optimization of your cloud environment.', icon: '🛠️', path: '/solutions/managed-cloud-service' },
+  { title: 'CLOUD SECURITY', desc: 'Comprehensive security solutions to protect your cloud assets and data.', icon: '🔒', path: '/solutions/cloud-security' },
+  { title: 'Cloud DevOps', desc: 'Accelerate development and operations with modern DevOps practices in the cloud.', icon: '⚙️', path: '/solutions/cloud-devops' },
+];
+
+const megaIndustries = [
+  { title: 'financial services & insurance', desc: 'Autonomous Workflows. Zero-Trust Security. Instant Settlement.' },
+  { title: 'healthcare & life sciences', desc: 'AI-Native. Patient-Centric. Compliance-First.' },
+  { title: 'travel, transportation & logistics', desc: 'Real-time routing, AI-Native Billing.' },
+  { title: 'retail, CPG & e-commerce', desc: 'AI-Native. Consumer-Centric. Demand-Driven.' },
+  { title: 'telecommunication, media, entertainment & gaming', desc: 'Engineering the future of connectivity, content, and play.' },
+  { title: 'manufacturing, industrials & construction', desc: 'Predictive Maintenance. AI Visual Quality. Synchronous Supply Chains.' },
+  { title: 'technology, software & services', desc: 'Predictive Revenue Engines. Refactored Delivery. Synchronous Growth.' },
+  { title: 'natural resources, energy & utilities', desc: 'Autonomous Grids. Zero-Trust Asset Security. Real-time Yield Optimization.' },
+  { title: 'public sector & education', desc: 'Autonomous Adjudication. Student Success. Agentic Governance.' },
 ];
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [hoverTarget, setHoverTarget] = useState<null | 'services' | 'industries' | 'insights'>(null);
+  const hideTimeout = useRef<number>();
+  const pendingTarget = useRef<null | 'services' | 'industries'>(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -40,19 +73,111 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Nav */}
-        <div className="hidden lg:flex items-center gap-8">
+        {/* desktop links + hover zone */}
+        <div
+          className="hidden lg:flex items-center gap-8 relative group/nav-hover"
+          onMouseEnter={() => {
+            if (hideTimeout.current) clearTimeout(hideTimeout.current);
+          }}
+          onMouseLeave={() => {
+            hideTimeout.current = window.setTimeout(() => setHoverTarget(null), 800);
+          }}
+        >
           {navLinks.map((link) => (
-            <Link key={link.label} to={link.path} className="nav-link">
+            <Link
+              key={link.label}
+              to={link.path}
+              className="nav-link"
+              onMouseEnter={() => {
+                if (hideTimeout.current) clearTimeout(hideTimeout.current);
+                if (link.label === 'services' || link.label === 'industries' || link.label === 'insights') {
+                  setHoverTarget(link.label as 'services' | 'industries' | 'insights');
+                }
+              }}
+            >
               {link.label}
             </Link>
           ))}
+
+          {/* mega menu overlay */}
+          {/* always render dropdown for animation; visibility controlled via opacity */}
+          <div
+            className={`fixed left-10 right-10 top-[var(--nav-height,64px)] w-auto bg-navy text-white py-10 overflow-x-hidden z-40 px-4 lg:px-0 rounded-b-2xl transition-opacity duration-200 ${
+              hoverTarget ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+            }`}
+            onMouseEnter={() => {
+              if (hideTimeout.current) clearTimeout(hideTimeout.current);
+            }}
+          >
+            <div className="max-w-[1400px] mx-auto px-6 lg:px-10 grid grid-cols-1 lg:grid-cols-4 gap-10">
+              <div className="col-span-3">
+                {hoverTarget === 'services' ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {megaServices.map(item => (
+                      <Link
+                        key={item.title}
+                        to={item.path}
+                        className="block space-y-2 py-2 px-4 rounded hover:bg-bright-blue/20 transition-colors"
+                      >
+                        <div className="text-sm font-semibold text-bright-blue flex items-center gap-1">
+                          <span>{item.icon}</span>
+                          {item.title}
+                        </div>
+                        <div className="text-xs leading-snug">
+                          {item.desc}
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                ) : hoverTarget === 'industries' ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {megaIndustries.map(item => (
+                      <div key={item.title} className="space-y-2">
+                        <div className="text-sm uppercase font-semibold leading-tight">
+                          {item.title}
+                        </div>
+                        <div className="text-xs leading-snug">
+                          {item.desc}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : hoverTarget === 'insights' ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {insightsDropdown.map(item => (
+                      <div key={item.title} className="py-2 px-4 rounded hover:bg-bright-blue/20 transition-colors">
+                        <a href={item.path} className="block text-base font-semibold mb-1">
+                          {item.title}
+                        </a>
+                        <div className="text-xs text-muted-foreground leading-snug">
+                          {item.desc}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : null}
+              </div>
+              {/* right panel */}
+              <div className="hidden lg:block">
+                <h4 className="text-lg font-semibold mb-4">
+                  Proud to be a trusted partner for Xtelify with Google Cloud
+                </h4>
+                <p className="text-sm mb-4">
+                  Helping Xtelify (erstwhile Airtel Digital) migrate to Google Cloud was both an exciting opportunity and a big responsibility. Hear directly from Hitesh Bhatia, AVP Engineering at Xtelify, on how this partnership unfolded.
+                </p>
+                <button className="btn-primary text-sm">
+                  Watch here <span className="ml-2">→</span>
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Right */}
         <div className="hidden lg:flex items-center gap-4">
-          <button className="p-2 rounded-full hover:bg-muted transition-colors">
+          {/* <button className="p-2 rounded-full hover:bg-muted transition-colors">
             <Search className="w-4 h-4 text-muted-foreground" />
-          </button>
+          </button> */}
           <Link to="/contact" className="btn-primary text-sm !px-6 !py-2.5">
             Let's Connect
           </Link>

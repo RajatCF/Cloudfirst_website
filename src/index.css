@@ -1,8 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
 @layer base {
   :root {
@@ -75,19 +75,39 @@
 }
 
 @layer components {
+  /* main headline used in several hero-like sections; made sleeker by default */
   .hero-headline {
-    font-size: 11vw;
-    line-height: 0.92;
-    font-weight: 700;
+    font-size: 9vw;
+    line-height: 1.2;
+    font-weight: 300; /* light instead of bold */
     font-family: 'Space Grotesk', sans-serif;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.02em;
   }
 
   @media (min-width: 1024px) {
     .hero-headline {
-      font-size: 9vw;
+      font-size: 6vw;
     }
   }
+
+  /* ensure each phrase stays on its own line */
+  .hero-headline > div {
+    white-space: nowrap;
+  }
+
+  /* animated ring that expands and fades around the hero circles */
+  .hero-ring {
+    @apply absolute rounded-full pointer-events-none;
+    border: 2px solid hsl(var(--bright-blue));
+    opacity: 0.6;
+    z-index: -1; /* sit behind circles */
+  }
+
+/* prevent horizontal scroll when menu is full-width */
+html, body {
+  overflow-x: hidden;
+}
+
 
   .section-title {
     @apply text-5xl xl:text-6xl font-bold tracking-tight;
@@ -175,6 +195,25 @@
 
   .bg-navy {
     background: hsl(var(--navy-deep));
+  }
+
+  /* marquee animations for client logos */
+  @keyframes scroll-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  @keyframes scroll-right {
+    /* start shifted left so logos slide in from left edge
+       and end at neutral; prevents empty gap on right */
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+  }
+
+  .animate-scroll-left {
+    animation: scroll-left 10s linear infinite;
+  }
+  .animate-scroll-right {
+    animation: scroll-right 10s linear infinite;
   }
 
   .bg-navy-dark {
