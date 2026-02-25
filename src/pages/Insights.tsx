@@ -25,6 +25,7 @@ const Insights = () => {
   const [activeCategory, setActiveCategory] = useState('All');
   const filtered = activeCategory === 'All' ? articles : articles.filter(a => a.category === activeCategory);
 
+  
   return (
     <Layout>
       <section className="py-32 lg:py-40">
