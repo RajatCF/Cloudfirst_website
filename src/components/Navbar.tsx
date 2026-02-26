@@ -21,18 +21,19 @@ const insightsDropdown = [
 
 // mega menu data
 const megaServices = [
-  { title: 'Cloud Migration', desc: 'Seamless migration of workloads and data to the cloud for agility and scale.', icon: '☁️', path: '/solutions/cloud-migration' },
-  { title: 'Data Analytic', desc: 'Unlock insights and drive decisions with advanced analytics and data solutions.', icon: '📊', path: '/solutions/data-analytic' },
-  { title: 'Managed Cloud Service', desc: 'End-to-end management and optimization of your cloud environment.', icon: '🛠️', path: '/solutions/managed-cloud-service' },
-  { title: 'CLOUD SECURITY', desc: 'Comprehensive security solutions to protect your cloud assets and data.', icon: '🔒', path: '/solutions/cloud-security' },
-  { title: 'Cloud DevOps', desc: 'Accelerate development and operations with modern DevOps practices in the cloud.', icon: '⚙️', path: '/solutions/cloud-devops' },
+  { title: 'Cloud Migration', desc: 'Seamless migration of workloads and data to the cloud for agility and scale.', path: '/solutions/cloud-migration' },
+  { title: 'Data Analytic', desc: 'Unlock insights and drive decisions with advanced analytics and data solutions.', path: '/solutions/data-analytic' },
+  { title: 'Managed Cloud Service', desc: 'End-to-end management and optimization of your cloud environment.', path: '/solutions/managed-cloud-service' },
+  { title: 'CLOUD SECURITY', desc: 'Comprehensive security solutions to protect your cloud assets and data.', path: '/solutions/cloud-security' },
+  { title: 'Cloud DevOps', desc: 'Accelerate development and operations with modern DevOps practices in the cloud.', path: '/solutions/cloud-devops' },
 ];
 
 const megaIndustries = [
-  { title: 'financial services & insurance', desc: 'Autonomous Workflows. Zero-Trust Security. Instant Settlement.' },
-  { title: 'healthcare & life sciences', desc: 'AI-Native. Patient-Centric. Compliance-First.' },
-  { title: 'travel, transportation & logistics', desc: 'Real-time routing, AI-Native Billing.' },
-  { title: 'retail, CPG & e-commerce', desc: 'AI-Native. Consumer-Centric. Demand-Driven.' },
+  { title: 'Cloud Migration', desc: 'Seamless migration of workloads and data to the cloud for agility and scale.', path: '/solutions/cloud-migration' },
+  { title: 'Data Analytic', desc: 'Unlock insights and drive decisions with advanced analytics and data solutions.', path: '/solutions/data-analytic' },
+  { title: 'Managed Cloud Service', desc: 'End-to-end management and optimization of your cloud environment.', path: '/solutions/managed-cloud-service' },
+  { title: 'CLOUD SECURITY', desc: 'Comprehensive security solutions to protect your cloud assets and data.', path: '/solutions/cloud-security' },
+  { title: 'Cloud DevOps', desc: 'Accelerate development and operations with modern DevOps practices in the cloud.', path: '/solutions/cloud-devops' },
   { title: 'telecommunication, media, entertainment & gaming', desc: 'Engineering the future of connectivity, content, and play.' },
   { title: 'manufacturing, industrials & construction', desc: 'Predictive Maintenance. AI Visual Quality. Synchronous Supply Chains.' },
   { title: 'technology, software & services', desc: 'Predictive Revenue Engines. Refactored Delivery. Synchronous Growth.' },
@@ -44,9 +45,7 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [hoverTarget, setHoverTarget] = useState<null | 'services' | 'industries' | 'insights'>(null);
-  const hideTimeout = useRef<number>();
-  const pendingTarget = useRef<null | 'services' | 'industries'>(null);
-  const location = useLocation();
+  const hideTimeout = useRef<number | null>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -102,7 +101,7 @@ const Navbar = () => {
           {/* mega menu overlay */}
           {/* always render dropdown for animation; visibility controlled via opacity */}
           <div
-            className={`fixed left-10 right-10 top-[var(--nav-height,64px)] w-auto bg-navy text-white py-10 overflow-x-hidden z-40 px-4 lg:px-0 rounded-b-2xl transition-opacity duration-200 ${
+            className={`fixed left-10 right-10 top-[var(--nav-height,64px)] w-auto bg-gradient-to-b from-[#669bbc] to-white text-foreground py-10 overflow-x-hidden z-40 px-4 lg:px-0 rounded-b-2xl shadow-2xl backdrop-blur-sm transition-opacity duration-200 ${
               hoverTarget ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
             }`}
             onMouseEnter={() => {
@@ -117,13 +116,12 @@ const Navbar = () => {
                       <Link
                         key={item.title}
                         to={item.path}
-                        className="block space-y-2 py-2 px-4 rounded hover:bg-bright-blue/20 transition-colors"
+                        className="block space-y-2 py-2 px-4 rounded hover:bg-bright-blue/10 transition-colors"
                       >
-                        <div className="text-sm font-semibold text-bright-blue flex items-center gap-1">
-                          <span>{item.icon}</span>
+                        <div className="text-sm font-semibold text-foreground">
                           {item.title}
                         </div>
-                        <div className="text-xs leading-snug">
+                        <div className="text-xs text-muted-foreground leading-snug">
                           {item.desc}
                         </div>
                       </Link>
@@ -133,10 +131,10 @@ const Navbar = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {megaIndustries.map(item => (
                       <div key={item.title} className="space-y-2">
-                        <div className="text-sm uppercase font-semibold leading-tight">
+                        <div className="text-sm uppercase font-semibold leading-tight text-foreground">
                           {item.title}
                         </div>
-                        <div className="text-xs leading-snug">
+                        <div className="text-xs text-muted-foreground leading-snug">
                           {item.desc}
                         </div>
                       </div>
@@ -145,8 +143,8 @@ const Navbar = () => {
                 ) : hoverTarget === 'insights' ? (
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {insightsDropdown.map(item => (
-                      <div key={item.title} className="py-2 px-4 rounded hover:bg-bright-blue/20 transition-colors">
-                        <a href={item.path} className="block text-base font-semibold mb-1">
+                      <div key={item.title} className="py-2 px-4 rounded hover:bg-bright-blue/10 transition-colors">
+                        <a href={item.path} className="block text-base font-semibold mb-1 text-foreground">
                           {item.title}
                         </a>
                         <div className="text-xs text-muted-foreground leading-snug">

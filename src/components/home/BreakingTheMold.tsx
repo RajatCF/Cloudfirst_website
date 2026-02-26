@@ -44,17 +44,17 @@ const BreakingTheMold = () => {
           {/* Content */}
           <div className="mold-content">
             <h2 className="section-title mb-10">
-              breaking the <span className="text-light-blue">mold</span>
+              breaking <span className="text-light-blue">cloud barrier</span>
             </h2>
             <div className="space-y-6 text-base leading-relaxed opacity-70">
               <p>
-                Traditional consultancies sell slide decks. We ship production-grade infrastructure. Every engagement starts with AI-driven analysis and ends with automated, scalable systems.
+                Traditional consultancies talk cloud. We deliver secure, production-ready cloud environments. Every engagement starts with a deep cloud security assessment and ends with automated, compliant, and scalable solutions.
               </p>
               <p>
-                Our engineers don't just advise—they build alongside your team, embedding modern practices that outlast any consulting engagement.
+                Our cloud engineers don’t just advise—they architect, migrate, and optimize your cloud, embedding best practices that protect your data and accelerate your business.
               </p>
               <p>
-                From Day One, we prioritize outcomes over hours billed. Our success is measured by your velocity, reliability, and cost efficiency.
+                From Day One, we focus on cloud outcomes: security, compliance, and operational excellence. Your success is measured by resilience, agility, and cost efficiency in the cloud.
               </p>
             </div>
             <div className="flex items-center gap-12 mt-12 pt-8 border-t border-primary-foreground/10">
