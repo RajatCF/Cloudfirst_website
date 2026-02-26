@@ -49,16 +49,16 @@ const HeroSection = () => {
       {loading && (
         <div className="absolute inset-0 flex items-center justify-center z-50 bg-black">
           <div className="loader-wrapper w-full h-full flex items-center justify-center">
-          <span className="loader-letter">G</span>
-          <span className="loader-letter">e</span>
-          <span className="loader-letter">n</span>
-          <span className="loader-letter">e</span>
-          <span className="loader-letter">r</span>
-          <span className="loader-letter">a</span>
-          <span className="loader-letter">t</span>
-          <span className="loader-letter">i</span>
-          <span className="loader-letter">n</span>
-          <span className="loader-letter">g</span>
+          <span className="loader-letter">C</span>
+          <span className="loader-letter">L</span>
+          <span className="loader-letter">O</span>
+          <span className="loader-letter">U</span>
+          <span className="loader-letter">D</span>
+          <span className="loader-letter">F</span>
+          <span className="loader-letter">I</span>
+          <span className="loader-letter">R</span>
+          <span className="loader-letter">S</span>
+          <span className="loader-letter">T</span>
 
           <div className="loader"></div>
           <style>{`/* loader styles */
