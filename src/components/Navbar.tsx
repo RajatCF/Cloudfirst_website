@@ -65,10 +65,8 @@ const Navbar = () => {
     >
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10 flex items-center justify-between h-16 lg:h-20">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-0 font-display text-xl font-bold tracking-tight">
-          <span className="text-foreground">cloud</span>
-          <span className="text-foreground">first</span>
-          <span className="text-bright-blue text-2xl leading-none">°</span>
+        <Link to="/" className="flex items-center gap-0">
+          <img src="/cf-tp.png" alt="CloudFirst logo" className="h-16 w-auto" />
         </Link>
 
         {/* Desktop Nav */}

@@ -32,7 +32,7 @@ const Footer = () => {
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link to="/" className="font-display text-xl font-bold tracking-tight inline-flex items-center">
-              cloudfirst<span className="text-bright-blue text-2xl">°</span>
+              <img src="/cflogo.png" alt="CloudFirst logo" className="h-16 w-auto inline-block" />
             </Link>
             <p className="mt-4 text-sm leading-relaxed opacity-60 max-w-xs">
               AI-native, engineering-led cloud consultancy helping enterprises modernize intelligently.
