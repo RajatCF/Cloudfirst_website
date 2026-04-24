@@ -1,5 +1,5 @@
 import { ReactNode, useEffect } from 'react';
-import Navbar from './Navbar';
+import Navbar from './Navbar.tsx';
 import Footer from './Footer';
 import Lenis from 'lenis';
 
