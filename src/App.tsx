@@ -53,7 +53,9 @@ import CloudCostCalculator from "./pages/CloudCostCalculator";
 import OurPartners from "./pages/OurPartners";
 import Careers from "./pages/Careers";
 import Hiring from "./pages/Hiring";
+
 import PressMedia from "./pages/PressMedia";
+import GoGlobalAward from "./pages/GoGlobalAward";
 
 const queryClient = new QueryClient();
 
@@ -121,6 +123,9 @@ const App = () => (
           <Route path="/company/careers" element={<Careers />} />
           <Route path="/company/hiring" element={<Hiring />} />
           <Route path="/company/press-media" element={<PressMedia />} />
+
+          {/* Go Global Award Dedicated Page */}
+          <Route path="/go-global-award" element={<GoGlobalAward />} />
 
           <Route path="*" element={<NotFound />} />
         </Routes>

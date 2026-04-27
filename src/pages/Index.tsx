@@ -6,6 +6,7 @@ import ServicesGrid from '@/components/home/ServicesGrid';
 import JoinPioneers from '@/components/home/JoinPioneers';
 import ClientLogos from '@/components/home/ClientLogos';
 import ContactSection from '@/components/home/ContactSection';
+import GoGlobal from '@/components/home/GoGlobal';
 
 const Index = () => {
   return (
@@ -13,10 +14,12 @@ const Index = () => {
       <HeroSection />
       <SubHeroSection />
       <BreakingTheMold />
+      <GoGlobal />
       <ServicesGrid />
       <ClientLogos />
       <JoinPioneers />
       <ContactSection />
+      
     </Layout>
   );
 };
