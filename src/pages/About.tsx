@@ -1,89 +1,321 @@
 import Layout from '@/components/Layout';
-import { Linkedin } from 'lucide-react';
+import { CheckCircle2, Globe, Award, Users, TrendingUp, ShieldCheck, Lightbulb, Heart, Star, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
-const timeline = [
-  { year: '2020', title: 'Founded', desc: 'CloudFirst launched with a mission to bring AI-native consulting to the enterprise.' },
-  { year: '2021', title: 'First 50 Clients', desc: 'Expanded across FinTech and Healthcare verticals with 100% client retention.' },
-  { year: '2022', title: 'Global Expansion', desc: 'Opened offices in New York and London, growing to 150+ engineers.' },
-  { year: '2023', title: 'AI-Native Pivot', desc: 'Integrated generative AI into every service offering and internal tool.' },
-  { year: '2024', title: '500+ Engagements', desc: 'Reached half a thousand successful cloud transformations worldwide.' },
-  { year: '2025', title: 'Industry Leader', desc: 'Named a leader in cloud consultancy by Forrester and Gartner.' },
+const stats = [
+  { value: "ISO 27001", label: "Information Security", icon: ShieldCheck },
+  { value: "ISO 9001", label: "Quality Management", icon: Award },
+  { value: "5+ Countries", label: "International clients", icon: Globe },
+  { value: "Govt. Projects", label: "Indian public sector", icon: Star },
 ];
 
-const team = [
-  { name: 'Sarah Chen', role: 'CEO & Co-Founder', bio: 'Ex-Google Cloud, 15 years in enterprise transformation.' },
-  { name: 'Marcus Williams', role: 'CTO', bio: 'Former AWS principal engineer, Kubernetes contributor.' },
-  { name: 'Priya Sharma', role: 'VP Engineering', bio: 'Led platform teams at Netflix and Stripe.' },
-  { name: 'James O\'Brien', role: 'Head of AI', bio: 'PhD in ML, ex-DeepMind research scientist.' },
-  { name: 'Aisha Patel', role: 'Head of FinOps', bio: 'Created FinOps practices at 3 Fortune 500 companies.' },
-  { name: 'David Kim', role: 'Head of Security', bio: 'CISO background, ISO 27001 and SOC2 specialist.' },
+const values = [
+  {
+    icon: Lightbulb,
+    color: "text-amber-500",
+    bg: "bg-amber-500/10",
+    border: "border-amber-500/20",
+    title: "Pioneering Spirit",
+    desc: "We embrace emerging technologies early and build practices around them — so our clients are always ahead, never catching up.",
+  },
+  {
+    icon: TrendingUp,
+    color: "text-blue-500",
+    bg: "bg-blue-500/10",
+    border: "border-blue-500/20",
+    title: "Innovation First",
+    desc: "Every engagement starts with a blank canvas. We design solutions that fit your exact context, not templates from the last client.",
+  },
+  {
+    icon: Heart,
+    color: "text-rose-500",
+    bg: "bg-rose-500/10",
+    border: "border-rose-500/20",
+    title: "Client Success",
+    desc: "Our professionals align their personal growth with your success. When you win, we win — and that's not a tagline, it's how we hire.",
+  },
+  {
+    icon: ShieldCheck,
+    color: "text-emerald-500",
+    bg: "bg-emerald-500/10",
+    border: "border-emerald-500/20",
+    title: "Quality & Security",
+    desc: "ISO 27001:2013 and ISO 9001:2015 certified. Every delivery is backed by a quality management system with zero compromise on security.",
+  },
+  {
+    icon: Globe,
+    color: "text-violet-500",
+    bg: "bg-violet-500/10",
+    border: "border-violet-500/20",
+    title: "Global Reach",
+    desc: "We serve clients across the US, Canada, Australia, New Zealand, and India — bringing global perspective to every local challenge.",
+  },
+  {
+    icon: Users,
+    color: "text-sky-500",
+    bg: "bg-sky-500/10",
+    border: "border-sky-500/20",
+    title: "People-Powered",
+    desc: "Skilled and passionate professionals who project their futures alongside client success. Not just a team — a shared mission.",
+  },
 ];
-
-const partners = ['Amazon Web Services', 'Microsoft Azure', 'Google Cloud', 'HashiCorp', 'Datadog', 'Snowflake'];
 
 const About = () => {
   return (
     <Layout>
-      {/* Hero */}
-      <section className="py-32 lg:py-40">
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
-          <div className="max-w-[800px]">
-            <h1 className="section-title mb-6">who <span className="text-bright-blue">we are</span></h1>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              CloudFirst is an AI-native, engineering-led cloud consultancy. We don't just advise—we build, deploy, and scale alongside your team.
-            </p>
-          </div>
+      {/* ── Hero ── */}
+      <section className="relative overflow-hidden bg-[#07111f]">
+        {/* Ambient glow */}
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute -top-40 -left-40 h-[640px] w-[640px] rounded-full bg-blue-700/10 blur-[130px]" />
+          <div className="absolute top-0 right-0 h-[500px] w-[500px] rounded-full bg-indigo-700/10 blur-[110px]" />
         </div>
-      </section>
 
-      {/* Timeline */}
-      <section className="bg-navy-dark text-primary-foreground py-32 lg:py-40">
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
-          <h2 className="section-title mb-16">our <span className="text-light-blue">journey</span></h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {timeline.map(item => (
-              <div key={item.year} className="border-l-2 border-bright-blue/30 pl-6">
-                <span className="text-bright-blue font-display font-bold text-2xl">{item.year}</span>
-                <h3 className="text-xl font-display font-bold mt-2 mb-2">{item.title}</h3>
-                <p className="text-sm opacity-60 leading-relaxed">{item.desc}</p>
+        <div className="relative max-w-[1200px] mx-auto px-6 lg:px-10">
+          <div className="grid items-center gap-12 lg:grid-cols-2 py-16 lg:py-24">
+            {/* Left */}
+            <div>
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-blue-400 mb-6">
+                About CloudFirst®
+              </span>
+              <h1
+                className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-5"
+                style={{ fontFamily: "'Georgia', serif" }}
+              >
+                Technology that{" "}
+                <span className="text-blue-400">changes everything</span>
+              </h1>
+              <p className="text-white/60 text-lg leading-relaxed max-w-lg mb-8">
+                CloudFirst Technology® Private Limited is an ISO 27001:2013 and ISO 9001:2015 certified company empowering clients globally through cutting-edge IT services — from US and Australia to Indian government projects.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-blue-500 hover:bg-blue-400 text-white text-sm font-bold rounded-lg transition-colors"
+                >
+                  Work with us <ArrowRight className="w-4 h-4" />
+                </Link>
+                <Link
+                  to="/careers"
+                  className="inline-flex items-center gap-2 px-6 py-3 border border-white/20 hover:border-white/40 text-white/80 text-sm font-medium rounded-lg transition-colors"
+                >
+                  Join the team
+                </Link>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
+            </div>
 
-      {/* Team */}
-      <section className="py-32 lg:py-40">
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
-          <h2 className="section-title mb-16">leadership <span className="text-bright-blue">team</span></h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {team.map(member => (
-              <div key={member.name} className="card-lift p-8 rounded-2xl border border-border bg-card">
-                <div className="w-16 h-16 rounded-full bg-muted mb-6 flex items-center justify-center">
-                  <span className="font-display font-bold text-xl text-bright-blue">
-                    {member.name.split(' ').map(n => n[0]).join('')}
-                  </span>
+            {/* Right — image with floating badges */}
+            <div className="relative flex items-center justify-center">
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-blue-500/20 via-transparent to-indigo-500/15 blur-2xl" />
+              <div className="relative w-full rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+                <img
+                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=900&q=80"
+                  alt="CloudFirst team collaborating"
+                  className="w-full h-72 lg:h-96 object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#07111f]/70 via-transparent to-transparent" />
+              </div>
+
+              {/* Floating badge — top left */}
+              <div className="absolute -top-4 -left-4 flex items-center gap-2 rounded-xl bg-[#0d1a2e] border border-blue-500/30 px-4 py-2.5 shadow-xl backdrop-blur-sm">
+                <ShieldCheck className="w-4 h-4 text-blue-400" />
+                <span className="text-xs font-semibold text-white">ISO 27001:2013 Certified</span>
+              </div>
+
+              {/* Floating badge — bottom right */}
+              <div className="absolute -bottom-4 -right-4 rounded-xl bg-[#0d1a2e] border border-white/10 px-4 py-3 shadow-xl backdrop-blur-sm">
+                <div className="text-xs text-white/50 mb-0.5">Markets served</div>
+                <div className="text-xl font-bold text-blue-400" style={{ fontFamily: "'Georgia', serif" }}>5 + countries</div>
+              </div>
+
+              {/* Floating badge — bottom left */}
+              <div className="absolute bottom-8 -left-5 rounded-xl bg-[#0d1a2e] border border-emerald-500/20 px-3 py-2 shadow-xl backdrop-blur-sm">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                  <span className="text-xs font-medium text-white">ISO 9001:2015 Certified</span>
                 </div>
-                <h3 className="text-xl font-display font-bold">{member.name}</h3>
-                <p className="text-sm text-bright-blue font-medium mt-1">{member.role}</p>
-                <p className="text-sm text-muted-foreground mt-3">{member.bio}</p>
-                <a href="#" className="inline-flex mt-4 text-muted-foreground hover:text-bright-blue transition-colors">
-                  <Linkedin className="w-4 h-4" />
-                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Stats strip */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/5 rounded-2xl overflow-hidden border border-white/5 mb-0">
+            {stats.map(({ value, label, icon: Icon }) => (
+              <div key={label} className="bg-[#0a1628] px-6 py-5 flex items-center gap-4">
+                <div className="h-9 w-9 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center flex-shrink-0">
+                  <Icon className="w-4 h-4 text-blue-400" />
+                </div>
+                <div>
+                  <div className="text-lg font-bold text-white" style={{ fontFamily: "'Georgia', serif" }}>{value}</div>
+                  <div className="text-xs text-white/40">{label}</div>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Partners */}
-      <section className="bg-light-blue py-24">
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-10 text-center">
-          <h2 className="text-2xl font-display font-bold mb-12">Trusted Technology Partners</h2>
-          <div className="flex flex-wrap items-center justify-center gap-8 lg:gap-16">
-            {partners.map(partner => (
-              <span key={partner} className="text-sm font-medium text-muted-foreground tracking-wide uppercase">{partner}</span>
+      {/* ── Who We Are ── */}
+      <section className="bg-[#f7f8fa] border-b border-gray-100">
+        <div className="max-w-[1200px] mx-auto px-6 lg:px-10 py-16">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <span className="text-xs font-bold uppercase tracking-widest text-blue-600">Who we are</span>
+              <h2 className="mt-3 text-2xl md:text-3xl font-bold text-gray-900 mb-5" style={{ fontFamily: "'Georgia', serif" }}>
+                A workforce built on passion and expertise
+              </h2>
+              <p className="text-gray-500 text-[15px] leading-relaxed mb-4">
+                CloudFirst Technology® is a workforce of skilled and passionate professionals who project their future aligned with company and client success. We bring a pioneering spirit, relentless innovation, and a commitment to excellence to every engagement.
+              </p>
+              <p className="text-gray-500 text-[15px] leading-relaxed">
+                Together we encompass experience and expertise in catering to international clients from the US, Canada, Australia, New Zealand and beyond — while also having undertaken several Indian government projects requiring the highest standards of security and delivery.
+              </p>
+              <div className="mt-6 space-y-3">
+                {[
+                  "Creativity, flexibility and technical expertise",
+                  "Simple or complex analyses delivered with precision",
+                  "Total focus on customer satisfaction",
+                  "Quality workmanship on every engagement",
+                ].map((item) => (
+                  <div key={item} className="flex items-start gap-2.5">
+                    <CheckCircle2 className="w-4 h-4 text-blue-500 flex-shrink-0 mt-0.5" />
+                    <span className="text-sm text-gray-700">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Image */}
+            <div className="relative">
+              <div className="absolute -inset-4 rounded-3xl bg-gradient-to-br from-blue-100 via-transparent to-indigo-50 blur-2xl" />
+              <div className="relative rounded-2xl overflow-hidden border border-gray-100 shadow-lg">
+                <img
+                  src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=800&q=80"
+                  alt="CloudFirst team at work"
+                  className="w-full h-64 lg:h-80 object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-tr from-blue-900/20 via-transparent to-transparent" />
+                <div className="absolute bottom-4 left-4 flex items-center gap-2 rounded-lg bg-white/95 backdrop-blur-sm px-3 py-2 shadow-md">
+                  <Award className="w-4 h-4 text-blue-500" />
+                  <span className="text-xs font-bold text-gray-800">Dual ISO certified organisation</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Vision & Mission ── */}
+      <section className="bg-white border-b border-gray-100">
+        <div className="max-w-[1200px] mx-auto px-6 lg:px-10 py-16">
+          <div className="text-center mb-12">
+            <span className="text-xs font-bold uppercase tracking-widest text-blue-600">Purpose</span>
+            <h2 className="mt-2 text-2xl md:text-3xl font-bold text-gray-900" style={{ fontFamily: "'Georgia', serif" }}>
+              Our vision & mission
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Vision card */}
+            <div className="relative bg-[#07111f] rounded-2xl p-8 overflow-hidden">
+              <div className="pointer-events-none absolute inset-0">
+                <div className="absolute -top-20 -right-20 h-60 w-60 rounded-full bg-blue-600/15 blur-[60px]" />
+              </div>
+              <div className="relative z-10">
+                <div className="inline-flex items-center justify-center h-11 w-11 rounded-xl bg-blue-500/15 border border-blue-500/25 mb-5">
+                  <Star className="w-5 h-5 text-blue-400" />
+                </div>
+                <h3 className="text-xl font-bold text-white mb-3" style={{ fontFamily: "'Georgia', serif" }}>Our Vision</h3>
+                <p className="text-white/60 text-[15px] leading-relaxed">
+                  To be a positive contributor in our client's success by providing Information Technology services that produce consistent, excellent results — every engagement, every time.
+                </p>
+              </div>
+            </div>
+
+            {/* Mission card */}
+            <div className="relative bg-[#07111f] rounded-2xl p-8 overflow-hidden">
+              <div className="pointer-events-none absolute inset-0">
+                <div className="absolute -top-20 -left-20 h-60 w-60 rounded-full bg-indigo-600/15 blur-[60px]" />
+              </div>
+              <div className="relative z-10">
+                <div className="inline-flex items-center justify-center h-11 w-11 rounded-xl bg-indigo-500/15 border border-indigo-500/25 mb-5">
+                  <Lightbulb className="w-5 h-5 text-indigo-400" />
+                </div>
+                <h3 className="text-xl font-bold text-white mb-3" style={{ fontFamily: "'Georgia', serif" }}>Our Mission</h3>
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-2.5">
+                    <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-indigo-400 flex-shrink-0" />
+                    <span className="text-white/60 text-[15px] leading-relaxed">Building Technology that changes everything.</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-indigo-400 flex-shrink-0" />
+                    <span className="text-white/60 text-[15px] leading-relaxed">Responding to industry needs using creativity, flexibility and technical expertise — from simple analyses to complex transformations.</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-indigo-400 flex-shrink-0" />
+                    <span className="text-white/60 text-[15px] leading-relaxed">Total focus on customer satisfaction and quality workmanship in every deliverable.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Values ── */}
+      <section className="bg-[#f7f8fa]">
+        <div className="max-w-[1200px] mx-auto px-6 lg:px-10 py-16">
+          <div className="mb-10">
+            <span className="text-xs font-bold uppercase tracking-widest text-blue-600">What drives us</span>
+            <h2 className="mt-2 text-2xl md:text-3xl font-bold text-gray-900" style={{ fontFamily: "'Georgia', serif" }}>
+              Our core values
+            </h2>
+          </div>
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {values.map(({ icon: Icon, color, bg, border, title, desc }) => (
+              <article
+                key={title}
+                className="group relative bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 overflow-hidden"
+              >
+                <div className={`absolute top-0 left-0 right-0 h-0.5 ${bg} opacity-0 group-hover:opacity-100 transition-opacity`} />
+                <div className={`inline-flex items-center justify-center h-10 w-10 rounded-xl ${bg} border ${border} mb-4`}>
+                  <Icon className={`w-5 h-5 ${color}`} />
+                </div>
+                <h3 className="text-base font-bold text-gray-900 mb-2">{title}</h3>
+                <p className="text-gray-500 text-sm leading-relaxed">{desc}</p>
+              </article>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── CTA ── */}
+      <section className="relative overflow-hidden bg-[#07111f]">
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-500/40 to-transparent" />
+          <div className="absolute -bottom-40 left-1/2 -translate-x-1/2 h-80 w-80 rounded-full bg-blue-600/10 blur-[80px]" />
+        </div>
+        <div className="relative max-w-[1200px] mx-auto px-6 lg:px-10 py-16 text-center">
+          <span className="inline-block text-xs font-bold uppercase tracking-widest text-blue-400 mb-4">Let's grow together</span>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4" style={{ fontFamily: "'Georgia', serif" }}>
+            Ready to experience the CloudFirst difference?
+          </h2>
+          <p className="text-white/50 text-lg max-w-xl mx-auto mb-8">
+            Leverage our pioneering spirit, innovation, and excellence on your journey towards growth.
+          </p>
+          <div className="flex flex-wrap gap-4 justify-center">
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 px-7 py-3.5 bg-blue-500 hover:bg-blue-400 text-white text-sm font-bold rounded-lg transition-colors"
+            >
+              Get in touch <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link
+              to="/careers"
+              className="inline-flex items-center gap-2 px-7 py-3.5 border border-white/20 hover:border-white/40 text-white/70 text-sm font-medium rounded-lg transition-colors"
+            >
+              View open roles
+            </Link>
           </div>
         </div>
       </section>

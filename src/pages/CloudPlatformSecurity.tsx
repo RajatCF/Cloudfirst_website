@@ -106,7 +106,7 @@ const CloudPlatformSecurity: React.FC = () => {
               "radial-gradient(ellipse at 80% 40%, #1565c0 0%, transparent 55%), radial-gradient(ellipse at 10% 80%, #0f4c2a 0%, transparent 50%)",
           }}
         />
-        <div className="max-w-6xl mx-auto px-6 py-20 relative z-10">
+        <div className="max-w-6xl mx-auto px-6 pt-24 pb-20 relative z-10">
           <div className="flex items-center gap-2 mb-5">
             <span className="text-xs font-semibold uppercase tracking-widest text-blue-300 border border-blue-400/30 bg-blue-400/10 rounded-full px-3 py-1">
               Cloud Platforms

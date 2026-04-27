@@ -1,161 +1,323 @@
 import Layout from "@/components/Layout";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Zap, Database, Boxes, Layers, Code2, HardDrive, Shield, CheckCircle2, TrendingUp, Globe, Lock } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const awsManagedServices = [
   {
     name: "AWS Lambda",
+    icon: Zap,
+    color: "text-amber-500",
+    bg: "bg-amber-500/10",
+    border: "border-amber-500/20",
     description:
-      "AWS Lambda is a serverless compute service that enables you to run your code without provisioning or managing servers. It automatically scales your applications in response to incoming requests and executes your code in parallel, ensuring high availability and cost efficiency.",
+      "Serverless compute that scales automatically in response to requests — no server management, pay only for what you use.",
   },
   {
     name: "Amazon RDS",
+    icon: Database,
+    color: "text-blue-400",
+    bg: "bg-blue-400/10",
+    border: "border-blue-400/20",
     description:
-      "Amazon Relational Database Service (RDS) makes it easy to set up, operate, and scale a relational database in the cloud. RDS manages routine database tasks such as backups, software patching, and automatic failure detection, allowing you to focus on building applications instead of managing infrastructure.",
+      "Fully managed relational database handling backups, patching, and failover so your team focuses on building, not maintenance.",
   },
   {
     name: "Amazon ECS",
+    icon: Boxes,
+    color: "text-orange-400",
+    bg: "bg-orange-400/10",
+    border: "border-orange-400/20",
     description:
-      "Amazon Elastic Container Service (ECS) is a highly scalable, high-performance container orchestration service that supports Docker containers. ECS simplifies the deployment and management of containers, providing you with the flexibility to run applications on a fully managed infrastructure.",
+      "High-performance container orchestration for Docker workloads, with fully managed infrastructure for flexible deployment.",
   },
   {
     name: "AWS Elastic Beanstalk",
+    icon: Layers,
+    color: "text-emerald-400",
+    bg: "bg-emerald-400/10",
+    border: "border-emerald-400/20",
     description:
-      "AWS Elastic Beanstalk is a fully managed service that makes it easy to deploy and run applications in multiple languages. It handles capacity provisioning, load balancing, and automatic scaling, allowing you to focus on writing code and delivering applications quickly.",
+      "Deploy multi-language applications without worrying about capacity, load balancing, or scaling — all handled for you.",
   },
   {
     name: "AWS CloudFormation",
+    icon: Code2,
+    color: "text-violet-400",
+    bg: "bg-violet-400/10",
+    border: "border-violet-400/20",
     description:
-      "AWS CloudFormation provides a declarative way to provision and manage your AWS infrastructure as code. With CloudFormation, you can define your infrastructure resources in a template, enabling consistent and automated provisioning and deployment of your applications.",
+      "Define your entire infrastructure as code with declarative templates for consistent, repeatable provisioning at any scale.",
   },
   {
     name: "Amazon S3",
+    icon: HardDrive,
+    color: "text-sky-400",
+    bg: "bg-sky-400/10",
+    border: "border-sky-400/20",
     description:
-      "Amazon Simple Storage Service (S3) is an object storage service that offers industry-leading scalability, durability, and security. S3 allows you to store and retrieve any amount of data from anywhere on the web, making it an ideal choice for backup, archiving, and content distribution.",
+      "Industry-leading object storage with unlimited scalability, 99.999999999% durability, and fine-grained access controls.",
   },
   {
     name: "AWS CloudTrail",
+    icon: Shield,
+    color: "text-rose-400",
+    bg: "bg-rose-400/10",
+    border: "border-rose-400/20",
     description:
-      "AWS CloudTrail provides visibility into user activity and resource changes within your AWS infrastructure. It captures API calls and delivers detailed logs, which can be used for security analysis, resource tracking, and compliance auditing.",
+      "Complete API audit trail for security analysis, compliance reporting, and resource change tracking across your AWS estate.",
   },
+];
+
+const stats = [
+  { value: "200+", label: "AWS Services", icon: Globe },
+  { value: "99.99%", label: "Uptime SLA", icon: TrendingUp },
+  { value: "ISO 27001", label: "Certified Partner", icon: Lock },
+  { value: "24 / 7", label: "Managed Support", icon: CheckCircle2 },
 ];
 
 const AmazonWebServices = () => {
   return (
     <Layout>
-      <section className="relative overflow-hidden py-20 lg:py-28">
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,_rgba(245,158,11,0.12),_transparent_45%),radial-gradient(circle_at_85%_25%,_rgba(59,130,246,0.12),_transparent_35%)]" />
+      {/* ── Hero ── */}
+      <section className="relative overflow-hidden bg-[#0a0e1a]">
+        {/* Ambient glow */}
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute -top-32 -left-32 h-[600px] w-[600px] rounded-full bg-amber-500/10 blur-[120px]" />
+          <div className="absolute top-0 right-0 h-[500px] w-[500px] rounded-full bg-orange-600/10 blur-[100px]" />
+        </div>
 
-        <div className="max-w-[1200px] mx-auto px-6 lg:px-10">
-          <div className="grid items-center gap-10 lg:grid-cols-2">
+        <div className="relative max-w-[1200px] mx-auto px-6 lg:px-10 pt-16 pb-0">
+          <div className="grid items-center gap-12 lg:grid-cols-2 py-16 lg:py-24">
+            {/* Left — copy */}
             <div>
-              <span className="inline-flex items-center rounded-full border border-border bg-card/80 px-3 py-1 text-xs font-medium uppercase tracking-wider text-muted-foreground backdrop-blur">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-amber-400">
                 Cloud Platforms
               </span>
 
-              <h1 className="section-title mt-6 mb-5">Amazon Web Services</h1>
+              <h1
+                className="mt-6 mb-5 text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight"
+                style={{ fontFamily: "'Georgia', serif" }}
+              >
+                Amazon Web{" "}
+                <span className="text-amber-400">Services</span>
+              </h1>
 
-              <div className="max-w-2xl space-y-5 text-lg leading-relaxed text-muted-foreground">
-                <p>
-                  We are here to introduce you to AWS Managed Cloud Services and
-                  how they can revolutionize your business operations.
-                </p>
-                <p>
-                  In today&apos;s rapidly evolving digital landscape, businesses
-                  need scalable and reliable infrastructure to meet the demands
-                  of their customers. AWS (Amazon Web Services) offers a
-                  comprehensive suite of cloud services that provide
-                  organizations with the flexibility, agility, and security they
-                  require.
-                </p>
-              </div>
+              <p className="text-white/60 text-lg leading-relaxed max-w-lg mb-8">
+                CloudFirst's AWS-certified team designs, migrates, and manages cloud infrastructure so you can ship faster, reduce costs, and scale with confidence.
+              </p>
 
-              <div className="mt-8 flex flex-wrap gap-4">
-                <Link to="/contact" className="btn-primary arrow-slide">
-                  Talk to our team
-                  <ArrowRight className="w-4 h-4 arrow-icon" />
+              <div className="flex flex-wrap gap-4">
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-amber-500 hover:bg-amber-400 text-black text-sm font-bold rounded-lg transition-colors"
+                >
+                  Talk to our team <ArrowRight className="w-4 h-4" />
                 </Link>
-                <Link to="/" className="btn-outline">
+                <Link
+                  to="/"
+                  className="inline-flex items-center gap-2 px-6 py-3 border border-white/20 hover:border-white/40 text-white/80 text-sm font-medium rounded-lg transition-colors"
+                >
                   Back to Home
                 </Link>
               </div>
             </div>
 
-            <div className="relative">
-              <div className="absolute -inset-3 rounded-3xl bg-gradient-to-tr from-amber-400/20 via-transparent to-sky-500/25 blur-2xl" />
-              <div className="relative overflow-hidden rounded-3xl border border-border bg-card shadow-xl">
+            {/* Right — image with floating badges */}
+            <div className="relative flex items-center justify-center">
+              {/* Outer glow ring */}
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-amber-500/20 via-transparent to-orange-500/15 blur-2xl" />
+
+              {/* Main image frame */}
+              <div className="relative w-full rounded-2xl overflow-hidden shadow-2xl border border-white/10">
                 <img
-                  src="/aws-services.png"
-                  alt="AWS managed cloud services"
-                  className="h-full w-full object-cover"
+                  src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=900&q=80"
+                  alt="AWS cloud infrastructure"
+                  className="w-full h-72 lg:h-96 object-cover"
                 />
+                {/* Gradient overlay for text legibility */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0e1a]/70 via-transparent to-transparent" />
+              </div>
+
+              {/* Floating badge — top left */}
+              <div className="absolute -top-4 -left-4 flex items-center gap-2 rounded-xl bg-[#13192e] border border-amber-500/30 px-4 py-2.5 shadow-xl backdrop-blur-sm">
+                <span className="h-2 w-2 rounded-full bg-amber-400 animate-pulse" />
+                <span className="text-xs font-semibold text-white">AWS Advanced Partner</span>
+              </div>
+
+              {/* Floating badge — bottom right */}
+              <div className="absolute -bottom-4 -right-4 rounded-xl bg-[#13192e] border border-white/10 px-4 py-3 shadow-xl backdrop-blur-sm">
+                <div className="text-xs text-white/50 mb-0.5">Avg. cost savings</div>
+                <div className="text-xl font-bold text-amber-400" style={{ fontFamily: "'Georgia', serif" }}>35 %</div>
+              </div>
+
+              {/* Floating badge — bottom left */}
+              <div className="absolute bottom-8 -left-5 rounded-xl bg-[#13192e] border border-emerald-500/20 px-3 py-2 shadow-xl backdrop-blur-sm">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                  <span className="text-xs font-medium text-white">Migration complete</span>
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="mt-14 max-w-4xl rounded-2xl border border-border bg-card/70 p-6 md:p-8">
-            <p className="text-lg leading-relaxed text-muted-foreground">
-              AWS Managed Cloud Services are designed to simplify the management
-              and maintenance of your cloud infrastructure, allowing you to
-              focus on your core business activities. With AWS Managed Cloud
-              Services, you can offload the operational burden of managing your
-              infrastructure to AWS experts, who will handle the day-to-day
-              tasks, monitoring, and optimization, so you can concentrate on
-              driving innovation and delivering value to your customers.
-            </p>
-          </div>
-
-          <h2 className="mt-16 text-2xl md:text-3xl font-semibold text-foreground">
-            Key AWS Managed Cloud Services
-          </h2>
-
-          <div className="mt-8 grid gap-6 md:grid-cols-2">
-            {awsManagedServices.map((service) => (
-              <article
-                key={service.name}
-                className="group rounded-2xl border border-border bg-card/80 p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-              >
-                <h3 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
-                  {service.name}
-                </h3>
-                <p className="mt-3 text-muted-foreground leading-relaxed">
-                  {service.description}
-                </p>
-              </article>
+          {/* Stats strip */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/5 rounded-2xl overflow-hidden border border-white/5 mb-0">
+            {stats.map(({ value, label, icon: Icon }) => (
+              <div key={label} className="bg-[#0d1220] px-6 py-5 flex items-center gap-4">
+                <div className="h-9 w-9 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center flex-shrink-0">
+                  <Icon className="w-4 h-4 text-amber-400" />
+                </div>
+                <div>
+                  <div className="text-lg font-bold text-white" style={{ fontFamily: "'Georgia', serif" }}>{value}</div>
+                  <div className="text-xs text-white/40">{label}</div>
+                </div>
+              </div>
             ))}
           </div>
+        </div>
+      </section>
 
-          <div className="max-w-4xl mt-14 space-y-5 text-lg leading-relaxed text-muted-foreground">
-            <p>
-              These are just a few examples of the extensive range of AWS
-              Managed Cloud Services available. By leveraging these services,
-              you can benefit from AWS&apos;s global infrastructure,
-              industry-leading security practices, and continuous innovation,
-              ensuring that your business stays ahead in today&apos;s competitive
-              landscape.
+      {/* ── Intro blurb ── */}
+      <section className="bg-[#f7f8fa] border-b border-gray-100">
+        <div className="max-w-[1200px] mx-auto px-6 lg:px-10 py-14">
+          <div className="max-w-3xl">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4" style={{ fontFamily: "'Georgia', serif" }}>
+              Offload AWS complexity to certified experts
+            </h2>
+            <p className="text-gray-500 text-lg leading-relaxed">
+              AWS Managed Cloud Services simplify the day-to-day management of your cloud infrastructure. CloudFirst's engineers handle monitoring, optimisation, patching, and incident response — so you can concentrate on delivering value to your customers.
             </p>
-            <p>
-              At CloudFirst, we specialize in helping businesses harness the
-              power of AWS Managed Cloud Services. Our team of experts can
-              assist you in designing, implementing, and managing your cloud
-              infrastructure, tailored to your unique business requirements.
+          </div>
+        </div>
+      </section>
+
+      {/* ── Services grid ── */}
+      <section className="bg-[#f7f8fa]">
+        <div className="max-w-[1200px] mx-auto px-6 lg:px-10 py-16">
+          <div className="flex items-end justify-between mb-10 gap-6 flex-wrap">
+            <div>
+              <span className="text-xs font-bold uppercase tracking-widest text-amber-600">What we manage</span>
+              <h2 className="mt-2 text-2xl md:text-3xl font-bold text-gray-900" style={{ fontFamily: "'Georgia', serif" }}>
+                Key AWS managed services
+              </h2>
+            </div>
+            <p className="text-gray-400 text-sm max-w-xs">
+              A sample of the 200+ AWS services CloudFirst architects and operates for customers.
             </p>
           </div>
 
-          <div className="mt-10 rounded-2xl border border-border bg-gradient-to-r from-amber-100/40 via-card to-sky-100/40 p-6 md:p-8">
-            <h3 className="text-xl md:text-2xl font-semibold text-foreground">
-              Ready to modernize on AWS?
-            </h3>
-            <p className="mt-3 max-w-3xl text-muted-foreground leading-relaxed">
-              Get a tailored AWS managed services roadmap from CloudFirst,
-              aligned to your workloads, security goals, and growth plans.
-            </p>
-            <div className="mt-6">
-              <Link to="/contact" className="btn-primary arrow-slide">
-                Get Started
-                <ArrowRight className="w-4 h-4 arrow-icon" />
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {awsManagedServices.map(({ name, icon: Icon, color, bg, border, description }) => (
+              <article
+                key={name}
+                className="group relative bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 overflow-hidden"
+              >
+                {/* Top accent bar */}
+                <div className={`absolute top-0 left-0 right-0 h-0.5 ${bg} opacity-0 group-hover:opacity-100 transition-opacity`} />
+                <div className={`inline-flex items-center justify-center h-10 w-10 rounded-xl ${bg} border ${border} mb-4`}>
+                  <Icon className={`w-5 h-5 ${color}`} />
+                </div>
+                <h3 className="text-base font-bold text-gray-900 mb-2">{name}</h3>
+                <p className="text-gray-500 text-sm leading-relaxed">{description}</p>
+              </article>
+            ))}
+
+            {/* "More services" card */}
+            <article className="relative bg-gradient-to-br from-amber-500 to-orange-600 rounded-2xl p-6 shadow-sm flex flex-col justify-between">
+              <div>
+                <div className="inline-flex items-center justify-center h-10 w-10 rounded-xl bg-white/20 mb-4">
+                  <Globe className="w-5 h-5 text-white" />
+                </div>
+                <h3 className="text-base font-bold text-white mb-2">+ 190 more AWS services</h3>
+                <p className="text-white/80 text-sm leading-relaxed">From AI/ML to IoT, security, and edge computing — CloudFirst manages it all.</p>
+              </div>
+              <Link
+                to="/contact"
+                className="mt-6 inline-flex items-center gap-1.5 text-white text-sm font-semibold hover:gap-2.5 transition-all"
+              >
+                Get full service list <ArrowRight className="w-4 h-4" />
               </Link>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Why AWS with CloudFirst ── */}
+      <section className="bg-white border-t border-gray-100">
+        <div className="max-w-[1200px] mx-auto px-6 lg:px-10 py-16">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Image */}
+            <div className="relative order-2 lg:order-1">
+              <div className="absolute -inset-4 rounded-3xl bg-gradient-to-br from-amber-100 via-transparent to-orange-50 blur-2xl" />
+              <div className="relative rounded-2xl overflow-hidden border border-gray-100 shadow-lg">
+                <img
+                  src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80"
+                  alt="Cloud data centre"
+                  className="w-full h-64 lg:h-80 object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-tr from-amber-900/30 via-transparent to-transparent" />
+                {/* Overlay chip */}
+                <div className="absolute bottom-4 left-4 flex items-center gap-2 rounded-lg bg-white/95 backdrop-blur-sm px-3 py-2 shadow-md">
+                  <TrendingUp className="w-4 h-4 text-amber-500" />
+                  <span className="text-xs font-bold text-gray-800">AWS Well-Architected Review included</span>
+                </div>
+              </div>
             </div>
+
+            {/* Copy */}
+            <div className="order-1 lg:order-2">
+              <span className="text-xs font-bold uppercase tracking-widest text-amber-600">Why CloudFirst for AWS</span>
+              <h2 className="mt-3 text-2xl md:text-3xl font-bold text-gray-900 mb-6" style={{ fontFamily: "'Georgia', serif" }}>
+                AWS expertise that goes beyond the console
+              </h2>
+              <div className="space-y-4">
+                {[
+                  { title: "AWS Advanced Tier Partner", body: "Verified technical credentials across compute, data, security, and migration." },
+                  { title: "Cost-first architecture", body: "Every design decision is evaluated for cost impact. Customers save an average of 35% vs. self-managed setups." },
+                  { title: "24/7 proactive monitoring", body: "Our NOC watches your environment round the clock — responding before issues become outages." },
+                  { title: "Compliance-ready", body: "ISO 27001, SOC 2, and GDPR-aligned practices baked into every managed engagement." },
+                ].map(({ title, body }) => (
+                  <div key={title} className="flex gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <div className="text-sm font-bold text-gray-900">{title}</div>
+                      <div className="text-sm text-gray-500 mt-0.5">{body}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── CTA ── */}
+      <section className="relative overflow-hidden bg-[#0a0e1a]">
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-amber-500/40 to-transparent" />
+          <div className="absolute -bottom-40 left-1/2 -translate-x-1/2 h-80 w-80 rounded-full bg-amber-500/10 blur-[80px]" />
+        </div>
+        <div className="relative max-w-[1200px] mx-auto px-6 lg:px-10 py-16 text-center">
+          <span className="inline-block text-xs font-bold uppercase tracking-widest text-amber-400 mb-4">Get started</span>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4" style={{ fontFamily: "'Georgia', serif" }}>
+            Ready to modernize on AWS?
+          </h2>
+          <p className="text-white/50 text-lg max-w-xl mx-auto mb-8">
+            Get a tailored AWS managed services roadmap aligned to your workloads, security goals, and growth plans.
+          </p>
+          <div className="flex flex-wrap gap-4 justify-center">
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 px-7 py-3.5 bg-amber-500 hover:bg-amber-400 text-black text-sm font-bold rounded-lg transition-colors"
+            >
+              Talk to an AWS architect <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link
+              to="/"
+              className="inline-flex items-center gap-2 px-7 py-3.5 border border-white/20 hover:border-white/40 text-white/70 text-sm font-medium rounded-lg transition-colors"
+            >
+              Explore all services
+            </Link>
           </div>
         </div>
       </section>
