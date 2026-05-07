@@ -7,7 +7,7 @@ import { Cloud, Shield, BarChart3, GitBranch, DollarSign, Settings } from 'lucid
 gsap.registerPlugin(ScrollTrigger);
 
 const services = [
-  { category: 'Infrastructure', icon: Cloud, title: 'Cloud Platform Modernization', badge: '✨ AI-native', path: '/solutions/infrastructure-modernisation' },
+  { category: 'Infrastructure', icon: Cloud, title: 'Cloud Modernization', badge: '✨ AI-native', path: '/solutions/infrastructure-modernisation' },
   { category: 'Security', icon: Shield, title: 'Security & Reliability', badge: '✨ AI-native', path: '/solutions/cloud-security-compliance' },
   { category: 'Data', icon: BarChart3, title: 'Data Intelligence', badge: '✨ AI-native', path: '/solutions/data-analytic' },
   { category: 'Engineering', icon: GitBranch, title: 'DevOps Automation', badge: '✨ AI-native', path: '/solutions/cloud-devops' },
@@ -46,12 +46,12 @@ const ServicesGrid = () => {
           <h2 className="section-title">our AI-native services</h2>
         </div>
 
-        <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-t border-l border-border">
+        <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {services.map((service) => {
             const Icon = service.icon;
             return (
               <Link key={service.title} to={service.path} className="block">
-                <div className="service-card service-card-anim group cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-105">
+                <div className="service-card service-card-anim group cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-105 border-r border-b border-border">
                   <div className="flex items-center justify-between mb-6">
                     <span className="service-category text-xs uppercase tracking-widest text-muted-foreground font-medium">
                       {service.category}

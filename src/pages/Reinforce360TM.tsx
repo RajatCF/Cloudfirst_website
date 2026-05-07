@@ -72,47 +72,6 @@ const Reinforce360TM = () => {
                 </a>
               </motion.div>
             </div>
-            
-            {/* Right Side Content */}
-            <div className="hidden lg:block">
-              <motion.div
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 1, delay: 0.3 }}
-                className="relative"
-              >
-                <div className="p-8">
-                  <div className="space-y-6">
-                    {/* Main Content */}
-                    <div>
-                      <h3 className="text-2xl font-bold mb-4 text-white">reinforce360™</h3>
-                      <p className="text-white/80 text-lg mb-4">Advanced Security & Compliance Platform</p>
-                    </div>
-                    
-                    {/* Stats */}
-                    <div className="grid grid-cols-4 gap-6 pt-6 border-t border-white/20">
-                      <div>
-                        <div className="text-3xl font-bold text-white mb-1">99.9%</div>
-                        <div className="text-white/70 text-sm">Uptime Guarantee</div>
-                      </div>
-                      <div>
-                        <div className="text-3xl font-bold text-white mb-1">24/7</div>
-                        <div className="text-white/70 text-sm">Security Monitoring</div>
-                      </div>
-                      <div>
-                        <div className="text-3xl font-bold text-white mb-1">500+</div>
-                        <div className="text-white/70 text-sm">Enterprise Clients</div>
-                      </div>
-                      <div>
-                        <div className="text-3xl font-bold text-white mb-1">50M+</div>
-                        <div className="text-white/70 text-sm">Security Events Processed</div>
-                      </div>
-                    </div>
-                    
-                                      </div>
-                </div>
-              </motion.div>
-            </div>
           </div>
         </div>
       </section>

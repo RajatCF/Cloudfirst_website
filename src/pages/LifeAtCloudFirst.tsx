@@ -288,8 +288,8 @@ const LifeAtCloudFirst = () => {
             <p className="text-gray-600 text-lg">Discover what makes CloudFirst a great place to work through the voices of our team</p>
           </motion.div>
 
-          {/* Employee Review Video - Temporarily commented out due to missing video file */}
-          {/* <motion.div
+          {/* Employee Video Section */}
+          <motion.div
             className="mb-16"
             initial="hidden"
             whileInView="visible"
@@ -297,22 +297,24 @@ const LifeAtCloudFirst = () => {
             variants={fadeInUp}
           >
             <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-8">
+                <h3 className="text-2xl font-semibold text-gray-900 mb-3">Employee Experiences</h3>
+                <p className="text-gray-600">Hear directly from our team about their journey at CloudFirst</p>
+              </div>
               <div className="relative rounded-2xl overflow-hidden shadow-2xl aspect-video bg-gray-900">
-                <video
-                  className="w-full h-full object-contain"
-                  controls
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  preload="auto"
-                >
-                  <source src="/employereview.mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
+                <iframe
+                  width="100%"
+                  height="100%"
+                  src="https://www.youtube.com/embed/eqULIVq3K2I?autoplay=0&mute=0&rel=0"
+                  title="Employee Experiences at CloudFirst"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  className="absolute inset-0 w-full h-full rounded-2xl"
+                ></iframe>
               </div>
             </div>
-          </motion.div> */}
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[

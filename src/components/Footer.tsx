@@ -95,6 +95,16 @@ const Footer = () => {
               <li>London, UK</li>
             </ul>
             <p className="text-sm opacity-60 mt-6">hello@cloudfirst.io</p>
+            
+            {/* AWS Advanced Partner Logo */}
+            <div className="mt-8">
+              <h4 className="text-xs uppercase tracking-widest font-semibold mb-4 opacity-40">Partners</h4>
+              <img 
+                src="/aws_advance partner logo.png" 
+                alt="AWS Advanced Partner" 
+                className="h-40 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity duration-300"
+              />
+            </div>
           </div>
         </div>
 

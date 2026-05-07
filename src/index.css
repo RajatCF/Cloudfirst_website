@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -69,8 +69,18 @@
     font-family: 'Space Grotesk', sans-serif;
   }
 
+  /* All text elements use consistent font */
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Space Grotesk', sans-serif;
+  }
+
+  p, span, div, li, a, button, input, textarea, select, label, td, th {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  /* Ensure all components use Space Grotesk */
+  * {
+    font-family: 'Space Grotesk', sans-serif !important;
   }
 }
 
