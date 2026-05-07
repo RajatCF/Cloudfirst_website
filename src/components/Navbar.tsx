@@ -2,12 +2,51 @@ import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ChevronDown } from 'lucide-react';
 
+// Brand Icons Components
+const BrandIcons: Record<string, React.ReactNode> = {
+aws: (
+  <img
+    src="/aws_logo.png"
+    alt="AWS"
+    className="w-10 h-10 object-contain"
+  />
+),
+  azure: (
+  <img
+    src="/azure_img.png"
+    alt="Azure"
+    className="w-7 h-7 object-contain"
+  />
+),
+  gcp: (
+  <img
+    src="/gcp_img.png"
+    alt="GCP"
+    className="w-7 h-7 object-contain"
+  />
+),
+  google_workspace: (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M3 3h8v8H3zm10 0h8v8h-8zm-10 10h8v8H3zm10 0h8v8h-8z"/>
+    </svg>
+  ),
+  microsoft365: (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+      <rect x="3" y="3" width="7" height="7" fill="#F25022"/>
+      <rect x="14" y="3" width="7" height="7" fill="#7FBA00"/>
+      <rect x="3" y="14" width="7" height="7" fill="#00A4EF"/>
+      <rect x="14" y="14" width="7" height="7" fill="#FFB900"/>
+    </svg>
+  ),
+};
+
 type MenuKey = 'cloud-platforms' | 'solutions' | 'services' | 'resources' | 'company';
 
 interface NavItem {
   label: string;
   path: string;
   dot?: string;
+  icon?: string;
 }
 
 interface NavSection {
@@ -27,16 +66,9 @@ const menuConfig: Record<MenuKey, MenuConfig> = {
         {
           heading: 'Hyperscalers',
           items: [
-            { label: 'Amazon Web Services', path: '/cloud-platforms/aws', dot: '#f59e0b' },
-            { label: 'Microsoft Azure', path: '/cloud-platforms/azure', dot: '#2563eb' },
-            { label: 'Google Cloud', path: '/cloud-platforms/gcp', dot: '#2563eb' },
-          ],
-        },
-        {
-          heading: 'Workspace',
-          items: [
-            { label: 'Google Workspace', path: '/cloud-platforms/google-workspace', dot: '#22c55e' },
-            { label: 'Microsoft 365', path: '/cloud-platforms/microsoft-365', dot: '#f97316' },
+            { label: 'Amazon Web Services', path: '/cloud-platforms/aws', icon: 'aws' },
+            { label: 'Microsoft Azure', path: '/cloud-platforms/azure', icon: 'azure' },
+            { label: 'Google Cloud', path: '/cloud-platforms/gcp', icon: 'gcp' },
           ],
         },
       ],
@@ -114,10 +146,17 @@ const menuConfig: Record<MenuKey, MenuConfig> = {
     columns: [
       [
         {
-          heading: '',
+          heading: 'Workspace',
+          items: [
+            { label: 'Google Workspace', path: '/cloud-platforms/google-workspace', icon: 'google_workspace' },
+            { label: 'Microsoft 365', path: '/cloud-platforms/microsoft-365', icon: 'microsoft365' },
+          ],
+        },
+        {
+          heading: 'Resources',
           items: [
             { label: 'Case studies', path: '/resources/case-studies' },
-            { label: 'Blog & insights', path: '/resources/blog-insights' },
+            { label: 'Blog & insights', path: '/blog' },
             { label: 'Whitepapers', path: '/resources/whitepapers' },
             { label: 'Migration guides', path: '/resources/migration-guides' },
           ],
@@ -129,6 +168,11 @@ const menuConfig: Record<MenuKey, MenuConfig> = {
           items: [
             { label: 'Partner certifications', path: '/resources/partner-certifications' },
             { label: 'Cloud cost calculator', path: '/resources/cost-calculator' },
+            { label: 'CloudFirst Videos', path: '/videos' },
+            { label: 'Life@CloudFirst', path: '/life-at-cloudfirst' },
+            { label: 'Current Openings', path: '/current-openings' },
+            { label: 'Work Benefits', path: '/work-benefits' },
+            { label: 'Events', path: '/events' },
           ],
         },
       ],
@@ -228,28 +272,31 @@ const Navbar = () => {
           ))}
 
           <div
-            className={`fixed left-10 right-10 top-16 lg:top-20 bg-gradient-to-b from-[#669bbc] to-white text-foreground rounded-b-2xl shadow-2xl backdrop-blur-sm transition-all duration-200 z-40 ${
-              activeMenu ? 'opacity-100 pointer-events-auto translate-y-0' : 'opacity-0 pointer-events-none -translate-y-1'
-            }`}
+            // className={`absolute left-1/2 -translate-x-1/2 top-full mt-2 w-auto min-w-max bg-gradient-to-b from-[#669bbc] to-white text-foreground rounded-b-2xl shadow-2xl backdrop-blur-sm transition-all duration-200 z-40 ${
+            //   activeMenu ? 'opacity-100 pointer-events-auto translate-y-0' : 'opacity-0 pointer-events-none -translate-y-1'
+            // }`}
+            className={`absolute left-0 top-full mt-2 w-full bg-gradient-to-b from-[#669bbc] to-white text-foreground rounded-b-2xl shadow-2xl backdrop-blur-sm transition-all duration-200 z-40 ${
+  activeMenu ? 'opacity-100 pointer-events-auto translate-y-0' : 'opacity-0 pointer-events-none -translate-y-1'
+}`}
             onMouseEnter={() => {
               if (hideTimeout.current) clearTimeout(hideTimeout.current);
             }}
             onMouseLeave={handleMouseLeave}
           >
             {currentData && (
-              <div className="max-w-[1400px] mx-auto px-10 py-8">
-                <div className="flex gap-12">
+              <div className="px-8 py-6">
+                <div className="flex gap-10">
                   <div
-                    className={`grid gap-10 flex-1 ${
+                    className={`grid gap-8 flex-1 ${
                       currentData.columns.length === 1
                         ? 'grid-cols-1 max-w-xs'
                         : currentData.columns.length === 2
-                        ? 'grid-cols-2'
+                        ? 'grid-cols-2 max-w-2xl'
                         : 'grid-cols-3'
                     }`}
                   >
                     {currentData.columns.map((sections, colIdx) => (
-                      <div key={colIdx} className="space-y-7">
+                      <div key={colIdx} className="space-y-5">
                         {sections.map((section) => (
                           <div key={section.heading || colIdx}>
                             {section.heading && (
@@ -265,12 +312,16 @@ const Navbar = () => {
                                     className="flex items-center gap-2.5 text-sm font-medium text-foreground hover:text-primary transition-colors group"
                                     onClick={() => setActiveMenu(null)}
                                   >
-                                    {item.dot && (
+                                    {item.icon ? (
+                                      <span className="w-4 h-4 flex-shrink-0 inline-flex items-center justify-center text-foreground group-hover:text-primary transition-colors">
+                                        {BrandIcons[item.icon]}
+                                      </span>
+                                    ) : item.dot ? (
                                       <span
                                         className="w-2 h-2 rounded-full flex-shrink-0"
                                         style={{ backgroundColor: item.dot }}
                                       />
-                                    )}
+                                    ) : null}
                                     <span className="group-hover:translate-x-0.5 transition-transform duration-150">
                                       {item.label}
                                     </span>
@@ -285,7 +336,7 @@ const Navbar = () => {
                   </div>
 
                   {currentData.rightPanel && (
-                    <div className="w-48 flex-shrink-0 border-l border-foreground/10 pl-10">
+                    <div className="w-48 flex-shrink-0 border-l border-foreground/15 pl-8">
                       <div className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-3">
                         {currentData.rightPanel.heading}
                       </div>
@@ -363,12 +414,16 @@ const Navbar = () => {
                                 to={item.path}
                                 className="flex items-center gap-2.5 text-sm text-foreground/80 hover:text-foreground transition-colors"
                               >
-                                {item.dot && (
+                                {item.icon ? (
+                                  <span className="w-4 h-4 flex-shrink-0 inline-flex items-center justify-center text-foreground/80 hover:text-foreground transition-colors">
+                                    {BrandIcons[item.icon]}
+                                  </span>
+                                ) : item.dot ? (
                                   <span
                                     className="w-2 h-2 rounded-full flex-shrink-0"
                                     style={{ backgroundColor: item.dot }}
                                   />
-                                )}
+                                ) : null}
                                 {item.label}
                               </Link>
                             </li>

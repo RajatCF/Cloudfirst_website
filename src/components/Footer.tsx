@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Linkedin, Twitter, Github } from 'lucide-react';
+import { Linkedin, Twitter, Youtube, Facebook, Instagram } from 'lucide-react';
 
 const footerLinks = {
   services: [
@@ -18,9 +18,11 @@ const footerLinks = {
     { label: 'Contact', path: '/contact' },
   ],
   connect: [
-    { label: 'LinkedIn', path: '#' },
-    { label: 'Twitter', path: '#' },
-    { label: 'GitHub', path: '#' },
+    { label: 'LinkedIn', path: 'https://www.linkedin.com/company/cloudfirsttech/' },
+    { label: 'YouTube', path: 'https://www.youtube.com/@cloudfirstin/?sub_confirmation=1' },
+    { label: 'Facebook', path: 'https://www.facebook.com/cloudfirstindia' },
+    { label: 'Instagram', path: 'https://www.instagram.com/cloudfirst.in' },
+    { label: 'X (Twitter)', path: 'https://x.com/Cloudfirstindia' },
   ],
 };
 
@@ -38,14 +40,20 @@ const Footer = () => {
               AI-native, engineering-led cloud consultancy helping enterprises modernize intelligently.
             </p>
             <div className="flex items-center gap-4 mt-6">
-              <a href="#" className="p-2 rounded-full border border-primary-foreground/20 hover:border-bright-blue hover:text-bright-blue transition-all">
+              <a href="https://www.linkedin.com/company/cloudfirsttech/" className="p-2 rounded-full border border-primary-foreground/20 hover:border-bright-blue hover:text-bright-blue transition-all">
                 <Linkedin className="w-4 h-4" />
               </a>
-              <a href="#" className="p-2 rounded-full border border-primary-foreground/20 hover:border-bright-blue hover:text-bright-blue transition-all">
-                <Twitter className="w-4 h-4" />
+              <a href="https://www.youtube.com/@cloudfirstin/?sub_confirmation=1" className="p-2 rounded-full border border-primary-foreground/20 hover:border-bright-blue hover:text-bright-blue transition-all">
+                <Youtube className="w-4 h-4" />
               </a>
-              <a href="#" className="p-2 rounded-full border border-primary-foreground/20 hover:border-bright-blue hover:text-bright-blue transition-all">
-                <Github className="w-4 h-4" />
+              <a href="https://www.facebook.com/cloudfirstindia" className="p-2 rounded-full border border-primary-foreground/20 hover:border-bright-blue hover:text-bright-blue transition-all">
+                <Facebook className="w-4 h-4" />
+              </a>
+              <a href="https://www.instagram.com/cloudfirst.in" className="p-2 rounded-full border border-primary-foreground/20 hover:border-bright-blue hover:text-bright-blue transition-all">
+                <Instagram className="w-4 h-4" />
+              </a>
+              <a href="https://x.com/Cloudfirstindia" className="p-2 rounded-full border border-primary-foreground/20 hover:border-bright-blue hover:text-bright-blue transition-all">
+                <Twitter className="w-4 h-4" />
               </a>
             </div>
           </div>

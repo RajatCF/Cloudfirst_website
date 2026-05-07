@@ -18,54 +18,50 @@ const BreakingTheMold = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="bg-navy-dark text-primary-foreground py-32 lg:py-40">
+    <section ref={sectionRef} className="bg-white text-gray-900 py-32 lg:py-40">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
-          {/* Geometric Pattern */}
+          {/* Image Space */}
           <div className="hidden lg:flex items-center justify-center">
-            <div className="relative w-80 h-80">
-              {[...Array(5)].map((_, i) => (
-                <div
-                  key={i}
-                  className="absolute border rounded-lg"
-                  style={{
-                    borderColor: `hsl(216, 100%, ${50 + i * 5}%, ${0.15 + i * 0.1})`,
-                    width: `${100 - i * 15}%`,
-                    height: `${100 - i * 15}%`,
-                    top: `${i * 7.5}%`,
-                    left: `${i * 7.5}%`,
-                    transform: `rotate(${i * 8}deg)`,
-                  }}
-                />
-              ))}
+            <div className="w-full">
+              <img
+                src="/src/assets/images/bg_img_reinfo.jpg"
+                alt="reinforce360 platform dashboard"
+                className="w-full h-auto rounded-lg object-cover shadow-lg"
+              />
             </div>
           </div>
 
           {/* Content */}
           <div className="mold-content">
             <h2 className="section-title mb-10">
-              breaking <span className="text-light-blue">cloud barrier</span>
+              <span className="bg-gradient-to-r from-bright-blue via-blue-400 to-purple-400 bg-clip-text text-transparent">
+                reinforce360™
+              </span>
             </h2>
             <div className="space-y-6 text-base leading-relaxed opacity-70">
               <p>
-                Traditional consultancies talk cloud. We deliver secure, production-ready cloud environments. Every engagement starts with a deep cloud security assessment and ends with automated, compliant, and scalable solutions.
+                reinforce360™ is designed to meet the complex and evolving needs of modern cloud operations. It delivers a unified platform that integrates cost governance, resource optimization, and intelligent automation, helping organizations operate more efficiently, securely, and sustainably in the cloud.
               </p>
               <p>
-                Our cloud engineers don’t just advise—they architect, migrate, and optimize your cloud, embedding best practices that protect your data and accelerate your business.
+                This platform goes beyond traditional cloud management tools by combining AI-powered analytics, automated tagging compliance, and real-time cost control into a single, seamless experience.
               </p>
               <p>
-                From Day One, we focus on cloud outcomes: security, compliance, and operational excellence. Your success is measured by resilience, agility, and cost efficiency in the cloud.
+                Traditional methods are prone to inaccuracies, manual errors, and lack scalability, leading to unnecessary costs, resource inefficiencies, and potential compliance risks. A smarter solution is needed to streamline management, optimize cloud operations, and mitigate risks effectively.
               </p>
             </div>
-            <div className="flex items-center gap-12 mt-12 pt-8 border-t border-primary-foreground/10">
-              <div>
-                <div className="text-3xl font-display font-bold text-bright-blue">10x</div>
-                <div className="text-sm opacity-50 mt-1">Faster Implementation</div>
-              </div>
-              <div>
-                <div className="text-3xl font-display font-bold text-bright-blue">100%</div>
-                <div className="text-sm opacity-50 mt-1">AI-Powered Solutions</div>
-              </div>
+            <div className="mt-12 pt-8 border-t border-primary-foreground/10">
+              <a 
+                href="/reinforce360tm" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-semibold text-sm transition-all duration-300 bg-gradient-to-r from-bright-blue to-blue-600 text-white hover:from-blue-600 hover:to-purple-600 hover:shadow-lg hover:shadow-blue-500/25"
+              >
+                Explore Product
+                <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </a>
             </div>
           </div>
         </div>

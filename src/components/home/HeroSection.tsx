@@ -1,7 +1,6 @@
-﻿import { useEffect, useState, useRef, Suspense, lazy } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import gsap from 'gsap';
-
-const Spline = lazy(() => import('@splinetool/react-spline'));
+import heroBackground from '../../assets/images/bg_img.jpg';
 
 const STATS = [
   { value: '500+', label: 'Enterprise Clients' },
@@ -14,77 +13,25 @@ const STATS = [
 // Aggressive watermark killer — runs repeatedly
 // to catch dynamically injected DOM nodes
 // ─────────────────────────────────────────────
-function killSplineWatermark() {
-  const selectors = [
-    'a[href*="spline.design"]',
-    'a[href*="splinetool"]',
-    'a[href*="spline"]',
-    '.spline-watermark',
-    '[class*="watermark"]',
-    '[id*="watermark"]',
-    'a[target="_blank"][rel*="noopener"]',   // Spline uses this pattern
-  ];
-
-  selectors.forEach(sel => {
-    document.querySelectorAll<HTMLElement>(sel).forEach(el => {
-      // Only hide if it looks like the Spline badge
-      const text = el.textContent?.toLowerCase() ?? '';
-      const href = el.getAttribute('href') ?? '';
-      if (
-        text.includes('spline') ||
-        href.includes('spline') ||
-        el.closest('canvas') !== null ||
-        el.tagName === 'A'
-      ) {
-        el.style.cssText +=
-          'display:none!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important;';
-      }
-    });
-  });
-}
-
 const HeroSection = () => {
   const [loading, setLoading] = useState(true);
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
 
-  const taglineRef  = useRef<HTMLDivElement>(null);
-  const headlineRef = useRef<HTMLDivElement>(null);
-  const subRef      = useRef<HTMLParagraphElement>(null);
-  const ctaRef      = useRef<HTMLDivElement>(null);
-  const statsRef    = useRef<HTMLDivElement>(null);
-  const formRef     = useRef<HTMLDivElement>(null);
-  const splineWrapRef = useRef<HTMLDivElement>(null);
-  const mutationObserverRef = useRef<MutationObserver | null>(null);
+  const taglineRef    = useRef<HTMLDivElement>(null);
+  const headlineRef   = useRef<HTMLDivElement>(null);
+  const cloudRef      = useRef<HTMLSpanElement>(null);
+  const cloudBurstRef = useRef<HTMLSpanElement>(null);
+  const cloudTextRef  = useRef<HTMLSpanElement>(null);
+  const cloudIconRef  = useRef<SVGSVGElement>(null);
+  const planeRef      = useRef<HTMLSpanElement>(null);
+  const subRef        = useRef<HTMLParagraphElement>(null);
+  const ctaRef        = useRef<HTMLDivElement>(null);
+  const statsRef      = useRef<HTMLDivElement>(null);
+  const statRefs      = useRef<HTMLDivElement[]>([]);
+  const formRef       = useRef<HTMLDivElement>(null);
 
-  // ── Watermark removal via MutationObserver ──────────────────────────────
-  // This is the most reliable approach: watches for any new DOM nodes added
-  // by Spline after load and hides them immediately.
-  useEffect(() => {
-    killSplineWatermark(); // initial pass
-
-    mutationObserverRef.current = new MutationObserver(() => {
-      killSplineWatermark();
-    });
-
-    mutationObserverRef.current.observe(document.body, {
-      childList: true,
-      subtree: true,
-      attributes: true,
-      attributeFilter: ['style', 'class'],
-    });
-
-    // Belt-and-suspenders: also poll for the first 5 s after mount
-    const intervals: ReturnType<typeof setInterval>[] = [];
-    [300, 600, 1000, 1500, 2000, 3000, 5000].forEach(delay => {
-      intervals.push(setTimeout(killSplineWatermark, delay));
-    });
-
-    return () => {
-      mutationObserverRef.current?.disconnect();
-      intervals.forEach(clearTimeout);
-    };
-  }, []);
+  statRefs.current = [];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -101,18 +48,99 @@ const HeroSection = () => {
   useEffect(() => {
     if (loading) return;
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    const headlineSpans = headlineRef.current?.querySelectorAll('span');
+
     tl.fromTo(taglineRef.current,  { y: -20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 })
-      .fromTo(headlineRef.current, { y: 40,  opacity: 0 }, { y: 0, opacity: 1, duration: 0.8 }, '-=0.2')
-      .fromTo(subRef.current,      { y: 25,  opacity: 0 }, { y: 0, opacity: 1, duration: 0.7 }, '-=0.4')
+      .fromTo(headlineRef.current, { y: 40,  opacity: 0 }, { y: 0, opacity: 1, duration: 0.8 }, '-=0.2');
+
+    if (headlineSpans && headlineSpans.length) {
+      tl.fromTo(
+        headlineSpans,
+        { scale: 0.92, opacity: 0, y: 20 },
+        { scale: 1, opacity: 1, y: 0, duration: 0.85, stagger: 0.1, ease: 'back.out(1.4)' },
+        '-=0.55'
+      );
+    }
+
+    if (cloudRef.current && cloudBurstRef.current && cloudTextRef.current) {
+      gsap.set(cloudTextRef.current, { opacity: 0, scale: 0.65, y: 12 });
+      tl.fromTo(
+        cloudBurstRef.current,
+        { opacity: 1, scale: 0.75, filter: 'blur(0px)' },
+        { opacity: 0.92, scale: 1.15, filter: 'blur(1px)', duration: 0.55, ease: 'power2.out' },
+        '+=0.1'
+      ).fromTo(
+        cloudTextRef.current,
+        { opacity: 0, scale: 0.65, y: 12 },
+        { opacity: 1, scale: 1, y: 0, duration: 0.7, ease: 'back.out(1.5)' },
+        '-=0.2'
+      );
+
+      gsap.to(cloudBurstRef.current, {
+        duration: 1.4,
+        scale: 1.05,
+        opacity: 0.7,
+        ease: 'sine.inOut',
+        repeat: -1,
+        yoyo: true,
+      });
+
+      gsap.to(cloudTextRef.current, {
+        duration: 1.6,
+        y: -2,
+        ease: 'sine.inOut',
+        repeat: -1,
+        yoyo: true,
+      });
+    }
+
+    if (cloudIconRef.current) {
+      gsap.to(cloudIconRef.current, {
+        duration: 1.4,
+        x: 6,
+        y: -4,
+        opacity: 0.95,
+        scale: 1.08,
+        ease: 'sine.inOut',
+        repeat: -1,
+        yoyo: true,
+      });
+    }
+
+    if (planeRef.current) {
+      gsap.fromTo(planeRef.current, {
+        x: 0,
+        y: 0,
+        rotation: 0,
+        opacity: 1,
+      }, {
+        x: 240,
+        y: -48,
+        rotation: 22,
+        opacity: 0.18,
+        duration: 0.95,
+        ease: 'power1.inOut',
+        repeat: -1,
+        yoyo: true,
+        repeatDelay: 0.45,
+      });
+    }
+
+    tl.fromTo(subRef.current,      { y: 25,  opacity: 0 }, { y: 0, opacity: 1, duration: 0.7 }, '-=0.4')
       .fromTo(ctaRef.current,      { y: 25,  opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, '-=0.3')
-      .fromTo(statsRef.current,    { y: 15,  opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, '-=0.3')
+      .fromTo(statRefs.current,    { y: 25,  opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, stagger: 0.1 }, '-=0.3')
       .fromTo(formRef.current,     { x: 50,  opacity: 0 }, { x: 0, opacity: 1, duration: 0.9 }, '-=0.8');
   }, [loading]);
 
   return (
     <section
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      style={{ background: '#0c0e1a' }}
+      style={{ 
+        backgroundImage: `url(${heroBackground})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
     >
       {/* ─────────────────────────────────────────────────────────────────
           GLOBAL CSS WATERMARK SUPPRESSION
@@ -157,81 +185,29 @@ const HeroSection = () => {
           60%      { opacity: 0.5; transform: translateY(0); }
         }
         @keyframes loader-ring {
-          0%   { box-shadow: 0 0 0 0 transparent, 0 0 60px 18px rgba(99,102,241,0.30),  0 0 120px 40px rgba(59,130,246,0.18); }
-          50%  { box-shadow: 0 0 0 0 transparent, 0 0 80px 28px rgba(124,58,237,0.28),  0 0 160px 60px rgba(99,102,241,0.14); }
-          100% { box-shadow: 0 0 0 0 transparent, 0 0 60px 18px rgba(99,102,241,0.30),  0 0 120px 40px rgba(59,130,246,0.18); }
+          0%   { box-shadow: 0 0 0 0 transparent, 0 0 60px 18px rgba(59,130,246,0.30),  0 0 120px 40px rgba(59,130,246,0.18); }
+          50%  { box-shadow: 0 0 0 0 transparent, 0 0 80px 28px rgba(165,180,252,0.28), 0 0 160px 60px rgba(59,130,246,0.14); }
+          100% { box-shadow: 0 0 0 0 transparent, 0 0 60px 18px rgba(59,130,246,0.30), 0 0 120px 40px rgba(165,180,252,0.18); }
         }
         ::placeholder { color: #64748b; }
       `}</style>
 
-      {/* ── SPLINE 3D BACKGROUND ──────────────────────────────────────── */}
-      {/*
-        overflow:hidden clips anything that escapes the bounds.
-        position:relative + z-index let us stack the mask overlay on top.
-        pointerEvents:none ensures the 3D scene doesn't steal mouse events
-        from the main content.
-      */}
+      
+      {/* Dark overlay for better text contrast with image background */}
       <div
-        ref={splineWrapRef}
-        className="spline-scene-wrap absolute inset-0 z-0"
-        style={{ overflow: 'hidden', pointerEvents: 'none', position: 'absolute' }}
-      >
-        <Suspense fallback={null}>
-          <Spline
-            scene="https://prod.spline.design/MJWPwGj3VI4In3wS/scene.splinecode"
-            style={{ width: '100%', height: '100%', display: 'block' }}
-            onLoad={() => {
-              // Extra pass right after Spline signals it has loaded
-              killSplineWatermark();
-              setTimeout(killSplineWatermark, 200);
-              setTimeout(killSplineWatermark, 800);
-            }}
-          />
-        </Suspense>
-
-        {/*
-          ── PIXEL-PERFECT CORNER MASK ──────────────────────────────────
-          This is the nuclear option: a color-matched box that sits
-          exactly where the "Built with Spline" badge appears.
-          It covers all responsive breakpoints by being large enough
-          (220 × 56 px) and anchored to bottom-right.
-          Since the section bg is #0c0e1a this is completely invisible.
-        */}
-        <div
-          aria-hidden="true"
-          style={{
-            position: 'absolute',
-            bottom: 0,
-            right: 0,
-            width: 240,      // wider than the badge on any screen
-            height: 60,      // taller than the badge on any screen
-            background: '#0c0e1a',
-            zIndex: 9999,
-            pointerEvents: 'none',
-          }}
-        />
-        {/* Also mask bottom-left in case Spline ever moves it */}
-        <div
-          aria-hidden="true"
-          style={{
-            position: 'absolute',
-            bottom: 0,
-            left: 0,
-            width: 240,
-            height: 60,
-            background: '#0c0e1a',
-            zIndex: 9999,
-            pointerEvents: 'none',
-          }}
-        />
-      </div>
-
-      {/* Gradient overlay — left readable, right clear for 3D */}
-      <div
-        className="absolute inset-0 z-[1]"
+        className="absolute inset-0"
         style={{
           background:
-            'linear-gradient(110deg, rgba(12,14,26,0.82) 0%, rgba(12,14,26,0.42) 50%, rgba(12,14,26,0.00) 100%)',
+            'linear-gradient(135deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.65) 25%, rgba(0,0,0,0.55) 50%, rgba(0,0,0,0.45) 75%, rgba(0,0,0,0.35) 100%)',
+          pointerEvents: 'none',
+        }}
+      />
+      {/* Additional gradient overlay for depth */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            'radial-gradient(circle at 30% 20%, rgba(99,102,241,0.15) 0%, transparent 50%), radial-gradient(circle at 70% 80%, rgba(168,85,247,0.12) 0%, transparent 50%)',
           pointerEvents: 'none',
         }}
       />
@@ -240,7 +216,7 @@ const HeroSection = () => {
       {loading && (
         <div
           className="absolute inset-0 flex items-center justify-center z-50"
-          style={{ background: '#0c0e1a' }}
+          style={{ background: 'linear-gradient(135deg, #e2e8f0 0%, #dbeafe 25%, #e0e7ff 50%, #fce7f3 75%, #f1f5f9 100%)' }}
         >
           <div className="relative flex items-center justify-center" style={{ width: 240, height: 240 }}>
             <div
@@ -290,7 +266,7 @@ const HeroSection = () => {
                 <span style={{
                   fontSize: '0.68rem', fontWeight: 700,
                   letterSpacing: '0.18em', textTransform: 'uppercase',
-                  color: '#93c5fd',
+                  color: '#ffffff',
                 }}>
                   Securing Clouds · Empowering Trust
                 </span>
@@ -304,12 +280,51 @@ const HeroSection = () => {
                   fontWeight: 900, lineHeight: 1.05,
                   letterSpacing: '-0.02em', color: '#ffffff',
                 }}>
-                  <span style={{
-                    background: 'linear-gradient(130deg, #60a5fa 0%, #818cf8 50%, #c084fc 100%)',
-                    WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
-                  }}>
-                    Cloud Security
-                  </span>
+                  <span
+                    ref={cloudRef}
+                    style={{
+                      position: 'relative',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      minWidth: 118,
+                      padding: '0 10px',
+                    }}
+                  >
+                    <span
+                      ref={cloudBurstRef}
+                      style={{
+                        position: 'absolute',
+                        left: '50%',
+                        top: '50%',
+                        width: 92,
+                        height: 64,
+                        transform: 'translate(-50%, -50%)',
+                        zIndex: 1,
+                        pointerEvents: 'none',
+                        opacity: 0.95,
+                      }}
+                    >
+                      <svg width="92" height="64" viewBox="0 0 92 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 40C9.715 40 3 33.285 3 25s6.715-15 15-15c1.373 0 2.706.188 4 .545C24.89 5.48 30.7 1 37.875 1 45.675 1 52.353 6.262 54.784 13.05 60.74 13.874 65 18.796 65 24c0 .03-.002.06-.002.091C72.761 25.191 79 31.548 79 39c0 8.284-6.716 15-15 15H18Z" fill="rgba(148,163,184,0.18)" />
+                      </svg>
+                    </span>
+                    <span
+                      ref={cloudTextRef}
+                      style={{
+                        display: 'inline-block',
+                        position: 'relative',
+                        zIndex: 2,
+                        fontWeight: 900,
+                        background: 'linear-gradient(130deg, #60a5fa 0%, #818cf8 45%, #c084fc 100%)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        backgroundClip: 'text',
+                      }}
+                    >
+                      Cloud
+                    </span>
+                  </span> Security
                   <br />
                   <span style={{
                     background: 'linear-gradient(130deg, #818cf8 0%, #c084fc 100%)',
@@ -326,7 +341,7 @@ const HeroSection = () => {
               <p
                 ref={subRef}
                 className="opacity-0"
-                style={{ fontSize: '1.05rem', lineHeight: 1.75, color: '#cbd5e1', maxWidth: 480 }}
+                style={{ fontSize: '1.05rem', lineHeight: 1.75, color: '#e2e8f0', maxWidth: 480 }}
               >
                 Enterprise-grade cloud security, compliance automation, and AI-driven data
                 governance — trusted by 500+ organizations worldwide.
@@ -389,13 +404,12 @@ const HeroSection = () => {
                 {STATS.map(s => (
                   <div
                     key={s.label}
+                    ref={el => { if (el) statRefs.current.push(el); }}
                     style={{
                       padding: '12px 14px', borderRadius: 14,
-                      background: 'rgba(255,255,255,0.08)',
-                      border: '1px solid rgba(255,255,255,0.15)',
-                      backdropFilter: 'blur(16px)',
-                      WebkitBackdropFilter: 'blur(16px)',
-                      boxShadow: '0 2px 12px rgba(0,0,0,0.25)',
+                      background: 'rgba(255,255,255,0.95)',
+                      border: '1px solid rgba(255,255,255,0.2)',
+                      boxShadow: '0 10px 24px rgba(0,0,0,0.2)',
                     }}
                   >
                     <div style={{
@@ -406,7 +420,7 @@ const HeroSection = () => {
                     }}>
                       {s.value}
                     </div>
-                    <div style={{ fontSize: '0.72rem', fontWeight: 500, color: '#e2e8f0', marginTop: 2 }}>
+                    <div style={{ fontSize: '0.72rem', fontWeight: 500, color: '#475569', marginTop: 2 }}>
                       {s.label}
                     </div>
                   </div>
@@ -419,15 +433,14 @@ const HeroSection = () => {
               <div style={{
                 borderRadius: 28,
                 padding: '36px 32px',
-                background: 'rgba(255,255,255,0.10)',
-                border: '1px solid rgba(255,255,255,0.22)',
-                backdropFilter: 'blur(40px) saturate(180%)',
-                WebkitBackdropFilter: 'blur(40px) saturate(180%)',
+                background: 'rgba(255,255,255,0.18)',
+                border: '1px solid rgba(255,255,255,0.25)',
+                backdropFilter: 'blur(12px) saturate(180%)',
+                WebkitBackdropFilter: 'blur(12px) saturate(180%)',
                 boxShadow: [
-                  '0 8px 32px rgba(0,0,0,0.30)',
-                  '0 32px 64px rgba(0,0,0,0.20)',
-                  'inset 0 1px 0 rgba(255,255,255,0.22)',
-                  'inset 0 -1px 0 rgba(255,255,255,0.06)',
+                  '0 8px 32px rgba(0,0,0,0.15)',
+                  '0 0 0 1px rgba(255,255,255,0.2)',
+                  'inset 0 1px 0 rgba(255,255,255,0.3)',
                 ].join(', '),
               }}>
                 {/* Header */}
@@ -435,12 +448,12 @@ const HeroSection = () => {
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
                     <div style={{
                       width: 8, height: 8, borderRadius: '50%',
-                      background: 'linear-gradient(135deg,#6366f1,#7c3aed)',
-                      boxShadow: '0 0 10px rgba(99,102,241,0.6)',
+                      background: 'linear-gradient(135deg,#a5b4fc,#3b82f6)',
+                      boxShadow: '0 0 10px rgba(165,180,252,0.6)',
                     }} />
                     <span style={{
                       fontSize: '0.68rem', fontWeight: 700,
-                      letterSpacing: '0.16em', textTransform: 'uppercase', color: '#93c5fd',
+                      letterSpacing: '0.16em', textTransform: 'uppercase', color: '#ffffff',
                     }}>
                       Quick Connect
                     </span>
@@ -451,7 +464,7 @@ const HeroSection = () => {
                   }}>
                     Talk to an Expert
                   </h3>
-                  <p style={{ fontSize: '0.84rem', color: '#cbd5e1', marginTop: 6 }}>
+                  <p style={{ fontSize: '0.84rem', color: '#e2e8f0', marginTop: 6 }}>
                     We respond within 24 hours
                   </p>
                 </div>
@@ -471,8 +484,8 @@ const HeroSection = () => {
                         <path d="M4 12l6 6L20 6" stroke="#6366f1" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </div>
-                    <p style={{ fontWeight: 700, fontSize: '1rem', color: '#93c5fd' }}>Message sent!</p>
-                    <p style={{ fontSize: '0.84rem', color: '#cbd5e1' }}>Our team will reach out shortly.</p>
+                    <p style={{ fontWeight: 700, fontSize: '1rem', color: '#ffffff' }}>Message sent!</p>
+                    <p style={{ fontSize: '0.84rem', color: '#e2e8f0' }}>Our team will reach out shortly.</p>
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
@@ -483,7 +496,7 @@ const HeroSection = () => {
                       <div key={f.key}>
                         <label style={{
                           display: 'block', fontSize: '0.75rem', fontWeight: 600,
-                          color: '#e2e8f0', marginBottom: 6,
+                          color: '#ffffff', marginBottom: 6,
                         }}>
                           {f.label}
                         </label>
@@ -497,20 +510,19 @@ const HeroSection = () => {
                             width: '100%', padding: '11px 16px',
                             borderRadius: 12, fontSize: '0.875rem',
                             outline: 'none', transition: 'all 0.2s',
-                            background: 'rgba(255,255,255,0.07)',
-                            border: '1.5px solid rgba(255,255,255,0.12)',
-                            color: '#f1f5f9',
-                            backdropFilter: 'blur(8px)',
+                            background: '#f8fafc',
+                            border: '1.5px solid rgba(148,163,184,0.28)',
+                            color: '#0f172a',
                             boxSizing: 'border-box',
                           }}
                           onFocus={e => {
-                            e.currentTarget.style.border = '1.5px solid rgba(129,140,248,0.60)';
-                            e.currentTarget.style.background = 'rgba(255,255,255,0.12)';
-                            e.currentTarget.style.boxShadow = '0 0 0 3px rgba(129,140,248,0.12)';
+                            e.currentTarget.style.border = '1.5px solid rgba(99,102,241,0.60)';
+                            e.currentTarget.style.background = '#ffffff';
+                            e.currentTarget.style.boxShadow = '0 0 0 3px rgba(99,102,241,0.12)';
                           }}
                           onBlur={e => {
-                            e.currentTarget.style.border = '1.5px solid rgba(255,255,255,0.12)';
-                            e.currentTarget.style.background = 'rgba(255,255,255,0.07)';
+                            e.currentTarget.style.border = '1.5px solid rgba(148,163,184,0.28)';
+                            e.currentTarget.style.background = '#f8fafc';
                             e.currentTarget.style.boxShadow = 'none';
                           }}
                         />
@@ -520,7 +532,7 @@ const HeroSection = () => {
                     <div>
                       <label style={{
                         display: 'block', fontSize: '0.75rem', fontWeight: 600,
-                        color: '#e2e8f0', marginBottom: 6,
+                        color: '#334155', marginBottom: 6,
                       }}>
                         Message
                       </label>
@@ -534,37 +546,39 @@ const HeroSection = () => {
                           width: '100%', padding: '11px 16px',
                           borderRadius: 12, fontSize: '0.875rem',
                           outline: 'none', transition: 'all 0.2s',
-                          background: 'rgba(255,255,255,0.07)',
-                          border: '1.5px solid rgba(255,255,255,0.12)',
-                          color: '#f1f5f9',
-                          backdropFilter: 'blur(8px)',
+                          background: '#f8fafc',
+                          border: '1.5px solid rgba(148,163,184,0.28)',
+                          color: '#0f172a',
                           resize: 'none', boxSizing: 'border-box',
                         }}
                         onFocus={e => {
-                          e.currentTarget.style.border = '1.5px solid rgba(129,140,248,0.60)';
-                          e.currentTarget.style.background = 'rgba(255,255,255,0.12)';
-                          e.currentTarget.style.boxShadow = '0 0 0 3px rgba(129,140,248,0.12)';
+                          e.currentTarget.style.border = '1.5px solid rgba(99,102,241,0.60)';
+                          e.currentTarget.style.background = '#ffffff';
+                          e.currentTarget.style.boxShadow = '0 0 0 3px rgba(99,102,241,0.12)';
                         }}
                         onBlur={e => {
-                          e.currentTarget.style.border = '1.5px solid rgba(255,255,255,0.12)';
-                          e.currentTarget.style.background = 'rgba(255,255,255,0.07)';
+                          e.currentTarget.style.border = '1.5px solid rgba(148,163,184,0.28)';
+                          e.currentTarget.style.background = '#f8fafc';
                           e.currentTarget.style.boxShadow = 'none';
                         }}
                       />
                     </div>
 
-                    <button
-                      type="submit"
-                      style={{
-                        width: '100%', padding: '13px',
-                        borderRadius: 14, fontWeight: 700,
-                        fontSize: '0.875rem', letterSpacing: '0.03em',
-                        border: 'none', cursor: 'pointer',
-                        background: 'linear-gradient(135deg, #2563eb 0%, #6d28d9 100%)',
-                        color: '#fff',
-                        boxShadow: '0 6px 24px rgba(79,70,229,0.40)',
-                        transition: 'all 0.25s',
-                      }}
+                    <div style={{ position: 'relative', overflow: 'visible', width: '100%' }}>
+                      <button
+                        type="submit"
+                        style={{
+                          position: 'relative',
+                          overflow: 'visible',
+                          width: '100%', padding: '13px',
+                          borderRadius: 14, fontWeight: 700,
+                          fontSize: '0.875rem', letterSpacing: '0.03em',
+                          border: 'none', cursor: 'pointer',
+                          background: 'linear-gradient(135deg, #2563eb 0%, #6d28d9 100%)',
+                          color: '#fff',
+                          boxShadow: '0 6px 24px rgba(79,70,229,0.40)',
+                          transition: 'all 0.25s',
+                        }}
                       onMouseEnter={e => {
                         (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(-1px)';
                         (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 12px 36px rgba(79,70,229,0.55)';
@@ -574,8 +588,31 @@ const HeroSection = () => {
                         (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 6px 24px rgba(79,70,229,0.40)';
                       }}
                     >
-                      Send Message →
+                      <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8, position: 'relative', zIndex: 1 }}>
+                        Send Message
+                      </span>
+                      <span
+                        ref={planeRef}
+                        style={{
+                          position: 'absolute',
+                          top: '50%',
+                          right: 18,
+                          width: 20,
+                          height: 20,
+                          transform: 'translateY(-50%)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          zIndex: 0,
+                        }}
+                      >
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M2 12L22 2L15 22L11 14L2 12Z" fill="white" />
+                          <path d="M2 12L11 14L15 22L22 2L2 12Z" stroke="white" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </span>
                     </button>
+                    </div>
 
                     <p style={{ textAlign: 'center', fontSize: '0.73rem', color: '#94a3b8' }}>
                       No spam · We'll help secure &amp; optimise your cloud

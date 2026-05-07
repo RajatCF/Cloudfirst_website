@@ -118,8 +118,8 @@ const CloudPlatformSecurity: React.FC = () => {
             className="text-4xl md:text-5xl font-bold text-white leading-tight mb-5 max-w-3xl"
             style={{ fontFamily: "'Georgia', serif" }}
           >
-            Cloud Security that{" "}
-            <span className="text-emerald-400">protects</span> without slowing you down
+            Secure your cloud{" "}
+            <span className="text-emerald-400">without compromise—</span> built for performance, protection, and scale.
           </h1>
           <p className="text-white/60 text-base md:text-lg leading-relaxed max-w-2xl mb-10">
             Most cloud environments are secured after the fact. We build security in from day one — continuous hardening, identity controls, threat detection, and incident readiness across AWS, Azure, and GCP.
@@ -152,10 +152,10 @@ const CloudPlatformSecurity: React.FC = () => {
             The problem with cloud security today
           </h2>
           <p className="text-gray-500 text-[15px] leading-relaxed mb-3">
-            Cloud adoption moves fast — security rarely keeps up. Misconfigurations, over-permissioned identities, and gaps in monitoring leave organizations exposed without realising it. 94% of organisations have experienced a cloud security incident in the past year.
+            Cloud adoption is accelerating—but security is falling behind. From misconfigurations and data exposure to complex multi-cloud environments, businesses face growing risks every day.
           </p>
           <p className="text-gray-500 text-[15px] leading-relaxed">
-            CloudFirst embeds security at every layer of your cloud estate. We don't just audit and report — we implement, automate, and operate the controls that keep you protected continuously.
+            Without a proactive, cloud-first security strategy, even small gaps can lead to major vulnerabilities.
           </p>
         </div>
       </div>

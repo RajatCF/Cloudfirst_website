@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import { motion } from "framer-motion";
-import { MapPin,  ArrowLeft, ExternalLink, ChevronDown } from "lucide-react";
+import { MapPin, ArrowLeft, ExternalLink, ChevronDown, Calendar, Users } from "lucide-react";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
+import Navbar from "../components/Navbar";
 
 
 const images = {
@@ -30,6 +29,31 @@ const images = {
     "https://gragwebsite.s3.ap-south-1.amazonaws.com/London+Pics/Slovakia+Pics/1744912521330.jpg",
     "https://gragwebsite.s3.ap-south-1.amazonaws.com/London+Pics/Slovakia+Pics/Solvakia+image.jpg",
   ],
+  "aws-summit-bengaluru": [
+    "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/aws+summit+bengaluru/1000106663.jpg",
+    "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/aws+summit+bengaluru/WhatsApp+Image+2026-04-24+at+06.57.58+(4).jpeg",
+    "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/aws+summit+bengaluru/WhatsApp+Image+2026-04-24+at+06.57.58+(4).jpeg",
+    "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/aws+summit+bengaluru/WhatsApp+Image+2026-04-24+at+06.57.58+(4).jpeg",
+  ],
+  "india-ai-impact-summit": [
+    "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/india+Ai+impact+summit/IMG-20260216-WA0023+(1).jpg",
+    "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/india+Ai+impact+summit/IMG-20260216-WA0025+(1).jpg",
+    "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/india+Ai+impact+summit/IMG-20260216-WA0035+(1).jpg",
+    "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/india+Ai+impact+summit/IMG-20260218-WA0016.jpg",
+  ],
+  "msme-startup-summit": [
+    "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/msme+and++startup+innovation+summit/IMG_3389+(1).HEIC",
+    "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/msme+and++startup+innovation+summit/IMG_3389+(1).HEIC",
+    "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/msme+and++startup+innovation+summit/IMG_3389+(1).HEIC",
+    "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/msme+and++startup+innovation+summit/IMG_3389+(1).HEIC",
+    "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/msme+and++startup+innovation+summit/IMG_3389+(1).HEIC"
+  ],
+  "msme-summit-2026": [
+    "/events/IMG_3389.jpg",
+    "/events/IMG_3415.jpg",
+    "/events/IMG_3454.jpg",
+    "/events/IMG_3467.jpg"
+  ]
 };
 
 const eventDetails = {
@@ -57,12 +81,39 @@ const eventDetails = {
     attendees: "80+",
     highlights: "Market research, partnership meetings, and cultural exchange"
   },
+  "aws-summit-bengaluru": {
+    title: "AWS Summit Bengaluru 2026",
+    description: "CloudFirst attended AWS Summit Bengaluru 2026, where the team explored the latest advancements in cloud technologies, AI-driven solutions, and connected with industry leaders.",
+    date: "April 2026",
+    location: "Bengaluru, India",
+    attendees: "5000+",
+    highlights: "Latest cloud technologies, AI-driven solutions, industry leader connections"
+  },
+  "india-ai-impact-summit": {
+    title: "India AI Impact Summit 2026",
+    description: "CloudFirst participated in the India AI Impact Summit 2026, bringing together global AI leaders to exchange ideas and drive innovation. The event opened up valuable networking opportunities, fostering meaningful connections across the AI ecosystem.",
+    date: "February 2026",
+    location: "India",
+    attendees: "300+",
+    highlights: "Global AI leaders, innovation exchange, valuable networking opportunities"
+  },
+  "msme-summit-2026": {
+    title: "MSME Summit 2026",
+    description: "Empowering Micro, Small and Medium Enterprises with digital transformation solutions and growth strategies",
+    date: "March 2026",
+    location: "India",
+    attendees: "1000+",
+    highlights: "Digital transformation, MSME empowerment, business growth strategies"
+  }
 };
 
 const eventThumbnails = {
   dubai: "https://gragwebsite.s3.ap-south-1.amazonaws.com/Dubai+Pics/WhatsApp+Image+2025-04-24+at+6.25.05+PM.jpeg",
   london: "https://gragwebsite.s3.ap-south-1.amazonaws.com/London+Pics/1750014704224.jpeg",
-  slovakia: "https://gragwebsite.s3.ap-south-1.amazonaws.com/London+Pics/Slovakia+Pics/Solvakia+image.jpg",
+  slovakia: "https://gragwebsite.s3.ap-south-1.amazonaws.com/London+Pics/Slovakia+Pics/1000001380.jpeg",
+  "aws-summit-bengaluru": "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/aws+summit+bengaluru/1000106663.jpg",
+  "india-ai-impact-summit": "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/india+Ai+impact+summit/IMG-20260216-WA0023+(1).jpg",
+  "msme-summit-2026": "/events/IMG_3389.jpg"
 };
 
 const ResourceEvents = () => {
@@ -70,7 +121,7 @@ const ResourceEvents = () => {
   const [index, setIndex] = useState(-1); // For tab gallery
   const [eventIndex, setEventIndex] = useState(-1); // For event gallery
   const [activeTab, setActiveTab] = useState<string>('overview'); // Changed back to 'overview' to show event cards by default
-  const [selectedYear, setSelectedYear] = useState<string>('2025'); // New state for year selection
+  const [selectedYear, setSelectedYear] = useState<string>('2026'); // New state for year selection
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // New state for dropdown
 
   // Close dropdown when clicking outside
@@ -90,6 +141,49 @@ const ResourceEvents = () => {
 
   // Years data with events
   const yearlyEvents = {
+    '2026': [
+      {
+        id: 'msme-summit-2026',
+        title: 'MSME Summit 2026',
+        description: 'Empowering Micro, Small and Medium Enterprises with digital transformation solutions and growth strategies.',
+        date: 'March 2026',
+        location: 'India',
+        attendees: '1000+',
+        images: [
+          "/events/IMG_3389.jpg",
+          "/events/IMG_3415.jpg",
+          "/events/IMG_3454.jpg",
+          "/events/IMG_3467.jpg"
+        ]
+      },
+      {
+        id: 'aws-summit-bengaluru-2026',
+        title: 'AWS Summit Bengaluru 2026',
+        description: 'CloudFirst attended AWS Summit Bengaluru 2026, exploring the latest advancements in cloud technologies and AI-driven solutions.',
+        date: 'April 2026',
+        location: 'Bengaluru, India',
+        attendees: '5000+',
+        images: [
+          "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/aws+summit+bengaluru/1000106663.jpg",
+          "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/aws+summit+bengaluru/WhatsApp+Image+2026-04-24+at+06.57.58+(4).jpeg",
+          "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/aws+summit+bengaluru/WhatsApp+Image+2026-04-24+at+06.57.58+(4).jpeg",
+          "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/aws+summit+bengaluru/WhatsApp+Image+2026-04-24+at+06.57.58+(4).jpeg"
+        ]
+      },
+      {
+        id: 'india-ai-impact-summit-2026',
+        title: 'India AI Impact Summit 2026',
+        description: 'CloudFirst participated in bringing together global AI leaders to exchange ideas and drive innovation.',
+        date: 'February 2026',
+        location: 'India',
+        attendees: '300+',
+        images: [
+          "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/india+Ai+impact+summit/IMG-20260216-WA0023+(1).jpg",
+          "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/india+Ai+impact+summit/IMG-20260216-WA0025+(1).jpg",
+          "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/india+Ai+impact+summit/IMG-20260218-WA0016.jpg"
+        ]
+      }
+    ],
     '2025': [
       {
         id: 'ashish-sir-president-2025',
@@ -273,13 +367,12 @@ const ResourceEvents = () => {
     ]
   };
 
-  // Type definition for event items
-  // type EventItem = typeof yearlyEvents[keyof typeof yearlyEvents][0];
-
-  // Event tabs configuration - updated
+  // Event tabs configuration - updated with 2026 events
   const eventTabs = [
     { id: 'overview', label: 'Event Overview', isDefault: true },
     { id: 'events', label: 'Events' },
+    { id: 'aws-summit-bengaluru', label: 'AWS Summit Bengaluru' },
+    { id: 'india-ai-impact-summit', label: 'India AI Impact Summit' },
     { id: 'dubai', label: 'Dubai Business Summit' },
     { id: 'london', label: 'London Tech Conference' },
     { id: 'slovakia', label: 'Slovak-India Business Forum' },
@@ -345,8 +438,8 @@ const ResourceEvents = () => {
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                   className={`px-6 py-3 rounded-lg text-sm font-medium transition-all duration-300 border flex items-center gap-2 ${
                     activeTab === 'events'
-                      ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white border-blue-500 shadow-lg'
-                      : 'bg-gray-50 text-gray-700 border-gray-200 hover:bg-gray-100'
+                      ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white border-purple-500 shadow-lg'
+                      : 'bg-gradient-to-r from-gray-50 to-gray-100 text-gray-700 border-gray-200 hover:from-blue-50 hover:to-purple-50'
                   }`}
                 >
                   {tab.label}
@@ -365,18 +458,13 @@ const ResourceEvents = () => {
                         <button
                           key={year}
                           onClick={() => {
-                            if (year === '2025') {
-                              // For 2025, show event overview instead
-                              setActiveTab('overview');
-                            } else {
-                              setSelectedYear(year);
-                              setActiveTab('events');
-                            }
+                            setSelectedYear(year);
+                            setActiveTab('events');
                             setIsDropdownOpen(false);
                           }}
                           className={`w-full text-left px-4 py-2 text-sm transition-colors ${
                             selectedYear === year
-                              ? 'bg-blue-50 text-blue-600 border-r-2 border-blue-500'
+                              ? 'bg-gradient-to-r from-blue-50 to-purple-50 text-blue-700 border-r-2 border-blue-500'
                               : 'text-gray-700 hover:bg-gray-50'
                           }`}
                         >
@@ -397,8 +485,8 @@ const ResourceEvents = () => {
                 }}
                 className={`px-6 py-3 rounded-lg text-sm font-medium transition-all duration-300 border ${
                   activeTab === tab.id
-                    ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white border-blue-500 shadow-lg'
-                    : 'bg-gray-50 text-gray-700 border-gray-200 hover:bg-gray-100'
+                    ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white border-purple-500 shadow-lg'
+                    : 'bg-gradient-to-r from-gray-50 to-gray-100 text-gray-700 border-gray-200 hover:from-blue-50 hover:to-purple-50'
                 }`}
               >
                 {tab.label}
@@ -414,154 +502,67 @@ const ResourceEvents = () => {
   const renderYearlyEvents = () => {
     const events = yearlyEvents[selectedYear as keyof typeof yearlyEvents] || [];
     
-    // For year 2025, show card layout like event overview
-    if (selectedYear === '2025') {
-      return (
-        <div className="max-w-7xl mx-auto px-4 py-16">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl font-semibold text-gray-900 mb-4">Events {selectedYear}</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Explore our events and activities from {selectedYear}
-            </p>
-          </motion.div>
+    return (
+      <div className="max-w-7xl mx-auto px-4 py-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">Events {selectedYear}</h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Explore our events and activities from {selectedYear}
+          </p>
+        </motion.div>
 
-          {events.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {events.map((event, idx) => (
-                <motion.div
-                  key={event.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: idx * 0.1 }}
-                  className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden cursor-pointer"
-                  onClick={() => setIndex(idx)}
-                >
-                  <div className="relative h-64 overflow-hidden">
-                    <img
-                      src={event.images[0]}
-                      alt={event.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                    <div className="absolute bottom-4 left-4 right-4 text-white">
-                      <h3 className="text-xl font-bold mb-1">{event.title}</h3>
+        {events.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {events.map((event, idx) => (
+              <motion.div
+                key={event.id}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: idx * 0.1 }}
+                className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden cursor-pointer border border-gray-100"
+                onClick={() => setIndex(idx)}
+              >
+                <div className="relative h-64 overflow-hidden">
+                  <img
+                    src={event.images[0]}
+                    alt={event.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                  <div className="absolute bottom-4 left-4 right-4 text-white">
+                    <h3 className="text-xl font-bold mb-1">{event.title}</h3>
+                  </div>
+                </div>
+                
+                <div className="p-6">
+                  <p className="text-gray-600 mb-4 line-clamp-2">{event.description}</p>
+                  
+                  <div className="space-y-2 mb-4">
+                    <div className="flex items-center text-sm text-gray-500">
+                      <MapPin className="w-4 h-4 mr-2" />
+                      {event.location}
+                    </div>
+                    <div className="flex items-center text-sm text-gray-500">
+                      <Calendar className="w-4 h-4 mr-2" />
+                      {event.date}
                     </div>
                   </div>
                   
-                  <div className="p-6">
-                    <p className="text-gray-600 mb-4 line-clamp-2">{event.description}</p>
-                    
-                    <div className="space-y-2 mb-4">
-                      <div className="flex items-center text-sm text-gray-500">
-                        <MapPin className="w-4 h-4 mr-2" />
-                        {event.location}
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm font-medium text-blue-600">
-                        {event.images.length} {event.images.length === 1 ? 'photo' : 'photos'}
-                      </span>
-                      <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-blue-600 transition-colors" />
-                    </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-medium bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                      {event.images.length} {event.images.length === 1 ? 'photo' : 'photos'}
+                    </span>
+                    <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-purple-600 transition-colors" />
                   </div>
-                </motion.div>
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-12">
-              <div className="text-gray-400 text-6xl mb-4">📅</div>
-              <h3 className="text-xl font-semibold text-gray-600 mb-2">No Events Found</h3>
-              <p className="text-gray-500">No events are available for {selectedYear}.</p>
-            </div>
-          )}
-
-          {/* Lightbox for 2025 events */}
-          <Lightbox
-            open={index >= 0}
-            close={() => setIndex(-1)}
-            slides={events.flatMap(event => event.images).map((src) => ({ src }))}
-            index={index}
-          />
-        </div>
-      );
-    }
-
-    // For other years, show gallery layout
-    // Collect all images from events for the selected year
-    const allImages: string[] = [];
-    events.forEach(event => {
-      allImages.push(...event.images);
-    });
-    
-    return (
-      <div className="max-w-7xl mx-auto px-4 py-12">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-semibold text-gray-900 mb-4">
-            Events {selectedYear}
-          </h2>
-          <p className="text-gray-600 text-lg">
-            Explore our events and activities from {selectedYear}
-          </p>
-        </div>
-
-        {allImages.length > 0 ? (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6 text-center">Event Gallery ({allImages.length} photos)</h2>
-            
-            {/* Dynamic grid layout based on number of images */}
-            <div className={`grid gap-4 ${
-              allImages.length === 1 
-                ? 'grid-cols-1 justify-items-center' 
-                : allImages.length === 2 
-                ? 'grid-cols-1 md:grid-cols-2' 
-                : allImages.length === 3 
-                ? 'grid-cols-1 md:grid-cols-3' 
-                : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
-            }`}>
-              {allImages.map((src, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.4, delay: idx * 0.05 }}
-                  className={`group relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer ${
-                    allImages.length === 1 ? 'max-w-md mx-auto' : ''
-                  }`}
-                  onClick={() => setIndex(idx)}
-                >
-                  <img
-                    src={src}
-                    alt={`${selectedYear} event ${idx + 1}`}
-                    className="w-full h-64 object-contain group-hover:scale-110 transition-transform duration-500 bg-gray-50"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 border-2 border-transparent group-hover:border-blue-500 transition-colors duration-300 flex items-center justify-center">
-                    <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/90 backdrop-blur-sm rounded-full p-3">
-                      <ExternalLink className="w-5 h-5 text-gray-800" />
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Lightbox for year gallery */}
-            <Lightbox
-              open={index >= 0}
-              close={() => setIndex(-1)}
-              slides={allImages.map((src) => ({ src }))}
-              index={index}
-            />
-          </motion.div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         ) : (
           <div className="text-center py-12">
             <div className="text-gray-400 text-6xl mb-4">📅</div>
@@ -569,6 +570,14 @@ const ResourceEvents = () => {
             <p className="text-gray-500">No events are available for {selectedYear}.</p>
           </div>
         )}
+
+        {/* Lightbox for 2026 events */}
+        <Lightbox
+          open={index >= 0}
+          close={() => setIndex(-1)}
+          slides={events.flatMap(event => event.images).map((src) => ({ src }))}
+          index={index}
+        />
       </div>
     );
   };
@@ -587,10 +596,24 @@ const ResourceEvents = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="bg-white rounded-2xl shadow-lg p-8 mb-8"
+          className="bg-gradient-to-br from-white to-blue-50 rounded-2xl shadow-xl p-8 mb-8 border border-blue-100"
         >
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">{details.title}</h1>
-          <p className="text-lg text-gray-600 mb-6">{details.description}</p>
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-700 to-purple-700 bg-clip-text text-transparent mb-4">{details.title}</h1>
+          <p className="text-lg text-gray-700 mb-6">{details.description}</p>
+          <div className="flex flex-wrap gap-4">
+            <div className="flex items-center text-sm text-gray-600 bg-white px-4 py-2 rounded-full shadow-sm">
+              <Calendar className="w-4 h-4 mr-2 text-blue-600" />
+              {details.date}
+            </div>
+            <div className="flex items-center text-sm text-gray-600 bg-white px-4 py-2 rounded-full shadow-sm">
+              <MapPin className="w-4 h-4 mr-2 text-purple-600" />
+              {details.location}
+            </div>
+            <div className="flex items-center text-sm text-gray-600 bg-white px-4 py-2 rounded-full shadow-sm">
+              <Users className="w-4 h-4 mr-2 text-indigo-600" />
+              {details.attendees} attendees
+            </div>
+          </div>
         </motion.div>
 
         {/* Photo Gallery */}
@@ -599,7 +622,7 @@ const ResourceEvents = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <h2 className="text-2xl font-semibold text-gray-900 mb-6 text-center">Event Gallery ({imgs.length} photos)</h2>
+          <h2 className="text-2xl font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-6 text-center">Event Gallery ({imgs.length} photos)</h2>
           
           {/* Dynamic grid layout based on number of images */}
           <div className={`grid gap-4 justify-items-center ${
@@ -617,20 +640,20 @@ const ResourceEvents = () => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.4, delay: idx * 0.05 }}
-                className={`group relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer ${
-                  imgs.length === 1 ? 'max-w-md w-full' : 'w-full'
+                className={`group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer border border-gray-100 ${
+                  imgs.length === 1 ? 'max-w-2xl w-full' : 'w-full'
                 }`}
                 onClick={() => setIndex(idx)}
               >
                 <img
                   src={src}
                   alt={`${activeTab} highlight ${idx + 1}`}
-                  className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+                  className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500 bg-gray-50"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 border-2 border-transparent group-hover:border-blue-500 transition-colors duration-300 flex items-center justify-center">
-                  <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/90 backdrop-blur-sm rounded-full p-3">
-                    <ExternalLink className="w-5 h-5 text-gray-800" />
+                <div className="absolute inset-0 border-3 border-transparent group-hover:border-purple-500 transition-colors duration-300 flex items-center justify-center">
+                  <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-blue-600/90 to-purple-600/90 backdrop-blur-sm rounded-full p-4">
+                    <ExternalLink className="w-6 h-6 text-white" />
                   </div>
                 </div>
               </motion.div>
@@ -649,7 +672,59 @@ const ResourceEvents = () => {
     );
   };
 
-  const renderEventCards = () => (
+  const renderEventCards = () => {
+  const featuredEvents = [
+    {
+      id: 'london',
+      title: 'London Tech Week',
+      description: 'Europe\'s largest technology festival participation',
+      thumbnail: eventThumbnails['london'],
+      date: 'June 2024',
+      location: 'London, UK'
+    },
+    {
+      id: 'dubai',
+      title: 'CloudFirst Dubai Summit',
+      description: 'Annual technology conference showcasing cloud innovations',
+      thumbnail: eventThumbnails['dubai'],
+      date: 'April 2024',
+      location: 'Dubai, UAE'
+    },
+    {
+      id: 'slovakia',
+      title: 'Slovakia Innovation Hub',
+      description: 'Exploring Central European market opportunities',
+      thumbnail: eventThumbnails['slovakia'],
+      date: 'March 2024',
+      location: 'Bratislava, Slovakia'
+    },
+    {
+      id: 'aws-summit-bengaluru',
+      title: 'AWS Summit Bengaluru 2026',
+      description: 'Exploring latest cloud technologies and AI-driven solutions',
+      thumbnail: eventThumbnails['aws-summit-bengaluru'],
+      date: 'April 2026',
+      location: 'Bengaluru, India'
+    },
+    {
+      id: 'india-ai-impact-summit',
+      title: 'India AI Impact Summit 2026',
+      description: 'Global AI leaders exchange ideas and drive innovation',
+      thumbnail: eventThumbnails['india-ai-impact-summit'],
+      date: 'February 2026',
+      location: 'India'
+    },
+    {
+      id: 'msme-summit-2026',
+      title: 'MSME Summit 2026',
+      description: 'Empowering Micro, Small and Medium Enterprises with digital transformation solutions and growth strategies',
+      thumbnail: eventThumbnails['msme-summit-2026'],
+      date: 'March 2026',
+      location: 'India'
+    }
+  ];
+
+  return (
     <div className="max-w-7xl mx-auto px-4 py-16">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -657,58 +732,56 @@ const ResourceEvents = () => {
         transition={{ duration: 0.6 }}
         className="text-center mb-16"
       >
-        <h2 className="text-4xl font-semibold text-gray-900 mb-4">Our Event Journey</h2>
+        <h2 className="text-4xl font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">Our Event Journey</h2>
         <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-          Discover CloudFirst's global presence through our participation in major technology events, 
-          conferences, and strategic meetings worldwide.
+          Join us through our remarkable journey of conferences, summits, and networking events across the globe.
         </p>
       </motion.div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {Object.entries(eventDetails).map(([key, details], idx) => (
+        {featuredEvents.map((event, idx) => (
           <motion.div
-            key={key}
+            key={event.id}
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: idx * 0.1 }}
-            className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden cursor-pointer"
-            onClick={() => setSelectedEvent(key as keyof typeof images)}
+            className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden cursor-pointer border border-gray-100"
+            onClick={() => {
+              setSelectedEvent(event.id as keyof typeof images);
+              setActiveTab(event.id);
+            }}
           >
             <div className="relative h-64 overflow-hidden">
               <img
-                src={eventThumbnails[key as keyof typeof eventThumbnails]}
-                alt={details.title}
+                src={event.thumbnail}
+                alt={event.title}
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
               <div className="absolute bottom-4 left-4 right-4 text-white">
-                <h3 className="text-xl font-bold mb-1">{details.title}</h3>
-                {/* <div className="flex items-center text-sm opacity-90">
-                  <Calendar className="w-4 h-4 mr-1" />
-                  {details.date}
-                </div> */}
+                <h3 className="text-xl font-bold mb-1">{event.title}</h3>
               </div>
             </div>
             
             <div className="p-6">
-              <p className="text-gray-600 mb-4 line-clamp-2">{details.description}</p>
+              <p className="text-gray-600 mb-4 line-clamp-2">{event.description}</p>
               
               <div className="space-y-2 mb-4">
                 <div className="flex items-center text-sm text-gray-500">
                   <MapPin className="w-4 h-4 mr-2" />
-                  {details.location}
+                  {event.location}
                 </div>
-                {/* <div className="flex items-center text-sm text-gray-500">
-                  <Users className="w-4 h-4 mr-2" />
-                  {details.attendees} attendees
-                </div> */}
+                <div className="flex items-center text-sm text-gray-500">
+                  <Calendar className="w-4 h-4 mr-2" />
+                  {event.date}
+                </div>
               </div>
               
               <div className="flex items-center justify-between">
-                <span className="text-sm font-medium text-blue-600">
-                  {images[key as keyof typeof images].length} photos
+                <span className="text-sm font-medium bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                  View Gallery
                 </span>
-                <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-blue-600 transition-colors" />
+                <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-purple-600 transition-colors" />
               </div>
             </div>
           </motion.div>
@@ -716,8 +789,9 @@ const ResourceEvents = () => {
       </div>
     </div>
   );
+};
 
-  const renderGallery = () => {
+const renderGallery = () => {
     if (!selectedEvent) return null;
     
     const imgs = images[selectedEvent];
@@ -734,15 +808,29 @@ const ResourceEvents = () => {
         >
           <button
             onClick={() => setSelectedEvent(null)}
-            className="flex items-center text-blue-600 hover:text-blue-800 font-medium mb-6 group transition-colors"
+            className="flex items-center text-gradient-to-r from-blue-600 to-purple-600 hover:text-blue-800 font-medium mb-6 group transition-colors"
           >
             <ArrowLeft className="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" />
             Back to Events
           </button>
           
-          <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-4">{details.title}</h1>
-            <p className="text-lg text-gray-600 mb-6">{details.description}</p>
+          <div className="bg-gradient-to-br from-white to-blue-50 rounded-2xl shadow-xl p-8 mb-8 border border-blue-100">
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-700 to-purple-700 bg-clip-text text-transparent mb-4">{details.title}</h1>
+            <p className="text-lg text-gray-700 mb-6">{details.description}</p>
+            <div className="flex flex-wrap gap-4">
+              <div className="flex items-center text-sm text-gray-600 bg-white px-4 py-2 rounded-full shadow-sm">
+                <Calendar className="w-4 h-4 mr-2 text-blue-600" />
+                {details.date}
+              </div>
+              <div className="flex items-center text-sm text-gray-600 bg-white px-4 py-2 rounded-full shadow-sm">
+                <MapPin className="w-4 h-4 mr-2 text-purple-600" />
+                {details.location}
+              </div>
+              <div className="flex items-center text-sm text-gray-600 bg-white px-4 py-2 rounded-full shadow-sm">
+                <Users className="w-4 h-4 mr-2 text-indigo-600" />
+                {details.attendees} attendees
+              </div>
+            </div>
           </div>
         </motion.div>
 
@@ -752,7 +840,7 @@ const ResourceEvents = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <h2 className="text-2xl font-semibold text-gray-900 mb-6 text-center">Event Gallery ({imgs.length} photos)</h2>
+          <h2 className="text-2xl font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-6 text-center">Event Gallery ({imgs.length} photos)</h2>
           
           {/* Dynamic grid layout based on number of images */}
           <div className={`grid gap-4 justify-items-center ${
@@ -770,20 +858,20 @@ const ResourceEvents = () => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.4, delay: idx * 0.05 }}
-                className={`group relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer ${
-                  imgs.length === 1 ? 'max-w-md w-full' : 'w-full'
+                className={`group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer border border-gray-100 ${
+                  imgs.length === 1 ? 'max-w-2xl w-full' : 'w-full'
                 }`}
                 onClick={() => setEventIndex(idx)}
               >
                 <img
                   src={src}
                   alt={`${selectedEvent} highlight ${idx + 1}`}
-                  className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+                  className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500 bg-gray-50"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 border-2 border-transparent group-hover:border-blue-500 transition-colors duration-300 flex items-center justify-center">
-                  <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/90 backdrop-blur-sm rounded-full p-3">
-                    <ExternalLink className="w-5 h-5 text-gray-800" />
+                <div className="absolute inset-0 border-3 border-transparent group-hover:border-purple-500 transition-colors duration-300 flex items-center justify-center">
+                  <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-blue-600/90 to-purple-600/90 backdrop-blur-sm rounded-full p-4">
+                    <ExternalLink className="w-6 h-6 text-white" />
                   </div>
                 </div>
               </motion.div>
@@ -805,6 +893,7 @@ const ResourceEvents = () => {
   return (
     <>
       <Navbar />
+      
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900 py-24 overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3')] bg-cover bg-center opacity-10"></div>
@@ -818,7 +907,7 @@ const ResourceEvents = () => {
               Events & <span className="text-blue-300">Highlights</span>
             </h1>
             <p className="text-xl md:text-2xl max-w-4xl mx-auto opacity-90">
-              Explore the moments, conferences, and milestones where CloudFirst made an impact. 
+              Explore moments, conferences, and milestones where CloudFirst made an impact. 
               Discover our journey through event photos and highlights.
             </p>
           </motion.div>
@@ -846,7 +935,6 @@ const ResourceEvents = () => {
           </>
         )}
       </div>
-      <Footer />
     </>
   );
 };

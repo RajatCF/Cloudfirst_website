@@ -166,9 +166,16 @@ const MicrosoftAzure = () => {
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4" style={{ fontFamily: "'Georgia', serif" }}>
               Let Azure experts handle your cloud operations
             </h2>
-            <p className="text-gray-500 text-lg leading-relaxed">
-              Azure Managed Cloud Services take the operational burden off your team. CloudFirst's certified engineers manage your VMs, databases, containers, applications, and security posture — ensuring optimal performance, compliance, and cost efficiency every day.
-            </p>
+            <div className="relative">
+              <img
+                src="/azure_img.png"
+                alt="Microsoft Azure"
+                className="absolute -right-56 -top-12 w-40 h-40 object-contain opacity-100"
+              />
+              <p className="text-gray-500 text-lg leading-relaxed relative z-10">
+                Azure Managed Cloud Services take the operational burden off your team. CloudFirst's certified engineers manage your VMs, databases, containers, applications, and security posture — ensuring optimal performance, compliance, and cost efficiency every day.
+              </p>
+            </div>
           </div>
         </div>
       </section>

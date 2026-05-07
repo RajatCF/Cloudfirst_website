@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Cloud, Shield, BarChart3, GitBranch, DollarSign, Settings } from 'lucide-react';
@@ -6,12 +7,12 @@ import { Cloud, Shield, BarChart3, GitBranch, DollarSign, Settings } from 'lucid
 gsap.registerPlugin(ScrollTrigger);
 
 const services = [
-  { category: 'Infrastructure', icon: Cloud, title: 'Cloud Platform Modernization', badge: '✨ AI-native' },
-  { category: 'Security', icon: Shield, title: 'Security & Reliability', badge: '✨ AI-native' },
-  { category: 'Data', icon: BarChart3, title: 'Data Intelligence', badge: '✨ AI-native' },
-  { category: 'Engineering', icon: GitBranch, title: 'DevOps Automation', badge: '✨ AI-native' },
-  { category: 'FinOps', icon: DollarSign, title: 'Cost Optimization', badge: '✨ AI-native' },
-  { category: 'Operations', icon: Settings, title: 'Managed Services', badge: '✨ AI-native' },
+  { category: 'Infrastructure', icon: Cloud, title: 'Cloud Platform Modernization', badge: '✨ AI-native', path: '/solutions/infrastructure-modernisation' },
+  { category: 'Security', icon: Shield, title: 'Security & Reliability', badge: '✨ AI-native', path: '/solutions/cloud-security-compliance' },
+  { category: 'Data', icon: BarChart3, title: 'Data Intelligence', badge: '✨ AI-native', path: '/solutions/data-analytic' },
+  { category: 'Engineering', icon: GitBranch, title: 'DevOps Automation', badge: '✨ AI-native', path: '/solutions/cloud-devops' },
+  { category: 'FinOps', icon: DollarSign, title: 'Cost Optimization', badge: '✨ AI-native', path: '/solutions/cost-optimisation' },
+  { category: 'Operations', icon: Settings, title: 'Managed Services', badge: '✨ AI-native', path: '/cloud-platforms/managed-services' },
 ];
 
 const ServicesGrid = () => {
@@ -22,6 +23,17 @@ const ServicesGrid = () => {
       gsap.fromTo('.service-card-anim', { opacity: 0, y: 40 }, {
         opacity: 1, y: 0, stagger: 0.1, duration: 0.6, ease: 'power2.out',
         scrollTrigger: { trigger: gridRef.current, start: 'top 75%' }
+      });
+
+      gsap.to('.service-icon', {
+        duration: 1.0,
+        y: -8,
+        x: 5,
+        rotation: 8,
+        ease: 'sine.inOut',
+        repeat: -1,
+        yoyo: true,
+        stagger: 0.08,
       });
     }, gridRef);
     return () => ctx.revert();
@@ -38,20 +50,22 @@ const ServicesGrid = () => {
           {services.map((service) => {
             const Icon = service.icon;
             return (
-              <div key={service.title} className="service-card service-card-anim">
-                <div className="flex items-center justify-between mb-6">
-                  <span className="service-category text-xs uppercase tracking-widest text-muted-foreground font-medium">
-                    {service.category}
-                  </span>
-                  <span className="text-xs px-3 py-1 rounded-full bg-bright-blue/10 text-bright-blue font-medium">
-                    {service.badge}
-                  </span>
+              <Link key={service.title} to={service.path} className="block">
+                <div className="service-card service-card-anim group cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-105">
+                  <div className="flex items-center justify-between mb-6">
+                    <span className="service-category text-xs uppercase tracking-widest text-muted-foreground font-medium">
+                      {service.category}
+                    </span>
+                    <span className="text-xs px-3 py-1 rounded-full bg-bright-blue/10 text-bright-blue font-medium">
+                      {service.badge}
+                    </span>
+                  </div>
+                  <Icon className="service-icon inline-block w-8 h-8 text-bright-blue mb-6 transition-transform duration-300 group-hover:scale-110" />
+                  <h3 className="text-2xl lg:text-3xl font-display font-bold leading-tight">
+                    {service.title}
+                  </h3>
                 </div>
-                <Icon className="service-icon w-8 h-8 text-bright-blue mb-6" />
-                <h3 className="text-2xl lg:text-3xl font-display font-bold leading-tight">
-                  {service.title}
-                </h3>
-              </div>
+              </Link>
             );
           })}
         </div>

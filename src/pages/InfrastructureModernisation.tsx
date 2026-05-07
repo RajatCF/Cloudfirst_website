@@ -27,7 +27,7 @@ const InfrastructureModernisation: React.FC = () => {
             <span className="text-purple-600">to cloud-native platform</span>
           </h1>
           <p className="text-gray-500 text-lg leading-relaxed mb-8 max-w-xl">
-            Legacy infrastructure slows down engineering teams and creates compounding risk. CloudFirst modernises your platform — replacing manual, brittle processes with automated, resilient cloud-native foundations your teams can actually ship on.
+            Outdated infrastructure creates bottlenecks and hidden risks. CloudFirst Technology modernizes your environment by transitioning from rigid, manual systems to agile, automated cloud-native platforms—so your teams can move faster and scale without limits.
           </p>
           <div className="flex flex-wrap gap-3">
             <button onClick={() => navigate("/contact")} className="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white text-sm font-semibold rounded-lg transition-colors">Start modernising →</button>

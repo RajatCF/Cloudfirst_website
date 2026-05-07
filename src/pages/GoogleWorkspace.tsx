@@ -106,7 +106,7 @@ const GoogleWorkspace: React.FC = () => {
             <span className="text-white/30 text-xs">·</span>
             <span className="text-xs text-white/40 font-medium">Google Workspace</span>
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-5 max-w-3xl" style={{ fontFamily: "'Georgia', serif" }}>
+          <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-5 max-w-3xl">
             Google Workspace that{" "}
             <span className="text-blue-400">actually works for your team</span>
           </h1>
@@ -116,7 +116,7 @@ const GoogleWorkspace: React.FC = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {stats.map((s) => (
               <div key={s.label} className="bg-white/5 border border-white/10 rounded-xl px-4 py-4">
-                <div className="text-2xl font-bold text-white mb-1" style={{ fontFamily: "'Georgia', serif" }}>{s.value}</div>
+                <div className="text-2xl font-bold text-white mb-1">{s.value}</div>
                 <div className="text-xs text-white/50 font-medium">{s.label}</div>
               </div>
             ))}
@@ -127,19 +127,29 @@ const GoogleWorkspace: React.FC = () => {
       {/* Intro */}
       <div className="max-w-6xl mx-auto px-6 py-14">
         <div className="max-w-3xl">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4" style={{ fontFamily: "'Georgia', serif" }}>Why Workspace deployments underdeliver</h2>
-          <p className="text-gray-500 text-[15px] leading-relaxed mb-3">
-            Google Workspace is designed for collaboration — but without proper governance, it becomes a liability. Files are shared publicly by accident. Offboarded employees retain access. Phishing emails reach inboxes. Compliance audits fail on missing retention policies.
-          </p>
-          <p className="text-gray-500 text-[15px] leading-relaxed">
-            CloudFirst has deployed and managed Google Workspace for organisations across healthcare, finance, education, and technology. We know the settings that matter, the pitfalls to avoid, and how to make Workspace the productivity backbone your business needs.
-          </p>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Why Workspace deployments underdeliver</h2>
+          <div className="relative">
+            <img
+              src="/google_workspace.png"
+              alt="Google Workspace"
+              className="absolute right-0 w-64 h-64 object-contain opacity-100"
+              style={{ marginRight: '-300px', top: '-40px' }}
+            />
+            <div className="relative z-10">
+              <p className="text-gray-500 text-[15px] leading-relaxed mb-3">
+                Google Workspace is designed for collaboration — but without proper governance, it becomes a liability. Files are shared publicly by accident. Offboarded employees retain access. Phishing emails reach inboxes. Compliance audits fail on missing retention policies.
+              </p>
+              <p className="text-gray-500 text-[15px] leading-relaxed">
+                CloudFirst has deployed and managed Google Workspace for organisations across healthcare, finance, education, and technology. We know the settings that matter, the pitfalls to avoid, and how to make Workspace the productivity backbone your business needs.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* Capabilities grid */}
       <div className="max-w-6xl mx-auto px-6 pb-16">
-        <h2 className="text-xl font-bold text-gray-900 mb-2" style={{ fontFamily: "'Georgia', serif" }}>What's in Google Workspace</h2>
+        <h2 className="text-xl font-bold text-gray-900 mb-2">What's in Google Workspace</h2>
         <p className="text-gray-400 text-sm mb-8">A deeply integrated productivity suite — powerful when configured correctly.</p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {capabilities.map((c) => (
@@ -157,7 +167,7 @@ const GoogleWorkspace: React.FC = () => {
       {/* Services grid */}
       <div className="max-w-6xl mx-auto px-6 pb-16">
         <div className="flex items-center justify-between mb-8">
-          <h2 className="text-xl font-bold text-gray-900" style={{ fontFamily: "'Georgia', serif" }}>How we help</h2>
+          <h2 className="text-xl font-bold text-gray-900 mb-8">How we help</h2>
           <span className="text-xs text-gray-400 font-medium uppercase tracking-wider">6 service areas</span>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -184,7 +194,7 @@ const GoogleWorkspace: React.FC = () => {
       {/* Process strip */}
       <div className="bg-white border-y border-gray-100 py-14">
         <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-xl font-bold text-gray-900 mb-10 text-center" style={{ fontFamily: "'Georgia', serif" }}>Our Workspace engagement process</h2>
+          <h2 className="text-xl font-bold text-gray-900 mb-10 text-center">Our Workspace engagement process</h2>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {[
               { step: "01", title: "Assess", desc: "We audit your current environment — existing email system, identity provider, compliance requirements, and user needs — to design the right migration plan." },
@@ -193,7 +203,7 @@ const GoogleWorkspace: React.FC = () => {
               { step: "04", title: "Manage", desc: "We provide ongoing Workspace administration, user support, licence management, and continuous security hardening as part of your operations." },
             ].map((p) => (
               <div key={p.step}>
-                <div className="text-4xl font-bold text-gray-100 mb-3" style={{ fontFamily: "'Georgia', serif" }}>{p.step}</div>
+                <div className="text-4xl font-bold text-gray-100 mb-3">{p.step}</div>
                 <h3 className="text-sm font-bold text-gray-900 mb-2">{p.title}</h3>
                 <p className="text-xs text-gray-500 leading-relaxed">{p.desc}</p>
               </div>
@@ -204,7 +214,7 @@ const GoogleWorkspace: React.FC = () => {
 
       {/* Use cases */}
       <div className="max-w-6xl mx-auto px-6 py-16">
-        <h2 className="text-xl font-bold text-gray-900 mb-8" style={{ fontFamily: "'Georgia', serif" }}>Common scenarios we solve</h2>
+        <h2 className="text-xl font-bold text-gray-900 mb-8">Common scenarios we solve</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {[
             { scenario: "Microsoft 365 to Workspace migration", desc: "Moving from Exchange and SharePoint to Gmail and Drive with zero data loss, calendar continuity, and user onboarding support." },
@@ -225,7 +235,7 @@ const GoogleWorkspace: React.FC = () => {
           <div className="absolute inset-0 opacity-20" style={{ background: "radial-gradient(ellipse at 90% 50%, #4285f4 0%, transparent 60%)" }} />
           <div className="relative z-10 max-w-lg">
             <span className="inline-block text-xs font-semibold uppercase tracking-widest text-blue-400 mb-3">Free assessment</span>
-            <h2 className="text-2xl md:text-3xl font-bold text-white mb-3 leading-snug" style={{ fontFamily: "'Georgia', serif" }}>Get your Workspace security scorecard</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-3 leading-snug">Get your Workspace security scorecard</h2>
             <p className="text-white/60 text-sm leading-relaxed">We'll audit your Workspace configuration, identify sharing and security gaps, and deliver a prioritised remediation plan — no cost, no commitment.</p>
           </div>
           <div className="relative z-10 flex flex-col gap-3 flex-shrink-0">

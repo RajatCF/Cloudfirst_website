@@ -12,7 +12,7 @@ const CloudMigration = () => {
               Seamless <span className="text-bright-blue">Cloud Migration</span>
             </h1>
             <p className="text-lg md:text-2xl text-muted-foreground mb-8 max-w-xl">
-              Move your workloads and data to the cloud with minimal disruption. Our migration specialists ensure security, performance, and cost efficiency at every step.
+              Seamlessly migrate your workloads and data to the cloud with minimal disruption. At CloudFirst Technology, our experts ensure secure, high-performance, and cost-optimized transitions across AWS, Azure, and Google Cloud
             </p>
             <a href="/contact" className="btn-primary text-lg px-8 py-3 shadow-lg inline-block">Start Your Migration</a>
           </div>
@@ -82,7 +82,7 @@ const CloudMigration = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">Customer Stories</h2>
           <div className="grid md:grid-cols-2 gap-8">
             <div className="bg-white rounded-xl shadow-md p-8">
-              <p className="text-lg mb-4">“Migrating to the cloud was frictionless thanks to the team’s detailed planning and execution. Our users never noticed a hiccup.”</p>
+              <p className="text-lg mb-4">“CloudFirst Technology made our cloud migration seamless and disruption-free. Their expertise ensured a secure transition with improved performance—our users didn’t experience a single interruption.”</p>
               <div className="flex items-center gap-3">
                 <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Client" className="w-10 h-10 rounded-full" />
                 <div>

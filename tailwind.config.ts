@@ -14,7 +14,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
+        sans: ['Space Grotesk', 'sans-serif'],
         display: ['Space Grotesk', 'sans-serif'],
       },
       colors: {
@@ -68,6 +68,19 @@ export default {
         },
         "bright-blue": "hsl(var(--bright-blue))",
         "light-blue": "hsl(var(--light-blue))",
+        "reinforce-green": {
+          DEFAULT: "#0A5C3F",
+          50: "#E8F5EE",
+          100: "#D1EAD7",
+          200: "#A3D5BE",
+          300: "#75C0A5",
+          400: "#47A58D",
+          500: "#0A5C3F",
+          600: "#084A32",
+          700: "#063826",
+          800: "#04261A",
+          900: "#02140D"
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

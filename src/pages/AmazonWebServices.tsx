@@ -184,9 +184,16 @@ const AmazonWebServices = () => {
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4" style={{ fontFamily: "'Georgia', serif" }}>
               Offload AWS complexity to certified experts
             </h2>
-            <p className="text-gray-500 text-lg leading-relaxed">
-              AWS Managed Cloud Services simplify the day-to-day management of your cloud infrastructure. CloudFirst's engineers handle monitoring, optimisation, patching, and incident response — so you can concentrate on delivering value to your customers.
-            </p>
+            <div className="relative">
+              <img
+                src="/aws_advance partner logo.png"
+                alt="AWS"
+                className="absolute -right-56 -top-12 w-40 h-40 object-contain opacity-100"
+              />
+              <p className="text-gray-500 text-lg leading-relaxed relative z-10">
+                AWS Managed Cloud Services simplify the day-to-day management of your cloud infrastructure. CloudFirst's engineers handle monitoring, optimisation, patching, and incident response — so you can concentrate on delivering value to your customers.
+              </p>
+            </div>
           </div>
         </div>
       </section>

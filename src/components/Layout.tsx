@@ -1,6 +1,5 @@
 import { ReactNode, useEffect } from 'react';
 import Navbar from './Navbar.tsx';
-import Footer from './Footer';
 import Lenis from 'lenis';
 
 interface LayoutProps {
@@ -32,7 +31,6 @@ const Layout = ({ children }: LayoutProps) => {
       <main className="flex-1 pt-16 lg:pt-20">
         {children}
       </main>
-      <Footer />
     </div>
   );
 };

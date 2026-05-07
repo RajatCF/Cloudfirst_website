@@ -3,10 +3,10 @@ import HeroSection from '@/components/home/HeroSection';
 import SubHeroSection from '@/components/home/SubHeroSection';
 import BreakingTheMold from '@/components/home/BreakingTheMold';
 import ServicesGrid from '@/components/home/ServicesGrid';
-import JoinPioneers from '@/components/home/JoinPioneers';
 import ClientLogos from '@/components/home/ClientLogos';
 import ContactSection from '@/components/home/ContactSection';
 import GoGlobal from '@/components/home/GoGlobal';
+import ScrollingTestimonials from '@/components/home/ScrollingTestimonials';
 
 const Index = () => {
   return (
@@ -17,9 +17,8 @@ const Index = () => {
       <GoGlobal />
       <ServicesGrid />
       <ClientLogos />
-      <JoinPioneers />
+      <ScrollingTestimonials />
       <ContactSection />
-      
     </Layout>
   );
 };

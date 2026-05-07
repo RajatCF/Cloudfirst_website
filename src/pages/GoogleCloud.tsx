@@ -202,12 +202,21 @@ const GoogleCloud: React.FC = () => {
             <h2 className="text-2xl font-bold text-gray-900 mb-4" style={{ fontFamily: "'Georgia', serif" }}>
               Why GCP projects stall without the right architecture
             </h2>
-            <p className="text-gray-500 text-[15px] leading-relaxed mb-3">
-              Google Cloud moves fast and rewards teams who understand its primitives deeply. But most organisations onboard GCP reactively — spinning up projects, assigning broad IAM roles, and copying patterns from the internet — and wonder why costs spike, security posture scores are low, and deployments remain unreliable.
-            </p>
-            <p className="text-gray-500 text-[15px] leading-relaxed">
-              CloudFirst brings deep GCP engineering expertise across GKE, BigQuery, networking, security, and serverless. We've designed and operated GCP environments for startups shipping AI products and enterprises running regulated financial workloads.
-            </p>
+            <div className="relative">
+              <img
+                src="/gcp_img.png"
+                alt="Google Cloud"
+                className="absolute -right-56 -top-12 w-40 h-40 object-contain opacity-100"
+              />
+              <div className="relative z-10">
+                <p className="text-gray-500 text-[15px] leading-relaxed mb-3">
+                  Google Cloud moves fast and rewards teams who understand its primitives deeply. But most organisations onboard GCP reactively — spinning up projects, assigning broad IAM roles, and copying patterns from the internet — and wonder why costs spike, security posture scores are low, and deployments remain unreliable.
+                </p>
+                <p className="text-gray-500 text-[15px] leading-relaxed">
+                  CloudFirst brings deep GCP engineering expertise across GKE, BigQuery, networking, security, and serverless. We've designed and operated GCP environments for startups shipping AI products and enterprises running regulated financial workloads.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

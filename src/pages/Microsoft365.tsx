@@ -182,12 +182,19 @@ const Microsoft365: React.FC = () => {
           >
             Why Microsoft 365 deployments fail
           </h2>
-          <p className="text-gray-500 text-[15px] leading-relaxed mb-3">
-            Microsoft 365 is powerful — but its flexibility is a trap. Without governance, you inherit Teams sprawl, mailbox bloat, and external sharing that violates compliance policies. Without security hardening, you're exposed to phishing, ransomware, and privilege escalation. Without proper identity architecture, SSO never happens.
-          </p>
-          <p className="text-gray-500 text-[15px] leading-relaxed">
-            CloudFirst has deployed and managed Microsoft 365 for enterprises across industries. We know the gotchas, the hidden settings, and the policies that prevent chaos. We don't just license you — we architect, secure, and operate your tenant as a strategic platform.
-          </p>
+          <div className="relative">
+            <img
+              src="/logo/Microsoft_Office_365_logo.png"
+              alt="Microsoft 365"
+              className="absolute -right-56 -top-12 w-40 h-40 object-contain opacity-100"
+            />
+            <p className="text-gray-500 text-[15px] leading-relaxed mb-3 relative z-10">
+              Microsoft 365 is powerful — but its flexibility is a trap. Without governance, you inherit Teams sprawl, mailbox bloat, and external sharing that violates compliance policies. Without security hardening, you're exposed to phishing, ransomware, and privilege escalation. Without proper identity architecture, SSO never happens.
+            </p>
+            <p className="text-gray-500 text-[15px] leading-relaxed relative z-10">
+              CloudFirst has deployed and managed Microsoft 365 for enterprises across industries. We know the gotchas, hidden settings, and policies that prevent chaos. We don't just license you — we architect, secure, and operate your tenant as a strategic platform.
+            </p>
+          </div>
         </div>
       </div>
 

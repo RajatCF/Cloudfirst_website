@@ -83,7 +83,7 @@ const About = () => {
                 style={{ fontFamily: "'Georgia', serif" }}
               >
                 Technology that{" "}
-                <span className="text-blue-400">changes everything</span>
+                <span className="text-blue-400">powers your cloud journey</span>
               </h1>
               <p className="text-white/60 text-lg leading-relaxed max-w-lg mb-8">
                 CloudFirst Technology® Private Limited is an ISO 27001:2013 and ISO 9001:2015 certified company empowering clients globally through cutting-edge IT services — from US and Australia to Indian government projects.
@@ -125,7 +125,7 @@ const About = () => {
               {/* Floating badge — bottom right */}
               <div className="absolute -bottom-4 -right-4 rounded-xl bg-[#0d1a2e] border border-white/10 px-4 py-3 shadow-xl backdrop-blur-sm">
                 <div className="text-xs text-white/50 mb-0.5">Markets served</div>
-                <div className="text-xl font-bold text-blue-400" style={{ fontFamily: "'Georgia', serif" }}>5 + countries</div>
+                <div className="text-xl font-bold text-blue-400" style={{ fontFamily: "'Georgia', serif" }}>Trusted across 5+ countries</div>
               </div>
 
               {/* Floating badge — bottom left */}
