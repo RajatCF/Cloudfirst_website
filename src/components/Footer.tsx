@@ -30,9 +30,9 @@ const Footer = () => {
   return (
     <footer className="bg-navy-dark text-primary-foreground">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10 py-20 lg:py-28">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4 lg:gap-3">
           {/* Brand */}
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-1 pr-8">
             <Link to="/" className="font-display text-xl font-bold tracking-tight inline-flex items-center">
               <img src="/cflogo.png" alt="CloudFirst logo" className="h-16 w-auto inline-block" />
             </Link>
@@ -59,7 +59,7 @@ const Footer = () => {
           </div>
 
           {/* Services */}
-          <div>
+          <div className="pl-4">
             <h4 className="text-xs uppercase tracking-widest font-semibold mb-6 opacity-40">Services</h4>
             <ul className="space-y-3">
               {footerLinks.services.map((link) => (
@@ -86,25 +86,57 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Connect */}
+          {/* Office Locations */}
           <div>
-            <h4 className="text-xs uppercase tracking-widest font-semibold mb-6 opacity-40">Offices</h4>
-            <ul className="space-y-3 text-sm opacity-60">
-              <li>San Francisco, CA</li>
-              <li>New York, NY</li>
-              <li>London, UK</li>
-            </ul>
-            <p className="text-sm opacity-60 mt-6">hello@cloudfirst.io</p>
-            
-            {/* AWS Advanced Partner Logo */}
-            <div className="mt-8">
-              <h4 className="text-xs uppercase tracking-widest font-semibold mb-4 opacity-40">Partners</h4>
-              <img 
-                src="/aws_advance partner logo.png" 
-                alt="AWS Advanced Partner" 
-                className="h-40 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity duration-300"
-              />
+            <h4 className="text-xs uppercase tracking-widest font-semibold mb-6 opacity-40">Office Locations</h4>
+            <div className="space-y-4 text-sm opacity-60">
+              <div>
+                <p className="font-semibold mb-2">Mumbai-India :</p>
+                <p className="text-xs leading-relaxed">3rd Floor, Chintamani Plaza, Andheri East, Mumbai-400099</p>
+              </div>
+              
+              <div>
+                <p className="font-semibold mb-2">Delhi NCR-India :</p>
+                <p className="text-xs leading-relaxed">The i-THUM Sector 62, Noida-201309</p>
+              </div>
+              
+              <div>
+                <p className="font-semibold mb-2">Bengaluru-India :</p>
+                <p className="text-xs leading-relaxed">1st Floor, Brigade Tech Park, B Block, Whitefield Road, Bengaluru–560066</p>
+              </div>
+              
+              <div>
+                <p className="font-semibold mb-1">USA :</p>
+                <p className="text-xs leading-relaxed">2055 Limestone Rd STE 200-C Wilmington, DE 19808 United States</p>
+              </div>
             </div>
+          </div>
+
+          {/* Contact Details */}
+          <div>
+            <h4 className="text-xs uppercase tracking-widest font-semibold mb-6 opacity-40">Contact Details</h4>
+            <div className="space-y-4 text-sm opacity-60">
+              <div>
+                <p className="font-semibold mb-1">Phone:</p>
+                <p className="text-xs">+91-8448440769</p>
+              </div>
+              
+              <div>
+                <p className="font-semibold mb-1">E-mail:</p>
+                <p className="text-xs">solutions@cloudfirst.in</p>
+                <p className="text-xs">support@cloudfirst.in</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Partners - Far Right */}
+          <div className="flex flex-col justify-center">
+            <h4 className="text-xs uppercase tracking-widest font-semibold mb-4 opacity-40">Partners</h4>
+            <img 
+              src="/aws_advance partner logo.png" 
+              alt="AWS Advanced Partner" 
+              className="h-40 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity duration-300"
+            />
           </div>
         </div>
 

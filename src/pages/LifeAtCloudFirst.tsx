@@ -64,6 +64,11 @@ const LifeAtCloudFirst = () => {
       src: "/Life at cloudfirst/productLaunch.jpeg",
       title: "Product Launch",
       description: "Launching new ideas with passion."
+    },
+    {
+      src: "/Life at cloudfirst/women_day_img.png",
+      title: "Women's Day Celebration",
+      description: "Celebrating our amazing women team members"
     }
   ];
 
