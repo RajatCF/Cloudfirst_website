@@ -43,7 +43,7 @@ const ServicesGrid = () => {
     <section className="py-32 lg:py-40 bg-background">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
         <div className="mb-16">
-          <h2 className="section-title">our AI-native services</h2>
+          <h2 className="section-title">Our Intelligent Cloud Services</h2>
         </div>
 
         <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">

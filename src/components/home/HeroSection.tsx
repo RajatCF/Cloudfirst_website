@@ -75,13 +75,7 @@ const HeroSection = () => {
             typeof (v.name as { common?: unknown } | undefined)?.common === 'string'
               ? (v.name as { common: string }).common
               : '';
-          const flags = v.flags as { png?: unknown; svg?: unknown } | undefined;
-          const flagUrl =
-            typeof flags?.png === 'string'
-              ? flags.png
-              : typeof flags?.svg === 'string'
-                ? flags.svg
-                : '';
+          const flagUrl = `https://flagcdn.com/w40/${cca2.toLowerCase()}.png`;
           const idd = v.idd as { root?: unknown; suffixes?: unknown } | undefined;
           const root = typeof idd?.root === 'string' ? idd.root : '';
           const suffixes = Array.isArray(idd?.suffixes) ? idd?.suffixes : [];
