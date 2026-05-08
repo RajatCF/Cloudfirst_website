@@ -15,8 +15,12 @@ export default {
     },
     extend: {
       fontFamily: {
+<<<<<<< HEAD
         sans: ['Space Grotesk', 'sans-serif'],
         display: ['Space Grotesk', 'sans-serif'],
+=======
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+>>>>>>> 9e022dd14cd080f8ce67e225b385dbcbf33097bd
       },
       colors: {
         border: "hsl(var(--border))",
@@ -51,6 +55,18 @@ export default {
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
+        },
+        cloud: {
+          50: "hsl(var(--cloud-50))",
+          100: "hsl(var(--cloud-100))",
+          200: "hsl(var(--cloud-200))",
+          300: "hsl(var(--cloud-300))",
+          400: "hsl(var(--cloud-400))",
+          500: "hsl(var(--cloud-500))",
+          600: "hsl(var(--cloud-600))",
+          700: "hsl(var(--cloud-700))",
+          800: "hsl(var(--cloud-800))",
+          900: "hsl(var(--cloud-900))",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
@@ -105,17 +121,43 @@ export default {
           "0%": { opacity: "0" },
           "100%": { opacity: "1" },
         },
+<<<<<<< HEAD
         "slide-left": {
           "0%": { opacity: "0", transform: "translateX(-100px)" },
           "100%": { opacity: "1", transform: "translateX(0)" },
+=======
+        "scale-in": {
+          "0%": { opacity: "0", transform: "scale(0.95)" },
+          "100%": { opacity: "1", transform: "scale(1)" },
+        },
+        "slide-in-left": {
+          "0%": { opacity: "0", transform: "translateX(-40px)" },
+          "100%": { opacity: "1", transform: "translateX(0)" },
+        },
+        "slide-in-right": {
+          "0%": { opacity: "0", transform: "translateX(40px)" },
+          "100%": { opacity: "1", transform: "translateX(0)" },
+        },
+        marquee: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+>>>>>>> 9e022dd14cd080f8ce67e225b385dbcbf33097bd
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-up": "fade-up 0.6s ease-out forwards",
+<<<<<<< HEAD
         "fade-in": "fade-in 0.6s ease-out forwards",
         "slide-left": "slide-left 0.8s ease-out forwards",
+=======
+        "fade-in": "fade-in 0.5s ease-out forwards",
+        "scale-in": "scale-in 0.4s ease-out forwards",
+        "slide-in-left": "slide-in-left 0.5s ease-out forwards",
+        "slide-in-right": "slide-in-right 0.5s ease-out forwards",
+        marquee: "marquee 30s linear infinite",
+>>>>>>> 9e022dd14cd080f8ce67e225b385dbcbf33097bd
       },
     },
   },
