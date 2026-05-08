@@ -29,11 +29,11 @@ const footerLinks = {
 const Footer = () => {
   return (
     <footer className="bg-navy-dark text-primary-foreground">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-10 py-14 lg:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 lg:gap-6">
-          <div className="lg:col-span-1 pr-8">
+      <div className="w-full max-w-none mx-auto px-6 sm:px-10 lg:px-20 py-14 lg:py-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 lg:gap-6">
+          <div className="lg:col-span-1">
             <Link to="/" className="inline-block leading-none -mt-1">
-              <img src="/cflogo.png" alt="CloudFirst logo" className="h-16 w-auto block" />
+              <img src="/cflogo.png" alt="CloudFirst logo" className="h-20 w-auto block" />
             </Link>
             <p className="mt-4 text-sm leading-relaxed opacity-60 max-w-xs">
               AI-native, engineering-led cloud consultancy helping enterprises modernize intelligently.
@@ -90,7 +90,7 @@ const Footer = () => {
                 <p className="font-semibold mb-1">Phone:</p>
                 <p className="text-xs">+91-8448440769</p>
               </div>
-              
+
               <div>
                 <p className="font-semibold mb-1">E-mail:</p>
                 <p className="text-xs">solutions@cloudfirst.in</p>
@@ -99,23 +99,41 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="flex flex-col">
-            <h4 className="text-xs uppercase tracking-widest font-semibold mb-3 opacity-40">Partners</h4>
-            <div className="w-full flex justify-center">
+          <div className="flex flex-col items-center">
+            <h4 className="text-xs uppercase tracking-widest font-semibold mb-4 opacity-40 text-center">Partners</h4>
+            <div className="grid grid-cols-3 items-center justify-items-center gap-x-6">
               <img
                 src="/aws_advance partner logo.png"
                 alt="AWS Advanced Partner"
-                className="h-28 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity duration-300"
+                className="h-24 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity duration-300"
+                loading="lazy"
+              />
+              <img
+                src="/logo/microsoft_logo.png"
+                alt="Microsoft Partner"
+                className="h-24 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity duration-300"
+                loading="lazy"
+              />
+              <img
+                src="/logo/GCP_image.png"
+                alt="Google Cloud Partner"
+                className="h-24 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity duration-300"
+                loading="lazy"
               />
             </div>
           </div>
         </div>
 
-        <div className="mt-12 pt-6 flex flex-col md:flex-row items-center justify-between gap-4 border-t border-amber-300/50 shadow-[0_-1px_0_rgba(251,191,36,0.35)]">
-          <p className="text-xs opacity-40">© 2026 CloudFirst. All rights reserved.</p>
-          <div className="flex items-center gap-6 text-xs opacity-40">
-            <a href="#" className="hover:opacity-100 transition-opacity">Privacy Policy</a>
-            <a href="#" className="hover:opacity-100 transition-opacity">Terms of Service</a>
+        <div className="mt-12 pt-6 border-t border-amber-300/50 shadow-[0_-1px_0_rgba(251,191,36,0.35)]">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="text-xs opacity-40">© 2026 CloudFirst. All rights reserved.</p>
+            <div className="flex items-center gap-6 text-xs opacity-40">
+              <Link to="/evergreen-thought" className="hover:opacity-100 hover:text-bright-blue transition-all">
+                Evergreen Thought
+              </Link>
+              <a href="#" className="hover:opacity-100 transition-opacity">Privacy Policy</a>
+              <a href="#" className="hover:opacity-100 transition-opacity">Terms of Service</a>
+            </div>
           </div>
         </div>
       </div>

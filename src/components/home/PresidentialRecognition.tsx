@@ -1,8 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
 const PresidentialRecognition = () => {
   const [isVideoActive, setIsVideoActive] = useState(false);
+  const [isImageOpen, setIsImageOpen] = useState(false);
+
+  useEffect(() => {
+    if (!isImageOpen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsImageOpen(false);
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [isImageOpen]);
 
   return (
     <section className="max-w-[1400px] mx-auto px-6 lg:px-10 py-20">
@@ -20,12 +30,21 @@ const PresidentialRecognition = () => {
             className="relative p-2"
           >
             <div className="rounded-2xl overflow-hidden shadow-xl border border-gray-100 bg-white">
-              <img
-                src="https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/AshishSirWithPresident.jpg"
-                alt="Presidential Recognition 2025"
-                className="w-full h-[280px] sm:h-[340px] lg:h-[360px] object-cover"
-                loading="lazy"
-              />
+              <button
+                type="button"
+                onClick={() => setIsImageOpen(true)}
+                aria-label="Open image"
+                className="block w-full text-left"
+              >
+                <div className="bg-white p-3">
+                  <img
+                    src="https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/AshishSirWithPresident.jpg"
+                    alt="Presidential Recognition 2025"
+                    className="w-full h-auto max-h-[640px] object-contain bg-white"
+                    loading="lazy"
+                  />
+                </div>
+              </button>
             </div>
           </motion.div>
 
@@ -80,32 +99,83 @@ const PresidentialRecognition = () => {
             <div className="rounded-2xl overflow-hidden shadow-2xl border border-gray-100 bg-white">
               <div
                 className="aspect-video relative"
-                onMouseLeave={() => setIsVideoActive(false)}
               >
-                {!isVideoActive && (
-                  <button
-                    type="button"
-                    onClick={() => setIsVideoActive(true)}
-                    onTouchStart={() => setIsVideoActive(true)}
-                    className="absolute inset-0 w-full h-full flex items-center justify-center bg-black/10 backdrop-blur-[1px] text-white font-semibold"
-                  >
-                    <span className="px-5 py-3 rounded-full bg-black/60">
-                      Click to play video
-                    </span>
-                  </button>
+                {!isVideoActive ? (
+                  <div className="absolute inset-0">
+                    <img
+                      src="https://i.ytimg.com/vi/KB5p5EAYm4s/maxresdefault.jpg"
+                      alt="Slovak–India Business Forum video thumbnail"
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                      onError={(e) => {
+                        (e.currentTarget as HTMLImageElement).src = "https://i.ytimg.com/vi/KB5p5EAYm4s/hqdefault.jpg";
+                      }}
+                    />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/35 via-black/10 to-transparent" />
+                    <button
+                      type="button"
+                      onClick={() => setIsVideoActive(true)}
+                      aria-label="Play video"
+                      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+                    >
+                      <span className="flex items-center gap-3 rounded-full bg-black/70 px-5 py-3 text-white font-semibold shadow-lg">
+                        <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/15">
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M9 7l10 5-10 5V7z" fill="currentColor" />
+                          </svg>
+                        </span>
+                        Play video
+                      </span>
+                    </button>
+                  </div>
+                ) : (
+                  <iframe
+                    src="https://www.youtube-nocookie.com/embed/KB5p5EAYm4s?autoplay=1"
+                    title="Slovak-India Business Forum Video"
+                    className="absolute inset-0 w-full h-full border-0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                  />
                 )}
-                <iframe
-                  src="https://www.youtube.com/embed/KB5p5EAYm4s"
-                  title="Slovak-India Business Forum Video"
-                  className={`absolute inset-0 w-full h-full border-0 ${isVideoActive ? '' : 'pointer-events-none'}`}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
               </div>
             </div>
           </div>
         </motion.div>
       </motion.div>
+
+      {isImageOpen ? (
+        <div
+          className="fixed inset-0 z-[80] bg-black/70 px-4 py-8 flex items-center justify-center"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Image preview"
+          onClick={() => setIsImageOpen(false)}
+        >
+          <div
+            className="relative w-full max-w-6xl max-h-[90vh] rounded-2xl bg-white overflow-hidden shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={() => setIsImageOpen(false)}
+              aria-label="Close"
+              className="absolute right-3 top-3 z-10 rounded-full bg-black/70 text-white px-3 py-2 text-sm hover:bg-black/80 transition-colors"
+            >
+              Close
+            </button>
+            <div className="w-full h-full bg-white p-4">
+              <img
+                src="https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/AshishSirWithPresident.jpg"
+                alt="Presidential Recognition 2025"
+                className="w-full h-full max-h-[calc(90vh-2rem)] object-contain"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
+      ) : null}
     </section>
   );
 };

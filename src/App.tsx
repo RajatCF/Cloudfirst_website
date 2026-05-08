@@ -67,6 +67,7 @@ const CreateBlog = lazy(() => import("./pages/CreateBlog"));
 const CloudFirstVideos = lazy(() => import("./pages/CloudFirstVideos"));
 const LifeAtCloudFirst = lazy(() => import("./pages/LifeAtCloudFirst"));
 const WorkBenefits = lazy(() => import("./pages/WorkBenefits"));
+const EvergreenThought = lazy(() => import("./pages/EvergreenThought"));
  
 const queryClient = new QueryClient();
 const OG_GREEN_TREE_URL = "https://example.com";
@@ -182,6 +183,8 @@ const App = () => (
            
             {/* Work Benefits Page */}
             <Route path="/work-benefits" element={<WorkBenefits />} />
+
+            <Route path="/evergreen-thought" element={<EvergreenThought />} />
  
             <Route path="*" element={<NotFound />} />
           </Routes>

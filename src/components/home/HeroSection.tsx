@@ -197,9 +197,13 @@ const HeroSection = () => {
 
   return (
     <section
-      className="relative bg-white min-h-[46vh] flex items-center justify-center overflow-hidden"
+      className="relative min-h-[46vh] flex items-center justify-center overflow-hidden"
     >
-      <div className="absolute inset-0 pointer-events-none bg-white" />
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('/banner.jpg')" }}
+      />
+      <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-black/70 via-black/55 to-black/70" />
       {/* ─────────────────────────────────────────────────────────────────
           GLOBAL CSS WATERMARK SUPPRESSION
           Covers every known selector pattern Spline has ever used,
