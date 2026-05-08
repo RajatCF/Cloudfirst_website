@@ -32,8 +32,8 @@ const Footer = () => {
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10 py-14 lg:py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 lg:gap-6">
           <div className="lg:col-span-1 pr-8">
-            <Link to="/" className="font-display text-xl font-bold tracking-tight inline-flex items-center">
-              <img src="/cflogo.png" alt="CloudFirst logo" className="h-16 w-auto inline-block" />
+            <Link to="/" className="inline-block leading-none -mt-1">
+              <img src="/cflogo.png" alt="CloudFirst logo" className="h-16 w-auto block" />
             </Link>
             <p className="mt-4 text-sm leading-relaxed opacity-60 max-w-xs">
               AI-native, engineering-led cloud consultancy helping enterprises modernize intelligently.
