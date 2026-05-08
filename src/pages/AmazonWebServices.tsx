@@ -1,70 +1,79 @@
 import Layout from "@/components/Layout";
-import { ArrowRight, Zap, Database, Boxes, Layers, Code2, HardDrive, Shield, CheckCircle2, TrendingUp, Globe, Lock } from "lucide-react";
+import { ArrowRight, Zap, Database, Boxes, Layers, Code2, HardDrive, Shield, CheckCircle2, TrendingUp, Globe, Lock, Brain, Cpu } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const awsManagedServices = [
   {
-    name: "AWS Lambda",
-    icon: Zap,
+    name: "AWS Landing Zone & Governance",
+    icon: Layers,
     color: "text-amber-500",
     bg: "bg-amber-500/10",
     border: "border-amber-500/20",
     description:
-      "Serverless compute that scales automatically in response to requests — no server management, pay only for what you use.",
+      "Design and implement multi-account AWS foundations with guardrails, networking, identity, tagging, and policies aligned to best practices.",
   },
   {
-    name: "Amazon RDS",
-    icon: Database,
-    color: "text-blue-400",
-    bg: "bg-blue-400/10",
-    border: "border-blue-400/20",
-    description:
-      "Fully managed relational database handling backups, patching, and failover so your team focuses on building, not maintenance.",
-  },
-  {
-    name: "Amazon ECS",
+    name: "Cloud Migration & Modernisation",
     icon: Boxes,
     color: "text-orange-400",
     bg: "bg-orange-400/10",
     border: "border-orange-400/20",
     description:
-      "High-performance container orchestration for Docker workloads, with fully managed infrastructure for flexible deployment.",
+      "Plan and execute workload migrations, refactors, and platform modernisation with minimal downtime and a clear wave-based approach.",
   },
   {
-    name: "AWS Elastic Beanstalk",
-    icon: Layers,
+    name: "24/7 Monitoring & Incident Response",
+    icon: Zap,
     color: "text-emerald-400",
     bg: "bg-emerald-400/10",
     border: "border-emerald-400/20",
     description:
-      "Deploy multi-language applications without worrying about capacity, load balancing, or scaling — all handled for you.",
+      "Continuous observability, alert triage, on-call response, and post-incident RCA — so issues are resolved fast and don’t repeat.",
   },
   {
-    name: "AWS CloudFormation",
-    icon: Code2,
-    color: "text-violet-400",
-    bg: "bg-violet-400/10",
-    border: "border-violet-400/20",
-    description:
-      "Define your entire infrastructure as code with declarative templates for consistent, repeatable provisioning at any scale.",
-  },
-  {
-    name: "Amazon S3",
-    icon: HardDrive,
-    color: "text-sky-400",
-    bg: "bg-sky-400/10",
-    border: "border-sky-400/20",
-    description:
-      "Industry-leading object storage with unlimited scalability, 99.999999999% durability, and fine-grained access controls.",
-  },
-  {
-    name: "AWS CloudTrail",
+    name: "Security Hardening & Compliance",
     icon: Shield,
     color: "text-rose-400",
     bg: "bg-rose-400/10",
     border: "border-rose-400/20",
     description:
-      "Complete API audit trail for security analysis, compliance reporting, and resource change tracking across your AWS estate.",
+      "Strengthen your AWS security posture with best-practice controls, continuous improvements, and audit-ready operational processes.",
+  },
+  {
+    name: "FinOps & Cost Optimisation",
+    icon: TrendingUp,
+    color: "text-blue-400",
+    bg: "bg-blue-400/10",
+    border: "border-blue-400/20",
+    description:
+      "Rightsizing, commitment optimisation, cost allocation, and monthly reviews that reduce spend without sacrificing performance.",
+  },
+  {
+    name: "Backup & Disaster Recovery",
+    icon: HardDrive,
+    color: "text-sky-400",
+    bg: "bg-sky-400/10",
+    border: "border-sky-400/20",
+    description:
+      "Design DR strategies, automate backups, test recovery plans, and ensure resilient operations aligned to your business RTO/RPO.",
+  },
+  {
+    name: "DevOps & Infrastructure as Code",
+    icon: Code2,
+    color: "text-violet-400",
+    bg: "bg-violet-400/10",
+    border: "border-violet-400/20",
+    description:
+      "CI/CD pipelines, repeatable deployments, and automated provisioning using IaC to improve reliability, speed, and consistency.",
+  },
+  {
+    name: "Database & Data Platform Operations",
+    icon: Database,
+    color: "text-indigo-400",
+    bg: "bg-indigo-400/10",
+    border: "border-indigo-400/20",
+    description:
+      "Operate and optimize data platforms on AWS with performance tuning, reliability improvements, and secure access controls.",
   },
 ];
 
@@ -73,6 +82,45 @@ const stats = [
   { value: "99.99%", label: "Uptime SLA", icon: TrendingUp },
   { value: "ISO 27001", label: "Certified Partner", icon: Lock },
   { value: "24 / 7", label: "Managed Support", icon: CheckCircle2 },
+];
+
+const aiServices = [
+  {
+    name: "GenAI on AWS (Bedrock-ready)",
+    icon: Brain,
+    color: "text-amber-500",
+    bg: "bg-amber-500/10",
+    border: "border-amber-500/20",
+    description:
+      "Design and deliver generative AI workloads on AWS with strong security, cost controls, and a clear path to production.",
+  },
+  {
+    name: "LLM Apps & RAG Pipelines",
+    icon: Database,
+    color: "text-blue-400",
+    bg: "bg-blue-400/10",
+    border: "border-blue-400/20",
+    description:
+      "Build retrieval-augmented generation (RAG) applications connected to enterprise knowledge with reliable evaluation and guardrails.",
+  },
+  {
+    name: "MLOps, Model Ops & Observability",
+    icon: Cpu,
+    color: "text-emerald-400",
+    bg: "bg-emerald-400/10",
+    border: "border-emerald-400/20",
+    description:
+      "Operationalize training, deployment, monitoring, and drift management so ML systems stay stable as data and usage change.",
+  },
+  {
+    name: "AI Security, Governance & Compliance",
+    icon: Shield,
+    color: "text-rose-400",
+    bg: "bg-rose-400/10",
+    border: "border-rose-400/20",
+    description:
+      "Threat modeling, access control, logging, and policy guardrails for AI workloads aligned to compliance requirements.",
+  },
 ];
 
 const AmazonWebServices = () => {
@@ -203,13 +251,13 @@ const AmazonWebServices = () => {
         <div className="max-w-[1200px] mx-auto px-6 lg:px-10 py-16">
           <div className="flex items-end justify-between mb-10 gap-6 flex-wrap">
             <div>
-              <span className="text-xs font-bold uppercase tracking-widest text-amber-600">What we manage</span>
+              <span className="text-xs font-bold uppercase tracking-widest text-amber-600">What we deliver</span>
               <h2 className="mt-2 text-2xl md:text-3xl font-bold text-gray-900" style={{ fontFamily: "'Georgia', serif" }}>
-                Key AWS managed services
+                Key CloudFirst AWS services
               </h2>
             </div>
             <p className="text-gray-400 text-sm max-w-xs">
-              A sample of the 200+ AWS services CloudFirst architects and operates for customers.
+              A snapshot of the managed capabilities CloudFirst delivers on AWS for customers.
             </p>
           </div>
 
@@ -235,16 +283,69 @@ const AmazonWebServices = () => {
                 <div className="inline-flex items-center justify-center h-10 w-10 rounded-xl bg-white/20 mb-4">
                   <Globe className="w-5 h-5 text-white" />
                 </div>
-                <h3 className="text-base font-bold text-white mb-2">+ 190 more AWS services</h3>
-                <p className="text-white/80 text-sm leading-relaxed">From AI/ML to IoT, security, and edge computing — CloudFirst manages it all.</p>
+                <h3 className="text-base font-bold text-white mb-2">Custom service coverage</h3>
+                <p className="text-white/80 text-sm leading-relaxed">
+                  Need something specific on AWS? We tailor delivery to your workloads, security requirements, and operating model.
+                </p>
               </div>
               <Link
                 to="/contact"
                 className="mt-6 inline-flex items-center gap-1.5 text-white text-sm font-semibold hover:gap-2.5 transition-all"
               >
-                Get full service list <ArrowRight className="w-4 h-4" />
+                Talk to an AWS expert <ArrowRight className="w-4 h-4" />
               </Link>
             </article>
+          </div>
+        </div>
+      </section>
+
+      <section className="relative overflow-hidden border-t border-gray-100 bg-gradient-to-br from-amber-50 via-white to-orange-50">
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute -top-24 -left-24 h-80 w-80 rounded-full bg-amber-400/15 blur-[80px]" />
+          <div className="absolute -bottom-28 -right-28 h-96 w-96 rounded-full bg-orange-400/15 blur-[90px]" />
+        </div>
+        <div className="max-w-[1200px] mx-auto px-6 lg:px-10 py-16">
+          <div className="flex items-end justify-between mb-10 gap-6 flex-wrap">
+            <div>
+              <span className="text-xs font-bold uppercase tracking-widest text-amber-600">AI & GenAI</span>
+              <h2 className="mt-2 text-2xl md:text-3xl font-bold text-gray-900" style={{ fontFamily: "'Georgia', serif" }}>
+                AI services on AWS
+              </h2>
+            </div>
+            <p className="text-gray-400 text-sm max-w-xs">
+              From LLM applications to governance — delivered with production-grade engineering and operational rigor.
+            </p>
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+            {aiServices.map(({ name, icon: Icon, color, bg, border, description }) => (
+              <article
+                key={name}
+                className="group relative bg-white/90 backdrop-blur-sm rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 overflow-hidden"
+              >
+                <div className={`absolute top-0 left-0 right-0 h-0.5 ${bg} opacity-0 group-hover:opacity-100 transition-opacity`} />
+                <div className={`inline-flex items-center justify-center h-10 w-10 rounded-xl ${bg} border ${border} mb-4`}>
+                  <Icon className={`w-5 h-5 ${color}`} />
+                </div>
+                <h3 className="text-base font-bold text-gray-900 mb-2">{name}</h3>
+                <p className="text-gray-500 text-sm leading-relaxed">{description}</p>
+              </article>
+            ))}
+          </div>
+
+          <div className="mt-10 flex flex-wrap gap-4">
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-amber-500 hover:bg-amber-400 text-black text-sm font-bold rounded-lg transition-colors"
+            >
+              Talk to an AI architect <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 px-6 py-3 border border-gray-300/70 hover:border-gray-400 text-gray-900 text-sm font-semibold rounded-lg transition-colors bg-white/70 backdrop-blur-sm"
+            >
+              Request an AI roadmap
+            </Link>
           </div>
         </div>
       </section>

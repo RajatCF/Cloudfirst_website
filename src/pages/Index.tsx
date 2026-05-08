@@ -2,7 +2,7 @@ import Layout from '@/components/Layout';
 import HeroSection from '@/components/home/HeroSection';
 import BreakingTheMold from '@/components/home/BreakingTheMold';
 import ServicesGrid from '@/components/home/ServicesGrid';
-import ClientLogos from '@/components/home/ClientLogos';
+import ClientLogos, { OurClientsLogos } from '@/components/home/ClientLogos';
 import GoGlobal from '@/components/home/GoGlobal';
 import PresidentialRecognition from '@/components/home/PresidentialRecognition';
 import ScrollingTestimonials from '@/components/home/ScrollingTestimonials';
@@ -30,6 +30,8 @@ const Index = () => {
       <ClientLogos />
       <Divider />
       <ScrollingTestimonials />
+      <Divider />
+      <OurClientsLogos />
       <Divider />
       <NumbersStrip />
     </Layout>

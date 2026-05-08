@@ -1,52 +1,79 @@
 import Layout from "@/components/Layout";
-import { ArrowRight, Server, Database, Boxes, AppWindow, ShieldCheck, CheckCircle2, TrendingUp, Globe, Lock, Cpu } from "lucide-react";
+import { ArrowRight, Server, Database, Boxes, ShieldCheck, CheckCircle2, TrendingUp, Globe, Lock, Cpu, Layers, HardDrive, Code2, Brain } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const azureManagedServices = [
   {
-    name: "Azure Managed Virtual Machines",
-    icon: Server,
+    name: "Azure Landing Zone & Governance",
+    icon: Layers,
     color: "text-sky-400",
     bg: "bg-sky-400/10",
     border: "border-sky-400/20",
     description:
-      "Fully managed VMs optimised for performance, security, and reliability — patching, backups, and monitoring all handled for you.",
+      "Build secure Azure foundations with identity, networking, policy guardrails, management groups, and standards that scale with your organisation.",
   },
   {
-    name: "Azure Managed Databases",
-    icon: Database,
-    color: "text-blue-400",
-    bg: "bg-blue-400/10",
-    border: "border-blue-400/20",
-    description:
-      "Managed database services with built-in high availability, automated backups, and expert-led performance tuning.",
-  },
-  {
-    name: "Azure Managed Kubernetes",
+    name: "Cloud Migration & Modernisation",
     icon: Boxes,
     color: "text-cyan-400",
     bg: "bg-cyan-400/10",
     border: "border-cyan-400/20",
     description:
-      "Production-grade AKS clusters with managed upgrades, autoscaling, and 24/7 monitoring by certified Azure engineers.",
+      "Plan and execute Azure migrations and refactors with minimal downtime, clear wave planning, and operational readiness from day one.",
   },
   {
-    name: "Azure Managed Applications",
-    icon: AppWindow,
+    name: "24/7 Monitoring & Incident Response",
+    icon: Server,
+    color: "text-emerald-400",
+    bg: "bg-emerald-400/10",
+    border: "border-emerald-400/20",
+    description:
+      "Continuous observability, alert triage, on-call response, and post-incident RCA — keeping your Azure environment reliable and fast.",
+  },
+  {
+    name: "Security Hardening & Compliance",
     color: "text-indigo-400",
     bg: "bg-indigo-400/10",
     border: "border-indigo-400/20",
     description:
-      "Fully managed application services covering patching, scaling, and availability so your teams ship faster.",
+      "Improve your security posture with best-practice controls, continuous improvements, and audit-ready operational processes across Azure.",
+    icon: ShieldCheck,
   },
   {
-    name: "Azure Managed Security",
-    icon: ShieldCheck,
     color: "text-violet-400",
     bg: "bg-violet-400/10",
     border: "border-violet-400/20",
+    name: "FinOps & Cost Optimisation",
+    icon: TrendingUp,
     description:
-      "End-to-end Azure security management — IAM, network security, Defender for Cloud, and threat response included.",
+      "Rightsizing, commitment optimisation, cost allocation, and monthly reviews that reduce spend without sacrificing performance.",
+  },
+  {
+    name: "Backup & Disaster Recovery",
+    icon: HardDrive,
+    color: "text-blue-400",
+    bg: "bg-blue-400/10",
+    border: "border-blue-400/20",
+    description:
+      "Design DR strategies, automate backups, test recovery plans, and ensure resilient operations aligned to your business RTO/RPO.",
+  },
+  {
+    name: "DevOps & Infrastructure as Code",
+    icon: Code2,
+    color: "text-amber-400",
+    bg: "bg-amber-400/10",
+    border: "border-amber-400/20",
+    description:
+      "CI/CD pipelines, repeatable deployments, and automated provisioning using IaC to improve reliability, speed, and consistency.",
+  },
+  {
+    name: "Database & Data Platform Operations",
+    icon: Database,
+    color: "text-slate-500",
+    bg: "bg-slate-500/10",
+    border: "border-slate-500/20",
+    description:
+      "Operate and optimize data platforms on Azure with performance tuning, reliability improvements, and secure access controls.",
   },
 ];
 
@@ -55,6 +82,45 @@ const stats = [
   { value: "99.99%", label: "Uptime SLA", icon: TrendingUp },
   { value: "ISO 27001", label: "Certified", icon: Lock },
   { value: "24 / 7", label: "NOC Support", icon: Cpu },
+];
+
+const aiServices = [
+  {
+    name: "Copilot Customization & Enablement",
+    icon: Brain,
+    color: "text-sky-500",
+    bg: "bg-sky-500/10",
+    border: "border-sky-500/20",
+    description:
+      "Roll out Copilot experiences with governance, secure data access, and adoption planning aligned to your teams and workflows.",
+  },
+  {
+    name: "Copilot Studio Solutions",
+    icon: Code2,
+    color: "text-indigo-500",
+    bg: "bg-indigo-500/10",
+    border: "border-indigo-500/20",
+    description:
+      "Design and build copilots and automations with structured intents, integrations, and guardrails to deliver real business outcomes.",
+  },
+  {
+    name: "LLM Apps on Azure (Azure OpenAI-ready)",
+    icon: Cpu,
+    color: "text-emerald-500",
+    bg: "bg-emerald-500/10",
+    border: "border-emerald-500/20",
+    description:
+      "Build production-ready LLM applications with RAG, evaluation, observability, and cost controls — from PoC to scale.",
+  },
+  {
+    name: "AI Security, Governance & Compliance",
+    icon: ShieldCheck,
+    color: "text-rose-500",
+    bg: "bg-rose-500/10",
+    border: "border-rose-500/20",
+    description:
+      "Policies, access control, logging, and monitoring for AI workloads so your AI program stays secure and audit-ready.",
+  },
 ];
 
 const MicrosoftAzure = () => {
@@ -185,13 +251,13 @@ const MicrosoftAzure = () => {
         <div className="max-w-[1200px] mx-auto px-6 lg:px-10 py-16">
           <div className="flex items-end justify-between mb-10 gap-6 flex-wrap">
             <div>
-              <span className="text-xs font-bold uppercase tracking-widest text-sky-600">What we manage</span>
+              <span className="text-xs font-bold uppercase tracking-widest text-sky-600">What we deliver</span>
               <h2 className="mt-2 text-2xl md:text-3xl font-bold text-gray-900" style={{ fontFamily: "'Georgia', serif" }}>
-                Key Azure managed services
+                Key CloudFirst Azure services
               </h2>
             </div>
             <p className="text-gray-400 text-sm max-w-xs">
-              Core Azure services CloudFirst operates and optimises for your environment.
+              A snapshot of the managed capabilities CloudFirst delivers on Azure for customers.
             </p>
           </div>
 
@@ -216,16 +282,69 @@ const MicrosoftAzure = () => {
                 <div className="inline-flex items-center justify-center h-10 w-10 rounded-xl bg-white/20 mb-4">
                   <Globe className="w-5 h-5 text-white" />
                 </div>
-                <h3 className="text-base font-bold text-white mb-2">Full Azure portfolio coverage</h3>
-                <p className="text-white/80 text-sm leading-relaxed">From AI services and IoT to analytics, DevOps, and hybrid cloud — we manage it all.</p>
+                <h3 className="text-base font-bold text-white mb-2">Custom service coverage</h3>
+                <p className="text-white/80 text-sm leading-relaxed">
+                  Need something specific on Azure? We tailor delivery to your workloads, security requirements, and operating model.
+                </p>
               </div>
               <Link
                 to="/contact"
                 className="mt-6 inline-flex items-center gap-1.5 text-white text-sm font-semibold hover:gap-2.5 transition-all"
               >
-                Get full service list <ArrowRight className="w-4 h-4" />
+                Talk to an Azure expert <ArrowRight className="w-4 h-4" />
               </Link>
             </article>
+          </div>
+        </div>
+      </section>
+
+      <section className="relative overflow-hidden border-t border-gray-100 bg-gradient-to-br from-sky-50 via-white to-blue-50">
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute -top-24 -left-24 h-80 w-80 rounded-full bg-sky-500/15 blur-[80px]" />
+          <div className="absolute -bottom-28 -right-28 h-96 w-96 rounded-full bg-indigo-500/12 blur-[90px]" />
+        </div>
+        <div className="relative max-w-[1200px] mx-auto px-6 lg:px-10 py-16">
+          <div className="flex items-end justify-between mb-10 gap-6 flex-wrap">
+            <div>
+              <span className="text-xs font-bold uppercase tracking-widest text-sky-600">AI & GenAI</span>
+              <h2 className="mt-2 text-2xl md:text-3xl font-bold text-gray-900" style={{ fontFamily: "'Georgia', serif" }}>
+                AI services on Azure
+              </h2>
+            </div>
+            <p className="text-gray-400 text-sm max-w-xs">
+              Copilot, copilots, and LLM applications — engineered for enterprise security, governance, and adoption.
+            </p>
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+            {aiServices.map(({ name, icon: Icon, color, bg, border, description }) => (
+              <article
+                key={name}
+                className="group relative bg-white/90 backdrop-blur-sm rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 overflow-hidden"
+              >
+                <div className={`absolute top-0 left-0 right-0 h-0.5 ${bg} opacity-0 group-hover:opacity-100 transition-opacity`} />
+                <div className={`inline-flex items-center justify-center h-10 w-10 rounded-xl ${bg} border ${border} mb-4`}>
+                  <Icon className={`w-5 h-5 ${color}`} />
+                </div>
+                <h3 className="text-base font-bold text-gray-900 mb-2">{name}</h3>
+                <p className="text-gray-500 text-sm leading-relaxed">{description}</p>
+              </article>
+            ))}
+          </div>
+
+          <div className="mt-10 flex flex-wrap gap-4">
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-sky-500 hover:bg-sky-400 text-white text-sm font-bold rounded-lg transition-colors"
+            >
+              Talk to an AI expert <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 px-6 py-3 border border-gray-300/70 hover:border-gray-400 text-gray-900 text-sm font-semibold rounded-lg transition-colors bg-white/70 backdrop-blur-sm"
+            >
+              Request an AI roadmap
+            </Link>
           </div>
         </div>
       </section>

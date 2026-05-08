@@ -37,6 +37,7 @@ const NocSupport = lazy(() => import("./pages/NocSupport"));
 const InfrastructureModernisation = lazy(() => import("./pages/InfrastructureModernisation"));
 const CostOptimisation = lazy(() => import("./pages/CostOptimisation"));
 const CloudSecurityCompliance = lazy(() => import("./pages/CloudSecurityCompliance"));
+const CloudDataBackup = lazy(() => import("./pages/CloudDataBackup"));
 const StartupsSmbs = lazy(() => import("./pages/StartupsSmbs"));
 const EnterpriseIndustry = lazy(() => import("./pages/EnterpriseIndustry"));
 const FinanceBfsi = lazy(() => import("./pages/FinanceBfsi"));
@@ -132,6 +133,7 @@ const App = () => (
             <Route path="/solutions/infrastructure-modernisation" element={<InfrastructureModernisation />} />
             <Route path="/solutions/cost-optimisation" element={<CostOptimisation />} />
             <Route path="/solutions/cloud-security-compliance" element={<CloudSecurityCompliance />} />
+            <Route path="/solutions/cloud-data-backup" element={<CloudDataBackup />} />
  
             <Route path="/industries/startups-smbs" element={<StartupsSmbs />} />
             <Route path="/industries/enterprise" element={<EnterpriseIndustry />} />

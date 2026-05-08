@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
-import { Cloud, Code2, ShieldCheck, Database, BarChart3, Zap, Wrench, Globe, Lock, TrendingUp, CheckCircle2, Cpu, Layers, GitBranch } from "lucide-react";
+import { Cloud, Code2, ShieldCheck, Database, BarChart3, Zap, Wrench, Globe, Lock, TrendingUp, CheckCircle2, Cpu, Layers, GitBranch, HardDrive, Brain } from "lucide-react";
 
 const services = [
   {
@@ -83,13 +83,63 @@ const stats = [
   { value: "24 / 7", label: "Operations coverage", icon: Lock },
 ];
 
+const aiServices = [
+  {
+    title: "Google Gemini (AI Studio)",
+    icon: Brain,
+    color: "text-blue-500",
+    bg: "bg-blue-500/10",
+    border: "border-blue-500/20",
+    description:
+      "Enable Gemini with secure access patterns, governance, and practical use cases that accelerate teams without risking data exposure.",
+  },
+  {
+    title: "Google Workspace Studio",
+    icon: Code2,
+    color: "text-sky-600",
+    bg: "bg-sky-600/10",
+    border: "border-sky-600/20",
+    description:
+      "Design and automate Workspace workflows with secure integrations, approvals, and governance — tailored to your teams and processes.",
+  },
+  {
+    title: "Vertex AI, MLOps & LLMOps",
+    icon: GitBranch,
+    color: "text-emerald-600",
+    bg: "bg-emerald-600/10",
+    border: "border-emerald-600/20",
+    description:
+      "Operationalize models with repeatable pipelines, deployment standards, monitoring, and drift management on Google Cloud.",
+  },
+  {
+    title: "LLM Apps & RAG on Google Cloud",
+    icon: Database,
+    color: "text-indigo-600",
+    bg: "bg-indigo-600/10",
+    border: "border-indigo-600/20",
+    description:
+      "Build RAG applications connected to enterprise knowledge with evaluation, observability, and cost controls baked in.",
+  },
+  {
+    title: "Workspace AI Automation",
+    icon: Cpu,
+    color: "text-amber-600",
+    bg: "bg-amber-600/10",
+    border: "border-amber-600/20",
+    description:
+      "Design AI-assisted workflows across Google Workspace to reduce manual work and improve productivity with guardrails.",
+  },
+];
+
 const capabilities = [
-  { app: "Google Kubernetes Engine", icon: Layers, color: "text-blue-500", bg: "bg-blue-50", use: "Managed Kubernetes for containerised workloads at scale" },
-  { app: "BigQuery", icon: BarChart3, color: "text-emerald-600", bg: "bg-emerald-50", use: "Serverless data warehouse for analytics at petabyte scale" },
-  { app: "Cloud Run", icon: Zap, color: "text-orange-500", bg: "bg-orange-50", use: "Fully managed serverless container runtime" },
-  { app: "Cloud Spanner", icon: Globe, color: "text-violet-500", bg: "bg-violet-50", use: "Globally distributed relational database with horizontal scaling" },
-  { app: "Vertex AI", icon: GitBranch, color: "text-pink-500", bg: "bg-pink-50", use: "Unified ML platform for training, tuning, and serving AI models" },
-  { app: "Cloud Armor", icon: ShieldCheck, color: "text-sky-500", bg: "bg-sky-50", use: "DDoS protection and WAF for GCP-hosted applications" },
+  { app: "GCP Foundation & Landing Zone", icon: Layers, color: "text-blue-500", bg: "bg-blue-50", use: "Organisation, folders/projects, IAM, networking, and guardrails to start secure and scale cleanly" },
+  { app: "Migration & Modernisation", icon: Cloud, color: "text-cyan-600", bg: "bg-cyan-50", use: "Workload migration planning and execution with operational readiness and minimal downtime" },
+  { app: "24/7 Managed Operations", icon: Wrench, color: "text-emerald-600", bg: "bg-emerald-50", use: "Monitoring, incident response, patching, quota reviews, and proactive optimisation" },
+  { app: "Security & Compliance", icon: ShieldCheck, color: "text-sky-600", bg: "bg-sky-50", use: "Harden posture with least-privilege IAM, network controls, and continuous improvements" },
+  { app: "FinOps & Cost Optimisation", icon: TrendingUp, color: "text-amber-600", bg: "bg-amber-50", use: "Cost allocation, CUD strategy, rightsizing, and monthly reviews to reduce spend" },
+  { app: "Backup & Disaster Recovery", icon: HardDrive, color: "text-violet-600", bg: "bg-violet-50", use: "Backup strategy, DR design, recovery testing, and resilience aligned to business RTO/RPO" },
+  { app: "DevOps & Infrastructure as Code", icon: Code2, color: "text-slate-700", bg: "bg-slate-100", use: "CI/CD pipelines and automated provisioning to improve reliability, speed, and consistency" },
+  { app: "Data Platform Operations", icon: BarChart3, color: "text-indigo-600", bg: "bg-indigo-50", use: "Operate and optimise analytics platforms with performance tuning and secure access controls" },
 ];
 
 const GoogleCloud: React.FC = () => {
@@ -224,9 +274,9 @@ const GoogleCloud: React.FC = () => {
       {/* ── Capabilities grid ── */}
       <div className="max-w-6xl mx-auto px-6 py-16">
         <div className="mb-10">
-          <span className="text-xs font-bold uppercase tracking-widest text-blue-600">Core services</span>
-          <h2 className="mt-2 text-2xl font-bold text-gray-900" style={{ fontFamily: "'Georgia', serif" }}>Key GCP services we specialise in</h2>
-          <p className="text-gray-400 text-sm mt-1">Deep engineering expertise across Google Cloud's most critical products.</p>
+          <span className="text-xs font-bold uppercase tracking-widest text-blue-600">What we deliver</span>
+          <h2 className="mt-2 text-2xl font-bold text-gray-900" style={{ fontFamily: "'Georgia', serif" }}>Key CloudFirst Google Cloud services</h2>
+          <p className="text-gray-400 text-sm mt-1">A snapshot of the managed capabilities CloudFirst delivers on Google Cloud.</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {capabilities.map(({ app, icon: Icon, color, bg, use }) => (
@@ -240,6 +290,57 @@ const GoogleCloud: React.FC = () => {
               <p className="text-xs text-gray-500 leading-relaxed">{use}</p>
             </div>
           ))}
+        </div>
+      </div>
+
+      <div className="relative overflow-hidden border-y border-gray-100 bg-gradient-to-br from-blue-50 via-white to-emerald-50">
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute -top-24 -left-24 h-80 w-80 rounded-full bg-blue-500/12 blur-[80px]" />
+          <div className="absolute -bottom-28 -right-28 h-96 w-96 rounded-full bg-emerald-500/12 blur-[90px]" />
+        </div>
+        <div className="relative max-w-6xl mx-auto px-6 py-16">
+          <div className="flex items-end justify-between mb-10 gap-6 flex-wrap">
+            <div>
+              <span className="text-xs font-bold uppercase tracking-widest text-blue-600">AI & GenAI</span>
+              <h2 className="mt-2 text-2xl font-bold text-gray-900" style={{ fontFamily: "'Georgia', serif" }}>
+                AI services on Google Cloud
+              </h2>
+            </div>
+            <p className="text-gray-400 text-sm max-w-xs">
+              Gemini, LLM applications, and operational AI — delivered with secure-by-design architecture and measurable outcomes.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {aiServices.map(({ title, icon: Icon, color, bg, border, description }) => (
+              <div
+                key={title}
+                className="group relative bg-white/90 backdrop-blur-sm rounded-2xl border border-gray-100 shadow-sm p-6 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 overflow-hidden"
+              >
+                <div className={`absolute top-0 left-0 right-0 h-0.5 ${bg} opacity-0 group-hover:opacity-100 transition-opacity`} />
+                <div className={`inline-flex items-center justify-center h-10 w-10 rounded-xl ${bg} border ${border} mb-4`}>
+                  <Icon className={`w-5 h-5 ${color}`} />
+                </div>
+                <h3 className="text-base font-bold text-gray-900 mb-2">{title}</h3>
+                <p className="text-gray-500 text-sm leading-relaxed">{description}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-10 flex flex-wrap gap-4">
+            <button
+              onClick={() => navigate("/contact")}
+              className="inline-flex items-center gap-2 px-6 py-3 bg-blue-500 hover:bg-blue-400 text-white text-sm font-bold rounded-lg transition-colors"
+            >
+              Talk to an AI expert →
+            </button>
+            <button
+              onClick={() => navigate("/contact")}
+              className="inline-flex items-center gap-2 px-6 py-3 border border-gray-300/70 hover:border-gray-400 text-gray-900 text-sm font-semibold rounded-lg transition-colors bg-white/70 backdrop-blur-sm"
+            >
+              Request an AI roadmap
+            </button>
+          </div>
         </div>
       </div>
 

@@ -100,6 +100,7 @@ const menuConfig: Record<MenuKey, MenuConfig> = {
             { label: 'Cloud migration', path: '/solutions/cloud-migration' },
             { label: 'Infrastructure modernisation', path: '/solutions/infrastructure-modernisation' },
             { label: 'Cost optimisation', path: '/solutions/cost-optimisation' },
+            { label: 'Cloud data backup', path: '/solutions/cloud-data-backup' },
             { label: 'Cloud security & compliance', path: '/solutions/cloud-security-compliance' },
             { label: 'DR on Cloud', path: '/solutions/dr-on-cloud' },
           ],
@@ -182,9 +183,9 @@ const menuConfig: Record<MenuKey, MenuConfig> = {
           heading: '',
           items: [
             { label: 'About us', path: '/about' },
-            { label: 'Our partners', path: '/company/partners' },
             { label: 'Careers', path: '/company/careers' },
             { label: 'Hiring', path: '/company/hiring' },
+            { label: 'Press & media', path: '/company/press-media' },
           ],
         },
       ],
@@ -192,7 +193,9 @@ const menuConfig: Record<MenuKey, MenuConfig> = {
         {
           heading: '',
           items: [
-            { label: 'Press & media', path: '/company/press-media' },
+            { label: 'Our partners', path: '/company/partners' },
+            { label: 'Our clients', path: '/#our-client' },
+            { label: 'Our leadership', path: '/about#our-leadership' },
             { label: 'Contact us', path: '/contact' },
           ],
         },

@@ -60,6 +60,33 @@ const values = [
   },
 ];
 
+const milestones = [
+  {
+    year: "2015",
+    title: "Founded with a cloud-first mindset",
+    desc: "Started with a mission to modernize how teams build, operate, and scale on the cloud.",
+    icon: Star,
+  },
+  {
+    year: "2018",
+    title: "Enterprise-grade delivery standards",
+    desc: "Strengthened delivery practices and governance to support high-impact programs.",
+    icon: Award,
+  },
+  {
+    year: "2021",
+    title: "Expanded across markets",
+    desc: "Scaled services across multiple regions while keeping engineering quality consistent.",
+    icon: Globe,
+  },
+  {
+    year: "2024",
+    title: "AI + cloud acceleration",
+    desc: "Evolved into modern cloud and AI execution with measurable business outcomes.",
+    icon: TrendingUp,
+  },
+];
+
 const About = () => {
   return (
     <Layout>
@@ -256,6 +283,51 @@ const About = () => {
                     <span className="text-white/60 text-[15px] leading-relaxed">Total focus on customer satisfaction and quality workmanship in every deliverable.</span>
                   </li>
                 </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[#f7f8fa] border-b border-gray-100">
+        <div className="max-w-[1200px] mx-auto px-6 lg:px-10 py-16">
+          <div className="mb-10">
+            <span className="text-xs font-bold uppercase tracking-widest text-blue-600">Milestones & journey</span>
+            <h2 className="mt-2 text-2xl md:text-3xl font-bold text-gray-900" style={{ fontFamily: "'Georgia', serif" }}>
+              Our milestones
+            </h2>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-10 items-start">
+            <div className="rounded-2xl border border-gray-100 bg-white shadow-sm overflow-hidden">
+              <div className="aspect-[16/10] w-full bg-gradient-to-br from-blue-50 via-white to-indigo-50 flex items-center justify-center">
+                <div className="mx-8 w-full rounded-2xl border-2 border-dashed border-blue-200/70 bg-white/70 px-6 py-10 text-center">
+                  <div className="text-sm font-semibold text-gray-900 mb-1">Milestones image</div>
+                  <div className="text-sm text-gray-500">Add your journey graphic here</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-gray-100 bg-white shadow-sm p-6 md:p-8">
+              <div className="relative">
+                <div className="absolute left-[18px] top-2 bottom-2 w-px bg-gradient-to-b from-blue-200 via-indigo-200 to-transparent" />
+                <div className="space-y-6">
+                  {milestones.map(({ year, title, desc, icon: Icon }) => (
+                    <div key={year} className="relative pl-12">
+                      <div className="absolute left-0 top-0">
+                        <div className="h-9 w-9 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
+                          <Icon className="w-4 h-4 text-blue-600" />
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-3 mb-1">
+                        <span className="text-xs font-bold tracking-widest text-blue-600">{year}</span>
+                        <span className="h-1 w-1 rounded-full bg-blue-300" />
+                        <h3 className="text-base font-bold text-gray-900">{title}</h3>
+                      </div>
+                      <p className="text-sm text-gray-500 leading-relaxed">{desc}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

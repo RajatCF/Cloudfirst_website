@@ -197,7 +197,7 @@ const HeroSection = () => {
 
   return (
     <section
-      className="relative bg-white min-h-[58vh] flex items-center justify-center overflow-hidden"
+      className="relative bg-white min-h-[46vh] flex items-center justify-center overflow-hidden"
     >
       <div className="absolute inset-0 pointer-events-none bg-white" />
       {/* ─────────────────────────────────────────────────────────────────
@@ -288,7 +288,7 @@ const HeroSection = () => {
 
       {/* ── MAIN CONTENT ────────────────────────────────────────────────── */}
       {!loading && (
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 py-14 lg:py-16">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 py-10 lg:py-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-center">
 
             {/* ── LEFT: COPY ── */}

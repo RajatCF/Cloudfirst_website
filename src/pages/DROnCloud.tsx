@@ -108,7 +108,7 @@ const DROnCloud = () => {
           <div className="relative max-w-[1400px] mx-auto px-6 lg:px-10 pb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-8">
               <span className="bg-gradient-to-r from-sky-600 via-indigo-600 to-rose-600 bg-clip-text text-transparent">
-                Our DR on cloud services include:
+                Our Disaster Recovery (DR) on cloud services include:
               </span>
             </h2>
 
