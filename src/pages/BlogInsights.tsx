@@ -52,7 +52,7 @@ const BlogInsights: React.FC = () => {
         const blogsArray = data.data || data || [];
         setPosts(blogsArray);
         
-      } catch (error: any) {
+      } catch (error: unknown) {
         console.error("Error fetching blogs for insights:", error);
         setPosts([]);
       } finally {

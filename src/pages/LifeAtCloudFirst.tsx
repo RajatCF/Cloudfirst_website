@@ -73,7 +73,13 @@ const LifeAtCloudFirst = () => {
   ];
 
   // Custom arrow components
-  const CustomPrevArrow = (props: any) => {
+  type ArrowProps = {
+    className?: string;
+    style?: React.CSSProperties;
+    onClick?: React.MouseEventHandler<HTMLDivElement>;
+  };
+
+  const CustomPrevArrow = (props: ArrowProps) => {
     const { className, style, onClick } = props;
     return (
       <div
@@ -96,7 +102,7 @@ const LifeAtCloudFirst = () => {
     );
   };
 
-  const CustomNextArrow = (props: any) => {
+  const CustomNextArrow = (props: ArrowProps) => {
     const { className, style, onClick } = props;
     return (
       <div

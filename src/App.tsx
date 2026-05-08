@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import ScrollToTop from "./components/ScrollToTop";
 import Footer from "./components/Footer";
-
+ 
 // Lazy loaded components for better performance
 const Index = lazy(() => import("./pages/Index"));
 const Industries = lazy(() => import("./pages/Industries"));
@@ -23,6 +23,7 @@ const CloudSecurity = lazy(() => import("./pages/CloudSecurity"));
 const CloudDevOps = lazy(() => import("./pages/CloudDevOps"));
 const ResourceEvents = lazy(() => import("./pages/ResourceEvents"));
 const CurrentOpenings = lazy(() => import("./pages/CurrentOpenings"));
+const DROnCloud = lazy(() => import("./pages/DROnCloud"));
 const AmazonWebServices = lazy(() => import("./pages/AmazonWebServices"));
 const MicrosoftAzure = lazy(() => import("./pages/MicrosoftAzure"));
 const GoogleCloud = lazy(() => import("./pages/GoogleCloud"));
@@ -65,9 +66,10 @@ const CreateBlog = lazy(() => import("./pages/CreateBlog"));
 const CloudFirstVideos = lazy(() => import("./pages/CloudFirstVideos"));
 const LifeAtCloudFirst = lazy(() => import("./pages/LifeAtCloudFirst"));
 const WorkBenefits = lazy(() => import("./pages/WorkBenefits"));
-
+ 
 const queryClient = new QueryClient();
-
+const OG_GREEN_TREE_URL = "https://example.com";
+ 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
@@ -75,94 +77,119 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <ScrollToTop />
-        <Routes>
-          <Route path="/" element={<Suspense fallback={<div>Loading...</div>}><Index /></Suspense>} />
-          <Route path="/industries" element={<Suspense fallback={<div>Loading...</div>}><Industries /></Suspense>} />
-          <Route path="/solutions" element={<Suspense fallback={<div>Loading...</div>}><Solutions /></Suspense>} />
-          <Route path="/insights" element={<Suspense fallback={<div>Loading...</div>}><Insights /></Suspense>} />
-          <Route path="/insights/events" element={<Suspense fallback={<div>Loading...</div>}><ResourceEvents /></Suspense>} />
-          <Route path="/events" element={<Suspense fallback={<div>Loading...</div>}><ResourceEvents /></Suspense>} />
-          <Route path="/about" element={<Suspense fallback={<div>Loading...</div>}><About /></Suspense>} />
-          <Route path="/pricing" element={<Suspense fallback={<div>Loading...</div>}><Pricing /></Suspense>} />
-          <Route path="/contact" element={<Suspense fallback={<div>Loading...</div>}><Contact /></Suspense>} />
-          <Route path="/current-openings" element={<Suspense fallback={<div>Loading...</div>}><CurrentOpenings /></Suspense>} />
-          {/* Service Detail Pages */}
-          <Route path="/solutions/cloud-migration" element={<Suspense fallback={<div>Loading...</div>}><CloudMigration /></Suspense>} />
-          <Route path="/solutions/data-analytic" element={<Suspense fallback={<div>Loading...</div>}><DataAnalytic /></Suspense>} />
-          <Route path="/solutions/managed-cloud-service" element={<Suspense fallback={<div>Loading...</div>}><ManagedCloudService /></Suspense>} />
-          <Route path="/solutions/cloud-security" element={<Suspense fallback={<div>Loading...</div>}><CloudSecurity /></Suspense>} />
-          <Route path="/solutions/cloud-devops" element={<Suspense fallback={<div>Loading...</div>}><CloudDevOps /></Suspense>} />
-
-          {/* Navbar Option Pages */}
-          <Route path="/cloud-platforms/aws" element={<Suspense fallback={<div>Loading...</div>}><AmazonWebServices /></Suspense>} />
-          <Route path="/cloud-platforms/azure" element={<Suspense fallback={<div>Loading...</div>}><MicrosoftAzure /></Suspense>} />
-          <Route path="/cloud-platforms/gcp" element={<Suspense fallback={<div>Loading...</div>}><GoogleCloud /></Suspense>} />
-          <Route path="/cloud-platforms/cloud-security" element={<Suspense fallback={<div>Loading...</div>}><CloudPlatformSecurity /></Suspense>} />
-          <Route path="/cloud-platforms/backup-recovery" element={<Suspense fallback={<div>Loading...</div>}><BackupDisasterRecovery /></Suspense>} />
-          <Route path="/cloud-platforms/networking-cdn" element={<Suspense fallback={<div>Loading...</div>}><NetworkingCdn /></Suspense>} />
-          <Route path="/cloud-platforms/google-workspace" element={<Suspense fallback={<div>Loading...</div>}><GoogleWorkspace /></Suspense>} />
-          <Route path="/cloud-platforms/microsoft-365" element={<Suspense fallback={<div>Loading...</div>}><Microsoft365 /></Suspense>} />
-          <Route path="/cloud-platforms/managed-services" element={<Suspense fallback={<div>Loading...</div>}><ManagedServices /></Suspense>} />
-          <Route path="/cloud-platforms/noc-support" element={<Suspense fallback={<div>Loading...</div>}><NocSupport /></Suspense>} />
-
-          <Route path="/solutions/infrastructure-modernisation" element={<Suspense fallback={<div>Loading...</div>}><InfrastructureModernisation /></Suspense>} />
-          <Route path="/solutions/cost-optimisation" element={<Suspense fallback={<div>Loading...</div>}><CostOptimisation /></Suspense>} />
-          <Route path="/solutions/cloud-security-compliance" element={<Suspense fallback={<div>Loading...</div>}><CloudSecurityCompliance /></Suspense>} />
-
-          <Route path="/industries/startups-smbs" element={<Suspense fallback={<div>Loading...</div>}><StartupsSmbs /></Suspense>} />
-          <Route path="/industries/enterprise" element={<Suspense fallback={<div>Loading...</div>}><EnterpriseIndustry /></Suspense>} />
-          <Route path="/industries/finance-bfsi" element={<Suspense fallback={<div>Loading...</div>}><FinanceBfsi /></Suspense>} />
-          <Route path="/industries/healthcare" element={<Suspense fallback={<div>Loading...</div>}><HealthcareIndustry /></Suspense>} />
-          <Route path="/industries/education" element={<Suspense fallback={<div>Loading...</div>}><EducationIndustry /></Suspense>} />
-
-          <Route path="/services/cloud-strategy" element={<Suspense fallback={<div>Loading...</div>}><CloudStrategyRoadmap /></Suspense>} />
-          <Route path="/services/architecture-review" element={<Suspense fallback={<div>Loading...</div>}><ArchitectureReview /></Suspense>} />
-          <Route path="/services/migration-planning" element={<Suspense fallback={<div>Loading...</div>}><MigrationPlanning /></Suspense>} />
-          <Route path="/services/managed-cloud-operations" element={<Suspense fallback={<div>Loading...</div>}><ManagedCloudOperations /></Suspense>} />
-          <Route path="/services/finops" element={<Suspense fallback={<div>Loading...</div>}><FinopsBillingManagement /></Suspense>} />
-          <Route path="/services/security-monitoring" element={<Suspense fallback={<div>Loading...</div>}><SecurityMonitoring /></Suspense>} />
-
-          <Route path="/resources/case-studies" element={<Suspense fallback={<div>Loading...</div>}><CaseStudies /></Suspense>} />
-          <Route path="/resources/blog-insights" element={<Suspense fallback={<div>Loading...</div>}><BlogInsights /></Suspense>} />
-          <Route path="/resources/whitepapers" element={<Suspense fallback={<div>Loading...</div>}><Whitepapers /></Suspense>} />
-          <Route path="/resources/migration-guides" element={<Suspense fallback={<div>Loading...</div>}><MigrationGuides /></Suspense>} />
-          <Route path="/resources/partner-certifications" element={<Suspense fallback={<div>Loading...</div>}><PartnerCertifications /></Suspense>} />
-          <Route path="/resources/cost-calculator" element={<Suspense fallback={<div>Loading...</div>}><CloudCostCalculator /></Suspense>} />
-
-          <Route path="/company/partners" element={<Suspense fallback={<div>Loading...</div>}><OurPartners /></Suspense>} />
-          <Route path="/company/careers" element={<Suspense fallback={<div>Loading...</div>}><Careers /></Suspense>} />
-          <Route path="/company/hiring" element={<Suspense fallback={<div>Loading...</div>}><Hiring /></Suspense>} />
-          <Route path="/company/press-media" element={<Suspense fallback={<div>Loading...</div>}><PressMedia /></Suspense>} />
-
-          {/* Go Global Award Dedicated Page */}
-          <Route path="/go-global-award" element={<Suspense fallback={<div>Loading...</div>}><GoGlobalAward /></Suspense>} />
-          
-          {/* Reinforce360TM Dedicated Page */}
-          <Route path="/reinforce360tm" element={<Suspense fallback={<div>Loading...</div>}><Reinforce360TM /></Suspense>} />
-          
-          {/* Blog Pages */}
-          <Route path="/blog" element={<Suspense fallback={<div>Loading...</div>}><Blog /></Suspense>} />
-          <Route path="/blog/:id" element={<Suspense fallback={<div>Loading...</div>}><BlogPost /></Suspense>} />
-          <Route path="/create-blog" element={<Suspense fallback={<div>Loading...</div>}><CreateBlog /></Suspense>} />
-          
-          {/* Videos Page */}
-          <Route path="/videos" element={<Suspense fallback={<div>Loading...</div>}><CloudFirstVideos /></Suspense>} />
-          
-          {/* Life@CloudFirst Page */}
-          <Route path="/life-at-cloudfirst" element={<Suspense fallback={<div>Loading...</div>}><LifeAtCloudFirst /></Suspense>} />
-          
-          {/* Current Openings Page */}
-          <Route path="/current-openings" element={<Suspense fallback={<div>Loading...</div>}><CurrentOpenings /></Suspense>} />
-          
-          {/* Work Benefits Page */}
-          <Route path="/work-benefits" element={<Suspense fallback={<div>Loading...</div>}><WorkBenefits /></Suspense>} />
-
-          <Route path="*" element={<Suspense fallback={<div>Loading...</div>}><NotFound /></Suspense>} />
-        </Routes>
-        <Footer />
+        <button
+          type="button"
+          onClick={() => window.open(OG_GREEN_TREE_URL, "_blank", "noopener,noreferrer")}
+          aria-label="Open OG Green Tree"
+          className="fixed bottom-6 right-6 z-[60] w-14 h-14 rounded-full bg-yellow-50 shadow-xl hover:shadow-2xl transition-all duration-200 flex items-center justify-center overflow-hidden ring-1 ring-yellow-200"
+        >
+          <img
+            src="/logo/og-green-tree.jpg"
+            alt="OG Green Tree"
+            className="w-full h-full object-cover rounded-full"
+            loading="lazy"
+          />
+        </button>
+        <Suspense fallback={
+          <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-blue-50">
+            <div className="text-center">
+              <div className="animate-spin rounded-full h-16 w-16 border-4 border-blue-200 border-t-blue-600 mx-auto mb-4"></div>
+              <p className="text-gray-600">Loading...</p>
+            </div>
+          </div>
+        }>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/industries" element={<Industries />} />
+            <Route path="/solutions" element={<Solutions />} />
+            <Route path="/insights" element={<Insights />} />
+            <Route path="/insights/events" element={<ResourceEvents />} />
+            <Route path="/events" element={<ResourceEvents />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/pricing" element={<Pricing />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/current-openings" element={<CurrentOpenings />} />
+            {/* Service Detail Pages */}
+            <Route path="/solutions/cloud-migration" element={<CloudMigration />} />
+            <Route path="/solutions/data-analytic" element={<DataAnalytic />} />
+            <Route path="/solutions/managed-cloud-service" element={<ManagedCloudService />} />
+            <Route path="/solutions/cloud-security" element={<CloudSecurity />} />
+            <Route path="/solutions/cloud-devops" element={<CloudDevOps />} />
+            <Route path="/solutions/dr-on-cloud" element={<DROnCloud />} />
+ 
+            {/* Navbar Option Pages */}
+            <Route path="/cloud-platforms/aws" element={<AmazonWebServices />} />
+            <Route path="/cloud-platforms/azure" element={<MicrosoftAzure />} />
+            <Route path="/cloud-platforms/gcp" element={<GoogleCloud />} />
+            <Route path="/cloud-platforms/cloud-security" element={<CloudPlatformSecurity />} />
+            <Route path="/cloud-platforms/backup-recovery" element={<BackupDisasterRecovery />} />
+            <Route path="/cloud-platforms/networking-cdn" element={<NetworkingCdn />} />
+            <Route path="/cloud-platforms/google-workspace" element={<GoogleWorkspace />} />
+            <Route path="/cloud-platforms/microsoft-365" element={<Microsoft365 />} />
+            <Route path="/cloud-platforms/managed-services" element={<ManagedServices />} />
+            <Route path="/cloud-platforms/noc-support" element={<NocSupport />} />
+ 
+            <Route path="/solutions/infrastructure-modernisation" element={<InfrastructureModernisation />} />
+            <Route path="/solutions/cost-optimisation" element={<CostOptimisation />} />
+            <Route path="/solutions/cloud-security-compliance" element={<CloudSecurityCompliance />} />
+ 
+            <Route path="/industries/startups-smbs" element={<StartupsSmbs />} />
+            <Route path="/industries/enterprise" element={<EnterpriseIndustry />} />
+            <Route path="/industries/finance-bfsi" element={<FinanceBfsi />} />
+            <Route path="/industries/healthcare" element={<HealthcareIndustry />} />
+            <Route path="/industries/education" element={<EducationIndustry />} />
+ 
+            <Route path="/services/cloud-strategy" element={<CloudStrategyRoadmap />} />
+            <Route path="/services/architecture-review" element={<ArchitectureReview />} />
+            <Route path="/services/migration-planning" element={<MigrationPlanning />} />
+            <Route path="/services/managed-cloud-operations" element={<ManagedCloudOperations />} />
+            <Route path="/services/finops" element={<FinopsBillingManagement />} />
+            <Route path="/services/security-monitoring" element={<SecurityMonitoring />} />
+ 
+            <Route path="/resources/case-studies" element={<CaseStudies />} />
+            <Route path="/resources/blog-insights" element={<BlogInsights />} />
+            <Route path="/resources/whitepapers" element={<Whitepapers />} />
+            <Route path="/resources/migration-guides" element={<MigrationGuides />} />
+            <Route path="/resources/partner-certifications" element={<PartnerCertifications />} />
+            <Route path="/resources/cost-calculator" element={<CloudCostCalculator />} />
+ 
+            <Route path="/company/partners" element={<OurPartners />} />
+            <Route path="/company/careers" element={<Careers />} />
+            <Route path="/company/hiring" element={<Hiring />} />
+            <Route path="/company/press-media" element={<PressMedia />} />
+ 
+            {/* Go Global Award Dedicated Page */}
+            <Route path="/go-global-award" element={<GoGlobalAward />} />
+           
+            {/* Reinforce360TM Dedicated Page */}
+            <Route path="/reinforce360tm" element={<Reinforce360TM />} />
+           
+            {/* Blog Pages */}
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:id" element={<BlogPost />} />
+            <Route path="/create-blog" element={<CreateBlog />} />
+           
+            {/* Videos Page */}
+            <Route path="/videos" element={<CloudFirstVideos />} />
+           
+            {/* Life@CloudFirst Page */}
+            <Route path="/life-at-cloudfirst" element={<LifeAtCloudFirst />} />
+           
+            {/* Current Openings Page */}
+            <Route path="/current-openings" element={<CurrentOpenings />} />
+           
+            {/* Work Benefits Page */}
+            <Route path="/work-benefits" element={<WorkBenefits />} />
+ 
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+          <Footer />
+        </Suspense>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
 );
-
+ 
 export default App;
+ 
+ 

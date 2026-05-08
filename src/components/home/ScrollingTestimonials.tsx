@@ -37,26 +37,28 @@ const ScrollingTestimonials = () => {
           </p>
         </div>
 
-        {/* Simple 3 Card Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          {testimonials.map((testimonial, index) => (
-            <div
-              key={index}
-              className="bg-white rounded-2xl shadow-lg p-6 border border-gray-100 hover:shadow-xl transition-all duration-300"
-            >
-              <div className="text-center">
-                <p className="text-gray-900 leading-relaxed mb-6 text-lg" style={{ fontFamily: 'Georgia, serif' }}>
-                  "{testimonial.quote}"
-                </p>
-                <div className="text-blue-600 font-semibold text-lg" style={{ fontFamily: 'Georgia, serif' }}>
-                  {testimonial.name}
-                </div>
-                <div className="text-blue-600 font-medium text-base mt-1" style={{ fontFamily: 'Georgia, serif' }}>
-                  {testimonial.designation}
+        {/* Horizontal Testimonials */}
+        <div className="overflow-x-auto pb-4">
+          <div className="flex gap-6 min-w-max px-4">
+            {testimonials.map((testimonial, index) => (
+              <div
+                key={index}
+                className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-6 border border-gray-100 hover:shadow-xl transition-all duration-300 min-w-[350px] max-w-[350px]"
+              >
+                <div className="text-left">
+                  <p className="text-gray-900 leading-relaxed mb-6 text-lg whitespace-pre-line" style={{ fontFamily: 'Georgia, serif' }}>
+                    "{testimonial.quote}"
+                  </p>
+                  <div className="text-blue-600 font-semibold text-lg" style={{ fontFamily: 'Georgia, serif' }}>
+                    {testimonial.name}
+                  </div>
+                  <div className="text-blue-600 font-medium text-base mt-1" style={{ fontFamily: 'Georgia, serif' }}>
+                    {testimonial.designation}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
 

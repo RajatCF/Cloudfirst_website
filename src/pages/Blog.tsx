@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
-
-
+ 
+ 
 import { Brain, User, Clock, ArrowRight, BookOpen, Search, Plus } from "lucide-react";
-
+ 
 const API_URL = 'https://hor3mik7u1.execute-api.ap-south-1.amazonaws.com/Dev';
 const BLOG_API_URL = `${API_URL}/cloudfirst-blog`;
-
+ 
 type Blog = {
   PK?: string;
   SK?: string;
   EntityType?: string;
   postId?: string;
+  id?: string;
   title: string;
   author: string;
   content: string;
@@ -25,7 +26,7 @@ type Blog = {
   updatedAt?: string;
   status?: string;
 };
-
+ 
 // Default images for blogs without featured images
 const techImages = [
   '1677442136019-21780ecad995',
@@ -35,12 +36,12 @@ const techImages = [
   '1498050108023-c5249f4df085',
   '1498050208025-a513f7df099b'
 ];
-
-// const getRandomTechImageUrl = () => {
-//   const img = techImages[Math.floor(Math.random() * techImages.length)];
-//   return `https://images.unsplash.com/photo-${img}?w=400&h=300&fit=crop&auto=format`;
-// };
-
+ 
+// Default image if no imageUrl provided
+const getDefaultImage = () => {
+  return "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=500&fit=crop&auto=format";
+};
+ 
 const Blogs: React.FC = () => {
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [loading, setLoading] = useState(true);
@@ -48,17 +49,17 @@ const Blogs: React.FC = () => {
   const [error, setError] = useState<string>("");
   const [displayCount, setDisplayCount] = useState(6); // Show 6 blogs initially
   const navigate = useNavigate();
-
+ 
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
         setLoading(true);
         setError("");
-        
+       
         // Add timeout to prevent infinite loading
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
-        
+       
         const response = await fetch(`${BLOG_API_URL}`, {
           method: 'GET',
           headers: {
@@ -66,75 +67,86 @@ const Blogs: React.FC = () => {
           },
           signal: controller.signal
         });
-
+ 
         clearTimeout(timeoutId);
-
+ 
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-
+ 
         const data = await response.json();
         console.log('API Response:', data);
-
+ 
         // Handle the response structure from new API
         const blogsArray = data.data || data || [];
+       
+        // Log the first blog to check ID fields
+        if (blogsArray.length > 0) {
+          console.log('First blog ID fields:', {
+            PK: blogsArray[0].PK,
+            postId: blogsArray[0].postId,
+            id: blogsArray[0].id
+          });
+        }
+       
         setBlogs(blogsArray);
-        
+       
         // If no blogs found, set empty array but don't show error
         if (blogsArray.length === 0) {
           console.log('No blogs found, showing empty state');
         }
-        
-      } catch (error: any) {
-        console.error("Error fetching blogs:", error);
-        
-        if (error.name === 'AbortError') {
+       
+      } catch (error: unknown) {
+        const err = error as { name?: string; message?: string };
+        console.error("Error fetching blogs:", err);
+       
+        if (err?.name === 'AbortError') {
           setError("Request timed out. Please check your connection and try again.");
-        } else if (error.message.includes('NetworkError') || error.message.includes('Failed to fetch')) {
+        } else if ((err?.message || '').includes('NetworkError') || (err?.message || '').includes('Failed to fetch')) {
           setError("Network error. Please check your internet connection.");
         } else {
           setError("Failed to load blogs. Please try again later.");
         }
-        
+       
         // Set empty array as fallback
         setBlogs([]);
       } finally {
         setLoading(false);
       }
     };
-
+ 
     fetchBlogs();
   }, []);
-
+ 
   // Helper function to strip HTML tags from content
   const stripHtml = (html: string) => {
     const tmp = document.createElement("DIV");
     tmp.innerHTML = html;
     return tmp.textContent || tmp.innerText || "";
   };
-
+ 
   const truncateContent = (content: string, maxLength: number = 120) => {
     const plainText = stripHtml(content);
     return plainText.length > maxLength ? plainText.substring(0, maxLength) + "..." : plainText;
   };
-
+ 
   const filteredBlogs = blogs.filter(blog =>
     blog.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
     stripHtml(blog.content).toLowerCase().includes(searchTerm.toLowerCase())
   );
-
+ 
   // Sort by creation date (newest first)
-  const sortedBlogs = [...filteredBlogs].sort((a, b) => 
+  const sortedBlogs = [...filteredBlogs].sort((a, b) =>
     new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
   );
-
+ 
   // Featured blog is most recent
   const featuredBlog = sortedBlogs[0];
   const remainingBlogs = sortedBlogs.slice(1);
   const blogsToShow = remainingBlogs.slice(0, displayCount);
   const hasMoreBlogs = remainingBlogs.length > displayCount;
-
-  
+ 
+ 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
@@ -142,10 +154,10 @@ const Blogs: React.FC = () => {
       day: 'numeric'
     });
   };
-
+ 
   // Generate random views for display purposes
   // const getRandomViews = () => Math.floor(Math.random() * 1000) + 100;
-
+ 
   if (loading) {
     return (
       <>
@@ -168,7 +180,7 @@ const Blogs: React.FC = () => {
       </>
     );
   }
-
+ 
   // Retry function
   const retryFetch = () => {
     setError("");
@@ -176,7 +188,7 @@ const Blogs: React.FC = () => {
     // Trigger useEffect by changing a dependency or call fetchBlogs directly
     window.location.reload();
   };
-
+ 
   if (error) {
     return (
       <>
@@ -191,14 +203,14 @@ const Blogs: React.FC = () => {
             <h2 className="text-xl font-semibold text-gray-800 mb-2">Oops! Something went wrong</h2>
             <p className="text-gray-600 mb-6">{error}</p>
             <div className="space-y-3">
-              <button 
-                onClick={retryFetch} 
+              <button
+                onClick={retryFetch}
                 className="w-full px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors duration-200 font-medium"
               >
                 Try Again
               </button>
-              <button 
-                onClick={() => navigate('/')} 
+              <button
+                onClick={() => navigate('/')}
                 className="w-full px-6 py-3 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 transition-colors duration-200 font-medium"
               >
                 Go to Homepage
@@ -209,12 +221,12 @@ const Blogs: React.FC = () => {
       </>
     );
   }
-
+ 
   return (
     <>
       <Navbar />
       <div className="font-sans w-full bg-gradient-to-br from-gray-50 via-white to-blue-50 min-h-screen">
-        
+       
         {/* Hero Banner Section */}
         <section
           className="relative w-full h-[400px] md:h-[600px] overflow-hidden flex items-center justify-center"
@@ -233,11 +245,11 @@ const Blogs: React.FC = () => {
             <p className="text-lg md:text-xl font-sans font-light mx-auto max-w-md drop-shadow-lg mb-8">
               Discover our mission, vision, and the dedicated team powering CloudFirst's innovations.
             </p>
-            
-          
+           
+         
           </div>
         </section>
-
+ 
         {/* Search Section */}
         <section className="max-w-7xl mx-auto px-4 py-8">
           <div className="relative max-w-md mx-auto">
@@ -251,7 +263,7 @@ const Blogs: React.FC = () => {
             />
           </div>
         </section>
-
+ 
         {/* Featured Article */}
         {featuredBlog && (
           <section className="max-w-7xl mx-auto px-4 mb-16">
@@ -266,15 +278,15 @@ const Blogs: React.FC = () => {
                       {featuredBlog.category}
                     </span>
                   </div>
-                  
+                 
                   <h3 className="text-3xl md:text-4xl font-light text-gray-900 mb-4 leading-tight">
                     {featuredBlog.title}
                   </h3>
-                  
+                 
                   <div className="text-gray-600 text-lg mb-6 leading-relaxed font-light">
                     <p>{truncateContent(featuredBlog.content, 200)}</p>
                   </div>
-                  
+                 
                   <div className="flex items-center gap-6 text-gray-500 text-sm mb-6">
                     <div className="flex items-center gap-2">
                       <User className="w-4 h-4" />
@@ -289,19 +301,19 @@ const Blogs: React.FC = () => {
                       <span>{getRandomViews().toLocaleString()}</span>
                     </div> */}
                   </div>
-                  
+                 
                   <button
-                    onClick={() => navigate(`/blog/${featuredBlog.postId}`)}
+                    onClick={() => navigate(`/blog/${featuredBlog.id || featuredBlog.postId || featuredBlog.PK}`)}
                     className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium px-8 py-3 rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
                   >
                     Read Full Article <ArrowRight className="w-4 h-4" />
                   </button>
                 </div>
-                
+               
                 <div className="relative">
                   <div className="w-full h-64 md:h-80 rounded-2xl overflow-hidden shadow-lg">
-                    <img 
-                      //src={featuredBlog.imageUrl || getRandomTechImageUrl()} 
+                    <img
+                      src={featuredBlog.imageUrl || getDefaultImage()}
                       alt="Featured Article"
                       className="w-full h-full object-cover"
                     />
@@ -314,7 +326,7 @@ const Blogs: React.FC = () => {
             </div>
           </section>
         )}
-
+ 
         {/* Recent Posts */}
         <section className="max-w-7xl mx-auto px-4 pb-20">
           <div className="flex items-center justify-between mb-10">
@@ -335,18 +347,18 @@ const Blogs: React.FC = () => {
               </button>
             </div>
           </div>
-
+ 
           {blogsToShow.length > 0 ? (
             <>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {blogsToShow.map((blog) => (
                   <article
-                    key={blog.postId}
+                    key={blog.id || blog.postId || blog.PK}
                     className="bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 group hover:scale-105"
                   >
                     <div className="h-48 bg-gradient-to-br from-blue-100 to-purple-100 relative overflow-hidden">
-                      <img 
-                        //src={blog.imageUrl || getRandomTechImageUrl()}
+                      <img
+                        src={blog.imageUrl || getDefaultImage()}
                         alt={blog.title}
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                       />
@@ -356,16 +368,16 @@ const Blogs: React.FC = () => {
                         </span>
                       </div>
                     </div>
-                    
+                   
                     <div className="p-6">
                       <h3 className="text-xl font-medium text-gray-900 mb-3 leading-tight group-hover:text-blue-600 transition-colors">
                         {blog.title}
                       </h3>
-
+ 
                       <div className="text-gray-600 text-sm mb-4 leading-relaxed font-light">
                         <p>{truncateContent(blog.content, 100)}</p>
                       </div>
-
+ 
                       <div className="flex items-center justify-between text-xs text-gray-500 mb-4">
                         <div className="flex items-center gap-4">
                           <div className="flex items-center gap-1">
@@ -378,14 +390,14 @@ const Blogs: React.FC = () => {
                           </div>
                         </div>
                       </div>
-
+ 
                       <div className="flex items-center justify-between">
                         <div className="text-xs text-gray-500">
                           {formatDate(blog.createdAt)}
                         </div>
-
+ 
                         <button
-                          onClick={() => navigate(`/blog/${blog.postId}`)}
+                          onClick={() => navigate(`/blog/${blog.id || blog.postId || blog.PK}`)}
                           className="text-blue-600 hover:text-blue-800 font-medium text-sm flex items-center gap-1 transition-all duration-300 hover:gap-2"
                         >
                           Read More <ArrowRight className="w-3 h-3" />
@@ -395,15 +407,15 @@ const Blogs: React.FC = () => {
                   </article>
                 ))}
               </div>
-
+ 
               {/* Load More Button */}
               <div className="text-center mt-12">
                 <button
                   onClick={() => hasMoreBlogs && setDisplayCount(prev => prev + 6)}
                   disabled={!hasMoreBlogs}
                   className={`inline-flex items-center gap-2 font-medium px-8 py-3 rounded-xl transition-all duration-300 transform shadow-lg ${
-                    hasMoreBlogs 
-                      ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700 hover:scale-105 hover:shadow-xl cursor-pointer' 
+                    hasMoreBlogs
+                      ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700 hover:scale-105 hover:shadow-xl cursor-pointer'
                       : 'bg-gray-300 text-gray-500 cursor-not-allowed'
                   }`}
                 >
@@ -425,8 +437,8 @@ const Blogs: React.FC = () => {
                 {blogs.length === 0 ? 'No blogs yet' : 'No articles found'}
               </h3>
               <p className="text-gray-500 mb-6">
-                {blogs.length === 0 
-                  ? 'Be the first to create a blog post!' 
+                {blogs.length === 0
+                  ? 'Be the first to create a blog post!'
                   : 'Try adjusting your search terms'
                 }
               </p>
@@ -443,11 +455,13 @@ const Blogs: React.FC = () => {
           )}
         </section>
       </div>
-
-      
+ 
+     
      
     </>
   );
 };
-
+ 
 export default Blogs;
+ 
+ 

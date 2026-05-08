@@ -101,6 +101,7 @@ const menuConfig: Record<MenuKey, MenuConfig> = {
             { label: 'Infrastructure modernisation', path: '/solutions/infrastructure-modernisation' },
             { label: 'Cost optimisation', path: '/solutions/cost-optimisation' },
             { label: 'Cloud security & compliance', path: '/solutions/cloud-security-compliance' },
+            { label: 'DR on Cloud', path: '/solutions/dr-on-cloud' },
           ],
         },
       ],
@@ -157,8 +158,6 @@ const menuConfig: Record<MenuKey, MenuConfig> = {
           items: [
             { label: 'Case studies', path: '/resources/case-studies' },
             { label: 'Blog & insights', path: '/blog' },
-            { label: 'Whitepapers', path: '/resources/whitepapers' },
-            { label: 'Migration guides', path: '/resources/migration-guides' },
           ],
         },
       ],
@@ -166,8 +165,6 @@ const menuConfig: Record<MenuKey, MenuConfig> = {
         {
           heading: '',
           items: [
-            { label: 'Partner certifications', path: '/resources/partner-certifications' },
-            { label: 'Cloud cost calculator', path: '/resources/cost-calculator' },
             { label: 'CloudFirst Videos', path: '/videos' },
             { label: 'Life@CloudFirst', path: '/life-at-cloudfirst' },
             { label: 'Current Openings', path: '/current-openings' },
@@ -248,9 +245,9 @@ const Navbar = () => {
         scrolled ? 'bg-background/90 backdrop-blur-xl shadow-sm' : 'bg-background/70 backdrop-blur-md'
       }`}
     >
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-10 flex items-center justify-between h-16 lg:h-20">
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-10 flex items-center justify-between h-20 lg:h-24">
         <Link to="/" className="flex items-center gap-0 flex-shrink-0">
-          <img src="/cf-tp.png" alt="CloudFirst logo" className="h-16 w-auto" />
+          <img src="/cf-tp.png" alt="CloudFirst logo" className="h-24 w-auto" />
         </Link>
 
         <div className="hidden lg:flex items-center gap-1 relative" onMouseLeave={handleMouseLeave}>

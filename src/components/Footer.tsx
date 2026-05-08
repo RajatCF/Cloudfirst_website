@@ -29,9 +29,8 @@ const footerLinks = {
 const Footer = () => {
   return (
     <footer className="bg-navy-dark text-primary-foreground">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-10 py-20 lg:py-28">
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4 lg:gap-3">
-          {/* Brand */}
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-10 py-14 lg:py-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 lg:gap-6">
           <div className="lg:col-span-1 pr-8">
             <Link to="/" className="font-display text-xl font-bold tracking-tight inline-flex items-center">
               <img src="/cflogo.png" alt="CloudFirst logo" className="h-16 w-auto inline-block" />
@@ -58,8 +57,7 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Services */}
-          <div className="pl-4">
+          <div>
             <h4 className="text-xs uppercase tracking-widest font-semibold mb-6 opacity-40">Services</h4>
             <ul className="space-y-3">
               {footerLinks.services.map((link) => (
@@ -72,7 +70,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Company */}
           <div>
             <h4 className="text-xs uppercase tracking-widest font-semibold mb-6 opacity-40">Company</h4>
             <ul className="space-y-3">
@@ -86,33 +83,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Office Locations */}
-          <div>
-            <h4 className="text-xs uppercase tracking-widest font-semibold mb-6 opacity-40">Office Locations</h4>
-            <div className="space-y-4 text-sm opacity-60">
-              <div>
-                <p className="font-semibold mb-2">Mumbai-India :</p>
-                <p className="text-xs leading-relaxed">3rd Floor, Chintamani Plaza, Andheri East, Mumbai-400099</p>
-              </div>
-              
-              <div>
-                <p className="font-semibold mb-2">Delhi NCR-India :</p>
-                <p className="text-xs leading-relaxed">The i-THUM Sector 62, Noida-201309</p>
-              </div>
-              
-              <div>
-                <p className="font-semibold mb-2">Bengaluru-India :</p>
-                <p className="text-xs leading-relaxed">1st Floor, Brigade Tech Park, B Block, Whitefield Road, Bengaluru–560066</p>
-              </div>
-              
-              <div>
-                <p className="font-semibold mb-1">USA :</p>
-                <p className="text-xs leading-relaxed">2055 Limestone Rd STE 200-C Wilmington, DE 19808 United States</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Contact Details */}
           <div>
             <h4 className="text-xs uppercase tracking-widest font-semibold mb-6 opacity-40">Contact Details</h4>
             <div className="space-y-4 text-sm opacity-60">
@@ -129,18 +99,19 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Partners - Far Right */}
-          <div className="flex flex-col justify-center">
-            <h4 className="text-xs uppercase tracking-widest font-semibold mb-4 opacity-40">Partners</h4>
-            <img 
-              src="/aws_advance partner logo.png" 
-              alt="AWS Advanced Partner" 
-              className="h-40 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity duration-300"
-            />
+          <div className="flex flex-col">
+            <h4 className="text-xs uppercase tracking-widest font-semibold mb-3 opacity-40">Partners</h4>
+            <div className="w-full flex justify-center">
+              <img
+                src="/aws_advance partner logo.png"
+                alt="AWS Advanced Partner"
+                className="h-28 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity duration-300"
+              />
+            </div>
           </div>
         </div>
 
-        <div className="mt-20 pt-8 border-t border-primary-foreground/10 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="mt-12 pt-6 flex flex-col md:flex-row items-center justify-between gap-4 border-t border-amber-300/50 shadow-[0_-1px_0_rgba(251,191,36,0.35)]">
           <p className="text-xs opacity-40">© 2026 CloudFirst. All rights reserved.</p>
           <div className="flex items-center gap-6 text-xs opacity-40">
             <a href="#" className="hover:opacity-100 transition-opacity">Privacy Policy</a>

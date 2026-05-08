@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
 import gsap from 'gsap';
-import heroBackground from '../../assets/images/bg_img.jpg';
 
 const STATS = [
   { value: '500+', label: 'Enterprise Clients' },
@@ -15,8 +14,19 @@ const STATS = [
 // ─────────────────────────────────────────────
 const HeroSection = () => {
   const [loading, setLoading] = useState(true);
-  const [form, setForm] = useState({ name: '', email: '', message: '' });
+  const [form, setForm] = useState({ name: '', email: '', phoneCca2: 'IN', phoneNumber: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
+  type CountryOption = { cca2: string; name: string; dial: string; flagUrl: string };
+  const fallbackPhoneCountries = [
+    { cca2: 'IN', name: 'India', dial: '+91', flagUrl: 'https://flagcdn.com/w40/in.png' },
+    { cca2: 'US', name: 'United States', dial: '+1', flagUrl: 'https://flagcdn.com/w40/us.png' },
+    { cca2: 'GB', name: 'United Kingdom', dial: '+44', flagUrl: 'https://flagcdn.com/w40/gb.png' },
+    { cca2: 'AE', name: 'United Arab Emirates', dial: '+971', flagUrl: 'https://flagcdn.com/w40/ae.png' },
+    { cca2: 'SG', name: 'Singapore', dial: '+65', flagUrl: 'https://flagcdn.com/w40/sg.png' },
+  ];
+  const [phoneCountries, setPhoneCountries] = useState(fallbackPhoneCountries);
+  const [phoneCountriesLoaded, setPhoneCountriesLoaded] = useState(false);
+  const [isPhoneCountryOpen, setIsPhoneCountryOpen] = useState(false);
 
   const taglineRef    = useRef<HTMLDivElement>(null);
   const headlineRef   = useRef<HTMLDivElement>(null);
@@ -30,19 +40,78 @@ const HeroSection = () => {
   const statsRef      = useRef<HTMLDivElement>(null);
   const statRefs      = useRef<HTMLDivElement[]>([]);
   const formRef       = useRef<HTMLDivElement>(null);
+  const phoneCountryRef = useRef<HTMLDivElement>(null);
 
   statRefs.current = [];
+  const selectedPhoneCountry = phoneCountries.find((c) => c.cca2 === form.phoneCca2) ?? phoneCountries[0];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
-    setForm({ name: '', email: '', message: '' });
+    setForm({ name: '', email: '', phoneCca2: 'IN', phoneNumber: '', message: '' });
     setTimeout(() => setSubmitted(false), 4000);
   };
 
   useEffect(() => {
     const t = setTimeout(() => setLoading(false), 1800);
     return () => clearTimeout(t);
+  }, []);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    fetch('https://restcountries.com/v3.1/all?fields=name,idd,cca2,flags', { signal: controller.signal })
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error(`Failed to load countries: ${r.status}`))))
+      .then((data: unknown) => {
+        const toCountryOption = (value: unknown): CountryOption | null => {
+          if (!value || typeof value !== 'object') return null;
+          const v = value as {
+            cca2?: unknown;
+            name?: { common?: unknown } | unknown;
+            flags?: { png?: unknown; svg?: unknown } | unknown;
+            idd?: { root?: unknown; suffixes?: unknown } | unknown;
+          };
+          const cca2 = typeof v.cca2 === 'string' ? v.cca2.toUpperCase() : '';
+          const name =
+            typeof (v.name as { common?: unknown } | undefined)?.common === 'string'
+              ? (v.name as { common: string }).common
+              : '';
+          const flags = v.flags as { png?: unknown; svg?: unknown } | undefined;
+          const flagUrl =
+            typeof flags?.png === 'string'
+              ? flags.png
+              : typeof flags?.svg === 'string'
+                ? flags.svg
+                : '';
+          const idd = v.idd as { root?: unknown; suffixes?: unknown } | undefined;
+          const root = typeof idd?.root === 'string' ? idd.root : '';
+          const suffixes = Array.isArray(idd?.suffixes) ? idd?.suffixes : [];
+          const suffix = typeof suffixes?.[0] === 'string' ? suffixes[0] : '';
+          const dial = root ? `${root}${suffix}` : '';
+          if (!cca2 || !name || !dial) return null;
+          return { cca2, name, dial, flagUrl };
+        };
+
+        const next = (Array.isArray(data) ? data : [])
+          .map(toCountryOption)
+          .filter((v): v is CountryOption => Boolean(v));
+        next.sort((a, b) => a.name.localeCompare(b.name));
+        if (next.length) setPhoneCountries(next);
+        setPhoneCountriesLoaded(true);
+      })
+      .catch(() => {
+        setPhoneCountriesLoaded(true);
+      });
+    return () => controller.abort();
+  }, []);
+
+  useEffect(() => {
+    const onDown = (e: MouseEvent) => {
+      const t = e.target as Node | null;
+      if (!t) return;
+      if (!phoneCountryRef.current?.contains(t)) setIsPhoneCountryOpen(false);
+    };
+    document.addEventListener('mousedown', onDown);
+    return () => document.removeEventListener('mousedown', onDown);
   }, []);
 
   useEffect(() => {
@@ -134,14 +203,9 @@ const HeroSection = () => {
 
   return (
     <section
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      style={{ 
-        backgroundImage: `url(${heroBackground})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      }}
+      className="relative bg-white min-h-[58vh] flex items-center justify-center overflow-hidden"
     >
+      <div className="absolute inset-0 pointer-events-none bg-white" />
       {/* ─────────────────────────────────────────────────────────────────
           GLOBAL CSS WATERMARK SUPPRESSION
           Covers every known selector pattern Spline has ever used,
@@ -193,24 +257,6 @@ const HeroSection = () => {
       `}</style>
 
       
-      {/* Dark overlay for better text contrast with image background */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            'linear-gradient(135deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.65) 25%, rgba(0,0,0,0.55) 50%, rgba(0,0,0,0.45) 75%, rgba(0,0,0,0.35) 100%)',
-          pointerEvents: 'none',
-        }}
-      />
-      {/* Additional gradient overlay for depth */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            'radial-gradient(circle at 30% 20%, rgba(99,102,241,0.15) 0%, transparent 50%), radial-gradient(circle at 70% 80%, rgba(168,85,247,0.12) 0%, transparent 50%)',
-          pointerEvents: 'none',
-        }}
-      />
 
       {/* ── LOADER ──────────────────────────────────────────────────────── */}
       {loading && (
@@ -248,7 +294,7 @@ const HeroSection = () => {
 
       {/* ── MAIN CONTENT ────────────────────────────────────────────────── */}
       {!loading && (
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 py-20 lg:py-28">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 py-14 lg:py-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-center">
 
             {/* ── LEFT: COPY ── */}
@@ -341,7 +387,7 @@ const HeroSection = () => {
               <p
                 ref={subRef}
                 className="opacity-0"
-                style={{ fontSize: '1.05rem', lineHeight: 1.75, color: '#e2e8f0', maxWidth: 480 }}
+                style={{ fontSize: '1.05rem', lineHeight: 1.75, color: '#2563eb', maxWidth: 480 }}
               >
                 Enterprise-grade cloud security, compliance automation, and AI-driven data
                 governance — trusted by 500+ organizations worldwide.
@@ -532,6 +578,169 @@ const HeroSection = () => {
                     <div>
                       <label style={{
                         display: 'block', fontSize: '0.75rem', fontWeight: 600,
+                        color: '#ffffff', marginBottom: 6,
+                      }}>
+                        Phone Number
+                      </label>
+                      <div ref={phoneCountryRef} style={{ position: 'relative' }}>
+                        <div
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            width: '100%',
+                            borderRadius: 12,
+                            background: '#f8fafc',
+                            border: '1.5px solid rgba(148,163,184,0.28)',
+                            overflow: 'hidden',
+                            transition: 'all 0.2s',
+                            boxSizing: 'border-box',
+                          }}
+                          onFocusCapture={(e) => {
+                            const el = e.currentTarget as HTMLDivElement;
+                            el.style.border = '1.5px solid rgba(99,102,241,0.60)';
+                            el.style.background = '#ffffff';
+                            el.style.boxShadow = '0 0 0 3px rgba(99,102,241,0.12)';
+                          }}
+                          onBlurCapture={(e) => {
+                            const el = e.currentTarget as HTMLDivElement;
+                            el.style.border = '1.5px solid rgba(148,163,184,0.28)';
+                            el.style.background = '#f8fafc';
+                            el.style.boxShadow = 'none';
+                          }}
+                        >
+                          <button
+                            type="button"
+                            onClick={() => setIsPhoneCountryOpen((v) => !v)}
+                            aria-label="Select country"
+                            style={{
+                              height: 44,
+                              padding: '0 10px 0 12px',
+                              border: 'none',
+                              outline: 'none',
+                              background: 'transparent',
+                              color: '#0f172a',
+                              fontSize: '0.875rem',
+                              fontWeight: 700,
+                              cursor: 'pointer',
+                              boxSizing: 'border-box',
+                              borderRight: '1px solid rgba(148,163,184,0.20)',
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: 8,
+                              userSelect: 'none',
+                            }}
+                          >
+                            {selectedPhoneCountry.flagUrl ? (
+                              <img
+                                src={selectedPhoneCountry.flagUrl}
+                                alt=""
+                                width={18}
+                                height={14}
+                                style={{ width: 18, height: 14, borderRadius: 2, display: 'block' }}
+                                loading="lazy"
+                              />
+                            ) : (
+                              <span aria-hidden="true" style={{ width: 18, textAlign: 'center' }}>🏳️</span>
+                            )}
+                            <span style={{ whiteSpace: 'nowrap' }}>
+                              {selectedPhoneCountry.cca2} {selectedPhoneCountry.dial}
+                            </span>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M6 9l6 6 6-6" stroke="#334155" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                          </button>
+
+                          <input
+                            type="tel"
+                            value={form.phoneNumber}
+                            onChange={(e) => setForm({ ...form, phoneNumber: e.target.value })}
+                            placeholder="Phone number"
+                            required
+                            style={{
+                              flex: 1,
+                              padding: '11px 14px',
+                              border: 'none',
+                              outline: 'none',
+                              background: 'transparent',
+                              color: '#0f172a',
+                              fontSize: '0.875rem',
+                              boxSizing: 'border-box',
+                            }}
+                          />
+                        </div>
+
+                        {isPhoneCountryOpen && (
+                          <div
+                            style={{
+                              position: 'absolute',
+                              left: 0,
+                              top: 'calc(100% + 8px)',
+                              width: 'min(520px, 100%)',
+                              maxHeight: 260,
+                              overflowY: 'auto',
+                              background: '#ffffff',
+                              border: '1px solid rgba(148,163,184,0.35)',
+                              borderRadius: 14,
+                              boxShadow: '0 18px 60px rgba(0,0,0,0.20)',
+                              zIndex: 50,
+                              padding: 6,
+                            }}
+                          >
+                            {phoneCountries.map((c) => (
+                              <button
+                                key={`${c.cca2}-${c.dial}`}
+                                type="button"
+                                onClick={() => {
+                                  setForm({ ...form, phoneCca2: c.cca2 });
+                                  setIsPhoneCountryOpen(false);
+                                }}
+                                style={{
+                                  width: '100%',
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  gap: 10,
+                                  padding: '10px 10px',
+                                  borderRadius: 12,
+                                  border: 'none',
+                                  cursor: 'pointer',
+                                  background: c.cca2 === form.phoneCca2 ? 'rgba(99,102,241,0.10)' : 'transparent',
+                                  color: '#0f172a',
+                                  textAlign: 'left',
+                                }}
+                                onMouseEnter={(e) => {
+                                  (e.currentTarget as HTMLButtonElement).style.background = 'rgba(148,163,184,0.10)';
+                                }}
+                                onMouseLeave={(e) => {
+                                  (e.currentTarget as HTMLButtonElement).style.background = c.cca2 === form.phoneCca2 ? 'rgba(99,102,241,0.10)' : 'transparent';
+                                }}
+                              >
+                                {c.flagUrl ? (
+                                  <img
+                                    src={c.flagUrl}
+                                    alt=""
+                                    width={18}
+                                    height={14}
+                                    style={{ width: 18, height: 14, borderRadius: 2, display: 'block', flexShrink: 0 }}
+                                    loading="lazy"
+                                  />
+                                ) : (
+                                  <span aria-hidden="true" style={{ width: 18, textAlign: 'center' }}>🏳️</span>
+                                )}
+                                <span style={{ flex: 1, fontWeight: 600, fontSize: '0.875rem' }}>{c.name}</span>
+                                <span style={{ fontWeight: 700, fontSize: '0.875rem', color: '#334155' }}>{c.dial}</span>
+                              </button>
+                            ))}
+                            {!phoneCountriesLoaded && (
+                              <div style={{ padding: 10, fontSize: '0.85rem', color: '#64748b' }}>Loading countries…</div>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    <div>
+                      <label style={{
+                        display: 'block', fontSize: '0.75rem', fontWeight: 600,
                         color: '#334155', marginBottom: 6,
                       }}>
                         Message
@@ -625,6 +834,7 @@ const HeroSection = () => {
           </div>
         </div>
       )}
+
     </section>
   );
 };

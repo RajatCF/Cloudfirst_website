@@ -16,9 +16,6 @@ const logos = [
   '/logo/acunetic.png'
 ];
 
-const firstRow = logos.slice(0, Math.ceil(logos.length / 2));
-const secondRow = logos.slice(Math.ceil(logos.length / 2));
-
 // helper to repeat an array n times
 const repeat = <T,>(arr: T[], times: number) => {
   const out: T[] = [];
@@ -27,36 +24,23 @@ const repeat = <T,>(arr: T[], times: number) => {
 };
 
 const ClientLogos = () => {
-  // duplicate enough times to cover wide viewports (4x each row)
-  const firstLoop = repeat(firstRow, 4);
-  const secondLoop = repeat(secondRow, 4);
+  const loop = repeat(logos, 6);
 
   return (
     <section className="py-20 bg-transparent">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
-        <h3 className="text-center text-2xl lg:text-3xl font-semibold text-foreground mb-12">
-          Trusted by
+        <h3 className="text-center text-3xl lg:text-4xl font-semibold text-foreground mb-10">
+          Trusted by Enterprises
         </h3>
-        {/* animated rows */}
-        <div className="space-y-8 overflow-hidden">
-          <div className="flex gap-8 whitespace-nowrap animate-scroll-left will-change-transform">
-            {firstLoop.map((src, idx) => (
+        <div className="overflow-hidden">
+          <div className="flex gap-10 whitespace-nowrap animate-scroll-left will-change-transform">
+            {loop.map((src, idx) => (
               <div key={idx} className="flex justify-center flex-shrink-0">
                 <img
                   src={src}
                   alt={`Client logo ${idx + 1}`}
-                  className="h-12 w-32 object-contain"
-                />
-              </div>
-            ))}
-          </div>
-          <div className="flex gap-8 whitespace-nowrap animate-scroll-right will-change-transform">
-            {secondLoop.map((src, idx) => (
-              <div key={idx} className="flex justify-center flex-shrink-0">
-                <img
-                  src={src}
-                  alt={`Client logo ${idx + 1}`}
-                  className="h-12 w-32 object-contain"
+                  className="h-14 sm:h-16 w-40 sm:w-44 object-contain"
+                  loading="lazy"
                 />
               </div>
             ))}
