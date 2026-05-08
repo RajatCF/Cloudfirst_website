@@ -121,7 +121,7 @@ const ResourceEvents = () => {
   const [index, setIndex] = useState(-1); // For tab gallery
   const [eventIndex, setEventIndex] = useState(-1); // For event gallery
   const [activeTab, setActiveTab] = useState<string>('overview'); // Changed back to 'overview' to show event cards by default
-  const [selectedYear, setSelectedYear] = useState<string>('2026'); // New state for year selection
+  const [selectedYear, setSelectedYear] = useState<string>('2025'); // New state for year selection
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // New state for dropdown
 
   // Close dropdown when clicking outside
@@ -367,6 +367,12 @@ const ResourceEvents = () => {
     ]
   };
 
+  const allowedYears = ['2021', '2022', '2023', '2024', '2025'];
+
+  useEffect(() => {
+    if (!allowedYears.includes(selectedYear)) setSelectedYear('2025');
+  }, [selectedYear]);
+
   // Event tabs configuration - updated with 2026 events
   const eventTabs = [
     { id: 'overview', label: 'Event Overview', isDefault: true },
@@ -454,7 +460,7 @@ const ResourceEvents = () => {
                 {isDropdownOpen && (
                   <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-50">
                     <div className="py-2">
-                      {Object.keys(yearlyEvents).map((year) => (
+                      {allowedYears.map((year) => (
                         <button
                           key={year}
                           onClick={() => {
@@ -501,6 +507,13 @@ const ResourceEvents = () => {
   // Render yearly events based on selected year
   const renderYearlyEvents = () => {
     const events = yearlyEvents[selectedYear as keyof typeof yearlyEvents] || [];
+    const gridColsClass =
+      events.length === 1
+        ? "grid-cols-1"
+        : events.length === 2
+        ? "grid-cols-1 md:grid-cols-2"
+        : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3";
+    const gridMaxWidthClass = events.length <= 2 ? "max-w-5xl mx-auto" : "";
     
     return (
       <div className="max-w-7xl mx-auto px-4 py-16">
@@ -517,14 +530,14 @@ const ResourceEvents = () => {
         </motion.div>
 
         {events.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className={`${gridMaxWidthClass} grid ${gridColsClass} gap-8 justify-items-center`}>
             {events.map((event, idx) => (
               <motion.div
                 key={event.id}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: idx * 0.1 }}
-                className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden cursor-pointer border border-gray-100"
+                className="group w-full max-w-md bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden cursor-pointer border border-gray-100"
                 onClick={() => setIndex(idx)}
               >
                 <div className="relative h-64 overflow-hidden">

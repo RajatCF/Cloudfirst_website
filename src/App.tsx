@@ -56,6 +56,7 @@ const MigrationGuides = lazy(() => import("./pages/MigrationGuides"));
 const PartnerCertifications = lazy(() => import("./pages/PartnerCertifications"));
 const CloudCostCalculator = lazy(() => import("./pages/CloudCostCalculator"));
 const OurPartners = lazy(() => import("./pages/OurPartners"));
+const OurClients = lazy(() => import("./pages/OurClients"));
 const Careers = lazy(() => import("./pages/Careers"));
 const Hiring = lazy(() => import("./pages/Hiring"));
 const PressMedia = lazy(() => import("./pages/PressMedia"));
@@ -157,6 +158,7 @@ const App = () => (
             <Route path="/resources/cost-calculator" element={<CloudCostCalculator />} />
  
             <Route path="/company/partners" element={<OurPartners />} />
+            <Route path="/company/clients" element={<OurClients />} />
             <Route path="/company/careers" element={<Careers />} />
             <Route path="/company/hiring" element={<Hiring />} />
             <Route path="/company/press-media" element={<PressMedia />} />

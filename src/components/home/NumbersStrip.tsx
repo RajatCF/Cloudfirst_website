@@ -62,7 +62,7 @@ const NumbersStrip = () => {
   }, [hasAnimated]);
 
   return (
-    <section ref={stripRef} className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 py-16">
+    <section ref={stripRef} className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 py-16 mb-12">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16">
           {statistics.map((stat, index) => (

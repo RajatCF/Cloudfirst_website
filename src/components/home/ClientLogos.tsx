@@ -87,7 +87,7 @@ const ClientLogos = () => (
 const OurClientsLogos = () => (
   <LogoMarqueeSection
     id="our-client"
-    title="Our partners"
+    title="Our Partners"
     logos={ourClientLogos}
     animationClassName="animate-scroll-left"
   />

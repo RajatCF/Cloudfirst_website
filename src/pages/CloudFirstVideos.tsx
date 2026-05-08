@@ -2,8 +2,20 @@ import { motion } from 'framer-motion';
 import type { Variants } from 'framer-motion';
 import { Play } from 'lucide-react';
 import Layout from '@/components/Layout';
+import { useState } from 'react';
 
 const CloudFirstVideos = () => {
+  const [isFeaturedActive, setIsFeaturedActive] = useState(false);
+  const [activeVideoId, setActiveVideoId] = useState<string | null>(null);
+  const preferHqThumbIds = new Set(["hvDvBEfw1aI", "8yO9_8hw7DQ"]);
+  const getThumbUrl = (id: string) =>
+    preferHqThumbIds.has(id)
+      ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg`
+      : `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`;
+  const getThumbFallbackUrl = (id: string) =>
+    preferHqThumbIds.has(id)
+      ? `https://i.ytimg.com/vi/${id}/mqdefault.jpg`
+      : `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
   const fadeInUp: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: { 
@@ -19,22 +31,21 @@ const CloudFirstVideos = () => {
   // YouTube video URLs from your HTML
   const youtubeVideos = [
     {
-      id: "jZUid6W4MBk",
-      title: "ASSOCHAM India Summit - Making India a Global Data Hub",
-      description: "A proud partner of 2nd Annual ASSOCHAM India summit on \"Datacentres & Cloud Infrastructure Summit\" with theme \"Making India a Global Data Hub\".",
+      id: "cXYAwpGyenA",
+      title: "CloudFirst Technology — Latest Video",
       featured: true
     },
     {
-      id: "26y-MEXLB1s",
-      title: "CloudFirst Technology Solutions"
+      id: "hvDvBEfw1aI",
+      title: "CloudFirst Technology — Video"
     },
     {
-      id: "i4Iv7gpbaYU", 
-      title: "Cloud Infrastructure Overview"
+      id: "8yO9_8hw7DQ",
+      title: "CloudFirst Technology — Video"
     },
     {
-      id: "28tTHZPQGxQ",
-      title: "Digital Transformation Journey"
+      id: "gb4eyKNY5Vc",
+      title: "CloudFirst Technology — Video"
     },
     {
       id: "HXz927hzQkM",
@@ -101,16 +112,44 @@ const CloudFirstVideos = () => {
                 
                 {/* Featured Video Embed */}
                 <div className="relative aspect-video rounded-lg overflow-hidden shadow-lg">
-                  <iframe
-                    width="100%"
-                    height="100%"
-                    src={`https://www.youtube.com/embed/${youtubeVideos[0].id}`}
-                    title="YouTube video player"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="absolute inset-0 w-full h-full"
-                  ></iframe>
+                  {!isFeaturedActive ? (
+                    <button
+                      type="button"
+                      onClick={() => setIsFeaturedActive(true)}
+                      className="absolute inset-0 w-full h-full"
+                      aria-label="Play featured video"
+                    >
+                      <img
+                        src={`https://i.ytimg.com/vi/${youtubeVideos[0].id}/maxresdefault.jpg`}
+                        alt={youtubeVideos[0].title ?? "Featured video thumbnail"}
+                        className="absolute inset-0 w-full h-full object-cover"
+                        loading="lazy"
+                        onError={(e) => {
+                          (e.currentTarget as HTMLImageElement).src = `https://i.ytimg.com/vi/${youtubeVideos[0].id}/hqdefault.jpg`;
+                        }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-black/10 to-transparent" />
+                      <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 inline-flex items-center gap-3 rounded-full bg-black/70 px-5 py-3 text-white font-semibold shadow-lg">
+                        <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/15">
+                          <Play className="w-5 h-5" />
+                        </span>
+                        Play video
+                      </span>
+                    </button>
+                  ) : (
+                    <iframe
+                      width="100%"
+                      height="100%"
+                      src={`https://www.youtube-nocookie.com/embed/${youtubeVideos[0].id}?autoplay=1`}
+                      title="YouTube video player"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="absolute inset-0 w-full h-full"
+                      loading="lazy"
+                      referrerPolicy="strict-origin-when-cross-origin"
+                    ></iframe>
+                  )}
                 </div>
               </div>
             </div>
@@ -142,16 +181,44 @@ const CloudFirstVideos = () => {
                 }}
               >
                 <div className="relative aspect-video">
-                  <iframe
-                    width="100%"
-                    height="100%"
-                    src={`https://www.youtube.com/embed/${video.id}`}
-                    title="YouTube video player"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                    className="absolute inset-0 w-full h-full"
-                  ></iframe>
+                  {activeVideoId !== video.id ? (
+                    <button
+                      type="button"
+                      onClick={() => setActiveVideoId(video.id)}
+                      className="absolute inset-0 w-full h-full"
+                      aria-label="Play video"
+                    >
+                      <img
+                        src={getThumbUrl(video.id)}
+                        alt={video.title ?? "Video thumbnail"}
+                        className="absolute inset-0 w-full h-full object-cover"
+                        loading="lazy"
+                        onError={(e) => {
+                          (e.currentTarget as HTMLImageElement).src = getThumbFallbackUrl(video.id);
+                        }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-black/10 to-transparent" />
+                      <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 inline-flex items-center gap-3 rounded-full bg-black/70 px-5 py-3 text-white font-semibold shadow-lg">
+                        <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/15">
+                          <Play className="w-5 h-5" />
+                        </span>
+                        Play video
+                      </span>
+                    </button>
+                  ) : (
+                    <iframe
+                      width="100%"
+                      height="100%"
+                      src={`https://www.youtube-nocookie.com/embed/${video.id}?autoplay=1`}
+                      title="YouTube video player"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                      className="absolute inset-0 w-full h-full"
+                      loading="lazy"
+                      referrerPolicy="strict-origin-when-cross-origin"
+                    ></iframe>
+                  )}
                 </div>
                 
                 {video.title && (

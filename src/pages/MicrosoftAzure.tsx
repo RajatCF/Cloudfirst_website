@@ -253,7 +253,7 @@ const MicrosoftAzure = () => {
             <div>
               <span className="text-xs font-bold uppercase tracking-widest text-sky-600">What we deliver</span>
               <h2 className="mt-2 text-2xl md:text-3xl font-bold text-gray-900" style={{ fontFamily: "'Georgia', serif" }}>
-                Key CloudFirst Azure services
+                Key Azure services
               </h2>
             </div>
             <p className="text-gray-400 text-sm max-w-xs">
@@ -399,17 +399,16 @@ const MicrosoftAzure = () => {
       </section>
 
       {/* ── CTA ── */}
-      <section className="relative overflow-hidden bg-[#060c1f]">
+      <section className="relative overflow-hidden bg-white border-t border-gray-100">
         <div className="pointer-events-none absolute inset-0">
-          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-sky-500/40 to-transparent" />
-          <div className="absolute -bottom-40 left-1/2 -translate-x-1/2 h-80 w-80 rounded-full bg-sky-600/10 blur-[80px]" />
+          <div className="absolute -bottom-40 left-1/2 -translate-x-1/2 h-80 w-80 rounded-full bg-sky-600/12 blur-[80px]" />
         </div>
         <div className="relative max-w-[1200px] mx-auto px-6 lg:px-10 py-16 text-center">
-          <span className="inline-block text-xs font-bold uppercase tracking-widest text-sky-400 mb-4">Get started</span>
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4" style={{ fontFamily: "'Georgia', serif" }}>
+          <span className="inline-block text-xs font-bold uppercase tracking-widest text-sky-600 mb-4">Get started</span>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4" style={{ fontFamily: "'Georgia', serif" }}>
             Build and scale confidently on Azure
           </h2>
-          <p className="text-white/50 text-lg max-w-xl mx-auto mb-8">
+          <p className="text-gray-600 text-lg max-w-xl mx-auto mb-8">
             Partner with CloudFirst to plan, implement, and manage your Azure environment with security, reliability, and operational excellence at the centre.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
@@ -421,7 +420,7 @@ const MicrosoftAzure = () => {
             </Link>
             <Link
               to="/"
-              className="inline-flex items-center gap-2 px-7 py-3.5 border border-white/20 hover:border-white/40 text-white/70 text-sm font-medium rounded-lg transition-colors"
+              className="inline-flex items-center gap-2 px-7 py-3.5 border border-gray-300 hover:border-gray-400 text-gray-700 text-sm font-medium rounded-lg transition-colors bg-white"
             >
               Explore all services
             </Link>

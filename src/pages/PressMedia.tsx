@@ -3,17 +3,60 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 
 const pressItems = [
-  { type: "Press release", date: "Dec 2024", title: "CloudFirst achieves AWS Premier Partner status for second consecutive year", summary: "CloudFirst has been re-designated as an AWS Premier Consulting Partner — recognising continued growth in certified engineers, customer outcomes, and technical innovation.", outlet: "CloudFirst" },
-  { type: "Media mention", date: "Nov 2024", title: "The Register: How BFSI companies are approaching cloud compliance in 2025", summary: "CloudFirst's Head of Architecture was featured in The Register's cloud compliance feature, sharing perspectives on DORA readiness and PCI DSS in cloud-native environments.", outlet: "The Register" },
-  { type: "Award", date: "Oct 2024", title: "CloudFirst named in Clutch Top Cloud Consulting Companies 2024", summary: "Based on client reviews and delivery track record, CloudFirst was named in Clutch's global list of top cloud consulting companies for 2024.", outlet: "Clutch" },
-  { type: "Press release", date: "Sep 2024", title: "CloudFirst opens new delivery centre in Bengaluru, India", summary: "CloudFirst has expanded its operations with a new 80-seat delivery centre in Bengaluru, increasing 24/7 NOC and managed operations capacity for customers globally.", outlet: "CloudFirst" },
-  { type: "Media mention", date: "Jul 2024", title: "Computer Weekly: Cloud migration — what separates the successes from the failures", summary: "CloudFirst's CTO contributed to Computer Weekly's deep-dive on cloud migration success factors — drawing on 6 years of customer migration data.", outlet: "Computer Weekly" },
+  {
+    type: "Award",
+    date: "Feb 2026",
+    title: "CloudFirst Technology wins Cloud Solutions Provider of the Year at Go Global Awards 2025",
+    summary: "Coverage of CloudFirst’s recognition at the Go Global Awards 2025.",
+    outlet: "ANI News",
+    href: "https://www.aninews.in/news/business/cloudfirst-technology-wins-cloud-solutions-provider-of-the-year-at-go-global-awards-202520260211182923/",
+  },
+  {
+    type: "Award",
+    date: "Feb 2026",
+    title: "CloudFirst Technology wins Cloud Solutions Provider of the Year at Go Global Awards 2025",
+    summary: "Coverage of CloudFirst’s recognition at the Go Global Awards 2025.",
+    outlet: "The Wire",
+    href: "https://thewire.in/ptiprnews/cloudfirst-technology-wins-cloud-solutions-provider-of-the-year-at-go-global-awards-2025",
+  },
+  {
+    type: "Press release",
+    date: "Nov 2024",
+    title: "CloudFirst Technology Private Limited announces the launch of CloudFirst AI Factory",
+    summary: "Announcement of the CloudFirst AI Factory launch and its focus on real-time AI solutions.",
+    outlet: "Business Standard",
+    href: "https://www.business-standard.com/content/specials/cloudfirst-technology-private-limited-announces-the-launch-of-cloudfirst-ai-factory-124110601801_1.html",
+  },
+  {
+    type: "Media mention",
+    date: "2024",
+    title: "Visionary companies in India",
+    summary: "Brand Connect feature highlighting CloudFirst in Forbes India.",
+    outlet: "Forbes India",
+    href: "https://www.forbesindia.com/article/upfront/brand-connect/visionary-companies-in-india/2988312/1",
+  },
+  {
+    type: "Press release",
+    date: "2025",
+    title: "CloudFirst Technology Private Limited nominated for Go Global Awards 2025",
+    summary: "Coverage of CloudFirst’s nomination for the Go Global Awards 2025.",
+    outlet: "International Trade Council",
+    href: "https://tradecouncil.org/cloudfirst-technology-private-limited-nominated-for-go-global-awards-2025/",
+  },
 ];
 
 const typeColours: Record<string, string> = {
   "Press release": "text-blue-700 bg-blue-50 border-blue-100",
   "Media mention": "text-purple-700 bg-purple-50 border-purple-100",
   "Award": "text-amber-700 bg-amber-50 border-amber-100",
+};
+
+const getDomain = (url: string) => {
+  try {
+    return new URL(url).hostname.replace(/^www\./, "");
+  } catch {
+    return "";
+  }
 };
 
 const PressMedia: React.FC = () => {
@@ -41,21 +84,45 @@ const PressMedia: React.FC = () => {
       <div className="max-w-6xl mx-auto px-6 py-14">
         <div className="space-y-4">
           {pressItems.map((item) => (
-            <div key={item.title} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 hover:border-gray-200 hover:shadow-md transition-all">
+            <a
+              key={item.href}
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block bg-white rounded-2xl border border-gray-100 shadow-sm p-6 hover:border-gray-200 hover:shadow-md transition-all"
+            >
               <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-                <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-3">
-                    <span className={`text-[10px] font-bold border rounded px-2.5 py-1 uppercase tracking-wider ${typeColours[item.type]}`}>{item.type}</span>
-                    <span className="text-xs text-gray-400">{item.date}</span>
-                    <span className="text-xs text-gray-300">·</span>
-                    <span className="text-xs text-gray-400">{item.outlet}</span>
+                <div className="flex items-start gap-4 flex-1">
+                  <div className="w-28 h-20 rounded-xl border border-gray-100 bg-gray-50 flex items-center justify-center overflow-hidden flex-shrink-0">
+                    <img
+                      src={`https://logo.clearbit.com/${getDomain(item.href)}`}
+                      alt={item.outlet}
+                      className="w-full h-full object-contain p-3"
+                      loading="lazy"
+                      onError={(e) => {
+                        const domain = getDomain(item.href);
+                        e.currentTarget.src = domain ? `https://www.google.com/s2/favicons?domain=${domain}&sz=256` : "";
+                      }}
+                    />
                   </div>
-                  <h3 className="text-base font-bold text-gray-900 mb-2" style={{ fontFamily: "'Georgia', serif" }}>{item.title}</h3>
-                  <p className="text-sm text-gray-500 leading-relaxed">{item.summary}</p>
+
+                  <div className="flex-1">
+                    <div className="flex items-center gap-3 mb-3 flex-wrap">
+                      <span className={`text-[10px] font-bold border rounded px-2.5 py-1 uppercase tracking-wider ${typeColours[item.type]}`}>{item.type}</span>
+                      <span className="text-xs text-gray-400">{item.date}</span>
+                      <span className="text-xs text-gray-300">·</span>
+                      <span className="text-xs text-gray-400">{item.outlet}</span>
+                    </div>
+                    <h3 className="text-base font-bold text-gray-900 mb-2" style={{ fontFamily: "'Georgia', serif" }}>{item.title}</h3>
+                    <p className="text-sm text-gray-500 leading-relaxed">{item.summary}</p>
+                  </div>
                 </div>
-                <button className="flex-shrink-0 text-xs text-blue-600 hover:text-blue-800 font-semibold transition-colors whitespace-nowrap self-start">Read more →</button>
+
+                <span className="flex-shrink-0 text-xs text-blue-600 hover:text-blue-800 font-semibold transition-colors whitespace-nowrap self-start">
+                  Read more →
+                </span>
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </div>

@@ -1,11 +1,10 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import { useMemo, useState } from 'react';
 
 const LifeAtCloudFirst = () => {
+  const [activeCategory, setActiveCategory] = useState<string>('festivals');
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
     visible: { 
@@ -18,151 +17,56 @@ const LifeAtCloudFirst = () => {
     }
   };
 
-  // Team photos data
-  const teamPhotos = [
-    {
-      src: "/Life at cloudfirst/annual-ofsite-visits-at0cloudfirst.jfif",
-      title: "Annual Offsite Visits",
-      description: "Team building and strategic planning sessions"
-    },
-    {
-      src: "/Life at cloudfirst/christmas at cloudfirst.jfif",
-      title: "Christmas Celebration",
-      description: "Festive celebrations with the CloudFirst family"
-    },
-    {
-      src: "/Life at cloudfirst/diwali celebration at cloudfirst.jfif",
-      title: "Diwali Celebration",
-      description: "Festival of lights celebration at CloudFirst"
-    },
-    {
-      src: "/Life at cloudfirst/holi-celebration-at-acloudfirst.jfif",
-      title: "Holi Celebration",
-      description: "Colorful Holi festivities with the team"
-    },
-    {
-      src: "/Life at cloudfirst/independence-day-celebration-at-cloudfirst.jfif",
-      title: "Independence Day",
-      description: "Patriotic celebrations at CloudFirst"
-    },
-    {
-      src: "/Life at cloudfirst/makar sankranti at cloudfirst.jfif",
-      title: "Makar Sankranti",
-      description: "Traditional festival celebration"
-    },
-    {
-      src: "/Life at cloudfirst/charity-work-at-cloudfirst.jfif",
-      title: "Charity Work",
-      description: "Giving back to the community together"
-    },
-    {
-      src: "/Life at cloudfirst/paso.jpeg",
-      title: "Diwali Celebration",
-      description: "Festival of lights celebration at CloudFirst" 
-    },
-    {
-      src: "/Life at cloudfirst/productLaunch.jpeg",
-      title: "Product Launch",
-      description: "Launching new ideas with passion."
-    },
-    {
-      src: "/Life at cloudfirst/women_day_img.png",
-      title: "Women's Day Celebration",
-      description: "Celebrating our amazing women team members"
-    }
-  ];
-
-  // Custom arrow components
-  type ArrowProps = {
-    className?: string;
-    style?: React.CSSProperties;
-    onClick?: React.MouseEventHandler<HTMLDivElement>;
-  };
-
-  const CustomPrevArrow = (props: ArrowProps) => {
-    const { className, style, onClick } = props;
-    return (
-      <div
-        className={className}
-        style={{
-          ...style,
-          display: "block",
-          background: "#8b5cf6",
-          borderRadius: "50%",
-          width: "40px",
-          height: "40px",
-          zIndex: 10,
-          opacity: 0.8,
-          transition: "opacity 0.3s"
-        }}
-        onClick={onClick}
-        onMouseEnter={(e) => e.currentTarget.style.opacity = "1"}
-        onMouseLeave={(e) => e.currentTarget.style.opacity = "0.8"}
-      />
-    );
-  };
-
-  const CustomNextArrow = (props: ArrowProps) => {
-    const { className, style, onClick } = props;
-    return (
-      <div
-        className={className}
-        style={{
-          ...style,
-          display: "block",
-          background: "#8b5cf6",
-          borderRadius: "50%",
-          width: "40px",
-          height: "40px",
-          zIndex: 10,
-          opacity: 0.8,
-          transition: "opacity 0.3s"
-        }}
-        onClick={onClick}
-        onMouseEnter={(e) => e.currentTarget.style.opacity = "1"}
-        onMouseLeave={(e) => e.currentTarget.style.opacity = "0.8"}
-      />
-    );
-  };
-
-  // Carousel settings
-  const carouselSettings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 3000,
-    pauseOnHover: true,
-    arrows: true,
-    lazyLoad: 'ondemand' as const,
-    swipe: true,
-    swipeToSlide: true,
-    touchThreshold: 10,
-    prevArrow: <CustomPrevArrow />,
-    nextArrow: <CustomNextArrow />,
-    responsive: [
+  const photoCategories = useMemo(() => {
+    const categories = [
       {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          swipe: true,
-          swipeToSlide: true,
-        }
+        key: 'festivals',
+        label: 'Festivals',
+        photos: [
+          { src: '/Life at cloudfirst/diwali celebration at cloudfirst.jfif', title: 'Diwali Celebration' },
+          { src: '/Life at cloudfirst/diwali celebration at cloudfirst-1.jfif', title: 'Diwali Celebration' },
+          { src: '/Life at cloudfirst/diwali celebration at cloudfirst-1 (2).jfif', title: 'Diwali Celebration' },
+          { src: '/Life at cloudfirst/holi-celebration-at-acloudfirst.jfif', title: 'Holi Celebration' },
+          { src: '/Life at cloudfirst/christmas at cloudfirst.jfif', title: 'Christmas Celebration' },
+          { src: '/Life at cloudfirst/makar sankranti at cloudfirst.jfif', title: 'Makar Sankranti' },
+          { src: '/Life at cloudfirst/independence-day-celebration-at-cloudfirst.jfif', title: 'Independence Day' },
+          { src: '/Life at cloudfirst/women_day_img.png', title: "Women's Day" },
+        ],
       },
       {
-        breakpoint: 640,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          swipe: true,
-          swipeToSlide: true,
-        }
-      }
-    ]
-  };
+        key: 'outing',
+        label: 'Outing',
+        photos: [
+          { src: '/Life at cloudfirst/annual-ofsite-visits-at0cloudfirst.jfif', title: 'Annual Offsite Visits' },
+          { src: '/Life at cloudfirst/1741274387298.jfif', title: 'Team Outing' },
+          { src: '/Life at cloudfirst/1741274387962.jfif', title: 'Team Outing' },
+        ],
+      },
+      {
+        key: 'adventure',
+        label: 'Adventure',
+        photos: [
+          { src: '/Life at cloudfirst/1741274391252.jfif', title: 'Adventure' },
+        ],
+      },
+      {
+        key: 'milestones',
+        label: 'Milestones',
+        photos: [
+          { src: '/Life at cloudfirst/productLaunch.jpeg', title: 'Product Launch' },
+          { src: '/Life at cloudfirst/charity-work-at-cloudfirst.jfif', title: 'Charity Work' },
+        ],
+      },
+    ];
+
+    const safeDefault = categories.some((c) => c.key === activeCategory) ? activeCategory : 'festivals';
+    if (safeDefault !== activeCategory) setActiveCategory(safeDefault);
+    return categories;
+  }, [activeCategory]);
+
+  const activePhotos = useMemo(() => {
+    return photoCategories.find((c) => c.key === activeCategory)?.photos ?? [];
+  }, [photoCategories, activeCategory]);
 
   return (
     <div className="min-h-screen bg-white text-black">
@@ -236,7 +140,7 @@ const LifeAtCloudFirst = () => {
         </div>
       </section>
 
-      {/* Team Photos Carousel Section */}
+      {/* Our Team in Action */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
           <motion.div
@@ -255,32 +159,54 @@ const LifeAtCloudFirst = () => {
             whileInView="visible"
             viewport={{ once: true, amount: 0.1 }}
             variants={fadeInUp}
-            className="team-carousel"
+            className="max-w-6xl mx-auto"
           >
-            <Slider {...carouselSettings}>
-              {teamPhotos.map((photo, index) => (
-                <div key={index} className="px-2">
-                  <div className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
-                    <div className="relative h-80 overflow-hidden">
-                      <img
-                        src={photo.src}
-                        alt={photo.title}
-                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                        onError={(e) => {
-                          console.log('Image failed to load:', photo.src);
-                          e.currentTarget.style.display = 'none';
-                        }}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-                      <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
-                        <h3 className="text-lg font-bold mb-1">{photo.title}</h3>
-                        <p className="text-xs opacity-90">{photo.description}</p>
-                      </div>
+            <div className="flex flex-wrap justify-center gap-3 mb-10">
+              {photoCategories.map((c) => (
+                <button
+                  key={c.key}
+                  type="button"
+                  onClick={() => setActiveCategory(c.key)}
+                  className={`px-4 py-2 rounded-full text-sm font-semibold border transition-all ${
+                    activeCategory === c.key
+                      ? 'bg-purple-600 text-white border-purple-600'
+                      : 'bg-white text-gray-700 border-gray-200 hover:border-purple-300 hover:text-purple-700'
+                  }`}
+                >
+                  {c.label}
+                </button>
+              ))}
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {activePhotos.map((photo) => (
+                <div
+                  key={`${activeCategory}-${photo.src}`}
+                  className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+                >
+                  <div className="relative h-72 overflow-hidden bg-gray-50">
+                    <img
+                      src={encodeURI(photo.src)}
+                      alt={photo.title}
+                      className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      loading="lazy"
+                      onError={(e) => {
+                        e.currentTarget.style.display = 'none';
+                      }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+                      <h3 className="text-lg font-bold">{photo.title}</h3>
                     </div>
                   </div>
                 </div>
               ))}
-            </Slider>
+              {activePhotos.length === 0 ? (
+                <div className="sm:col-span-2 lg:col-span-3 text-center text-gray-500">
+                  No images available in this category.
+                </div>
+              ) : null}
+            </div>
           </motion.div>
         </div>
       </section>

@@ -173,10 +173,12 @@ const CloudPlatformSecurity: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {services.map((svc) => (
+          {services.map((svc, idx) => (
             <div
               key={svc.title}
-              className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 hover:shadow-md hover:border-blue-100 transition-all duration-200"
+              className={`bg-white rounded-2xl border border-gray-100 shadow-sm p-6 hover:shadow-md hover:border-blue-100 transition-all duration-200 ${
+                idx === services.length - 1 ? "md:col-span-2 md:max-w-[740px] md:justify-self-center" : ""
+              }`}
             >
               {/* Header */}
               <div className="flex items-start justify-between mb-4">
@@ -227,7 +229,7 @@ const CloudPlatformSecurity: React.FC = () => {
               { step: "04", title: "Operate", desc: "We provide ongoing monitoring, quarterly reviews, and incident response retainer so your posture improves continuously." },
             ].map((p) => (
               <div key={p.step} className="relative">
-                <div className="text-4xl font-bold text-gray-100 mb-3" style={{ fontFamily: "'Georgia', serif" }}>
+                <div className="text-4xl font-bold text-blue-500/70 mb-3" style={{ fontFamily: "'Georgia', serif" }}>
                   {p.step}
                 </div>
                 <h3 className="text-sm font-bold text-gray-900 mb-2">{p.title}</h3>

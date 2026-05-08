@@ -113,8 +113,6 @@ const menuConfig: Record<MenuKey, MenuConfig> = {
             { label: 'Startups & SMBs', path: '/industries/startups-smbs' },
             { label: 'Enterprise', path: '/industries/enterprise' },
             { label: 'Finance & BFSI', path: '/industries/finance-bfsi' },
-            { label: 'Healthcare', path: '/industries/healthcare' },
-            { label: 'Education', path: '/industries/education' },
           ],
         },
       ],
@@ -157,8 +155,8 @@ const menuConfig: Record<MenuKey, MenuConfig> = {
         {
           heading: 'Resources',
           items: [
-            { label: 'Case studies', path: '/resources/case-studies' },
             { label: 'Blog & insights', path: '/blog' },
+            { label: 'Case studies', path: '/resources/case-studies' },
           ],
         },
       ],
@@ -169,8 +167,8 @@ const menuConfig: Record<MenuKey, MenuConfig> = {
             { label: 'CloudFirst Videos', path: '/videos' },
             { label: 'Life@CloudFirst', path: '/life-at-cloudfirst' },
             { label: 'Current Openings', path: '/current-openings' },
-            { label: 'Work Benefits', path: '/work-benefits' },
             { label: 'Events', path: '/events' },
+            { label: 'Work Benefits', path: '/work-benefits' },
           ],
         },
       ],
@@ -194,7 +192,7 @@ const menuConfig: Record<MenuKey, MenuConfig> = {
           heading: '',
           items: [
             { label: 'Our partners', path: '/company/partners' },
-            { label: 'Our clients', path: '/#our-client' },
+            { label: 'Our clients', path: '/company/clients' },
             { label: 'Our leadership', path: '/about#our-leadership' },
             { label: 'Contact us', path: '/contact' },
           ],

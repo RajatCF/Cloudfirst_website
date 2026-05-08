@@ -739,7 +739,7 @@ const HeroSection = () => {
                     <div>
                       <label style={{
                         display: 'block', fontSize: '0.75rem', fontWeight: 600,
-                        color: '#334155', marginBottom: 6,
+                        color: '#ffffff', marginBottom: 6,
                       }}>
                         Message
                       </label>

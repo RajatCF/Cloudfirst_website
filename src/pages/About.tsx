@@ -182,52 +182,30 @@ const About = () => {
         </div>
       </section>
 
-      {/* ── Who We Are ── */}
-      <section className="bg-[#f7f8fa] border-b border-gray-100">
+      <section className="bg-white border-b border-gray-100">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-10 py-16">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <span className="text-xs font-bold uppercase tracking-widest text-blue-600">Who we are</span>
-              <h2 className="mt-3 text-2xl md:text-3xl font-bold text-gray-900 mb-5" style={{ fontFamily: "'Georgia', serif" }}>
-                A workforce built on passion and expertise
-              </h2>
-              <p className="text-gray-500 text-[15px] leading-relaxed mb-4">
-                CloudFirst Technology® is a workforce of skilled and passionate professionals who project their future aligned with company and client success. We bring a pioneering spirit, relentless innovation, and a commitment to excellence to every engagement.
-              </p>
-              <p className="text-gray-500 text-[15px] leading-relaxed">
-                Together we encompass experience and expertise in catering to international clients from the US, Canada, Australia, New Zealand and beyond — while also having undertaken several Indian government projects requiring the highest standards of security and delivery.
-              </p>
-              <div className="mt-6 space-y-3">
-                {[
-                  "Creativity, flexibility and technical expertise",
-                  "Simple or complex analyses delivered with precision",
-                  "Total focus on customer satisfaction",
-                  "Quality workmanship on every engagement",
-                ].map((item) => (
-                  <div key={item} className="flex items-start gap-2.5">
-                    <CheckCircle2 className="w-4 h-4 text-blue-500 flex-shrink-0 mt-0.5" />
-                    <span className="text-sm text-gray-700">{item}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
+          <div className="rounded-2xl overflow-hidden">
+            <img
+              src="/About_us.png"
+              alt="About CloudFirst"
+              className="w-full h-[520px] md:h-[620px] object-cover contrast-125 brightness-95"
+              onError={(e) => {
+                e.currentTarget.src = "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1200&q=80";
+              }}
+            />
+          </div>
+        </div>
+      </section>
 
-            {/* Image */}
-            <div className="relative">
-              <div className="absolute -inset-4 rounded-3xl bg-gradient-to-br from-blue-100 via-transparent to-indigo-50 blur-2xl" />
-              <div className="relative rounded-2xl overflow-hidden border border-gray-100 shadow-lg">
-                <img
-                  src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=800&q=80"
-                  alt="CloudFirst team at work"
-                  className="w-full h-64 lg:h-80 object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-tr from-blue-900/20 via-transparent to-transparent" />
-                <div className="absolute bottom-4 left-4 flex items-center gap-2 rounded-lg bg-white/95 backdrop-blur-sm px-3 py-2 shadow-md">
-                  <Award className="w-4 h-4 text-blue-500" />
-                  <span className="text-xs font-bold text-gray-800">Dual ISO certified organisation</span>
-                </div>
-              </div>
-            </div>
+      <section id="our-leadership" className="bg-white border-b border-gray-100">
+        <div className="max-w-[1200px] mx-auto px-6 lg:px-10 py-16">
+          <div className="rounded-2xl overflow-hidden">
+            <img
+              src="/Our_leadership.png"
+              alt="Our leadership"
+              className="w-full h-[520px] md:h-[620px] object-cover"
+              loading="lazy"
+            />
           </div>
         </div>
       </section>

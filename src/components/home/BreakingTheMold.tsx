@@ -25,11 +25,11 @@ const BreakingTheMold = () => {
           <div className="hidden lg:flex items-center justify-center">
             <div className="w-full">
               <img
-                src="/reinfo_img.jpg"
+                src="/cloud-computing.gif"
                 alt="reinforce360 platform dashboard"
-                className="w-full h-auto rounded-lg object-cover shadow-lg"
+                className="w-full h-auto rounded-lg object-contain"
                 onError={(e) => {
-                  console.log('Image failed to load:', '/reinfo_img.jpg');
+                  console.log('Image failed to load:', '/cloud-computing.gif');
                   // Fallback to original image if new one fails
                   e.currentTarget.src = "/src/assets/images/bg_img_reinfo.jpg";
                 }}

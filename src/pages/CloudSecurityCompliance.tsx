@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
+import { AlertTriangle, Bug, FileSearch, KeyRound, Network, ShieldCheck, Siren } from "lucide-react";
 
 const frameworks = [
   { name: "ISO 27001", desc: "Information security management system" },
@@ -18,6 +19,74 @@ const controls = [
   { category: "Data Protection", items: ["Encryption at rest (AES-256)", "TLS 1.3 in transit enforcement", "Key management and rotation", "Data classification and labelling"] },
   { category: "Network Security", items: ["VPC segmentation and micro-segmentation", "Web application firewall (WAF) rules", "DDoS protection layer", "Private endpoint enforcement"] },
   { category: "Threat Detection", items: ["SIEM integration and correlation rules", "Anomaly detection and alerting", "Vulnerability scanning schedule", "Penetration test programme"] },
+];
+
+const securityChallenges = [
+  {
+    title: "Misconfigurations & Drift",
+    tag: "CSPM",
+    icon: FileSearch,
+    color: "text-red-600",
+    bg: "bg-red-50",
+    problem: "Public buckets, open security groups, and ad hoc changes create silent exposure over time.",
+    solution: "We baseline against CIS benchmarks, continuously scan for drift, and implement auto-remediation for low-risk findings.",
+    tools: ["CIS Benchmarks", "CSPM scanning", "Policy-as-code guardrails", "IaC drift detection"],
+  },
+  {
+    title: "Identity Sprawl & Over-Privilege",
+    tag: "IAM",
+    icon: KeyRound,
+    color: "text-indigo-600",
+    bg: "bg-indigo-50",
+    problem: "Broad roles, long-lived keys, and unmanaged service accounts increase blast radius.",
+    solution: "We enforce least privilege, central identity, short-lived credentials, and privileged access workflows.",
+    tools: ["SSO & MFA", "PAM", "Key rotation", "Workload identity / federation"],
+  },
+  {
+    title: "Network Exposure",
+    tag: "Zero Trust",
+    icon: Network,
+    color: "text-sky-600",
+    bg: "bg-sky-50",
+    problem: "Flat networks and internet-exposed services make lateral movement easy after initial access.",
+    solution: "We segment networks, implement private access patterns, and harden ingress/egress with layered controls.",
+    tools: ["Micro-segmentation", "Private endpoints", "WAF", "DDoS protection"],
+  },
+  {
+    title: "Vulnerabilities & Supply Chain Risk",
+    tag: "CNAPP",
+    icon: Bug,
+    color: "text-amber-600",
+    bg: "bg-amber-50",
+    problem: "Unpatched VMs, container images, and dependencies introduce exploit paths into production.",
+    solution: "We build continuous scanning into CI/CD, prioritize fixes by risk, and validate with controlled testing.",
+    tools: ["SCA & dependency scanning", "Container scanning", "Vulnerability management", "Patch automation"],
+  },
+  {
+    title: "Detection Gaps & Slow Response",
+    tag: "SIEM/SOAR",
+    icon: AlertTriangle,
+    color: "text-emerald-600",
+    bg: "bg-emerald-50",
+    problem: "Noisy alerts without context cause fatigue; real incidents get missed.",
+    solution: "We centralize logs, tune detections, correlate signals, and run incident response playbooks.",
+    tools: ["SIEM integration", "Detection engineering", "Alert tuning", "IR runbooks"],
+  },
+  {
+    title: "Ransomware Recovery",
+    tag: "Recovery",
+    icon: Siren,
+    color: "text-rose-600",
+    bg: "bg-rose-50",
+    problem: "Encryption events can spread fast; without immutable backups and tested restores, recovery becomes guesswork.",
+    solution: "We implement immutable backup patterns, isolate recovery environments, and run restore drills to validate RTO/RPO.",
+    tools: ["Immutable backups", "Backup encryption", "Snapshot locking", "Restore validation drills"],
+  },
+];
+
+const solutionsChallenges = [
+  ...securityChallenges.filter((c) => c.title === "Ransomware Recovery"),
+  ...securityChallenges.filter((c) => c.title !== "Ransomware Recovery"),
 ];
 
 const CloudSecurityCompliance: React.FC = () => {
@@ -91,6 +160,98 @@ const CloudSecurityCompliance: React.FC = () => {
                     </li>
                   ))}
                 </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-6xl mx-auto px-6 py-16">
+        <div className="flex items-end justify-between mb-10 gap-6 flex-wrap">
+          <div>
+            <span className="text-xs font-bold uppercase tracking-widest text-red-600">Cloud security</span>
+            <h2 className="mt-2 text-2xl font-bold text-gray-900" style={{ fontFamily: "'Georgia', serif" }}>
+              Common problems
+            </h2>
+          </div>
+          <p className="text-gray-400 text-sm max-w-xs">
+            The most common risks we see across AWS, Azure, and Google Cloud.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {securityChallenges.map(({ title, tag, icon: Icon, color, bg, problem }) => (
+            <div
+              key={title}
+              className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 hover:shadow-md hover:border-red-200 transition-all duration-200"
+            >
+              <div className="flex items-start justify-between gap-3 mb-4">
+                <div className={`h-10 w-10 rounded-xl ${bg} border border-black/5 flex items-center justify-center flex-shrink-0`}>
+                  <Icon className={`w-5 h-5 ${color}`} />
+                </div>
+                <span className="text-[11px] font-semibold text-red-700 bg-red-50 border border-red-100 rounded-full px-2.5 py-1">
+                  {tag}
+                </span>
+              </div>
+
+              <h3 className="text-base font-bold text-gray-900 mb-3">{title}</h3>
+
+              <div className="flex items-start gap-2">
+                <span className="mt-0.5 w-4 h-4 flex-shrink-0 rounded-full bg-red-50 flex items-center justify-center">
+                  <span className="block w-1.5 h-1.5 rounded-full bg-red-400" />
+                </span>
+                <p className="text-xs text-gray-400 leading-relaxed">{problem}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="bg-white border-y border-gray-100">
+        <div className="max-w-6xl mx-auto px-6 py-16">
+          <div className="flex items-end justify-between mb-10 gap-6 flex-wrap">
+            <div>
+              <span className="text-xs font-bold uppercase tracking-widest text-red-600">Cloud security</span>
+              <h2 className="mt-2 text-2xl font-bold text-gray-900" style={{ fontFamily: "'Georgia', serif" }}>
+                Solutions & tools
+              </h2>
+            </div>
+            <p className="text-gray-400 text-sm max-w-xs">
+              The controls, processes, and tooling we use to reduce risk and recover fast.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {solutionsChallenges.map(({ title, tag, icon: Icon, color, bg, solution, tools }) => (
+              <div
+                key={title}
+                className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 hover:shadow-md hover:border-red-200 transition-all duration-200"
+              >
+                <div className="flex items-start justify-between gap-3 mb-4">
+                  <div className={`h-10 w-10 rounded-xl ${bg} border border-black/5 flex items-center justify-center flex-shrink-0`}>
+                    <Icon className={`w-5 h-5 ${color}`} />
+                  </div>
+                  <span className="text-[11px] font-semibold text-red-700 bg-red-50 border border-red-100 rounded-full px-2.5 py-1">
+                    {tag}
+                  </span>
+                </div>
+
+                <h3 className="text-base font-bold text-gray-900 mb-3">{title}</h3>
+
+                <div className="flex items-start gap-2 mb-4">
+                  <span className="mt-0.5 w-4 h-4 flex-shrink-0 rounded-full bg-emerald-50 flex items-center justify-center">
+                    <span className="block w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                  </span>
+                  <p className="text-xs text-gray-600 leading-relaxed">{solution}</p>
+                </div>
+
+                <div className="flex flex-wrap gap-2 pt-4 border-t border-gray-100">
+                  {tools.map((t) => (
+                    <span key={t} className="text-[11px] font-semibold text-gray-700 bg-gray-50 border border-gray-100 rounded-full px-2.5 py-1">
+                      {t}
+                    </span>
+                  ))}
+                </div>
               </div>
             ))}
           </div>

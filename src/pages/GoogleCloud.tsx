@@ -5,16 +5,6 @@ import { Cloud, Code2, ShieldCheck, Database, BarChart3, Zap, Wrench, Globe, Loc
 
 const services = [
   {
-    icon: Cloud,
-    color: "text-blue-400",
-    bg: "bg-blue-400/10",
-    border: "border-blue-400/20",
-    title: "GCP Foundation & Landing Zone",
-    tag: "Foundation",
-    problem: "Starting on GCP without governance leads to sprawling projects, unconstrained spending, and unmanaged access from day one.",
-    solution: "We design your GCP organisation hierarchy, folder structure, IAM policies, VPC architecture, and guardrails — giving you a secure, scalable foundation before the first workload lands.",
-  },
-  {
     icon: Layers,
     color: "text-cyan-400",
     bg: "bg-cyan-400/10",
@@ -120,15 +110,6 @@ const aiServices = [
     description:
       "Build RAG applications connected to enterprise knowledge with evaluation, observability, and cost controls baked in.",
   },
-  {
-    title: "Workspace AI Automation",
-    icon: Cpu,
-    color: "text-amber-600",
-    bg: "bg-amber-600/10",
-    border: "border-amber-600/20",
-    description:
-      "Design AI-assisted workflows across Google Workspace to reduce manual work and improve productivity with guardrails.",
-  },
 ];
 
 const capabilities = [
@@ -138,8 +119,6 @@ const capabilities = [
   { app: "Security & Compliance", icon: ShieldCheck, color: "text-sky-600", bg: "bg-sky-50", use: "Harden posture with least-privilege IAM, network controls, and continuous improvements" },
   { app: "FinOps & Cost Optimisation", icon: TrendingUp, color: "text-amber-600", bg: "bg-amber-50", use: "Cost allocation, CUD strategy, rightsizing, and monthly reviews to reduce spend" },
   { app: "Backup & Disaster Recovery", icon: HardDrive, color: "text-violet-600", bg: "bg-violet-50", use: "Backup strategy, DR design, recovery testing, and resilience aligned to business RTO/RPO" },
-  { app: "DevOps & Infrastructure as Code", icon: Code2, color: "text-slate-700", bg: "bg-slate-100", use: "CI/CD pipelines and automated provisioning to improve reliability, speed, and consistency" },
-  { app: "Data Platform Operations", icon: BarChart3, color: "text-indigo-600", bg: "bg-indigo-50", use: "Operate and optimise analytics platforms with performance tuning and secure access controls" },
 ];
 
 const GoogleCloud: React.FC = () => {
@@ -275,7 +254,7 @@ const GoogleCloud: React.FC = () => {
       <div className="max-w-6xl mx-auto px-6 py-16">
         <div className="mb-10">
           <span className="text-xs font-bold uppercase tracking-widest text-blue-600">What we deliver</span>
-          <h2 className="mt-2 text-2xl font-bold text-gray-900" style={{ fontFamily: "'Georgia', serif" }}>Key CloudFirst Google Cloud services</h2>
+          <h2 className="mt-2 text-2xl font-bold text-gray-900" style={{ fontFamily: "'Georgia', serif" }}>Key Google Cloud services</h2>
           <p className="text-gray-400 text-sm mt-1">A snapshot of the managed capabilities CloudFirst delivers on Google Cloud.</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -311,7 +290,7 @@ const GoogleCloud: React.FC = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
             {aiServices.map(({ title, icon: Icon, color, bg, border, description }) => (
               <div
                 key={title}
@@ -350,11 +329,11 @@ const GoogleCloud: React.FC = () => {
           <div className="flex items-end justify-between mb-10 gap-6 flex-wrap">
             <div>
               <span className="text-xs font-bold uppercase tracking-widest text-blue-600">What we do</span>
-              <h2 className="mt-2 text-2xl font-bold text-gray-900" style={{ fontFamily: "'Georgia', serif" }}>7 GCP practice areas</h2>
+              <h2 className="mt-2 text-2xl font-bold text-gray-900" style={{ fontFamily: "'Georgia', serif" }}>6 GCP practice areas</h2>
             </div>
             <p className="text-gray-400 text-sm max-w-xs">Every engagement addresses a real problem with a specific, measurable solution.</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {services.map(({ icon: Icon, color, bg, border, title, tag, problem, solution }) => (
               <article key={title} className="group relative bg-[#f7f8fa] rounded-2xl border border-gray-100 p-6 hover:shadow-md hover:border-blue-100 transition-all duration-200 overflow-hidden">
                 <div className={`absolute top-0 left-0 right-0 h-0.5 ${bg} opacity-0 group-hover:opacity-100 transition-opacity`} />
@@ -394,7 +373,7 @@ const GoogleCloud: React.FC = () => {
             { step: "04", title: "Operate", desc: "Ongoing managed operations — monitoring, patching, cost reviews, security scanning, and proactive improvements — as part of your team." },
           ].map((p) => (
             <div key={p.step} className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
-              <div className="text-4xl font-bold text-gray-100 mb-3" style={{ fontFamily: "'Georgia', serif" }}>{p.step}</div>
+              <div className="text-4xl font-bold text-blue-500/70 mb-3" style={{ fontFamily: "'Georgia', serif" }}>{p.step}</div>
               <h3 className="text-sm font-bold text-gray-900 mb-2">{p.title}</h3>
               <p className="text-xs text-gray-500 leading-relaxed">{p.desc}</p>
             </div>
@@ -451,17 +430,16 @@ const GoogleCloud: React.FC = () => {
       </div>
 
       {/* ── CTA ── */}
-      <div className="relative overflow-hidden bg-[#0a1628]">
+      <div className="relative overflow-hidden bg-white border-t border-gray-100">
         <div className="pointer-events-none absolute inset-0">
-          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-500/40 to-transparent" />
-          <div className="absolute -bottom-40 left-1/2 -translate-x-1/2 h-80 w-80 rounded-full bg-blue-600/10 blur-[80px]" />
+          <div className="absolute -bottom-40 left-1/2 -translate-x-1/2 h-80 w-80 rounded-full bg-blue-600/12 blur-[80px]" />
         </div>
         <div className="relative max-w-6xl mx-auto px-6 py-16 text-center">
-          <span className="inline-block text-xs font-bold uppercase tracking-widest text-blue-400 mb-4">Free assessment</span>
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4" style={{ fontFamily: "'Georgia', serif" }}>
+          <span className="inline-block text-xs font-bold uppercase tracking-widest text-blue-600 mb-4">Free assessment</span>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4" style={{ fontFamily: "'Georgia', serif" }}>
             Get a free GCP architecture review
           </h2>
-          <p className="text-white/50 text-lg max-w-xl mx-auto mb-8">
+          <p className="text-gray-600 text-lg max-w-xl mx-auto mb-8">
             Our GCP engineers will assess your current environment, identify security gaps and cost inefficiencies, and deliver a prioritised action plan within 48 hours.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
@@ -473,7 +451,7 @@ const GoogleCloud: React.FC = () => {
             </button>
             <button
               onClick={() => navigate(-1)}
-              className="inline-flex items-center gap-2 px-7 py-3.5 border border-white/20 hover:border-white/40 text-white/70 text-sm font-medium rounded-lg transition-colors"
+              className="inline-flex items-center gap-2 px-7 py-3.5 border border-gray-300 hover:border-gray-400 text-gray-700 text-sm font-medium rounded-lg transition-colors bg-white"
             >
               ← Back
             </button>

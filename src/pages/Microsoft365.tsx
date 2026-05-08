@@ -236,7 +236,7 @@ const Microsoft365: React.FC = () => {
           </h2>
           <span className="text-xs text-gray-400 font-medium uppercase tracking-wider">7 service areas</span>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
           {services.map((svc) => (
             <div
               key={svc.title}
@@ -285,7 +285,7 @@ const Microsoft365: React.FC = () => {
               { step: "04", title: "Manage", desc: "We provide ongoing admin, monitoring, optimization, and support so your Microsoft 365 environment stays secure and efficient." },
             ].map((p) => (
               <div key={p.step}>
-                <div className="text-4xl font-bold text-gray-100 mb-3" style={{ fontFamily: "'Georgia', serif" }}>
+                <div className="text-4xl font-bold text-blue-500/70 mb-3" style={{ fontFamily: "'Georgia', serif" }}>
                   {p.step}
                 </div>
                 <h3 className="text-sm font-bold text-gray-900 mb-2">{p.title}</h3>
