@@ -139,9 +139,10 @@ const About = () => {
               <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-blue-500/20 via-transparent to-indigo-500/15 blur-2xl" />
               <div className="relative w-full rounded-2xl overflow-hidden shadow-2xl border border-white/10">
                 <img
-                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=900&q=80"
+                  src="/About_us.png"
                   alt="CloudFirst team collaborating"
                   className="w-full h-72 lg:h-96 object-cover"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#07111f]/70 via-transparent to-transparent" />
               </div>
@@ -191,9 +192,10 @@ const About = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
               <div className="rounded-2xl overflow-hidden border border-gray-100 shadow-sm bg-white">
                 <img
-                  src="/About_us.png"
+                  src="/about_us3.jpg"
                   alt="About CloudFirst"
                   className="w-full h-[520px] md:h-[620px] object-cover"
+                  loading="lazy"
                   onError={(e) => {
                     e.currentTarget.src = "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1200&q=80";
                   }}
@@ -258,62 +260,40 @@ const About = () => {
         </section>
       )}
 
-      {/* ── Vision & Mission ── */}
-      <section className="bg-white border-b border-gray-100">
-        <div className="max-w-[1200px] mx-auto px-6 lg:px-10 py-16">
-          <div className="text-center mb-12">
-            <span className="text-xs font-bold uppercase tracking-widest text-blue-600">Purpose</span>
-            <h2 className="mt-2 text-2xl md:text-3xl font-bold text-gray-900" style={{ fontFamily: "'Georgia', serif" }}>
-              Our vision & mission
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            {/* Vision card */}
-            <div className="relative bg-[#07111f] rounded-2xl p-8 overflow-hidden">
-              <div className="pointer-events-none absolute inset-0">
-                <div className="absolute -top-20 -right-20 h-60 w-60 rounded-full bg-blue-600/15 blur-[60px]" />
-              </div>
-              <div className="relative z-10">
-                <div className="inline-flex items-center justify-center h-11 w-11 rounded-xl bg-blue-500/15 border border-blue-500/25 mb-5">
-                  <Star className="w-5 h-5 text-blue-400" />
+      {!showLeadership && (
+        <section className="bg-[#f7f8fa] border-b border-gray-100">
+          <div className="max-w-[1200px] mx-auto px-6 lg:px-10 py-16">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+              <div className="flex items-center justify-center">
+                <div className="w-full max-w-xl">
+                  <img src="/about_us2.jpg" alt="Our vision and mission" className="w-full h-auto" loading="lazy" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
                 </div>
-                <h3 className="text-xl font-bold text-white mb-3" style={{ fontFamily: "'Georgia', serif" }}>Our Vision</h3>
-                <p className="text-white/60 text-[15px] leading-relaxed">
-                  To be a positive contributor in our client's success by providing Information Technology services that produce consistent, excellent results — every engagement, every time.
-                </p>
               </div>
-            </div>
 
-            {/* Mission card */}
-            <div className="relative bg-[#07111f] rounded-2xl p-8 overflow-hidden">
-              <div className="pointer-events-none absolute inset-0">
-                <div className="absolute -top-20 -left-20 h-60 w-60 rounded-full bg-indigo-600/15 blur-[60px]" />
-              </div>
-              <div className="relative z-10">
-                <div className="inline-flex items-center justify-center h-11 w-11 rounded-xl bg-indigo-500/15 border border-indigo-500/25 mb-5">
-                  <Lightbulb className="w-5 h-5 text-indigo-400" />
+              <div>
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3" style={{ fontFamily: "'Georgia', serif" }}>
+                  <span className="text-blue-600">Our Vision</span> & <span className="text-pink-600">Mission</span>
+                </h2>
+                <div className="h-1 w-16 bg-gradient-to-r from-blue-600 to-pink-600 rounded-full mb-6" />
+
+                <div className="text-gray-700 leading-relaxed text-[15px] space-y-4">
+                  <p>
+                    Our core vision is to be a positive contributor in our client's success by providing Information Technology services that produces consistent excellent results.
+                  </p>
+                  <p>And yes, we are always dedicated and believe in:</p>
+                  <ul className="space-y-2">
+                    <li>Building Technology that changes everything.</li>
+                    <li>
+                      To respond to industry's needs for Information Technology services using creativity, flexibility and technical expertise in performing simple or complex analyses and services with total focus on customer satisfaction and quality workmanship
+                    </li>
+                    <li>Total focus on customer satisfaction and quality workmanship in every deliverable.</li>
+                  </ul>
                 </div>
-                <h3 className="text-xl font-bold text-white mb-3" style={{ fontFamily: "'Georgia', serif" }}>Our Mission</h3>
-                <ul className="space-y-3">
-                  <li className="flex items-start gap-2.5">
-                    <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-indigo-400 flex-shrink-0" />
-                    <span className="text-white/60 text-[15px] leading-relaxed">Building Technology that changes everything.</span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-indigo-400 flex-shrink-0" />
-                    <span className="text-white/60 text-[15px] leading-relaxed">Responding to industry needs using creativity, flexibility and technical expertise — from simple analyses to complex transformations.</span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-indigo-400 flex-shrink-0" />
-                    <span className="text-white/60 text-[15px] leading-relaxed">Total focus on customer satisfaction and quality workmanship in every deliverable.</span>
-                  </li>
-                </ul>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       <section className="bg-[#f7f8fa] border-b border-gray-100">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-10 py-16">

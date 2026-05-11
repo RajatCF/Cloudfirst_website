@@ -1,7 +1,82 @@
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import { useEffect, useMemo, useState } from 'react';
+
+const overviewCardImages: Record<string, string[]> = {
+  festivals: [
+    '/cloudfirts_festivals/Holi Vibes.png',
+    '/cloudfirts_festivals/Christmas Post.png',
+    '/cloudfirts_festivals/WhatsApp Image 2026-03-11 at 12.06.34 (1).jpeg',
+  ],
+  csr: ['/cloudfirst_csr/1.png', '/cloudfirst_csr/4.png', '/cloudfirst_csr/5.png'],
+  offsites: ['/cloudfirst_offsite/Image (2).jpg', '/cloudfirst_offsite/Image (3).jpg', '/cloudfirst_offsite/Image (4).jpg'],
+};
+
+const MotionImageCarousel = ({
+  images,
+  alt,
+  fit = 'cover',
+}: {
+  images: string[];
+  alt: string;
+  fit?: 'cover' | 'contain';
+}) => {
+  const shouldReduceMotion = useReducedMotion();
+  const slides = useMemo(() => images.filter(Boolean), [images]);
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    if (shouldReduceMotion) return;
+    if (slides.length <= 1) return;
+    const id = window.setInterval(() => {
+      setIndex((prev) => (prev + 1) % slides.length);
+    }, 2600);
+    return () => window.clearInterval(id);
+  }, [shouldReduceMotion, slides.length]);
+
+  const current = slides[index] ?? slides[0];
+  if (!current) return null;
+
+  return (
+    <div className="absolute inset-0">
+      <AnimatePresence mode="wait">
+        <motion.img
+          key={current}
+          src={encodeURI(current)}
+          alt={alt}
+          loading="lazy"
+          className={`absolute inset-0 w-full h-full ${fit === 'contain' ? 'object-contain bg-white' : 'object-cover'}`}
+          initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, scale: 1.06 }}
+          animate={
+            shouldReduceMotion
+              ? { opacity: 1 }
+              : {
+                  opacity: 1,
+                  scale: [1.04, 1.12, 1.04],
+                  x: [0, -10, 0],
+                  y: [0, -6, 0],
+                }
+          }
+          exit={shouldReduceMotion ? { opacity: 1 } : { opacity: 0 }}
+          transition={
+            shouldReduceMotion
+              ? { duration: 0 }
+              : {
+                  opacity: { duration: 0.45, ease: 'easeOut' },
+                  scale: { duration: 10, ease: 'easeInOut', repeat: Infinity },
+                  x: { duration: 10, ease: 'easeInOut', repeat: Infinity },
+                  y: { duration: 10, ease: 'easeInOut', repeat: Infinity },
+                }
+          }
+          onError={(e) => {
+            e.currentTarget.style.display = 'none';
+          }}
+        />
+      </AnimatePresence>
+    </div>
+  );
+};
 
 const LifeAtCloudFirst = () => {
   const [activeCategory, setActiveCategory] = useState<string>('festivals');
@@ -203,7 +278,8 @@ const LifeAtCloudFirst = () => {
                     subtitle: 'Team outings, offsites, and retreats',
                   },
                 ].map((card) => {
-                  const preview = photoCategories.find((c) => c.key === card.key)?.photos?.[0];
+                  const images = overviewCardImages[card.key] ?? [];
+                  const fit = card.key === 'csr' ? 'contain' : 'cover';
                   return (
                     <button
                       key={card.key}
@@ -214,18 +290,8 @@ const LifeAtCloudFirst = () => {
                       }}
                       className="group rounded-2xl overflow-hidden border border-gray-100 bg-white shadow-lg hover:shadow-2xl transition-all text-left"
                     >
-                      <div className="relative h-56 bg-gray-50 overflow-hidden">
-                        {preview ? (
-                          <img
-                            src={encodeURI(preview.src)}
-                            alt={card.title}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                            loading="lazy"
-                            onError={(e) => {
-                              e.currentTarget.style.display = 'none';
-                            }}
-                          />
-                        ) : null}
+                      <div className="relative h-64 bg-gray-50 overflow-hidden">
+                        <MotionImageCarousel images={images} alt={card.title} fit={fit} />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
                         <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
                           <div className="text-xl font-bold">{card.title}</div>

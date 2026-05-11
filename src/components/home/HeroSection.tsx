@@ -1,13 +1,13 @@
 import { useEffect, useState, useRef } from 'react';
 import gsap from 'gsap';
-
+ 
 const STATS = [
   { value: '500+', label: 'Enterprise Clients' },
   { value: '99.99%', label: 'Uptime SLA' },
   { value: '24/7', label: 'Expert Support' },
   { value: '50+', label: 'Certifications' },
 ];
-
+ 
 // ─────────────────────────────────────────────
 // Aggressive watermark killer — runs repeatedly
 // to catch dynamically injected DOM nodes
@@ -15,7 +15,7 @@ const STATS = [
 type HeroSectionProps = {
   isPageReady: boolean;
 };
-
+ 
 const HeroSection = ({ isPageReady }: HeroSectionProps) => {
   const [form, setForm] = useState({ name: '', email: '', phoneCca2: 'IN', phoneNumber: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
@@ -30,7 +30,7 @@ const HeroSection = ({ isPageReady }: HeroSectionProps) => {
   const [phoneCountries, setPhoneCountries] = useState(fallbackPhoneCountries);
   const [phoneCountriesLoaded, setPhoneCountriesLoaded] = useState(false);
   const [isPhoneCountryOpen, setIsPhoneCountryOpen] = useState(false);
-
+ 
   const taglineRef    = useRef<HTMLDivElement>(null);
   const headlineRef   = useRef<HTMLDivElement>(null);
   const cloudRef      = useRef<HTMLSpanElement>(null);
@@ -44,17 +44,17 @@ const HeroSection = ({ isPageReady }: HeroSectionProps) => {
   const statRefs      = useRef<HTMLDivElement[]>([]);
   const formRef       = useRef<HTMLDivElement>(null);
   const phoneCountryRef = useRef<HTMLDivElement>(null);
-
+ 
   statRefs.current = [];
   const selectedPhoneCountry = phoneCountries.find((c) => c.cca2 === form.phoneCca2) ?? phoneCountries[0];
-
+ 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
     setForm({ name: '', email: '', phoneCca2: 'IN', phoneNumber: '', message: '' });
     setTimeout(() => setSubmitted(false), 4000);
   };
-
+ 
   useEffect(() => {
     const controller = new AbortController();
     fetch('https://restcountries.com/v3.1/all?fields=name,idd,cca2,flags', { signal: controller.signal })
@@ -82,7 +82,7 @@ const HeroSection = ({ isPageReady }: HeroSectionProps) => {
           if (!cca2 || !name || !dial) return null;
           return { cca2, name, dial, flagUrl };
         };
-
+ 
         const next = (Array.isArray(data) ? data : [])
           .map(toCountryOption)
           .filter((v): v is CountryOption => Boolean(v));
@@ -95,7 +95,7 @@ const HeroSection = ({ isPageReady }: HeroSectionProps) => {
       });
     return () => controller.abort();
   }, []);
-
+ 
   useEffect(() => {
     const onDown = (e: MouseEvent) => {
       const t = e.target as Node | null;
@@ -105,15 +105,15 @@ const HeroSection = ({ isPageReady }: HeroSectionProps) => {
     document.addEventListener('mousedown', onDown);
     return () => document.removeEventListener('mousedown', onDown);
   }, []);
-
+ 
   useEffect(() => {
     if (!isPageReady) return;
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
     const headlineSpans = headlineRef.current?.querySelectorAll('span');
-
+ 
     tl.fromTo(taglineRef.current,  { y: -20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 })
       .fromTo(headlineRef.current, { y: 40,  opacity: 0 }, { y: 0, opacity: 1, duration: 0.8 }, '-=0.2');
-
+ 
     if (headlineSpans && headlineSpans.length) {
       tl.fromTo(
         headlineSpans,
@@ -122,7 +122,7 @@ const HeroSection = ({ isPageReady }: HeroSectionProps) => {
         '-=0.55'
       );
     }
-
+ 
     if (cloudRef.current && cloudBurstRef.current && cloudTextRef.current) {
       gsap.set(cloudTextRef.current, { opacity: 0, scale: 0.65, y: 12 });
       tl.fromTo(
@@ -136,7 +136,7 @@ const HeroSection = ({ isPageReady }: HeroSectionProps) => {
         { opacity: 1, scale: 1, y: 0, duration: 0.7, ease: 'back.out(1.5)' },
         '-=0.2'
       );
-
+ 
       gsap.to(cloudBurstRef.current, {
         duration: 1.4,
         scale: 1.05,
@@ -145,7 +145,7 @@ const HeroSection = ({ isPageReady }: HeroSectionProps) => {
         repeat: -1,
         yoyo: true,
       });
-
+ 
       gsap.to(cloudTextRef.current, {
         duration: 1.6,
         y: -2,
@@ -154,7 +154,7 @@ const HeroSection = ({ isPageReady }: HeroSectionProps) => {
         yoyo: true,
       });
     }
-
+ 
     if (cloudIconRef.current) {
       gsap.to(cloudIconRef.current, {
         duration: 1.4,
@@ -167,40 +167,27 @@ const HeroSection = ({ isPageReady }: HeroSectionProps) => {
         yoyo: true,
       });
     }
-
+ 
     if (planeRef.current) {
-      gsap.fromTo(planeRef.current, {
-        x: 0,
-        y: 0,
-        rotation: 0,
-        opacity: 1,
-      }, {
-        x: 240,
-        y: -48,
-        rotation: 22,
-        opacity: 0.18,
-        duration: 0.95,
-        ease: 'power1.inOut',
-        repeat: -1,
-        yoyo: true,
-        repeatDelay: 0.45,
-      });
+      gsap.set(planeRef.current, { display: 'none' });
     }
-
+ 
     tl.fromTo(subRef.current,      { y: 25,  opacity: 0 }, { y: 0, opacity: 1, duration: 0.7 }, '-=0.4')
       .fromTo(ctaRef.current,      { y: 25,  opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, '-=0.3')
       .fromTo(statRefs.current,    { y: 25,  opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, stagger: 0.1 }, '-=0.3')
       .fromTo(formRef.current,     { x: 50,  opacity: 0 }, { x: 0, opacity: 1, duration: 0.9 }, '-=0.8');
   }, [isPageReady]);
-
+ 
   return (
     <section
       className="relative min-h-[46vh] flex items-center justify-center overflow-hidden"
     >
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/home_page/new_home_image.jpg')" }}
+        style={{ backgroundImage: "url('/home_page/final_hero_image.png')" }}
       />
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 bg-black/40" />
       {/* ─────────────────────────────────────────────────────────────────
           GLOBAL CSS WATERMARK SUPPRESSION
           Covers every known selector pattern Spline has ever used,
@@ -225,18 +212,18 @@ const HeroSection = ({ isPageReady }: HeroSectionProps) => {
           height: 0 !important;
           overflow: hidden !important;
         }
-
+ 
         /* ── Hide any absolute/fixed anchor inside the Spline wrapper ── */
         .spline-scene-wrap a {
           display: none !important;
           pointer-events: none !important;
         }
-
+ 
         /* ── Spline canvas container overflow clip ── */
         .spline-scene-wrap canvas {
           display: block;
         }
-
+ 
         /* ── Loader letter animation ── */
         @keyframes loader-cf {
           0%,100% { opacity: 0.2; transform: translateY(0); }
@@ -250,17 +237,17 @@ const HeroSection = ({ isPageReady }: HeroSectionProps) => {
         }
         ::placeholder { color: #64748b; }
       `}</style>
-
-      
-
+ 
+     
+ 
       {/* ── MAIN CONTENT ────────────────────────────────────────────────── */}
       {isPageReady && (
         <div className="relative z-10 w-full max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 py-10 lg:py-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-center">
-
+ 
             {/* ── LEFT: COPY ── */}
             <div className="flex flex-col gap-7 text-center lg:text-left">
-
+ 
               {/* Eyebrow */}
               <div
                 ref={taglineRef}
@@ -278,7 +265,7 @@ const HeroSection = ({ isPageReady }: HeroSectionProps) => {
                   Securing Clouds · Empowering Trust
                 </span>
               </div>
-
+ 
               {/* Headline */}
               <div ref={headlineRef} className="opacity-0">
                 <h1 style={{
@@ -323,10 +310,7 @@ const HeroSection = ({ isPageReady }: HeroSectionProps) => {
                         position: 'relative',
                         zIndex: 2,
                         fontWeight: 900,
-                        background: 'linear-gradient(130deg, #60a5fa 0%, #818cf8 45%, #c084fc 100%)',
-                        WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent',
-                        backgroundClip: 'text',
+                        color: '#ffffff',
                       }}
                     >
                       Cloud
@@ -334,8 +318,7 @@ const HeroSection = ({ isPageReady }: HeroSectionProps) => {
                   </span> Security
                   <br />
                   <span style={{
-                    background: 'linear-gradient(130deg, #818cf8 0%, #c084fc 100%)',
-                    WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
+                    color: '#ffffff',
                   }}>
                     &amp; AI-Powered
                   </span>
@@ -343,17 +326,17 @@ const HeroSection = ({ isPageReady }: HeroSectionProps) => {
                   <span style={{ color: '#ffffff' }}>Governance</span>
                 </h1>
               </div>
-
+ 
               {/* Sub */}
               <p
                 ref={subRef}
                 className="opacity-0"
-                style={{ fontSize: '1.05rem', lineHeight: 1.75, color: '#2563eb', maxWidth: 480 }}
+                style={{ fontSize: '1.05rem', lineHeight: 1.75, color: '#ffffff', maxWidth: 480 }}
               >
                 Enterprise-grade cloud security, compliance automation, and AI-driven data
                 governance — trusted by 500+ organizations worldwide.
               </p>
-
+ 
               {/* CTAs */}
               <div
                 ref={ctaRef}
@@ -386,18 +369,18 @@ const HeroSection = ({ isPageReady }: HeroSectionProps) => {
                   href="/about"
                   className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-semibold text-sm transition-all duration-300"
                   style={{
-                    border: '1.5px solid rgba(129,140,248,0.30)',
-                    color: '#a5b4fc',
-                    background: 'rgba(129,140,248,0.06)',
+                    border: '1.5px solid rgba(255,255,255,0.40)',
+                    color: '#ffffff',
+                    background: 'rgba(255,255,255,0.10)',
                     letterSpacing: '0.02em',
                   }}
                   onMouseEnter={e => {
-                    (e.currentTarget as HTMLAnchorElement).style.background = 'rgba(129,140,248,0.14)';
+                    (e.currentTarget as HTMLAnchorElement).style.background = 'rgba(255,255,255,0.20)';
                     (e.currentTarget as HTMLAnchorElement).style.transform = 'translateY(-2px)';
-                    (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 8px 20px rgba(129,140,248,0.20)';
+                    (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 8px 20px rgba(255,255,255,0.15)';
                   }}
                   onMouseLeave={e => {
-                    (e.currentTarget as HTMLAnchorElement).style.background = 'rgba(129,140,248,0.06)';
+                    (e.currentTarget as HTMLAnchorElement).style.background = 'rgba(255,255,255,0.10)';
                     (e.currentTarget as HTMLAnchorElement).style.transform = '';
                     (e.currentTarget as HTMLAnchorElement).style.boxShadow = '';
                   }}
@@ -405,7 +388,7 @@ const HeroSection = ({ isPageReady }: HeroSectionProps) => {
                   See How It Works
                 </a>
               </div>
-
+ 
               {/* Stats */}
               <div ref={statsRef} className="grid grid-cols-2 sm:grid-cols-4 gap-3 opacity-0">
                 {STATS.map(s => (
@@ -434,7 +417,7 @@ const HeroSection = ({ isPageReady }: HeroSectionProps) => {
                 ))}
               </div>
             </div>
-
+ 
             {/* ── RIGHT: GLASSMORPHISM CONTACT CARD ── */}
             <div ref={formRef} className="w-full max-w-md mx-auto lg:mx-0 lg:ml-auto opacity-0">
               <div style={{
@@ -475,7 +458,7 @@ const HeroSection = ({ isPageReady }: HeroSectionProps) => {
                     We respond within 24 hours
                   </p>
                 </div>
-
+ 
                 {submitted ? (
                   <div style={{
                     display: 'flex', flexDirection: 'column', alignItems: 'center',
@@ -535,7 +518,7 @@ const HeroSection = ({ isPageReady }: HeroSectionProps) => {
                         />
                       </div>
                     ))}
-
+ 
                     <div>
                       <label style={{
                         display: 'block', fontSize: '0.75rem', fontWeight: 600,
@@ -610,7 +593,7 @@ const HeroSection = ({ isPageReady }: HeroSectionProps) => {
                               <path d="M6 9l6 6 6-6" stroke="#334155" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
                           </button>
-
+ 
                           <input
                             type="tel"
                             value={form.phoneNumber}
@@ -629,7 +612,7 @@ const HeroSection = ({ isPageReady }: HeroSectionProps) => {
                             }}
                           />
                         </div>
-
+ 
                         {isPhoneCountryOpen && (
                           <div
                             style={{
@@ -698,7 +681,7 @@ const HeroSection = ({ isPageReady }: HeroSectionProps) => {
                         )}
                       </div>
                     </div>
-
+ 
                     <div>
                       <label style={{
                         display: 'block', fontSize: '0.75rem', fontWeight: 600,
@@ -733,7 +716,7 @@ const HeroSection = ({ isPageReady }: HeroSectionProps) => {
                         }}
                       />
                     </div>
-
+ 
                     <div style={{ position: 'relative', overflow: 'visible', width: '100%' }}>
                       <button
                         type="submit"
@@ -783,7 +766,7 @@ const HeroSection = ({ isPageReady }: HeroSectionProps) => {
                       </span>
                     </button>
                     </div>
-
+ 
                     <p style={{ textAlign: 'center', fontSize: '0.73rem', color: '#94a3b8' }}>
                       No spam · We'll help secure &amp; optimise your cloud
                     </p>
@@ -791,14 +774,16 @@ const HeroSection = ({ isPageReady }: HeroSectionProps) => {
                 )}
               </div>
             </div>
-
+ 
           </div>
         </div>
       )}
-
+ 
     </section>
   );
 };
-
-
+ 
+ 
 export default HeroSection;
+ 
+ 
