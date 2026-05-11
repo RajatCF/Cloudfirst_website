@@ -903,26 +903,58 @@ const renderGallery = () => {
     );
   };
 
+  const heroBannerImages = [
+    "/events/events_banner/image%20(4).jpg",
+    "/events/events_banner/image%20(5).jpg",
+    "/events/events_banner/image%20(6).jpg",
+    "/events/events_banner/image%20(7).jpg",
+    "/events/events_banner/image%20(8).jpg",
+  ];
+
   return (
     <>
       <Navbar />
       
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900 py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3')] bg-cover bg-center opacity-10"></div>
-        <div className="relative max-w-7xl mx-auto px-4 text-center text-white">
+      <section className="relative pt-32 pb-28 min-h-[540px] md:min-h-[620px] overflow-hidden">
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 p-6 pt-28 opacity-85">
+            {heroBannerImages.map((src, idx) => (
+              <div
+                key={src}
+                className={`rounded-2xl overflow-hidden shadow-lg border border-white/10 ${
+                  idx === 0 ? "translate-y-6" : idx === 1 ? "-translate-y-4" : idx === 2 ? "translate-y-10" : idx === 3 ? "-translate-y-10" : "translate-y-4"
+                }`}
+              >
+                <img
+                  src={src}
+                  alt="Event banner"
+                  className="h-full w-full object-cover"
+                  loading={idx < 2 ? "eager" : "lazy"}
+                  decoding="async"
+                />
+              </div>
+            ))}
+          </div>
+          <div className="absolute inset-0 bg-black/15" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-black/15 to-transparent" />
+        </div>
+
+        <div className="relative max-w-7xl mx-auto px-4 text-center text-white pt-28 md:pt-40">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              Events & <span className="text-blue-300">Highlights</span>
-            </h1>
-            <p className="text-xl md:text-2xl max-w-4xl mx-auto opacity-90">
-              Explore moments, conferences, and milestones where CloudFirst made an impact. 
-              Discover our journey through event photos and highlights.
-            </p>
+            <div className="inline-block rounded-2xl bg-transparent border border-transparent px-6 py-6 md:px-10 md:py-8">
+              <h1 className="text-5xl md:text-6xl font-bold mb-6">
+                <span className="text-blue-300">Events & Highlights</span>
+              </h1>
+              <p className="text-xl md:text-2xl max-w-4xl mx-auto opacity-90">
+                Explore moments, conferences, and milestones where CloudFirst made an impact.
+                Discover our journey through event photos and highlights.
+              </p>
+            </div>
           </motion.div>
         </div>
       </section>

@@ -12,8 +12,11 @@ const STATS = [
 // Aggressive watermark killer — runs repeatedly
 // to catch dynamically injected DOM nodes
 // ─────────────────────────────────────────────
-const HeroSection = () => {
-  const [loading, setLoading] = useState(true);
+type HeroSectionProps = {
+  isPageReady: boolean;
+};
+
+const HeroSection = ({ isPageReady }: HeroSectionProps) => {
   const [form, setForm] = useState({ name: '', email: '', phoneCca2: 'IN', phoneNumber: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
   type CountryOption = { cca2: string; name: string; dial: string; flagUrl: string };
@@ -51,11 +54,6 @@ const HeroSection = () => {
     setForm({ name: '', email: '', phoneCca2: 'IN', phoneNumber: '', message: '' });
     setTimeout(() => setSubmitted(false), 4000);
   };
-
-  useEffect(() => {
-    const t = setTimeout(() => setLoading(false), 1800);
-    return () => clearTimeout(t);
-  }, []);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -109,7 +107,7 @@ const HeroSection = () => {
   }, []);
 
   useEffect(() => {
-    if (loading) return;
+    if (!isPageReady) return;
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
     const headlineSpans = headlineRef.current?.querySelectorAll('span');
 
@@ -193,7 +191,7 @@ const HeroSection = () => {
       .fromTo(ctaRef.current,      { y: 25,  opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, '-=0.3')
       .fromTo(statRefs.current,    { y: 25,  opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, stagger: 0.1 }, '-=0.3')
       .fromTo(formRef.current,     { x: 50,  opacity: 0 }, { x: 0, opacity: 1, duration: 0.9 }, '-=0.8');
-  }, [loading]);
+  }, [isPageReady]);
 
   return (
     <section
@@ -201,9 +199,8 @@ const HeroSection = () => {
     >
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/banner.jpg')" }}
+        style={{ backgroundImage: "url('/home_page/new_home_image.jpg')" }}
       />
-      <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-black/70 via-black/55 to-black/70" />
       {/* ─────────────────────────────────────────────────────────────────
           GLOBAL CSS WATERMARK SUPPRESSION
           Covers every known selector pattern Spline has ever used,
@@ -256,42 +253,8 @@ const HeroSection = () => {
 
       
 
-      {/* ── LOADER ──────────────────────────────────────────────────────── */}
-      {loading && (
-        <div
-          className="absolute inset-0 flex items-center justify-center z-50"
-          style={{ background: 'linear-gradient(135deg, #e2e8f0 0%, #dbeafe 25%, #e0e7ff 50%, #fce7f3 75%, #f1f5f9 100%)' }}
-        >
-          <div className="relative flex items-center justify-center" style={{ width: 240, height: 240 }}>
-            <div
-              style={{
-                position: 'absolute', top: '50%', left: '50%',
-                width: 200, height: 200,
-                transform: 'translate(-50%,-50%)',
-                borderRadius: '50%',
-                animation: 'loader-ring 2.2s ease-in-out infinite',
-              }}
-            />
-            <div
-              className="relative z-10 flex gap-0.5"
-              style={{
-                fontFamily: 'Space Grotesk, sans-serif',
-                fontWeight: 800, fontSize: '1.5rem',
-                letterSpacing: '0.1em', color: '#a5b4fc',
-              }}
-            >
-              {'CLOUDFIRST'.split('').map((c, i) => (
-                <span key={i} style={{ opacity: 0.2, animation: `loader-cf 2s ${i * 0.08}s infinite` }}>
-                  {c}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* ── MAIN CONTENT ────────────────────────────────────────────────── */}
-      {!loading && (
+      {isPageReady && (
         <div className="relative z-10 w-full max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 py-10 lg:py-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-center">
 

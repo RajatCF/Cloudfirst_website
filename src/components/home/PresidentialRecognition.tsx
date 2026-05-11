@@ -38,7 +38,7 @@ const PresidentialRecognition = () => {
               >
                 <div className="bg-white p-3">
                   <img
-                    src="https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/AshishSirWithPresident.jpg"
+                    src="/events/president_new_image.jpg"
                     alt="Presidential Recognition 2025"
                     className="w-full h-auto max-h-[640px] object-contain bg-white"
                     loading="lazy"
@@ -167,7 +167,7 @@ const PresidentialRecognition = () => {
             </button>
             <div className="w-full h-full bg-white p-4">
               <img
-                src="https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/AshishSirWithPresident.jpg"
+                src="/events/president_new_image.jpg"
                 alt="Presidential Recognition 2025"
                 className="w-full h-full max-h-[calc(90vh-2rem)] object-contain"
                 loading="lazy"

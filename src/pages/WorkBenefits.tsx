@@ -86,6 +86,13 @@ const WorkBenefits = () => {
     }
   ];
 
+  const healthCheckupImages = [
+    "/work_benefits/IMG_2276.jpg",
+    "/work_benefits/IMG_2303.jpg",
+    "/work_benefits/IMG_2309.jpg",
+    "/work_benefits/IMG_2316.jpg",
+  ];
+
   return (
     <Layout>
       <div className="min-h-screen bg-white">
@@ -204,6 +211,37 @@ const WorkBenefits = () => {
               viewport={{ once: true, amount: 0.1 }}
               variants={fadeInUp}
             >
+              <div className="mb-12">
+                <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-base sm:text-lg font-bold text-white bg-gradient-to-r from-emerald-500 via-teal-500 to-sky-500 shadow-md border border-white/30">
+                  <span className="text-lg sm:text-xl">🩺</span>
+                  <span>Health Checkups</span>
+                </div>
+                <p className="mt-3 text-gray-700 max-w-2xl mx-auto leading-relaxed">
+                  A glimpse of our health initiatives and wellness drives for the team.
+                </p>
+
+                <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  {healthCheckupImages.map((src, index) => (
+                    <motion.div
+                      key={src}
+                      initial={{ opacity: 0, y: 18 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.2 }}
+                      transition={{ duration: 0.6, delay: index * 0.06 }}
+                      className="group rounded-2xl overflow-hidden border border-white/70 bg-white/60 shadow-sm hover:shadow-lg transition-all"
+                    >
+                      <img
+                        src={src}
+                        alt="Health checkup"
+                        className="w-full h-64 md:h-72 object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+
               <div className="inline-block px-6 py-3 bg-orange-200/60 backdrop-blur-sm rounded-full text-sm font-medium text-gray-800 mb-8">
                 🚀 Start Your Journey Today
               </div>
@@ -233,21 +271,9 @@ const WorkBenefits = () => {
               </div>
             </motion.div>
 
-            <motion.div
-              className="absolute top-20 left-10 w-20 h-20 bg-orange-300 rounded-full opacity-20"
-              animate={{ y: [-10, 10, -10], rotate: [0, 180, 360] }}
-              transition={{ duration: 6, repeat: Infinity }}
-            />
-            <motion.div
-              className="absolute bottom-20 right-10 w-16 h-16 bg-red-300 rounded-full opacity-20"
-              animate={{ y: [10, -10, 10], rotate: [360, 180, 0] }}
-              transition={{ duration: 8, repeat: Infinity }}
-            />
-            <motion.div
-              className="absolute top-1/2 right-20 w-12 h-12 bg-orange-400 rounded-full opacity-20"
-              animate={{ x: [-5, 5, -5], y: [-5, 5, -5] }}
-              transition={{ duration: 4, repeat: Infinity }}
-            />
+            <div className="absolute top-20 left-10 w-20 h-20 bg-orange-300 rounded-full opacity-20" />
+            <div className="absolute bottom-20 right-10 w-16 h-16 bg-red-300 rounded-full opacity-20" />
+            <div className="absolute top-1/2 right-20 w-12 h-12 bg-orange-400 rounded-full opacity-20" />
           </div>
         </section>
 
@@ -343,17 +369,13 @@ const WorkBenefits = () => {
 
                   <div className="space-y-3">
                     {feature.features.map((item, idx) => (
-                      <motion.div
+                      <div
                         key={item}
                         className="flex items-center gap-3"
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true, amount: 0.1 }}
-                        transition={{ delay: (index * 0.2) + (idx * 0.1) }}
                       >
                         <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${feature.color} group-hover:scale-150 transition-transform duration-300`}></div>
                         <span className="text-sm text-gray-700 font-medium">{item}</span>
-                      </motion.div>
+                      </div>
                     ))}
                   </div>
 

@@ -9,10 +9,10 @@ const OurClients = () => {
       <section className="pt-28 pb-16 bg-white">
         <div className="max-w-6xl mx-auto px-6">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900" style={{ fontFamily: "'Georgia', serif" }}>
-            Our Clients
+            Client Spotlight
           </h1>
           <p className="mt-3 text-gray-600 max-w-2xl">
-            A snapshot of the clients we partner with.
+            A quick look at the brands and teams we proudly support across industries.
           </p>
 
           <div className="mt-10">

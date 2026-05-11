@@ -2,10 +2,34 @@ import { useState } from 'react';
 import Layout from '@/components/Layout';
 import { Send, MapPin, Phone, Mail, Calendar } from 'lucide-react';
 
-const offices = [
-  { city: 'San Francisco', address: '100 Market St, Suite 300, CA 94105', phone: '+1 (415) 555-0100' },
-  { city: 'New York', address: '350 Fifth Ave, Suite 4200, NY 10118', phone: '+1 (212) 555-0200' },
-  { city: 'London', address: '1 Canada Square, Canary Wharf, E14 5AB', phone: '+44 20 7946 0300' },
+const corporateOffice = {
+  heading: 'Corporate Office – Mumbai',
+  lines: [
+    'CloudFirst Technology Pvt. Ltd.',
+    '3rd Floor, Chintamani Plaza,',
+    'Andheri East, Mumbai – 400099, India',
+  ],
+};
+
+const regionalOffices = ['Bengaluru', 'Delhi NCR', 'Hyderabad', 'Kolkata'];
+
+const internationalOffices = [
+  {
+    heading: 'Dubai, UAE',
+    lines: [
+      'Gate Avenue, Zone D – Level 1,',
+      "Al Mustaqbal St, Zaa'beel Second, DIFC,",
+      'Dubai, United Arab Emirates',
+    ],
+  },
+  {
+    heading: 'United States',
+    lines: ['2055 Limestone Rd, STE 200-C,', 'Wilmington, DE 19808,', 'United States'],
+  },
+  {
+    heading: 'Singapore',
+    lines: ['10 Anson Road, International Plaza,', '079903, Singapore'],
+  },
 ];
 
 const Contact = () => {
@@ -39,27 +63,74 @@ const Contact = () => {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-stretch">
             <div className="h-full min-h-[560px] lg:min-h-[620px] rounded-2xl border border-cyan-400/35 bg-gradient-to-br from-cyan-50 via-white to-blue-50 shadow-sm p-8 lg:p-10 flex flex-col">
-              <h2 className="text-2xl font-display font-bold mb-8">Our offices</h2>
+              <h2 className="text-2xl font-display font-bold mb-8">Our Global Presence</h2>
 
-              <div className="space-y-8">
-                {offices.map(office => (
-                  <div key={office.city} className="flex gap-4">
+              <div className="space-y-10">
+                <div>
+                  <div className="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-4">Corporate Office</div>
+                  <div className="flex gap-4">
                     <MapPin className="w-5 h-5 text-bright-blue flex-shrink-0 mt-1" />
                     <div>
-                      <h3 className="font-display font-bold">{office.city}</h3>
-                      <p className="text-sm text-muted-foreground mt-1">{office.address}</p>
-                      <p className="text-sm text-muted-foreground">{office.phone}</p>
+                      <h3 className="font-display font-bold">{corporateOffice.heading}</h3>
+                      <div className="mt-1 space-y-0.5">
+                        {corporateOffice.lines.map((line) => (
+                          <p key={line} className="text-sm text-muted-foreground">
+                            {line}
+                          </p>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                ))}
+                </div>
+
+                <div>
+                  <div className="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-4">Regional Offices</div>
+                  <div className="flex gap-4">
+                    <MapPin className="w-5 h-5 text-bright-blue flex-shrink-0 mt-1" />
+                    <div className="flex flex-wrap gap-2">
+                      {regionalOffices.map((city) => (
+                        <span
+                          key={city}
+                          className="px-3 py-1 rounded-full text-xs font-medium bg-white/70 border border-cyan-400/20 text-gray-800"
+                        >
+                          {city}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <div className="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-4">International Offices</div>
+                  <div className="space-y-6">
+                    {internationalOffices.map((office) => (
+                      <div key={office.heading} className="flex gap-4">
+                        <MapPin className="w-5 h-5 text-bright-blue flex-shrink-0 mt-1" />
+                        <div>
+                          <h3 className="font-display font-bold">{office.heading}</h3>
+                          <div className="mt-1 space-y-0.5">
+                            {office.lines.map((line) => (
+                              <p key={line} className="text-sm text-muted-foreground">
+                                {line}
+                              </p>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
 
               <div className="mt-12 flex flex-col gap-3">
-                <a href="mailto:hello@cloudfirst.io" className="flex items-center gap-3 text-sm text-muted-foreground hover:text-bright-blue transition-colors">
-                  <Mail className="w-4 h-4" /> hello@cloudfirst.io
+                <a href="mailto:solutions@cloudfirst.in" className="flex items-center gap-3 text-sm text-muted-foreground hover:text-bright-blue transition-colors">
+                  <Mail className="w-4 h-4" /> solutions@cloudfirst.in
                 </a>
-                <a href="tel:+14155550100" className="flex items-center gap-3 text-sm text-muted-foreground hover:text-bright-blue transition-colors">
-                  <Phone className="w-4 h-4" /> +1 (415) 555-0100
+                <a href="mailto:support@cloudfirst.in" className="flex items-center gap-3 text-sm text-muted-foreground hover:text-bright-blue transition-colors">
+                  <Mail className="w-4 h-4" /> support@cloudfirst.in
+                </a>
+                <a href="tel:+918448440769" className="flex items-center gap-3 text-sm text-muted-foreground hover:text-bright-blue transition-colors">
+                  <Phone className="w-4 h-4" /> +91-8448440769
                 </a>
               </div>
 

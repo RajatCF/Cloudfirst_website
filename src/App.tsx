@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import ScrollToTop from "./components/ScrollToTop";
 import Footer from "./components/Footer";
@@ -69,9 +69,29 @@ const CloudFirstVideos = lazy(() => import("./pages/CloudFirstVideos"));
 const LifeAtCloudFirst = lazy(() => import("./pages/LifeAtCloudFirst"));
 const WorkBenefits = lazy(() => import("./pages/WorkBenefits"));
 const EvergreenThought = lazy(() => import("./pages/EvergreenThought"));
+const OgGreenTreeReport = lazy(() => import("./pages/OgGreenTreeReport"));
  
 const queryClient = new QueryClient();
-const OG_GREEN_TREE_URL = "https://example.com";
+
+const OgGreenTreeButton = () => {
+  const navigate = useNavigate();
+
+  return (
+    <button
+      type="button"
+      onClick={() => navigate("/og-green-tree")}
+      aria-label="Open OG Green Tree"
+      className="fixed bottom-6 right-6 z-[60] w-14 h-14 rounded-full bg-yellow-50 shadow-xl hover:shadow-2xl transition-all duration-200 flex items-center justify-center overflow-hidden ring-1 ring-yellow-200"
+    >
+      <img
+        src="/logo/og-green-tree.jpg"
+        alt="OG Green Tree"
+        className="w-full h-full object-cover rounded-full"
+        loading="lazy"
+      />
+    </button>
+  );
+};
  
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -80,19 +100,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <ScrollToTop />
-        <button
-          type="button"
-          onClick={() => window.open(OG_GREEN_TREE_URL, "_blank", "noopener,noreferrer")}
-          aria-label="Open OG Green Tree"
-          className="fixed bottom-6 right-6 z-[60] w-14 h-14 rounded-full bg-yellow-50 shadow-xl hover:shadow-2xl transition-all duration-200 flex items-center justify-center overflow-hidden ring-1 ring-yellow-200"
-        >
-          <img
-            src="/logo/og-green-tree.jpg"
-            alt="OG Green Tree"
-            className="w-full h-full object-cover rounded-full"
-            loading="lazy"
-          />
-        </button>
+        <OgGreenTreeButton />
         <Suspense fallback={
           <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-blue-50">
             <div className="text-center">
@@ -187,6 +195,7 @@ const App = () => (
             <Route path="/work-benefits" element={<WorkBenefits />} />
 
             <Route path="/evergreen-thought" element={<EvergreenThought />} />
+            <Route path="/og-green-tree" element={<OgGreenTreeReport />} />
  
             <Route path="*" element={<NotFound />} />
           </Routes>

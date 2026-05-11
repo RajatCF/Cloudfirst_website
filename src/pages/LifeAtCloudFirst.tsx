@@ -1,10 +1,12 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 const LifeAtCloudFirst = () => {
   const [activeCategory, setActiveCategory] = useState<string>('festivals');
+  const [viewMode, setViewMode] = useState<'overview' | 'gallery'>('overview');
+  const [openPhoto, setOpenPhoto] = useState<{ src: string; title: string } | null>(null);
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
     visible: { 
@@ -17,51 +19,72 @@ const LifeAtCloudFirst = () => {
     }
   };
 
+  useEffect(() => {
+    if (!openPhoto) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpenPhoto(null);
+    };
+    window.addEventListener('keydown', onKeyDown);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', onKeyDown);
+      document.body.style.overflow = '';
+    };
+  }, [openPhoto]);
+
   const photoCategories = useMemo(() => {
     const categories = [
       {
         key: 'festivals',
         label: 'Festivals',
         photos: [
-          { src: '/Life at cloudfirst/diwali celebration at cloudfirst.jfif', title: 'Diwali Celebration' },
-          { src: '/Life at cloudfirst/diwali celebration at cloudfirst-1.jfif', title: 'Diwali Celebration' },
-          { src: '/Life at cloudfirst/diwali celebration at cloudfirst-1 (2).jfif', title: 'Diwali Celebration' },
-          { src: '/Life at cloudfirst/holi-celebration-at-acloudfirst.jfif', title: 'Holi Celebration' },
           { src: '/Life at cloudfirst/christmas at cloudfirst.jfif', title: 'Christmas Celebration' },
-          { src: '/Life at cloudfirst/makar sankranti at cloudfirst.jfif', title: 'Makar Sankranti' },
+          { src: '/Life at cloudfirst/holi-celebration-at-acloudfirst.jfif', title: 'Holi Celebration' },
           { src: '/Life at cloudfirst/independence-day-celebration-at-cloudfirst.jfif', title: 'Independence Day' },
+          { src: '/Life at cloudfirst/diwali celebration at cloudfirst.jfif', title: 'Diwali Pics' },
+          { src: '/Life at cloudfirst/diwali celebration at cloudfirst-1.jfif', title: 'Diwali Pics' },
+          { src: '/Life at cloudfirst/diwali celebration at cloudfirst-1 (2).jfif', title: 'Diwali Pics' },
+          { src: '/Life at cloudfirst/makar sankranti at cloudfirst.jfif', title: 'Makar Sankranti' },
           { src: '/Life at cloudfirst/women_day_img.png', title: "Women's Day" },
+          { src: '/cloudfirts_festivals/WhatsApp Image 2026-03-11 at 12.06.34 (1).jpeg', title: 'Festival Moments' },
         ],
       },
       {
-        key: 'outing',
-        label: 'Outing',
+        key: 'csr',
+        label: 'CSR and Social Activities',
         photos: [
-          { src: '/Life at cloudfirst/annual-ofsite-visits-at0cloudfirst.jfif', title: 'Annual Offsite Visits' },
+          { src: '/Life at cloudfirst/charity-work-at-cloudfirst.jfif', title: 'Charity Work' },
+          { src: '/cloudfirst_csr/1.png', title: 'CSR Drive' },
+          { src: '/cloudfirst_csr/3.png', title: 'CSR Drive' },
+          { src: '/cloudfirst_csr/4.png', title: 'CSR Drive' },
+          { src: '/cloudfirst_csr/5.png', title: 'CSR Drive' },
+        ],
+      },
+      {
+        key: 'offsites',
+        label: 'Offsites & Retreats',
+        photos: [
+          { src: '/Life at cloudfirst/annual-ofsite-visits-at0cloudfirst.jfif', title: 'Annual Offsite' },
           { src: '/Life at cloudfirst/1741274387298.jfif', title: 'Team Outing' },
           { src: '/Life at cloudfirst/1741274387962.jfif', title: 'Team Outing' },
-        ],
-      },
-      {
-        key: 'adventure',
-        label: 'Adventure',
-        photos: [
-          { src: '/Life at cloudfirst/1741274391252.jfif', title: 'Adventure' },
-        ],
-      },
-      {
-        key: 'milestones',
-        label: 'Milestones',
-        photos: [
-          { src: '/Life at cloudfirst/productLaunch.jpeg', title: 'Product Launch' },
-          { src: '/Life at cloudfirst/charity-work-at-cloudfirst.jfif', title: 'Charity Work' },
+          { src: '/Life at cloudfirst/1741274391252.jfif', title: 'Team Retreat' },
+          { src: '/Life at cloudfirst/paso.jpeg', title: 'Team Moments' },
+          { src: '/Life at cloudfirst/productLaunch.jpeg', title: 'Team Milestone' },
+          { src: '/cloudfirst_offsite/Image (2).jpg', title: 'Offsite' },
+          { src: '/cloudfirst_offsite/Image (3).jpg', title: 'Offsite' },
+          { src: '/cloudfirst_offsite/Image (4).jpg', title: 'Offsite' },
         ],
       },
     ];
 
-    const safeDefault = categories.some((c) => c.key === activeCategory) ? activeCategory : 'festivals';
+    const normalized = categories.map((c) => ({
+      ...c,
+      photos: c.photos.filter((p) => !p.src.toLowerCase().endsWith('.heic')),
+    }));
+
+    const safeDefault = normalized.some((c) => c.key === activeCategory) ? activeCategory : 'festivals';
     if (safeDefault !== activeCategory) setActiveCategory(safeDefault);
-    return categories;
+    return normalized;
   }, [activeCategory]);
 
   const activePhotos = useMemo(() => {
@@ -151,7 +174,7 @@ const LifeAtCloudFirst = () => {
             variants={fadeInUp}
           >
             <h2 className="text-3xl md:text-4xl font-semibold text-gray-900 mb-4">Our Team in Action</h2>
-            <p className="text-gray-600 text-lg">Celebrating moments, festivals, and achievements together</p>
+            <p className="text-gray-600 text-lg">Explore celebrations, CSR initiatives, and offsites & retreats</p>
           </motion.div>
 
           <motion.div
@@ -161,55 +184,157 @@ const LifeAtCloudFirst = () => {
             variants={fadeInUp}
             className="max-w-6xl mx-auto"
           >
-            <div className="flex flex-wrap justify-center gap-3 mb-10">
-              {photoCategories.map((c) => (
-                <button
-                  key={c.key}
-                  type="button"
-                  onClick={() => setActiveCategory(c.key)}
-                  className={`px-4 py-2 rounded-full text-sm font-semibold border transition-all ${
-                    activeCategory === c.key
-                      ? 'bg-purple-600 text-white border-purple-600'
-                      : 'bg-white text-gray-700 border-gray-200 hover:border-purple-300 hover:text-purple-700'
-                  }`}
-                >
-                  {c.label}
-                </button>
-              ))}
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {activePhotos.map((photo) => (
-                <div
-                  key={`${activeCategory}-${photo.src}`}
-                  className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
-                >
-                  <div className="relative h-72 overflow-hidden bg-gray-50">
-                    <img
-                      src={encodeURI(photo.src)}
-                      alt={photo.title}
-                      className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                      loading="lazy"
-                      onError={(e) => {
-                        e.currentTarget.style.display = 'none';
+            {viewMode === 'overview' ? (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {[
+                  {
+                    key: 'festivals',
+                    title: 'Celebration',
+                    subtitle: 'Diwali, Holi, Independence Day, Women’s Day and more',
+                  },
+                  {
+                    key: 'csr',
+                    title: 'CSR & Social Activities',
+                    subtitle: 'Community initiatives and social impact drives',
+                  },
+                  {
+                    key: 'offsites',
+                    title: 'Offsites & Retreats',
+                    subtitle: 'Team outings, offsites, and retreats',
+                  },
+                ].map((card) => {
+                  const preview = photoCategories.find((c) => c.key === card.key)?.photos?.[0];
+                  return (
+                    <button
+                      key={card.key}
+                      type="button"
+                      onClick={() => {
+                        setActiveCategory(card.key);
+                        setViewMode('gallery');
                       }}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                    <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
-                      <h3 className="text-lg font-bold">{photo.title}</h3>
-                    </div>
+                      className="group rounded-2xl overflow-hidden border border-gray-100 bg-white shadow-lg hover:shadow-2xl transition-all text-left"
+                    >
+                      <div className="relative h-56 bg-gray-50 overflow-hidden">
+                        {preview ? (
+                          <img
+                            src={encodeURI(preview.src)}
+                            alt={card.title}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            loading="lazy"
+                            onError={(e) => {
+                              e.currentTarget.style.display = 'none';
+                            }}
+                          />
+                        ) : null}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                        <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
+                          <div className="text-xl font-bold">{card.title}</div>
+                          <div className="mt-1 text-sm text-white/80">{card.subtitle}</div>
+                        </div>
+                      </div>
+                      <div className="p-5">
+                        <div className="inline-flex items-center gap-2 text-sm font-semibold text-purple-700">
+                          View photos <span className="transition-transform group-hover:translate-x-0.5">→</span>
+                        </div>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            ) : (
+              <>
+                <div className="flex items-center justify-between gap-4 mb-10">
+                  <div>
+                    <h3 className="text-2xl md:text-3xl font-semibold text-gray-900">
+                      {activeCategory === 'festivals'
+                        ? 'Celebration'
+                        : activeCategory === 'csr'
+                        ? 'CSR & Social Activities'
+                        : 'Offsites & Retreats'}
+                    </h3>
+                    <p className="mt-2 text-gray-600">
+                      Tap any image to view it in full size.
+                    </p>
                   </div>
+                  <button
+                    type="button"
+                    onClick={() => setViewMode('overview')}
+                    className="px-5 py-2.5 rounded-full text-sm font-semibold border border-gray-200 bg-white hover:border-purple-300 hover:text-purple-700 transition-colors"
+                  >
+                    ← Back
+                  </button>
                 </div>
-              ))}
-              {activePhotos.length === 0 ? (
-                <div className="sm:col-span-2 lg:col-span-3 text-center text-gray-500">
-                  No images available in this category.
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {activePhotos.map((photo) => (
+                    <button
+                      key={`${activeCategory}-${photo.src}`}
+                      type="button"
+                      onClick={() => setOpenPhoto(photo)}
+                      className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 text-left"
+                    >
+                      <div className="relative h-72 overflow-hidden bg-gray-50">
+                        <img
+                          src={encodeURI(photo.src)}
+                          alt={photo.title}
+                          className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                          loading="lazy"
+                          onError={(e) => {
+                            e.currentTarget.style.display = 'none';
+                          }}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                        <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+                          <h3 className="text-lg font-bold">{photo.title}</h3>
+                        </div>
+                      </div>
+                    </button>
+                  ))}
+                  {activePhotos.length === 0 ? (
+                    <div className="sm:col-span-2 lg:col-span-3 text-center text-gray-500">
+                      No images available in this category.
+                    </div>
+                  ) : null}
                 </div>
-              ) : null}
-            </div>
+              </>
+            )}
           </motion.div>
         </div>
       </section>
+
+      {openPhoto ? (
+        <div
+          className="fixed inset-0 z-[80] bg-black/70 px-4 py-8 flex items-center justify-center"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Image preview"
+          onClick={() => setOpenPhoto(null)}
+        >
+          <div
+            className="relative w-full max-w-6xl max-h-[90vh] rounded-2xl bg-white overflow-hidden shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={() => setOpenPhoto(null)}
+              aria-label="Close"
+              className="absolute right-3 top-3 z-10 rounded-full bg-black/70 text-white px-3 py-2 text-sm hover:bg-black/80 transition-colors"
+            >
+              Close
+            </button>
+            <div className="w-full h-full bg-white p-4">
+              <img
+                src={encodeURI(openPhoto.src)}
+                alt={openPhoto.title}
+                className="w-full h-full max-h-[calc(90vh-2rem)] object-contain"
+                loading="lazy"
+                decoding="async"
+              />
+              <div className="mt-3 text-sm font-semibold text-gray-800">{openPhoto.title}</div>
+            </div>
+          </div>
+        </div>
+      ) : null}
 
       {/* Employee Testimonials Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-purple-50 to-pink-50">
@@ -256,10 +381,10 @@ const LifeAtCloudFirst = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
-                name: "Akash Singh",
-                position: "Digital Marketing Specialist",
-                quote: "As a Digital Marketing Specialist at CloudFirst, I've found an inspiring culture that values creativity, teamwork, and growth. The environment is supportive and dynamic, encouraging new ideas and continuous learning. It's a place where you truly grow both professionally and personally",
-                avatar: "AS",
+                name: "Ankit Pal",
+                position: "Software Developer",
+                quote: "As a Software Developer at CloudFirst, I get to work on real-world cloud solutions with a team that values clean engineering, ownership, and continuous learning. The environment is collaborative and supportive, which helps me grow my technical skills while delivering impactful work for clients.",
+                avatar: "AP",
                 bgColor: "bg-purple-500"
               },
               {

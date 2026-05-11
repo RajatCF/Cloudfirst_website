@@ -1,6 +1,6 @@
 import Layout from '@/components/Layout';
 import { CheckCircle2, Globe, Award, Users, TrendingUp, ShieldCheck, Lightbulb, Heart, Star, ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const stats = [
   { value: "ISO 27001", label: "Information Security", icon: ShieldCheck },
@@ -88,6 +88,9 @@ const milestones = [
 ];
 
 const About = () => {
+  const { hash } = useLocation();
+  const showLeadership = hash === '#our-leadership';
+
   return (
     <Layout>
       {/* ── Hero ── */}
@@ -182,33 +185,78 @@ const About = () => {
         </div>
       </section>
 
-      <section className="bg-white border-b border-gray-100">
-        <div className="max-w-[1200px] mx-auto px-6 lg:px-10 py-16">
-          <div className="rounded-2xl overflow-hidden">
-            <img
-              src="/About_us.png"
-              alt="About CloudFirst"
-              className="w-full h-[520px] md:h-[620px] object-cover contrast-125 brightness-95"
-              onError={(e) => {
-                e.currentTarget.src = "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1200&q=80";
-              }}
-            />
-          </div>
-        </div>
-      </section>
+      {!showLeadership && (
+        <section className="bg-white border-b border-gray-100">
+          <div className="max-w-[1200px] mx-auto px-6 lg:px-10 py-16">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+              <div className="rounded-2xl overflow-hidden border border-gray-100 shadow-sm bg-white">
+                <img
+                  src="/About_us.png"
+                  alt="About CloudFirst"
+                  className="w-full h-[520px] md:h-[620px] object-cover"
+                  onError={(e) => {
+                    e.currentTarget.src = "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1200&q=80";
+                  }}
+                />
+              </div>
 
-      <section id="our-leadership" className="bg-white border-b border-gray-100">
-        <div className="max-w-[1200px] mx-auto px-6 lg:px-10 py-16">
-          <div className="rounded-2xl overflow-hidden">
-            <img
-              src="/Our_leadership.png"
-              alt="Our leadership"
-              className="w-full h-[520px] md:h-[620px] object-cover"
-              loading="lazy"
-            />
+              <div>
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4" style={{ fontFamily: "'Georgia', serif" }}>
+                  About CloudFirst
+                </h2>
+                <div className="space-y-5 text-gray-700 leading-relaxed text-[18px]">
+                  <p>
+                    CloudFirst Technology® Private Limited—an ISO 27001:2013 and ISO 9001:2015 certified company—is empowering its client base by leveraging information technology resources.
+                  </p>
+                  <p>
+                    The company encompasses experience and expertise in catering to international clients from the US, Canada, Dubai, Singapore, and many more, and has also undertaken several Indian government projects.
+                  </p>
+                  <p>
+                    CloudFirst Technology® is a workforce of skilled and passionate professionals who align their future with company and client success. Leverage our pioneering spirit, innovation, and excellence on your journey towards growth.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
+
+      {showLeadership && (
+        <section id="our-leadership" className="bg-white border-b border-gray-100">
+          <div className="max-w-[1200px] mx-auto px-6 lg:px-10 py-16">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+              <div className="rounded-2xl overflow-hidden border border-gray-100 shadow-sm bg-white">
+                <img
+                  src="/Our_leadership.png"
+                  alt="Our leadership"
+                  className="w-full h-[520px] md:h-[620px] object-contain bg-white"
+                  loading="lazy"
+                  onError={(e) => {
+                    e.currentTarget.src = "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80";
+                  }}
+                />
+              </div>
+
+              <div>
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4" style={{ fontFamily: "'Georgia', serif" }}>
+                  Our Leadership
+                </h2>
+                <div className="space-y-5 text-gray-700 leading-relaxed text-[18px]">
+                  <p>
+                    CloudFirst is led by experienced professionals who combine deep cloud expertise with a strong focus on delivery quality, security, and customer outcomes.
+                  </p>
+                  <p>
+                    Our leadership team works closely with engineering and customer success to ensure every engagement is aligned to business goals, executed with clarity, and measured with real results.
+                  </p>
+                  <p>
+                    From strategy to execution, we build partnerships rooted in trust, accountability, and continuous improvement.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ── Vision & Mission ── */}
       <section className="bg-white border-b border-gray-100">
