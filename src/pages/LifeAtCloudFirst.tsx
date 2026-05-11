@@ -9,8 +9,13 @@ const overviewCardImages: Record<string, string[]> = {
     '/cloudfirts_festivals/Christmas Post.png',
     '/cloudfirts_festivals/WhatsApp Image 2026-03-11 at 12.06.34 (1).jpeg',
   ],
-  csr: ['/cloudfirst_csr/1.png', '/cloudfirst_csr/4.png', '/cloudfirst_csr/5.png'],
-  offsites: ['/cloudfirst_offsite/Image (2).jpg', '/cloudfirst_offsite/Image (3).jpg', '/cloudfirst_offsite/Image (4).jpg'],
+  csr: ['/cloudfirst_csr/1.png', '/cloudfirst_csr/3.png', '/cloudfirst_csr/4.png', '/cloudfirst_csr/5.png'],
+  offsites: [
+    '/cloudfirst_offsite/Image (2).jpg',
+    '/cloudfirst_offsite/Image (3).jpg',
+    '/cloudfirst_offsite/Image (4).jpg',
+    '/cloudfirst_offsite/image_neww.jpeg',
+  ],
 };
 
 const MotionImageCarousel = ({
@@ -113,22 +118,15 @@ const LifeAtCloudFirst = () => {
         key: 'festivals',
         label: 'Festivals',
         photos: [
-          { src: '/Life at cloudfirst/christmas at cloudfirst.jfif', title: 'Christmas Celebration' },
-          { src: '/Life at cloudfirst/holi-celebration-at-acloudfirst.jfif', title: 'Holi Celebration' },
-          { src: '/Life at cloudfirst/independence-day-celebration-at-cloudfirst.jfif', title: 'Independence Day' },
-          { src: '/Life at cloudfirst/diwali celebration at cloudfirst.jfif', title: 'Diwali Pics' },
-          { src: '/Life at cloudfirst/diwali celebration at cloudfirst-1.jfif', title: 'Diwali Pics' },
-          { src: '/Life at cloudfirst/diwali celebration at cloudfirst-1 (2).jfif', title: 'Diwali Pics' },
-          { src: '/Life at cloudfirst/makar sankranti at cloudfirst.jfif', title: 'Makar Sankranti' },
-          { src: '/Life at cloudfirst/women_day_img.png', title: "Women's Day" },
-          { src: '/cloudfirts_festivals/WhatsApp Image 2026-03-11 at 12.06.34 (1).jpeg', title: 'Festival Moments' },
+          { src: '/cloudfirts_festivals/Holi Vibes.png', title: 'Celebration' },
+          { src: '/cloudfirts_festivals/Christmas Post.png', title: 'Celebration' },
+          { src: '/cloudfirts_festivals/WhatsApp Image 2026-03-11 at 12.06.34 (1).jpeg', title: 'Celebration' },
         ],
       },
       {
         key: 'csr',
         label: 'CSR and Social Activities',
         photos: [
-          { src: '/Life at cloudfirst/charity-work-at-cloudfirst.jfif', title: 'Charity Work' },
           { src: '/cloudfirst_csr/1.png', title: 'CSR Drive' },
           { src: '/cloudfirst_csr/3.png', title: 'CSR Drive' },
           { src: '/cloudfirst_csr/4.png', title: 'CSR Drive' },
@@ -139,15 +137,10 @@ const LifeAtCloudFirst = () => {
         key: 'offsites',
         label: 'Offsites & Retreats',
         photos: [
-          { src: '/Life at cloudfirst/annual-ofsite-visits-at0cloudfirst.jfif', title: 'Annual Offsite' },
-          { src: '/Life at cloudfirst/1741274387298.jfif', title: 'Team Outing' },
-          { src: '/Life at cloudfirst/1741274387962.jfif', title: 'Team Outing' },
-          { src: '/Life at cloudfirst/1741274391252.jfif', title: 'Team Retreat' },
-          { src: '/Life at cloudfirst/paso.jpeg', title: 'Team Moments' },
-          { src: '/Life at cloudfirst/productLaunch.jpeg', title: 'Team Milestone' },
           { src: '/cloudfirst_offsite/Image (2).jpg', title: 'Offsite' },
           { src: '/cloudfirst_offsite/Image (3).jpg', title: 'Offsite' },
           { src: '/cloudfirst_offsite/Image (4).jpg', title: 'Offsite' },
+          { src: '/cloudfirst_offsite/image_neww.jpeg', title: 'Offsite' },
         ],
       },
     ];
@@ -268,14 +261,14 @@ const LifeAtCloudFirst = () => {
                     subtitle: 'Diwali, Holi, Independence Day, Women’s Day and more',
                   },
                   {
+                    key: 'offsites',
+                    title: 'Offsite & Retreats',
+                    subtitle: 'Team outings, offsites, and retreats',
+                  },
+                  {
                     key: 'csr',
                     title: 'CSR & Social Activities',
                     subtitle: 'Community initiatives and social impact drives',
-                  },
-                  {
-                    key: 'offsites',
-                    title: 'Offsites & Retreats',
-                    subtitle: 'Team outings, offsites, and retreats',
                   },
                 ].map((card) => {
                   const images = overviewCardImages[card.key] ?? [];
@@ -314,9 +307,9 @@ const LifeAtCloudFirst = () => {
                     <h3 className="text-2xl md:text-3xl font-semibold text-gray-900">
                       {activeCategory === 'festivals'
                         ? 'Celebration'
-                        : activeCategory === 'csr'
-                        ? 'CSR & Social Activities'
-                        : 'Offsites & Retreats'}
+                        : activeCategory === 'offsites'
+                        ? 'Offsite & Retreats'
+                        : 'CSR & Social Activities'}
                     </h3>
                     <p className="mt-2 text-gray-600">
                       Tap any image to view it in full size.
