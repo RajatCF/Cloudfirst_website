@@ -6,8 +6,8 @@ const CloudSecurity = () => {
     <Layout>
       <div className="bg-gradient-to-br from-red-50 to-white min-h-screen">
         {/* Hero Section */}
-        <section className="relative flex flex-col md:flex-row items-center justify-between max-w-7xl mx-auto px-4 md:px-12 pt-20 pb-12 md:pb-24">
-          <div className="flex-1 text-center md:text-left z-10">
+        <section className="relative max-w-7xl mx-auto px-4 md:px-12 pt-20 pb-12 md:pb-24">
+          <div className="text-center z-10 max-w-3xl mx-auto">
             <h1 className="text-4xl md:text-6xl font-extrabold text-navy mb-6 leading-tight">
               Enterprise <span className="text-bright-blue">Cloud Security</span>
             </h1>
@@ -15,13 +15,6 @@ const CloudSecurity = () => {
               Protect your cloud environment with end-to-end security measures. From identity management to threat response, we keep your data safe.
             </p>
             <a href="/contact" className="btn-primary text-lg px-8 py-3 shadow-lg inline-block">Secure My Cloud</a>
-          </div>
-          <div className="flex-1 flex justify-center md:justify-end mt-10 md:mt-0">
-            <img
-              src="https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&fit=crop&w=800&q=80"
-              alt="Cloud Security Hero"
-              className="rounded-2xl shadow-2xl w-full max-w-md md:max-w-lg border-4 border-bright-blue/10"
-            />
           </div>
           <svg className="absolute top-0 right-0 w-64 h-64 opacity-10 -z-1 hidden md:block" viewBox="0 0 400 400" fill="none"><circle cx="200" cy="200" r="200" fill="#EF4444" /></svg>
         </section>
@@ -72,33 +65,6 @@ const CloudSecurity = () => {
                 <div className="w-14 h-14 rounded-full bg-bright-blue/10 flex items-center justify-center mb-3 text-2xl">4</div>
                 <h4 className="font-semibold mb-1">Respond</h4>
                 <p className="text-sm text-muted-foreground">Act quickly to contain breaches.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Testimonials Section */}
-        <section className="max-w-5xl mx-auto px-4 py-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">Client Praise</h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-white rounded-xl shadow-md p-8">
-              <p className="text-lg mb-4">“Their security audits uncovered gaps we didn’t even know existed. They fixed everything promptly.”</p>
-              <div className="flex items-center gap-3">
-                <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Client" className="w-10 h-10 rounded-full" />
-                <div>
-                  <div className="font-semibold">Arjun D., CISO</div>
-                  <div className="text-xs text-muted-foreground">FinTech Firm</div>
-                </div>
-              </div>
-            </div>
-            <div className="bg-white rounded-xl shadow-md p-8">
-              <p className="text-lg mb-4">“Compliance became effortless once they took over security management. Our audits now pass with flying colors.”</p>
-              <div className="flex items-center gap-3">
-                <img src="https://randomuser.me/api/portraits/women/47.jpg" alt="Client" className="w-10 h-10 rounded-full" />
-                <div>
-                  <div className="font-semibold">Lina M., COO</div>
-                  <div className="text-xs text-muted-foreground">Healthcare Corporation</div>
-                </div>
               </div>
             </div>
           </div>

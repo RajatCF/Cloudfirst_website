@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
  
  
-import { Brain, User, Clock, ArrowRight, BookOpen, Search, Plus } from "lucide-react";
+import { Brain, User, Clock, ArrowRight, BookOpen, Search } from "lucide-react";
  
 const API_URL = 'https://hor3mik7u1.execute-api.ap-south-1.amazonaws.com/Dev';
 const BLOG_API_URL = `${API_URL}/cloudfirst-blog`;
@@ -335,16 +335,7 @@ const Blogs: React.FC = () => {
               <h2 className="text-3xl font-light text-gray-800">Latest Articles</h2>
             </div>
             <div className="flex items-center gap-4">
-              <div className="text-sm text-gray-500">
-                {remainingBlogs.length} articles found
-              </div>
-              <button
-                onClick={() => navigate('/create-blog')}
-                className="inline-flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-xl hover:bg-blue-700 transition-colors duration-200 font-medium text-sm"
-              >
-                <Plus className="w-4 h-4" />
-                Create New Blog
-              </button>
+              <div className="text-sm text-gray-500">{remainingBlogs.length} articles found</div>
             </div>
           </div>
  
@@ -438,19 +429,10 @@ const Blogs: React.FC = () => {
               </h3>
               <p className="text-gray-500 mb-6">
                 {blogs.length === 0
-                  ? 'Be the first to create a blog post!'
+                  ? 'Check back soon for new posts.'
                   : 'Try adjusting your search terms'
                 }
               </p>
-              {blogs.length === 0 && (
-                <button
-                  onClick={() => navigate('/create-blog')}
-                  className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-xl hover:bg-blue-700"
-                >
-                  <Plus className="w-5 h-5" />
-                  Create First Blog
-                </button>
-              )}
             </div>
           )}
         </section>

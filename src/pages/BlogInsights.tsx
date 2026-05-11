@@ -173,12 +173,6 @@ const BlogInsights: React.FC = () => {
             </div>
             <h3 className="text-xl font-medium text-gray-700 mb-2">No blog posts yet</h3>
             <p className="text-gray-500 mb-6">Start creating amazing content to see it here!</p>
-            <button
-              onClick={() => navigate('/create-blog')}
-              className="inline-flex items-center gap-2 bg-orange-500 text-white px-6 py-3 rounded-xl hover:bg-orange-600 transition-colors"
-            >
-              Create First Blog
-            </button>
           </div>
         )}
       </div>

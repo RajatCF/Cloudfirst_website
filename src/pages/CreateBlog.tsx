@@ -39,8 +39,7 @@ const CreateBlog: React.FC = () => {
   const [editingBlog, setEditingBlog] = useState<BlogItem | null>(null);
   const [showBlogList, setShowBlogList] = useState(true);
  
-  // Set your password here
-  const ADMIN_PASSWORD = 'cloudfirst123';
+  const ADMIN_PASSWORD = (import.meta as { env?: Record<string, string | undefined> })?.env?.VITE_BLOG_ADMIN_PASSWORD || 'cloudfirst@123';
  
   const handlePasswordSubmit = (e: React.FormEvent) => {
     e.preventDefault();

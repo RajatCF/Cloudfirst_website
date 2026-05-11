@@ -3,18 +3,18 @@ import { Linkedin, Twitter, Youtube, Facebook, Instagram } from 'lucide-react';
 
 const footerLinks = {
   services: [
-    { label: 'Cloud Modernization', path: '/solutions' },
-    { label: 'Data Intelligence', path: '/solutions' },
-    { label: 'DevOps Automation', path: '/solutions' },
-    { label: 'Security & Reliability', path: '/solutions' },
-    { label: 'Cost Optimization', path: '/solutions' },
-    { label: 'Managed Services', path: '/solutions' },
+    { label: 'Cloud Modernization', path: '/solutions/infrastructure-modernisation' },
+    { label: 'Data Intelligence', path: '/solutions/data-analytic' },
+    { label: 'DevOps Automation', path: '/solutions/cloud-devops' },
+    { label: 'Security & Reliability', path: '/solutions/cloud-security' },
+    { label: 'Cost Optimization', path: '/solutions/cost-optimisation' },
+    { label: 'Managed Services', path: '/solutions/managed-cloud-service' },
   ],
   company: [
     { label: 'About Us', path: '/about' },
     { label: 'Insights', path: '/insights' },
     { label: 'Pricing', path: '/pricing' },
-    { label: 'Careers', path: '/about' },
+    { label: 'Careers', path: '/company/careers' },
     { label: 'Contact', path: '/contact' },
   ],
   connect: [
@@ -62,7 +62,7 @@ const Footer = () => {
             <ul className="space-y-3">
               {footerLinks.services.map((link) => (
                 <li key={link.label}>
-                  <Link to={link.path} className="text-sm opacity-60 hover:opacity-100 hover:text-bright-blue transition-all">
+                  <Link to={link.path} className="block text-sm opacity-60 hover:opacity-100 hover:text-bright-blue transition-all">
                     {link.label}
                   </Link>
                 </li>
@@ -75,7 +75,7 @@ const Footer = () => {
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.label}>
-                  <Link to={link.path} className="text-sm opacity-60 hover:opacity-100 hover:text-bright-blue transition-all">
+                  <Link to={link.path} className="block text-sm opacity-60 hover:opacity-100 hover:text-bright-blue transition-all">
                     {link.label}
                   </Link>
                 </li>
@@ -102,24 +102,18 @@ const Footer = () => {
           <div className="flex flex-col items-center">
             <h4 className="text-xs uppercase tracking-widest font-semibold mb-4 opacity-40 text-center">Partners</h4>
             <div className="grid grid-cols-3 items-center justify-items-center gap-x-6">
-              <img
-                src="/aws_advance partner logo.png"
-                alt="AWS Advanced Partner"
-                className="h-24 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity duration-300"
-                loading="lazy"
-              />
-              <img
-                src="/logo/microsoft_logo.png"
-                alt="Microsoft Partner"
-                className="h-24 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity duration-300"
-                loading="lazy"
-              />
-              <img
-                src="/logo/GCP_image.png"
-                alt="Google Cloud Partner"
-                className="h-24 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity duration-300"
-                loading="lazy"
-              />
+              {[
+                { src: '/aws_advance partner logo.png', alt: 'AWS Advanced Partner' },
+                { src: '/logo/microsoft_logo.png', alt: 'Microsoft Partner' },
+                { src: '/logo/GCP_image.png', alt: 'Google Cloud Partner' },
+              ].map((partner) => (
+                <div
+                  key={partner.alt}
+                  className="h-28 w-28 rounded-full bg-white shadow-lg ring-1 ring-black/5 flex items-center justify-center p-4 transition-transform duration-300 hover:scale-[1.03]"
+                >
+                  <img src={partner.src} alt={partner.alt} className="w-full h-full object-contain" loading="lazy" />
+                </div>
+              ))}
             </div>
           </div>
         </div>

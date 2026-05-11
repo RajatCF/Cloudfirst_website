@@ -6,8 +6,8 @@ const DataAnalytic = () => {
     <Layout>
       <div className="bg-gradient-to-br from-purple-50 to-white min-h-screen">
         {/* Hero Section */}
-        <section className="relative flex flex-col md:flex-row items-center justify-between max-w-7xl mx-auto px-4 md:px-12 pt-20 pb-12 md:pb-24">
-          <div className="flex-1 text-center md:text-left z-10">
+        <section className="relative max-w-7xl mx-auto px-4 md:px-12 pt-20 pb-12 md:pb-24">
+          <div className="text-center z-10 max-w-3xl mx-auto">
             <h1 className="text-4xl md:text-6xl font-extrabold text-navy mb-6 leading-tight">
               Powerful <span className="text-bright-blue">Data Analytics</span>
             </h1>
@@ -15,13 +15,6 @@ const DataAnalytic = () => {
               Turn data into insights and action. Our analytics services help you uncover trends, predict outcomes and make confident decisions.
             </p>
             <a href="/contact" className="btn-primary text-lg px-8 py-3 shadow-lg inline-block">Talk Data With Us</a>
-          </div>
-          <div className="flex-1 flex justify-center md:justify-end mt-10 md:mt-0">
-            <img
-              src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80"
-              alt="Data Analytics Hero"
-              className="rounded-2xl shadow-2xl w-full max-w-md md:max-w-lg border-4 border-bright-blue/10"
-            />
           </div>
           <svg className="absolute top-0 right-0 w-64 h-64 opacity-10 -z-1 hidden md:block" viewBox="0 0 400 400" fill="none"><circle cx="200" cy="200" r="200" fill="#8B5CF6" /></svg>
         </section>
@@ -72,33 +65,6 @@ const DataAnalytic = () => {
                 <div className="w-14 h-14 rounded-full bg-bright-blue/10 flex items-center justify-center mb-3 text-2xl">4</div>
                 <h4 className="font-semibold mb-1">Optimize</h4>
                 <p className="text-sm text-muted-foreground">Refine models and processes continuously.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Testimonials Section */}
-        <section className="max-w-5xl mx-auto px-4 py-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">Client Feedback</h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-white rounded-xl shadow-md p-8">
-              <p className="text-lg mb-4">“Their analytics platform gave us visibility we never had before. Decisions are data-driven now.”</p>
-              <div className="flex items-center gap-3">
-                <img src="https://randomuser.me/api/portraits/women/55.jpg" alt="Client" className="w-10 h-10 rounded-full" />
-                <div>
-                  <div className="font-semibold">Nisha R., Data Lead</div>
-                  <div className="text-xs text-muted-foreground">Logistics Firm</div>
-                </div>
-              </div>
-            </div>
-            <div className="bg-white rounded-xl shadow-md p-8">
-              <p className="text-lg mb-4">“Predictive models helped us cut churn by 30%. The ROI speaks for itself.”</p>
-              <div className="flex items-center gap-3">
-                <img src="https://randomuser.me/api/portraits/men/62.jpg" alt="Client" className="w-10 h-10 rounded-full" />
-                <div>
-                  <div className="font-semibold">Vikram P., CMO</div>
-                  <div className="text-xs text-muted-foreground">Consumer Brand</div>
-                </div>
               </div>
             </div>
           </div>

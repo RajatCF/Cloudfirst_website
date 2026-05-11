@@ -3,12 +3,14 @@ import React from 'react';
 import Layout from '@/components/Layout';
 
 const CloudDevOps = () => {
+  const tools = ['Docker', 'Kubernetes', 'Jenkins', 'Terraform'];
+
   return (
     <Layout>
       <div className="bg-gradient-to-br from-yellow-50 to-white min-h-screen">
       {/* Hero Section */}
-      <section className="relative flex flex-col md:flex-row items-center justify-between max-w-7xl mx-auto px-4 md:px-12 pt-20 pb-12 md:pb-24">
-        <div className="flex-1 text-center md:text-left z-10">
+      <section className="relative max-w-7xl mx-auto px-4 md:px-12 pt-20 pb-12 md:pb-24">
+        <div className="text-center z-10 max-w-3xl mx-auto">
           <h1 className="text-4xl md:text-6xl font-extrabold text-navy mb-6 leading-tight">
             Modern <span className="text-bright-blue">Cloud DevOps</span> Solutions
           </h1>
@@ -16,13 +18,6 @@ const CloudDevOps = () => {
             Accelerate your development and operations with automation, scalability, and reliability. Empower your teams to innovate faster and deliver value continuously.
           </p>
           <a href="/contact" className="btn-primary text-lg px-8 py-3 shadow-lg inline-block">Boost with DevOps</a>
-        </div>
-        <div className="flex-1 flex justify-center md:justify-end mt-10 md:mt-0">
-          <img
-            src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=800&q=80"
-            alt="Cloud DevOps Hero"
-            className="rounded-2xl shadow-2xl w-full max-w-md md:max-w-lg border-4 border-bright-blue/10"
-          />
         </div>
         {/* Decorative SVG */}
         <svg className="absolute top-0 right-0 w-64 h-64 opacity-10 -z-1 hidden md:block" viewBox="0 0 400 400" fill="none"><circle cx="200" cy="200" r="200" fill="#3B82F6" /></svg>
@@ -67,33 +62,6 @@ const CloudDevOps = () => {
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section className="max-w-5xl mx-auto px-4 py-16">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">What Our Clients Say</h2>
-        <div className="grid md:grid-cols-2 gap-8">
-          <div className="bg-white rounded-xl shadow-md p-8">
-            <p className="text-lg mb-4">“The DevOps automation and cloud-native monitoring transformed our release cycles. We ship faster and with more confidence!”</p>
-            <div className="flex items-center gap-3">
-              <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client" className="w-10 h-10 rounded-full" />
-              <div>
-                <div className="font-semibold">Amit S., CTO</div>
-                <div className="text-xs text-muted-foreground">FinTech Startup</div>
-              </div>
-            </div>
-          </div>
-          <div className="bg-white rounded-xl shadow-md p-8">
-            <p className="text-lg mb-4">“Security and compliance are now built into every deployment. The peace of mind is priceless.”</p>
-            <div className="flex items-center gap-3">
-              <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Client" className="w-10 h-10 rounded-full" />
-              <div>
-                <div className="font-semibold">Priya K., Head of IT</div>
-                <div className="text-xs text-muted-foreground">E-Commerce Enterprise</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Use Cases Section */}
       <section className="bg-white py-16">
         <div className="max-w-6xl mx-auto px-4">
@@ -119,11 +87,12 @@ const CloudDevOps = () => {
       <section className="py-16 bg-white">
         <div className="max-w-6xl mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Tools & Technologies</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" className="w-16 h-16" />
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" alt="Kubernetes" className="w-16 h-16" />
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg" alt="Jenkins" className="w-16 h-16" />
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg" alt="Terraform" className="w-16 h-16" />
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            {tools.map((t) => (
+              <span key={t} className="px-4 py-2 rounded-full border border-gray-200 bg-gray-50 text-sm text-gray-700">
+                {t}
+              </span>
+            ))}
           </div>
         </div>
       </section>

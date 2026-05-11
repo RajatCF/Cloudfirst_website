@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import ScrollToTop from "./components/ScrollToTop";
 import Footer from "./components/Footer";
@@ -101,14 +101,7 @@ const App = () => (
       <BrowserRouter>
         <ScrollToTop />
         <OgGreenTreeButton />
-        <Suspense fallback={
-          <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-blue-50">
-            <div className="text-center">
-              <div className="animate-spin rounded-full h-16 w-16 border-4 border-blue-200 border-t-blue-600 mx-auto mb-4"></div>
-              <p className="text-gray-600">Loading...</p>
-            </div>
-          </div>
-        }>
+        <Suspense fallback={null}>
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/industries" element={<Industries />} />
@@ -180,7 +173,8 @@ const App = () => (
             {/* Blog Pages */}
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:id" element={<BlogPost />} />
-            <Route path="/create-blog" element={<CreateBlog />} />
+            <Route path="/admin/blog" element={<CreateBlog />} />
+            <Route path="/create-blog" element={<Navigate to="/admin/blog" replace />} />
            
             {/* Videos Page */}
             <Route path="/videos" element={<CloudFirstVideos />} />

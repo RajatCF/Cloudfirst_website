@@ -19,8 +19,8 @@ const InfrastructureModernisation: React.FC = () => {
       <Navbar />
 
       {/* Hero — purple accent, split with image */}
-      <div className="max-w-7xl mx-auto px-6 pt-28 pb-16 flex flex-col lg:flex-row items-center gap-12">
-        <div className="flex-1">
+      <div className="max-w-7xl mx-auto px-6 pt-28 pb-16">
+        <div className="max-w-3xl mx-auto text-center">
           <span className="inline-block text-xs font-semibold uppercase tracking-widest text-purple-600 bg-purple-50 border border-purple-100 rounded-full px-3 py-1 mb-5">Solutions</span>
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-5" style={{ fontFamily: "'Georgia', serif" }}>
             From legacy infrastructure<br />
@@ -29,17 +29,10 @@ const InfrastructureModernisation: React.FC = () => {
           <p className="text-gray-500 text-lg leading-relaxed mb-8 max-w-xl">
             Outdated infrastructure creates bottlenecks and hidden risks. CloudFirst Technology modernizes your environment by transitioning from rigid, manual systems to agile, automated cloud-native platforms—so your teams can move faster and scale without limits.
           </p>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-3 justify-center">
             <button onClick={() => navigate("/contact")} className="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white text-sm font-semibold rounded-lg transition-colors">Start modernising →</button>
             <button onClick={() => navigate(-1)} className="px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-semibold rounded-lg transition-colors">← Back</button>
           </div>
-        </div>
-        <div className="flex-1">
-          <img
-            src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80"
-            alt="Infrastructure Modernisation"
-            className="rounded-2xl shadow-2xl w-full max-w-lg object-cover aspect-video"
-          />
         </div>
       </div>
 
