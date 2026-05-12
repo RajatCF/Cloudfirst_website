@@ -60,6 +60,7 @@ const OurClients = lazy(() => import("./pages/OurClients"));
 const Careers = lazy(() => import("./pages/Careers"));
 const Hiring = lazy(() => import("./pages/Hiring"));
 const PressMedia = lazy(() => import("./pages/PressMedia"));
+const SupportPlans = lazy(() => import("./pages/SupportPlans"));
 const GoGlobalAward = lazy(() => import("./pages/GoGlobalAward"));
 const Reinforce360TM = lazy(() => import("./pages/Reinforce360TM"));
 const Blog = lazy(() => import("./pages/Blog"));
@@ -163,6 +164,7 @@ const App = () => (
             <Route path="/company/careers" element={<Careers />} />
             <Route path="/company/hiring" element={<Hiring />} />
             <Route path="/company/press-media" element={<PressMedia />} />
+            <Route path="/support-plans" element={<SupportPlans />} />
  
             {/* Go Global Award Dedicated Page */}
             <Route path="/go-global-award" element={<GoGlobalAward />} />
