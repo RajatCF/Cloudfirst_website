@@ -111,7 +111,13 @@ const Footer = () => {
                   key={partner.alt}
                   className="h-28 w-28 rounded-full bg-white shadow-lg ring-1 ring-black/5 flex items-center justify-center p-4 transition-transform duration-300 hover:scale-[1.03]"
                 >
-                  <img src={partner.src} alt={partner.alt} className="w-full h-full object-contain" loading="lazy" />
+                  <img
+                    src={partner.src}
+                    alt={partner.alt}
+                    className="w-full h-full object-contain"
+                    style={partner.alt === 'Google Cloud Partner' ? { filter: 'brightness(1.25) contrast(1.08)' } : undefined}
+                    loading="lazy"
+                  />
                 </div>
               ))}
             </div>
