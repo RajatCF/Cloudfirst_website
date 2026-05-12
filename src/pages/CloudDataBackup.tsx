@@ -124,17 +124,17 @@ const CloudDataBackup = () => {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-[#07111f]">
+      <section className="relative overflow-hidden bg-white">
         <div className="pointer-events-none absolute inset-0">
-          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-500/40 to-transparent" />
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-500/20 to-transparent" />
           <div className="absolute -bottom-40 left-1/2 -translate-x-1/2 h-96 w-96 rounded-full bg-blue-500/10 blur-[90px]" />
         </div>
         <div className="relative max-w-[1200px] mx-auto px-6 lg:px-10 py-16 text-center">
-          <span className="inline-block text-xs font-bold uppercase tracking-widest text-blue-400 mb-4">Get started</span>
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4" style={{ fontFamily: "'Georgia', serif" }}>
+          <span className="inline-block text-xs font-bold uppercase tracking-widest text-blue-600 mb-4">Get started</span>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4" style={{ fontFamily: "'Georgia', serif" }}>
             Want a backup posture review?
           </h2>
-          <p className="text-white/50 text-lg max-w-2xl mx-auto mb-8">
+          <p className="text-gray-600 text-lg max-w-2xl mx-auto mb-8">
             Get clarity on backup coverage, RPO gaps, restore readiness, and the controls needed to stay resilient and compliant.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
@@ -146,7 +146,7 @@ const CloudDataBackup = () => {
             </Link>
             <Link
               to="/"
-              className="inline-flex items-center gap-2 px-7 py-3.5 border border-white/20 hover:border-white/40 text-white/70 text-sm font-medium rounded-lg transition-colors"
+              className="inline-flex items-center gap-2 px-7 py-3.5 border border-gray-200 hover:border-gray-300 text-gray-700 text-sm font-medium rounded-lg transition-colors"
             >
               Explore more solutions
             </Link>

@@ -85,7 +85,13 @@ const Careers: React.FC = () => {
                     <div className="text-xs text-gray-400 mt-0.5">{role.location} · {role.type}</div>
                   </div>
                 </div>
-                <button onClick={() => navigate("/contact")} className="flex-shrink-0 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-lg transition-colors whitespace-nowrap">Apply →</button>
+                <button
+                  disabled
+                  className="flex-shrink-0 px-4 py-2 bg-blue-600 text-white text-xs font-bold rounded-lg transition-colors whitespace-nowrap cursor-not-allowed opacity-60"
+                  title="Applications currently closed"
+                >
+                  Apply →
+                </button>
               </div>
             ))}
           </div>

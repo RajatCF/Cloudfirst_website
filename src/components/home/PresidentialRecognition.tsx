@@ -95,7 +95,7 @@ const PresidentialRecognition = () => {
             </p>
           </div>
 
-          <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
+          <div className="max-w-5xl mx-auto px-6 lg:px-10">
             <div className="rounded-2xl overflow-hidden shadow-2xl border border-gray-100 bg-white">
               <div
                 className="aspect-video relative"
