@@ -84,7 +84,7 @@ const OgGreenTreeButton = () => {
       type="button"
       onClick={() => navigate("/og-green-tree")}
       aria-label="Open OG Green Tree"
-      className="fixed bottom-6 right-6 z-[60] w-14 h-14 rounded-full bg-yellow-50 shadow-xl hover:shadow-2xl transition-all duration-200 flex items-center justify-center overflow-hidden ring-1 ring-yellow-200"
+      className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[60] w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-yellow-50 shadow-xl hover:shadow-2xl transition-all duration-200 flex items-center justify-center overflow-hidden ring-1 ring-yellow-200"
     >
       <img
         src="/logo/og-green-tree.jpg"

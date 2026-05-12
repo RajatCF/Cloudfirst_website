@@ -246,9 +246,9 @@ const Navbar = () => {
         scrolled ? 'bg-background/90 backdrop-blur-xl shadow-sm' : 'bg-background/70 backdrop-blur-md'
       }`}
     >
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-10 flex items-center justify-between h-20 lg:h-24">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 flex items-center justify-between h-20 lg:h-24">
         <Link to="/" className="flex items-center gap-0 flex-shrink-0">
-          <img src="/cf-tp.png" alt="CloudFirst logo" className="h-24 w-auto" />
+          <img src="/cf-tp.png" alt="CloudFirst logo" className="h-14 sm:h-16 lg:h-24 w-auto" />
         </Link>
 
         <div className="hidden lg:flex items-center gap-1 relative" onMouseLeave={handleMouseLeave}>
@@ -378,7 +378,7 @@ const Navbar = () => {
       </div>
 
       {mobileOpen && (
-        <div className="lg:hidden bg-background border-t border-border px-6 py-6 space-y-1 max-h-[80vh] overflow-y-auto">
+        <div className="lg:hidden bg-background border-t border-border px-4 sm:px-6 py-6 space-y-1 max-h-[80vh] overflow-y-auto">
           {navLinks.map((link) => {
             const data = menuConfig[link.key];
             const isExpanded = mobileExpanded === link.key;
