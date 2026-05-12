@@ -73,16 +73,16 @@ const ScrollingTestimonials = () => {
                 {testimonials.map((testimonial, index) => (
                   <div
                     key={`${testimonial.company}-${index}`}
-                    className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-6 border border-gray-100 hover:shadow-xl transition-all duration-300 min-w-[340px] max-w-[340px] sm:min-w-[420px] sm:max-w-[420px] min-h-[280px] flex flex-col"
+                    className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-5 sm:p-6 border border-gray-100 hover:shadow-xl transition-all duration-300 min-w-[280px] max-w-[280px] sm:min-w-[340px] sm:max-w-[340px] lg:min-w-[420px] lg:max-w-[420px] min-h-[240px] sm:min-h-[280px] flex flex-col"
                   >
                     <div className="text-left flex flex-col flex-1">
-                      <p className="text-gray-900 leading-relaxed text-lg" style={{ fontFamily: 'Georgia, serif' }}>
+                      <p className="text-gray-900 leading-relaxed text-base sm:text-lg" style={{ fontFamily: 'Georgia, serif' }}>
                         {'“'}
                         {testimonial.quote}
                         {'”'}
                       </p>
                       <div
-                        className="mt-auto pt-6 text-blue-600 font-semibold text-lg text-left"
+                        className="mt-auto pt-5 sm:pt-6 text-blue-600 font-semibold text-base sm:text-lg text-left"
                         style={{ fontFamily: 'Georgia, serif' }}
                       >
                         — {testimonial.company}
@@ -106,16 +106,16 @@ const ScrollingTestimonials = () => {
                 {marqueeItems.map((testimonial, index) => (
                   <div
                     key={`${testimonial.company}-${index}`}
-                    className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-6 border border-gray-100 hover:shadow-xl transition-all duration-300 min-w-[340px] max-w-[340px] sm:min-w-[420px] sm:max-w-[420px] min-h-[280px] flex flex-col"
+                    className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg p-5 sm:p-6 border border-gray-100 hover:shadow-xl transition-all duration-300 min-w-[280px] max-w-[280px] sm:min-w-[340px] sm:max-w-[340px] lg:min-w-[420px] lg:max-w-[420px] min-h-[240px] sm:min-h-[280px] flex flex-col"
                   >
                     <div className="text-left flex flex-col flex-1">
-                      <p className="text-gray-900 leading-relaxed text-lg" style={{ fontFamily: 'Georgia, serif' }}>
+                      <p className="text-gray-900 leading-relaxed text-base sm:text-lg" style={{ fontFamily: 'Georgia, serif' }}>
                         {'“'}
                         {testimonial.quote}
                         {'”'}
                       </p>
                       <div
-                        className="mt-auto pt-6 text-blue-600 font-semibold text-lg text-left"
+                        className="mt-auto pt-5 sm:pt-6 text-blue-600 font-semibold text-base sm:text-lg text-left"
                         style={{ fontFamily: 'Georgia, serif' }}
                       >
                         — {testimonial.company}

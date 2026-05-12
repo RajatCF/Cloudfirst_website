@@ -182,7 +182,6 @@ const menuConfig: Record<MenuKey, MenuConfig> = {
           items: [
             { label: 'About us', path: '/about' },
             { label: 'Careers', path: '/company/careers' },
-            { label: 'Hiring', path: '/company/hiring' },
             { label: 'Press & media', path: '/company/press-media' },
           ],
         },

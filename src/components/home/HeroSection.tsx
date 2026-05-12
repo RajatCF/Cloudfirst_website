@@ -360,7 +360,7 @@ const HeroSection = ({ isPageReady }: HeroSectionProps) => {
                     (e.currentTarget as HTMLAnchorElement).style.boxShadow = '0 6px 24px rgba(79,70,229,0.35)';
                   }}
                 >
-                  Get Started Free
+                  Get Started
                   <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
                     <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>

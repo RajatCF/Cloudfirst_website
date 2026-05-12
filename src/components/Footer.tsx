@@ -144,31 +144,39 @@ const Footer = () => {
           </div>
 
           <div className="border-t border-primary-foreground/10 pt-6">
-            <h4 className="text-xs uppercase tracking-widest font-semibold mb-4 opacity-40">Partners</h4>
-            <div className="-mx-4 px-4 flex items-center gap-4 overflow-x-auto pb-2">
+            <h4 className="text-xs uppercase tracking-widest font-semibold mb-6 opacity-50 text-center">Partners</h4>
+            <div className="flex flex-wrap justify-center items-center gap-3 pb-2">
               {[
                 { src: '/aws_advance partner logo.png', alt: 'AWS Advanced Partner' },
-                { src: '/logo/microsoft_logo.png', alt: 'Microsoft Partner' },
+                { src: '/microsoft_new_logo.png', alt: 'Microsoft Solutions Partner' },
                 { src: '/logo/GCP_image.png', alt: 'Google Cloud Partner' },
-              ].map((partner) => (
-                <div
-                  key={partner.alt}
-                  className="flex-shrink-0 h-12 w-28 rounded-xl bg-white/95 ring-1 ring-black/5 flex items-center justify-center px-3"
-                >
-                  <img
-                    src={partner.src}
-                    alt={partner.alt}
-                    className="w-full h-full object-contain"
-                    style={partner.alt === 'Google Cloud Partner' ? { filter: 'brightness(1.25) contrast(1.08)' } : undefined}
-                    loading="lazy"
-                  />
-                </div>
-              ))}
+              ].map((partner, i) => {
+                const isMicrosoft = partner.alt === 'Microsoft Solutions Partner';
+                const isGcp = partner.alt === 'Google Cloud Partner';
+
+                return (
+                  <div
+                    key={partner.alt}
+                    className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 xl:w-20 xl:h-20 rounded-full bg-white flex items-center justify-center shadow-lg relative flex-shrink-0"
+                  >
+                    <img
+                      src={partner.src}
+                      alt={partner.alt}
+                      className={[
+                        'object-contain',
+                        isMicrosoft ? 'w-16 h-16 p-0.5' : 'w-14 h-14 p-1',
+                        isGcp ? 'mix-blend-multiply contrast-125 brightness-110 saturate-125' : '',
+                      ].join(' ')}
+                      loading="lazy"
+                    />
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
 
-        <div className="hidden sm:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 lg:gap-6">
+        <div className="hidden sm:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 lg:gap-4 xl:gap-6">
           <div className="lg:col-span-1">
             <Link to="/" className="inline-block leading-none -mt-1">
               <img src="/cflogo.png" alt="CloudFirst logo" className="h-16 sm:h-20 w-auto block" />
@@ -237,27 +245,40 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="flex flex-col items-center sm:items-start lg:items-center">
-            <h4 className="text-xs uppercase tracking-widest font-semibold mb-4 opacity-40 text-center">Partners</h4>
-            <div className="grid grid-cols-2 sm:grid-cols-3 items-center justify-items-center gap-4 sm:gap-x-6">
+          {/* Desktop Partners Section - matching screenshot structure */}
+          <div className="flex flex-col items-start">
+            <h4 className="text-xs uppercase tracking-widest font-semibold mb-6 opacity-50">Partners</h4>
+            <div className="flex flex-nowrap items-center gap-2 xl:gap-3">
               {[
                 { src: '/aws_advance partner logo.png', alt: 'AWS Advanced Partner' },
-                { src: '/logo/microsoft_logo.png', alt: 'Microsoft Partner' },
+                { src: '/microsoft_new_logo.png', alt: 'Microsoft Solutions Partner' },
                 { src: '/logo/GCP_image.png', alt: 'Google Cloud Partner' },
-              ].map((partner) => (
-                <div
-                  key={partner.alt}
-                  className="h-20 w-20 sm:h-24 sm:w-24 lg:h-28 lg:w-28 rounded-full bg-white shadow-lg ring-1 ring-black/5 flex items-center justify-center p-3 sm:p-4 transition-transform duration-300 hover:scale-[1.03]"
-                >
-                  <img
-                    src={partner.src}
-                    alt={partner.alt}
-                    className="w-full h-full object-contain"
-                    style={partner.alt === 'Google Cloud Partner' ? { filter: 'brightness(1.25) contrast(1.08)' } : undefined}
-                    loading="lazy"
-                  />
-                </div>
-              ))}
+              ].map((partner) => {
+                const isMicrosoft = partner.alt === 'Microsoft Solutions Partner';
+                const isGcp = partner.alt === 'Google Cloud Partner';
+
+                return (
+                  <div
+                    key={partner.alt}
+                    className="w-12 h-12 md:w-14 md:h-14 xl:w-16 xl:h-16 2xl:w-[72px] 2xl:h-[72px] rounded-full bg-white flex items-center justify-center shadow-lg flex-shrink-0"
+                  >
+                    <img
+                      src={partner.src}
+                      alt={partner.alt}
+                      className={[
+                        'object-contain',
+                        isMicrosoft
+                          ? 'w-10 h-10 md:w-12 md:h-12 xl:w-14 xl:h-14 p-1'
+                          : isGcp
+                            ? 'w-10 h-10 md:w-12 md:h-12 xl:w-[52px] xl:h-[52px] p-1'
+                            : 'w-9 h-9 md:w-11 md:h-11 xl:w-12 xl:h-12 p-1.5',
+                        isGcp ? 'mix-blend-multiply contrast-125 brightness-110 saturate-125' : '',
+                      ].join(' ')}
+                      loading="lazy"
+                    />
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>

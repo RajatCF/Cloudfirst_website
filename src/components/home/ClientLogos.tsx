@@ -54,18 +54,18 @@ const LogoMarqueeSection = ({ id, title, logos, animationClassName }: LogoMarque
           {title}
         </h3>
         <div className="overflow-hidden">
-          <div className={`flex gap-10 whitespace-nowrap will-change-transform ${animationClassName}`}>
+          <div className={`flex gap-6 sm:gap-8 lg:gap-10 whitespace-nowrap will-change-transform ${animationClassName}`}>
             {loop.map((src, idx) => (
               <div key={idx} className="flex justify-center flex-shrink-0">
                 {logos.length > 0 ? (
                   <img
                     src={encodeURI(src)}
                     alt={`Client logo ${idx + 1}`}
-                    className="h-14 sm:h-16 w-40 sm:w-44 object-contain"
+                    className="h-10 w-28 sm:h-12 sm:w-32 lg:h-16 lg:w-44 object-contain"
                     loading="lazy"
                   />
                 ) : (
-                  <div className="h-14 sm:h-16 w-40 sm:w-44 rounded-xl border border-dashed border-slate-300/70 bg-white/60" />
+                  <div className="h-10 w-28 sm:h-12 sm:w-32 lg:h-16 lg:w-44 rounded-xl border border-dashed border-slate-300/70 bg-white/60" />
                 )}
               </div>
             ))}

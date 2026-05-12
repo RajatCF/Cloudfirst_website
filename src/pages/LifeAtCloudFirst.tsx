@@ -257,7 +257,7 @@ const LifeAtCloudFirst = () => {
                 {[
                   {
                     key: 'festivals',
-                    title: 'Celebration',
+                    title: 'Celebrations',
                     subtitle: 'Diwali, Holi, Independence Day, Women’s Day and more',
                   },
                   {
@@ -306,7 +306,7 @@ const LifeAtCloudFirst = () => {
                   <div>
                     <h3 className="text-2xl md:text-3xl font-semibold text-gray-900">
                       {activeCategory === 'festivals'
-                        ? 'Celebration'
+                        ? 'Celebrations'
                         : activeCategory === 'offsites'
                         ? 'Offsite & Retreats'
                         : 'CSR & Social Activities'}
@@ -342,10 +342,6 @@ const LifeAtCloudFirst = () => {
                             e.currentTarget.style.display = 'none';
                           }}
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                        <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
-                          <h3 className="text-lg font-bold">{photo.title}</h3>
-                        </div>
                       </div>
                     </button>
                   ))}
@@ -389,7 +385,6 @@ const LifeAtCloudFirst = () => {
                 loading="lazy"
                 decoding="async"
               />
-              <div className="mt-3 text-sm font-semibold text-gray-800">{openPhoto.title}</div>
             </div>
           </div>
         </div>
@@ -419,7 +414,6 @@ const LifeAtCloudFirst = () => {
           >
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-8">
-                <h3 className="text-2xl font-semibold text-gray-900 mb-3">Employee Experiences</h3>
                 <p className="text-gray-600">Hear directly from our team about their journey at CloudFirst</p>
               </div>
               <div className="relative rounded-2xl overflow-hidden shadow-2xl aspect-video bg-gray-900">

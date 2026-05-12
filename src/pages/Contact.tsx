@@ -67,7 +67,6 @@ const Contact = () => {
 
               <div className="space-y-10">
                 <div>
-                  <div className="text-xs font-semibold uppercase tracking-widest text-gray-500 mb-4">Corporate Office</div>
                   <div className="flex gap-4">
                     <MapPin className="w-5 h-5 text-bright-blue flex-shrink-0 mt-1" />
                     <div>
