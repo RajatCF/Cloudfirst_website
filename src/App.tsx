@@ -71,6 +71,8 @@ const LifeAtCloudFirst = lazy(() => import("./pages/LifeAtCloudFirst"));
 const WorkBenefits = lazy(() => import("./pages/WorkBenefits"));
 const EvergreenThought = lazy(() => import("./pages/EvergreenThought"));
 const OgGreenTreeReport = lazy(() => import("./pages/OgGreenTreeReport"));
+const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
+const TermsOfService = lazy(() => import("./pages/TermsOfService"));
  
 const queryClient = new QueryClient();
 
@@ -191,6 +193,8 @@ const App = () => (
             <Route path="/work-benefits" element={<WorkBenefits />} />
 
             <Route path="/evergreen-thought" element={<EvergreenThought />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route path="/og-green-tree" element={<OgGreenTreeReport />} />
  
             <Route path="*" element={<NotFound />} />

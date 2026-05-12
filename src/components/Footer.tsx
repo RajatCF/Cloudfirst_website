@@ -131,8 +131,12 @@ const Footer = () => {
               <Link to="/evergreen-thought" className="hover:opacity-100 hover:text-bright-blue transition-all">
                 Evergreen Thought
               </Link>
-              <a href="#" className="hover:opacity-100 transition-opacity">Privacy Policy</a>
-              <a href="#" className="hover:opacity-100 transition-opacity">Terms of Service</a>
+              <Link to="/privacy-policy" className="hover:opacity-100 hover:text-bright-blue transition-all">
+                Privacy Policy
+              </Link>
+              <Link to="/terms-of-service" className="hover:opacity-100 hover:text-bright-blue transition-all">
+                Terms of Service
+              </Link>
             </div>
           </div>
         </div>

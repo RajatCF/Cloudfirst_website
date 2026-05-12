@@ -100,7 +100,7 @@ const eventDetails = {
   "msme-summit-2026": {
     title: "MSME Summit 2026",
     description: "Empowering Micro, Small and Medium Enterprises with digital transformation solutions and growth strategies",
-    date: "March 2026",
+    date: "April 2026",
     location: "India",
     attendees: "1000+",
     highlights: "Digital transformation, MSME empowerment, business growth strategies"
@@ -146,7 +146,7 @@ const ResourceEvents = () => {
         id: 'msme-summit-2026',
         title: 'MSME Summit 2026',
         description: 'Empowering Micro, Small and Medium Enterprises with digital transformation solutions and growth strategies.',
-        date: 'March 2026',
+        date: 'April 2026',
         location: 'India',
         attendees: '1000+',
         images: [
@@ -732,7 +732,7 @@ const ResourceEvents = () => {
       title: 'MSME Summit 2026',
       description: 'Empowering Micro, Small and Medium Enterprises with digital transformation solutions and growth strategies',
       thumbnail: eventThumbnails['msme-summit-2026'],
-      date: 'March 2026',
+      date: 'April 2026',
       location: 'India'
     }
   ];
@@ -936,8 +936,9 @@ const renderGallery = () => {
               </div>
             ))}
           </div>
-          <div className="absolute inset-0 bg-black/15" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-black/15 to-transparent" />
+          <div className="absolute inset-0 bg-black/10" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-black/10 to-transparent" />
+          <div className="absolute inset-0 bg-cyan-900/40" />
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 text-center text-white pt-28 md:pt-40">
@@ -946,10 +947,17 @@ const renderGallery = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <div className="inline-block rounded-2xl bg-transparent border border-transparent px-6 py-6 md:px-10 md:py-8">
+            <div className="inline-block px-6 py-6 md:px-10 md:py-8">
               <h1 className="text-5xl md:text-6xl font-bold mb-6">
-                <span className="text-blue-300">Events & Highlights</span>
+                <span className="text-white">Events & Highlights</span>
               </h1>
+              <div className="flex items-center justify-center mb-6">
+                <div className="inline-flex items-center gap-2 rounded-md bg-white/90 px-4 py-2 text-xs font-medium text-gray-700">
+                  <span>Home</span>
+                  <span className="text-gray-400">›</span>
+                  <span>Events</span>
+                </div>
+              </div>
               <p className="text-xl md:text-2xl max-w-4xl mx-auto opacity-90">
                 Explore moments, conferences, and milestones where CloudFirst made an impact.
                 Discover our journey through event photos and highlights.

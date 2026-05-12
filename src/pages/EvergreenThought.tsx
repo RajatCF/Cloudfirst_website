@@ -51,7 +51,7 @@ const EvergreenThought = () => {
                 <div className="absolute -top-10 -left-10 h-40 w-40 rounded-full bg-teal-200/50 blur-2xl" />
                 <div className="absolute -bottom-10 -right-10 h-40 w-40 rounded-full bg-cyan-200/50 blur-2xl" />
                 <img
-                  src="/logo/og-green-tree.jpg"
+                  src="/logo/evergreen.png"
                   alt="Evergreen thought"
                   className="relative z-10 w-2/3 h-2/3 object-contain"
                   loading="lazy"
