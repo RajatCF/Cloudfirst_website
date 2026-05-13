@@ -44,7 +44,7 @@ const Contact = () => {
   return (
     <Layout>
       <section className="relative pt-28 lg:pt-32 pb-16 lg:pb-20 overflow-hidden">
-        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/world_map.jpg')" }} />
+        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/New_world_map.png')" }} />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/95" />
 
         <div className="relative max-w-[1400px] mx-auto px-6 lg:px-10">

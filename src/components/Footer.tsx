@@ -149,23 +149,21 @@ const Footer = () => {
               {[
                 { src: '/aws_advance partner logo.png', alt: 'AWS Advanced Partner' },
                 { src: '/microsoft_new_logo.png', alt: 'Microsoft Solutions Partner' },
-                { src: '/logo/GCP_image.png', alt: 'Google Cloud Partner' },
+                { src: '/logo/new_GCI.png', alt: 'Google Cloud Partner' },
               ].map((partner, i) => {
-                const isMicrosoft = partner.alt === 'Microsoft Solutions Partner';
                 const isGcp = partner.alt === 'Google Cloud Partner';
 
                 return (
                   <div
                     key={partner.alt}
-                    className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 xl:w-20 xl:h-20 rounded-full bg-white flex items-center justify-center shadow-lg relative flex-shrink-0"
+                    className="w-28 h-16 sm:w-32 sm:h-[72px] lg:w-36 lg:h-20 bg-white rounded-xl ring-1 ring-black/15 shadow-md overflow-hidden flex items-center justify-center px-3 py-2"
                   >
                     <img
                       src={partner.src}
                       alt={partner.alt}
                       className={[
-                        'object-contain',
-                        isMicrosoft ? 'w-16 h-16 p-0.5' : 'w-14 h-14 p-1',
-                        isGcp ? 'mix-blend-multiply contrast-125 brightness-110 saturate-125' : '',
+                        'h-full w-full object-contain',
+                        isGcp ? 'mix-blend-multiply contrast-125 saturate-125' : '',
                       ].join(' ')}
                       loading="lazy"
                     />
@@ -176,7 +174,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="hidden sm:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 lg:gap-4 xl:gap-6">
+        <div className="hidden sm:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 lg:gap-3 xl:gap-4">
           <div className="lg:col-span-1">
             <Link to="/" className="inline-block leading-none -mt-1">
               <img src="/cflogo.png" alt="CloudFirst logo" className="h-16 sm:h-20 w-auto block" />
@@ -231,7 +229,7 @@ const Footer = () => {
 
           <div>
             <h4 className="text-xs uppercase tracking-widest font-semibold mb-6 opacity-40">Contact Details</h4>
-            <div className="space-y-4 text-sm opacity-60">
+            <div className="space-y-3 text-xs opacity-60">
               <div>
                 <p className="font-semibold mb-1">Phone:</p>
                 <p className="text-xs">+91-8448440769</p>
@@ -246,33 +244,27 @@ const Footer = () => {
           </div>
 
           {/* Desktop Partners Section - matching screenshot structure */}
-          <div className="flex flex-col items-start">
-            <h4 className="text-xs uppercase tracking-widest font-semibold mb-6 opacity-50">Partners</h4>
-            <div className="flex flex-nowrap items-center gap-2 xl:gap-3">
+          <div className="flex flex-col items-start lg:col-span-2">
+            <h4 className="text-xs uppercase tracking-widest font-semibold mb-6 opacity-50 text-center w-full">Partners</h4>
+            <div className="flex flex-nowrap items-center gap-3">
               {[
                 { src: '/aws_advance partner logo.png', alt: 'AWS Advanced Partner' },
                 { src: '/microsoft_new_logo.png', alt: 'Microsoft Solutions Partner' },
-                { src: '/logo/GCP_image.png', alt: 'Google Cloud Partner' },
+                { src: '/logo/new_GCI.png', alt: 'Google Cloud Partner' },
               ].map((partner) => {
-                const isMicrosoft = partner.alt === 'Microsoft Solutions Partner';
                 const isGcp = partner.alt === 'Google Cloud Partner';
 
                 return (
                   <div
                     key={partner.alt}
-                    className="w-12 h-12 md:w-14 md:h-14 xl:w-16 xl:h-16 2xl:w-[72px] 2xl:h-[72px] rounded-full bg-white flex items-center justify-center shadow-lg flex-shrink-0"
+                    className="w-24 h-14 lg:w-28 lg:h-16 xl:w-32 xl:h-[72px] bg-white rounded-xl ring-1 ring-black/15 shadow-md overflow-hidden flex items-center justify-center px-3 py-2 flex-shrink-0"
                   >
                     <img
                       src={partner.src}
                       alt={partner.alt}
                       className={[
-                        'object-contain',
-                        isMicrosoft
-                          ? 'w-10 h-10 md:w-12 md:h-12 xl:w-14 xl:h-14 p-1'
-                          : isGcp
-                            ? 'w-10 h-10 md:w-12 md:h-12 xl:w-[52px] xl:h-[52px] p-1'
-                            : 'w-9 h-9 md:w-11 md:h-11 xl:w-12 xl:h-12 p-1.5',
-                        isGcp ? 'mix-blend-multiply contrast-125 brightness-110 saturate-125' : '',
+                        'h-full w-full object-contain',
+                        isGcp ? 'mix-blend-multiply contrast-125 saturate-125' : '',
                       ].join(' ')}
                       loading="lazy"
                     />

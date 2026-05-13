@@ -1,5 +1,6 @@
 import React from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface CarouselItem {
   title: string;
@@ -18,6 +19,7 @@ interface CarouselProps {
 const Carousel: React.FC<CarouselProps> = ({ items }) => {
   const [active, setActive] = React.useState(0);
   const [isPaused, setIsPaused] = React.useState(false);
+  const isMobile = useIsMobile();
 
   const prev = () => setActive(a => (a === 0 ? items.length - 1 : a - 1));
   const next = () => setActive(a => (a === items.length - 1 ? 0 : a + 1));
@@ -53,75 +55,128 @@ const Carousel: React.FC<CarouselProps> = ({ items }) => {
         </div>
       </div>
       {/* Carousel */}
-      <div className="flex items-center justify-center mt-16 w-full">
-        <button onClick={prev} className="mr-4 p-2 rounded-full bg-muted hover:bg-bright-blue/10 transition">
-          <ChevronLeft className="w-6 h-6 text-bright-blue" />
-        </button>
-        <div className="relative flex items-center justify-center w-[900px] h-[340px]">
-          {items.map((item, i) => {
-            // compute shortest distance around circular array
-            let offset = i - active;
-            if (offset > items.length / 2) offset -= items.length;
-            if (offset < -items.length / 2) offset += items.length;
-            if (Math.abs(offset) > 3) return null; // only render a few around active
+      {isMobile ? (
+        <div className="mt-14 w-full max-w-[520px] px-4">
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={prev}
+              className="p-2 rounded-full bg-muted hover:bg-bright-blue/10 transition flex-shrink-0"
+              aria-label="Previous"
+            >
+              <ChevronLeft className="w-6 h-6 text-bright-blue" />
+            </button>
 
-            const baseX = 240; // horizontal shift per card
-            const translateX = offset * baseX;
-            const scale = offset === 0 ? 1 : 0.9;
-            const opacity = Math.max(0, 1 - Math.abs(offset) * 0.4);
-            const blur = Math.abs(offset) * 2;
-            const zIndex = 100 - Math.abs(offset);
-
-            return (
-              <div
-                key={i}
-                className="absolute top-0 left-1/2 transition-all duration-500 cursor-pointer"
-                style={{
-                  transform: `translateX(calc(-50% + ${translateX}px)) scale(${scale})`,
-                  opacity,
-                  filter: `blur(${blur}px)`,
-                  zIndex,
-                  pointerEvents: offset === 0 ? 'auto' : 'none',
-                }}
-                onClick={() => setActive(i)}
-              >
-                <div className="w-[480px] h-[320px] rounded-2xl overflow-hidden shadow-lg bg-card relative flex flex-col justify-end">
-                  {item.image && (
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      className="absolute inset-0 w-full h-full object-cover opacity-60"
-                    />
+            <div className="flex-1 min-w-0">
+              <div className="w-full h-[320px] rounded-2xl overflow-hidden shadow-lg bg-card relative flex flex-col justify-end">
+                {items[active]?.image && (
+                  <img
+                    src={items[active].image}
+                    alt={items[active].title}
+                    className="absolute inset-0 w-full h-full object-cover opacity-60"
+                  />
+                )}
+                <div className="relative z-10 p-5">
+                  {items[active]?.type && (
+                    <span className="inline-block px-3 py-1 rounded-full text-xs font-medium bg-bright-blue/10 text-bright-blue mb-4">
+                      {items[active].type}
+                    </span>
                   )}
-                  <div className="relative z-10 p-6">
-                    {item.type && (
-                      <span className="inline-block px-3 py-1 rounded-full text-xs font-medium bg-bright-blue/10 text-bright-blue mb-4">
-                        {item.type}
-                      </span>
-                    )}
-                    <h3 className="text-lg font-display font-bold mb-3 text-white">
-                      {item.title.length > 80 ? item.title.slice(0, 80) + '...' : item.title}
-                    </h3>
-                    <p className="text-sm text-white mb-4 leading-relaxed">
-                      {item.excerpt.length > 80 ? item.excerpt.slice(0, 80) + '...' : item.excerpt}
-                    </p>
-                    <div className="flex items-center gap-4 text-xs text-white">
-                      <span>{item.date}</span>
-                      <span className="flex items-center gap-1">
-                        <span>{item.readTime}</span>
-                      </span>
-                    </div>
-                    <button className="mt-4 btn-primary w-fit px-6 py-2">Read more →</button>
+                  <h3 className="text-base font-display font-bold mb-3 text-white">
+                    {items[active]?.title}
+                  </h3>
+                  <p className="text-sm text-white mb-4 leading-relaxed">
+                    {items[active]?.excerpt}
+                  </p>
+                  <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-white">
+                    <span>{items[active]?.date}</span>
+                    <span>{items[active]?.readTime}</span>
                   </div>
+                  <button className="mt-4 btn-primary w-fit px-6 py-2">Read more →</button>
                 </div>
               </div>
-            );
-          })}
+            </div>
+
+            <button
+              type="button"
+              onClick={next}
+              className="p-2 rounded-full bg-muted hover:bg-bright-blue/10 transition flex-shrink-0"
+              aria-label="Next"
+            >
+              <ChevronRight className="w-6 h-6 text-bright-blue" />
+            </button>
+          </div>
         </div>
-        <button onClick={next} className="ml-4 p-2 rounded-full bg-muted hover:bg-bright-blue/10 transition">
-          <ChevronRight className="w-6 h-6 text-bright-blue" />
-        </button>
-      </div>
+      ) : (
+        <div className="flex items-center justify-center mt-16 w-full">
+          <button onClick={prev} className="mr-4 p-2 rounded-full bg-muted hover:bg-bright-blue/10 transition">
+            <ChevronLeft className="w-6 h-6 text-bright-blue" />
+          </button>
+          <div className="relative flex items-center justify-center w-full max-w-[900px] h-[280px] lg:h-[340px]">
+            {items.map((item, i) => {
+              let offset = i - active;
+              if (offset > items.length / 2) offset -= items.length;
+              if (offset < -items.length / 2) offset += items.length;
+              if (Math.abs(offset) > 3) return null;
+
+              const baseX = 220;
+              const translateX = offset * baseX;
+              const scale = offset === 0 ? 1 : 0.9;
+              const opacity = Math.max(0, 1 - Math.abs(offset) * 0.4);
+              const blur = Math.abs(offset) * 2;
+              const zIndex = 100 - Math.abs(offset);
+
+              return (
+                <div
+                  key={i}
+                  className="absolute top-0 left-1/2 transition-all duration-500 cursor-pointer"
+                  style={{
+                    transform: `translateX(calc(-50% + ${translateX}px)) scale(${scale})`,
+                    opacity,
+                    filter: `blur(${blur}px)`,
+                    zIndex,
+                    pointerEvents: offset === 0 ? 'auto' : 'none',
+                  }}
+                  onClick={() => setActive(i)}
+                >
+                  <div className="w-[420px] lg:w-[480px] h-[260px] lg:h-[320px] rounded-2xl overflow-hidden shadow-lg bg-card relative flex flex-col justify-end">
+                    {item.image && (
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        className="absolute inset-0 w-full h-full object-cover opacity-60"
+                      />
+                    )}
+                    <div className="relative z-10 p-6">
+                      {item.type && (
+                        <span className="inline-block px-3 py-1 rounded-full text-xs font-medium bg-bright-blue/10 text-bright-blue mb-4">
+                          {item.type}
+                        </span>
+                      )}
+                      <h3 className="text-lg font-display font-bold mb-3 text-white">
+                        {item.title.length > 80 ? item.title.slice(0, 80) + '...' : item.title}
+                      </h3>
+                      <p className="text-sm text-white mb-4 leading-relaxed">
+                        {item.excerpt.length > 80 ? item.excerpt.slice(0, 80) + '...' : item.excerpt}
+                      </p>
+                      <div className="flex items-center gap-4 text-xs text-white">
+                        <span>{item.date}</span>
+                        <span className="flex items-center gap-1">
+                          <span>{item.readTime}</span>
+                        </span>
+                      </div>
+                      <button className="mt-4 btn-primary w-fit px-6 py-2">Read more →</button>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <button onClick={next} className="ml-4 p-2 rounded-full bg-muted hover:bg-bright-blue/10 transition">
+            <ChevronRight className="w-6 h-6 text-bright-blue" />
+          </button>
+        </div>
+      )}
       
       {/* Dots indicator */}
       <div className="flex gap-2 mt-8">

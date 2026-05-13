@@ -113,6 +113,13 @@
     white-space: nowrap;
   }
 
+  @media (max-width: 639px) {
+    .hero-headline > div {
+      white-space: normal;
+      overflow-wrap: anywhere;
+    }
+  }
+
   /* animated ring that expands and fades around the hero circles */
   .hero-ring {
     @apply absolute rounded-full pointer-events-none;
