@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import gsap from 'gsap';
  
 const STATS = [
-  { value: '500+', label: 'Enterprise Clients' },
+  { value: '4000+', label: 'Enterprise Clients' },
   { value: '99.99%', label: 'Uptime SLA' },
   { value: '24/7', label: 'Expert Support' },
   { value: '50+', label: 'Certifications' },
@@ -19,6 +19,8 @@ type HeroSectionProps = {
 const HeroSection = ({ isPageReady }: HeroSectionProps) => {
   const [form, setForm] = useState({ name: '', email: '', phoneCca2: 'IN', phoneNumber: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
   type CountryOption = { cca2: string; name: string; dial: string; flagUrl: string };
   const fallbackPhoneCountries = [
     { cca2: 'IN', name: 'India', dial: '+91', flagUrl: 'https://flagcdn.com/w40/in.png' },
@@ -48,11 +50,58 @@ const HeroSection = ({ isPageReady }: HeroSectionProps) => {
   statRefs.current = [];
   const selectedPhoneCountry = phoneCountries.find((c) => c.cca2 === form.phoneCca2) ?? phoneCountries[0];
  
-  const handleSubmit = (e: React.FormEvent) => {
+  const getPublicIp = async () => {
+    try {
+      const controller = new AbortController();
+      const timeoutId = window.setTimeout(() => controller.abort(), 1500);
+      const res = await fetch('https://api.ipify.org?format=json', { signal: controller.signal });
+      window.clearTimeout(timeoutId);
+      if (!res.ok) return '';
+      const data = (await res.json()) as { ip?: unknown };
+      return typeof data.ip === 'string' ? data.ip : '';
+    } catch {
+      return '';
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setForm({ name: '', email: '', phoneCca2: 'IN', phoneNumber: '', message: '' });
-    setTimeout(() => setSubmitted(false), 4000);
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+    setSubmitError('');
+
+    const timestamp = new Date().toISOString();
+    const source = typeof window !== 'undefined' ? window.location.hostname || 'cloudfirst.tech' : 'cloudfirst.tech';
+    const ip = await getPublicIp();
+
+    try {
+      const res = await fetch('https://wefll4iita.execute-api.ap-south-1.amazonaws.com/dev/send-contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          phone: form.phoneNumber,
+          message: form.message,
+          source,
+          timestamp,
+          ip,
+        }),
+      });
+
+      if (!res.ok) {
+        const text = await res.text().catch(() => '');
+        throw new Error(text || `Request failed: ${res.status}`);
+      }
+
+      setSubmitted(true);
+      setForm({ name: '', email: '', phoneCca2: 'IN', phoneNumber: '', message: '' });
+      setTimeout(() => setSubmitted(false), 4000);
+    } catch (err) {
+      setSubmitError(err instanceof Error ? err.message : 'Failed to send message');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
  
   useEffect(() => {
@@ -334,7 +383,7 @@ const HeroSection = ({ isPageReady }: HeroSectionProps) => {
                 style={{ fontSize: '1.05rem', lineHeight: 1.75, color: '#ffffff', maxWidth: 480 }}
               >
                 Enterprise-grade cloud security, compliance automation, and AI-driven data
-                governance — trusted by 500+ organizations worldwide.
+                governance — trusted by 4000+ organizations worldwide.
               </p>
  
               {/* CTAs */}
@@ -720,29 +769,34 @@ const HeroSection = ({ isPageReady }: HeroSectionProps) => {
                     <div style={{ position: 'relative', overflow: 'visible', width: '100%' }}>
                       <button
                         type="submit"
+                        disabled={isSubmitting}
                         style={{
                           position: 'relative',
                           overflow: 'visible',
                           width: '100%', padding: '13px',
                           borderRadius: 14, fontWeight: 700,
                           fontSize: '0.875rem', letterSpacing: '0.03em',
-                          border: 'none', cursor: 'pointer',
+                          border: 'none',
+                          cursor: isSubmitting ? 'not-allowed' : 'pointer',
                           background: 'linear-gradient(135deg, #2563eb 0%, #6d28d9 100%)',
                           color: '#fff',
                           boxShadow: '0 6px 24px rgba(79,70,229,0.40)',
                           transition: 'all 0.25s',
+                          opacity: isSubmitting ? 0.7 : 1,
                         }}
                       onMouseEnter={e => {
+                        if (isSubmitting) return;
                         (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(-1px)';
                         (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 12px 36px rgba(79,70,229,0.55)';
                       }}
                       onMouseLeave={e => {
+                        if (isSubmitting) return;
                         (e.currentTarget as HTMLButtonElement).style.transform = '';
                         (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 6px 24px rgba(79,70,229,0.40)';
                       }}
                     >
                       <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8, position: 'relative', zIndex: 1 }}>
-                        Send Message
+                        {isSubmitting ? 'Sending…' : 'Send Message'}
                       </span>
                       <span
                         ref={planeRef}
@@ -766,6 +820,11 @@ const HeroSection = ({ isPageReady }: HeroSectionProps) => {
                       </span>
                     </button>
                     </div>
+                    {submitError ? (
+                      <p style={{ textAlign: 'center', fontSize: '0.78rem', color: '#fecaca', fontWeight: 600 }}>
+                        {submitError}
+                      </p>
+                    ) : null}
  
                     <p style={{ textAlign: 'center', fontSize: '0.73rem', color: '#94a3b8' }}>
                       No spam · We'll help secure &amp; optimise your cloud

@@ -2,52 +2,33 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 
-const tiers = [
+const cloudPlatforms = [
   {
-    name: "Essentials",
-    price: "From £2,500/mo",
-    badge: "text-gray-700 bg-gray-100 border-gray-200",
-    card: "bg-white border-gray-200",
-    features: [
-      "Business-hours monitoring (8am–6pm)",
-      "Monthly cost & performance review",
-      "Patch management (scheduled)",
-      "Up to 3 cloud accounts",
-      "Email & ticket support",
-      "4hr response SLA",
-    ],
-    best: "Internal tools, dev/test environments",
+    name: "AWS Managed Services",
+    logo: "/aws_advance partner logo.png",
+    alt: "AWS Advanced Partner",
+    path: "/cloud-platforms/aws",
+    badge: "text-amber-700 bg-amber-50 border-amber-200",
+    card: "bg-white border-amber-200",
+    description: "Landing zones, migrations, monitoring, cost optimisation, and security hardening for AWS environments.",
   },
   {
-    name: "Professional",
-    price: "From £6,500/mo",
-    badge: "text-blue-700 bg-blue-50 border-blue-200",
-    card: "bg-blue-50 border-blue-200",
-    features: [
-      "24/7 monitoring & alerting",
-      "Weekly ops review",
-      "Incident response (P1/P2)",
-      "Up to 10 cloud accounts",
-      "Slack + phone support",
-      "1hr P1 response SLA",
-    ],
-    best: "Business-critical applications",
-    highlight: true,
+    name: "Azure Managed Services",
+    logo: "/microsoft_new_logo.png",
+    alt: "Microsoft Solutions Partner",
+    path: "/cloud-platforms/azure",
+    badge: "text-sky-700 bg-sky-50 border-sky-200",
+    card: "bg-white border-sky-200",
+    description: "Azure foundations, governance, operational excellence, incident response, and compliance-led delivery.",
   },
   {
-    name: "Enterprise",
-    price: "Custom",
-    badge: "text-purple-700 bg-purple-50 border-purple-200",
-    card: "bg-white border-purple-200",
-    features: [
-      "24/7/365 dedicated NOC",
-      "Daily ops reviews on-demand",
-      "War-room incident management",
-      "Unlimited cloud accounts",
-      "Named CSM + on-site support",
-      "15min P1 response SLA",
-    ],
-    best: "Enterprise & regulated workloads",
+    name: "Google Cloud Managed Services",
+    logo: "/logo/new_GCI.png",
+    alt: "Google Cloud Partner",
+    path: "/cloud-platforms/gcp",
+    badge: "text-emerald-700 bg-emerald-50 border-emerald-200",
+    card: "bg-white border-emerald-200",
+    description: "GCP architecture, migrations, SRE practices, security posture, and continuous optimisation.",
   },
 ];
 
@@ -62,51 +43,57 @@ const ManagedServices: React.FC = () => {
       <div className="w-full bg-[#0d1b4b] relative overflow-hidden pt-16 lg:pt-20">
         <div className="absolute inset-0 opacity-20" style={{ background: "radial-gradient(ellipse at 60% 40%, #0891b2 0%, transparent 60%)" }} />
         <div className="max-w-4xl mx-auto px-6 pt-24 pb-20 text-center relative z-10">
-          <span className="inline-block text-xs font-semibold uppercase tracking-widest text-teal-300 border border-teal-400/30 bg-teal-400/10 rounded-full px-3 py-1 mb-5">Support Tiers</span>
+          <span className="inline-block text-xs font-semibold uppercase tracking-widest text-teal-300 border border-teal-400/30 bg-teal-400/10 rounded-full px-3 py-1 mb-5">Managed Services</span>
           <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-5" style={{ fontFamily: "'Georgia', serif" }}>
             Managed services that<br />
             <span className="text-teal-400">scale with your business</span>
           </h1>
           <p className="text-white/60 text-lg leading-relaxed max-w-2xl mx-auto mb-10">
-            Choose the level of managed support that matches your operational maturity and business criticality. Every tier includes proactive monitoring, regular reviews, and certified cloud engineers.
+            Proactive monitoring, regular reviews, and certified cloud engineers — delivered with an operating model that fits your team and workloads.
           </p>
         </div>
       </div>
 
-      {/* Tier cards */}
-      <div className="max-w-6xl mx-auto px-6 py-16">
+      <div className="max-w-6xl mx-auto px-6 py-14">
+        <div className="flex items-end justify-between gap-6 flex-wrap mb-10">
+          <div>
+            <span className="text-xs font-semibold uppercase tracking-widest text-gray-600">Cloud platforms</span>
+            <h2 className="mt-2 text-2xl md:text-3xl font-bold text-gray-900" style={{ fontFamily: "'Georgia', serif" }}>
+              Managed services across AWS, Azure &amp; Google Cloud
+            </h2>
+          </div>
+          <p className="text-gray-500 text-sm max-w-md">
+            Explore how we deliver reliable, secure, and cost-optimised operations across your preferred cloud platform.
+          </p>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {tiers.map((tier) => (
-            <div key={tier.name} className={`rounded-2xl border-2 p-7 flex flex-col ${tier.card} ${tier.highlight ? "shadow-xl scale-[1.02] relative" : ""}`}>
-              {tier.highlight && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                  <span className="bg-blue-600 text-white text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">Most popular</span>
-                </div>
-              )}
-              <div className={`inline-block self-start text-[11px] font-bold uppercase tracking-wider border rounded px-2.5 py-1 mb-4 ${tier.badge}`}>{tier.name}</div>
-              <div className="text-2xl font-bold text-gray-900 mb-1" style={{ fontFamily: "'Georgia', serif" }}>{tier.price}</div>
-              <div className="text-xs text-gray-500 mb-6">Best for: {tier.best}</div>
-              <ul className="space-y-2.5 flex-1">
-                {tier.features.map((f) => (
-                  <li key={f} className="flex items-center gap-2 text-sm text-gray-700">
-                    <svg className="w-4 h-4 text-teal-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" /></svg>
-                    {f}
-                  </li>
-                ))}
-              </ul>
-              <button onClick={() => navigate("/contact")} className={`mt-7 w-full py-3 rounded-lg text-sm font-bold transition-colors ${tier.highlight ? "bg-blue-600 hover:bg-blue-700 text-white" : "bg-gray-900 hover:bg-gray-800 text-white"}`}>
-                Get started →
+          {cloudPlatforms.map((p) => (
+            <div key={p.name} className={`rounded-2xl border-2 p-6 flex flex-col ${p.card}`}>
+              <div className={`inline-flex items-center gap-2 self-start text-[11px] font-bold uppercase tracking-wider border rounded px-2.5 py-1 mb-5 ${p.badge}`}>
+                <span>Managed</span>
+              </div>
+              <div className="h-14 w-full bg-white rounded-xl border border-gray-100 flex items-center justify-center px-4 mb-5 overflow-hidden">
+                <img src={p.logo} alt={p.alt} className="h-10 w-auto object-contain" loading="lazy" />
+              </div>
+              <h3 className="text-lg font-bold text-gray-900 mb-2" style={{ fontFamily: "'Georgia', serif" }}>{p.name}</h3>
+              <p className="text-sm text-gray-600 leading-relaxed flex-1">{p.description}</p>
+              <button
+                type="button"
+                onClick={() => navigate(p.path)}
+                className="mt-6 w-full py-3 rounded-lg text-sm font-bold transition-colors bg-gray-900 hover:bg-gray-800 text-white"
+              >
+                Explore services →
               </button>
             </div>
           ))}
         </div>
-        <p className="text-center text-xs text-gray-400 mt-6">All prices exclude VAT. Custom pricing available for multi-year commitments.</p>
       </div>
 
       {/* What's always included */}
       <div className="bg-white border-y border-gray-100 py-16">
         <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center" style={{ fontFamily: "'Georgia', serif" }}>Included in every tier</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center" style={{ fontFamily: "'Georgia', serif" }}>Included in every engagement</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
             {[
               { icon: "☁️", title: "Multi-cloud support", desc: "AWS, Azure, and GCP — managed under a single service agreement." },

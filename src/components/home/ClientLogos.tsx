@@ -16,6 +16,9 @@ const trustedByEnterprisesLogos = [
 ];
 
 const ourClientLogos = [
+  '/aws_advance partner logo.png',
+  '/microsoft_new_logo.png',
+  '/logo/new_GCI.png',
   '/logo/our partner/Screenshot 2026-05-08 181609.png',
   '/logo/our partner/Screenshot 2026-05-08 181603.png',
   '/logo/our partner/Screenshot 2026-05-08 181555.png',
@@ -61,7 +64,7 @@ const LogoMarqueeSection = ({ id, title, logos, animationClassName }: LogoMarque
                   <img
                     src={encodeURI(src)}
                     alt={`Client logo ${idx + 1}`}
-                    className="h-10 w-28 sm:h-12 sm:w-32 lg:h-16 lg:w-44 object-contain"
+                    className="h-10 w-28 sm:h-12 sm:w-32 lg:h-16 lg:w-44 object-contain border-0 outline-none"
                     loading="lazy"
                   />
                 ) : (

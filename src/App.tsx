@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import { lazy, Suspense } from "react";
+import { Leaf } from "lucide-react";
 import ScrollToTop from "./components/ScrollToTop";
 import Footer from "./components/Footer";
  
@@ -84,14 +85,9 @@ const OgGreenTreeButton = () => {
       type="button"
       onClick={() => navigate("/og-green-tree")}
       aria-label="Open OG Green Tree"
-      className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[60] w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-yellow-50 shadow-xl hover:shadow-2xl transition-all duration-200 flex items-center justify-center overflow-hidden ring-1 ring-yellow-200"
+      className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[60] w-16 h-16 sm:w-20 sm:h-20 bg-transparent transition-all duration-200 flex items-center justify-center"
     >
-      <img
-        src="/logo/og-green-tree.jpg"
-        alt="OG Green Tree"
-        className="w-full h-full object-cover rounded-full"
-        loading="lazy"
-      />
+      <Leaf className="w-[72%] h-[72%] text-emerald-600" strokeWidth={2.5} aria-hidden="true" />
     </button>
   );
 };

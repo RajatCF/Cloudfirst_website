@@ -363,7 +363,7 @@ const Navbar = () => {
 
         <div className="hidden lg:flex items-center gap-4">
           <Link to="/contact" className="btn-primary text-sm !px-6 !py-2.5">
-            Let's Connect
+            Contact us
           </Link>
         </div>
 
@@ -435,7 +435,7 @@ const Navbar = () => {
           })}
           <div className="pt-5">
             <Link to="/contact" className="btn-primary text-sm !px-6 !py-2.5 inline-block">
-              Let's Connect
+              Contact us
             </Link>
           </div>
         </div>

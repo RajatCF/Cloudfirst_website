@@ -142,39 +142,9 @@ const Footer = () => {
               </div>
             </div>
           </div>
-
-          <div className="border-t border-primary-foreground/10 pt-6">
-            <h4 className="text-xs uppercase tracking-widest font-semibold mb-6 opacity-50 text-center">Partners</h4>
-            <div className="flex flex-wrap justify-center items-center gap-3 pb-2">
-              {[
-                { src: '/aws_advance partner logo.png', alt: 'AWS Advanced Partner' },
-                { src: '/microsoft_new_logo.png', alt: 'Microsoft Solutions Partner' },
-                { src: '/logo/new_GCI.png', alt: 'Google Cloud Partner' },
-              ].map((partner, i) => {
-                const isGcp = partner.alt === 'Google Cloud Partner';
-
-                return (
-                  <div
-                    key={partner.alt}
-                    className="w-28 h-16 sm:w-32 sm:h-[72px] lg:w-36 lg:h-20 bg-white rounded-xl ring-1 ring-black/15 shadow-md overflow-hidden flex items-center justify-center px-3 py-2"
-                  >
-                    <img
-                      src={partner.src}
-                      alt={partner.alt}
-                      className={[
-                        'h-full w-full object-contain',
-                        isGcp ? 'mix-blend-multiply contrast-125 saturate-125' : '',
-                      ].join(' ')}
-                      loading="lazy"
-                    />
-                  </div>
-                );
-              })}
-            </div>
-          </div>
         </div>
 
-        <div className="hidden sm:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 lg:gap-3 xl:gap-4">
+        <div className="hidden sm:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-8">
           <div className="lg:col-span-1">
             <Link to="/" className="inline-block leading-none -mt-1">
               <img src="/cflogo.png" alt="CloudFirst logo" className="h-16 sm:h-20 w-auto block" />
@@ -243,36 +213,6 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Desktop Partners Section - matching screenshot structure */}
-          <div className="flex flex-col items-start lg:col-span-2">
-            <h4 className="text-xs uppercase tracking-widest font-semibold mb-6 opacity-50 text-center w-full">Partners</h4>
-            <div className="flex flex-nowrap items-center gap-3">
-              {[
-                { src: '/aws_advance partner logo.png', alt: 'AWS Advanced Partner' },
-                { src: '/microsoft_new_logo.png', alt: 'Microsoft Solutions Partner' },
-                { src: '/logo/new_GCI.png', alt: 'Google Cloud Partner' },
-              ].map((partner) => {
-                const isGcp = partner.alt === 'Google Cloud Partner';
-
-                return (
-                  <div
-                    key={partner.alt}
-                    className="w-24 h-14 lg:w-28 lg:h-16 xl:w-32 xl:h-[72px] bg-white rounded-xl ring-1 ring-black/15 shadow-md overflow-hidden flex items-center justify-center px-3 py-2 flex-shrink-0"
-                  >
-                    <img
-                      src={partner.src}
-                      alt={partner.alt}
-                      className={[
-                        'h-full w-full object-contain',
-                        isGcp ? 'mix-blend-multiply contrast-125 saturate-125' : '',
-                      ].join(' ')}
-                      loading="lazy"
-                    />
-                  </div>
-                );
-              })}
-            </div>
-          </div>
         </div>
 
         <div className="mt-12 pt-6 border-t border-amber-300/50 shadow-[0_-1px_0_rgba(251,191,36,0.35)]">

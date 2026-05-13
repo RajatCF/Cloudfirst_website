@@ -33,12 +33,66 @@ const internationalOffices = [
 ];
 
 const Contact = () => {
-  const [form, setForm] = useState({ name: '', email: '', company: '', message: '' });
+  const [form, setForm] = useState({ name: '', email: '', phone: '', company: '', message: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitError, setSubmitError] = useState<string>('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const getPublicIp = async () => {
+    try {
+      const controller = new AbortController();
+      const timeoutId = window.setTimeout(() => controller.abort(), 1500);
+      const res = await fetch('https://api.ipify.org?format=json', { signal: controller.signal });
+      window.clearTimeout(timeoutId);
+      if (!res.ok) return '';
+      const data = (await res.json()) as { ip?: unknown };
+      return typeof data.ip === 'string' ? data.ip : '';
+    } catch {
+      return '';
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert('Thank you! We\'ll be in touch within 24 hours.');
-    setForm({ name: '', email: '', company: '', message: '' });
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+    setSubmitError('');
+
+    const timestamp = new Date().toISOString();
+    const source = typeof window !== 'undefined' ? window.location.hostname || 'cloudfirst.tech' : 'cloudfirst.tech';
+    const ip = await getPublicIp();
+    const message =
+      form.company.trim().length > 0 ? `${form.message}\n\nCompany: ${form.company}` : form.message;
+
+    try {
+      const res = await fetch('https://wefll4iita.execute-api.ap-south-1.amazonaws.com/dev/send-contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          message,
+          source,
+          timestamp,
+          ip,
+        }),
+      });
+
+      if (!res.ok) {
+        const text = await res.text().catch(() => '');
+        throw new Error(text || `Request failed: ${res.status}`);
+      }
+
+      setSubmitStatus('success');
+      setForm({ name: '', email: '', phone: '', company: '', message: '' });
+    } catch (err) {
+      setSubmitStatus('error');
+      setSubmitError(err instanceof Error ? err.message : 'Something went wrong');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -169,6 +223,17 @@ const Contact = () => {
                   />
                 </div>
                 <div>
+                  <label className="block text-sm font-medium mb-2">Phone</label>
+                  <input
+                    type="tel"
+                    value={form.phone}
+                    onChange={e => setForm({ ...form, phone: e.target.value })}
+                    className="w-full px-4 py-3 rounded-lg bg-white/80 border border-violet-300/60 focus:outline-none focus:ring-2 focus:ring-violet-500/25 transition-all"
+                    placeholder="Your phone number"
+                    required
+                  />
+                </div>
+                <div>
                   <label className="block text-sm font-medium mb-2">Company</label>
                   <input
                     type="text"
@@ -189,9 +254,23 @@ const Contact = () => {
                     required
                   />
                 </div>
-                <button type="submit" className="btn-primary w-full justify-center">
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="btn-primary w-full justify-center disabled:opacity-60 disabled:pointer-events-none"
+                >
                   Send Message <Send className="w-4 h-4" />
                 </button>
+                {submitStatus === 'success' ? (
+                  <div className="text-sm text-emerald-700 font-medium">
+                    Thank you! We&apos;ll be in touch within 24 hours.
+                  </div>
+                ) : null}
+                {submitStatus === 'error' ? (
+                  <div className="text-sm text-red-600 font-medium">
+                    Failed to send message{submitError ? `: ${submitError}` : ''}.
+                  </div>
+                ) : null}
               </form>
             </div>
           </div>
