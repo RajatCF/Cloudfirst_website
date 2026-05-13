@@ -2,18 +2,18 @@ import React, { useState, useEffect, useRef } from 'react';
 
 const NumbersStrip = () => {
   const [counts, setCounts] = useState({
-    projects: 0,
     customers: 0,
-    teamMembers: 0,
+    years: 0,
+    awards: 0,
     resolvedTickets: 0
   });
   const [hasAnimated, setHasAnimated] = useState(false);
   const stripRef = useRef<HTMLDivElement>(null);
 
   const statistics = [
-    { value: "300+", label: "Projects", count: counts.projects },
-    { value: "4000+", label: "Customers", count: counts.customers },
-    { value: "50+", label: "Team Members", count: counts.teamMembers },
+    { value: "1500+", label: "Customers", count: counts.customers },
+    { value: "16+", label: "Years of building", count: counts.years },
+    { value: "50+", label: "Awards and Certificates", count: counts.awards },
     { value: "3245", label: "Resolved Tickets", count: counts.resolvedTickets }
   ];
 
@@ -40,9 +40,9 @@ const NumbersStrip = () => {
               }, 16);
             };
 
-            animateCount(300, 'projects', 2000);
-            animateCount(4000, 'customers', 2500);
-            animateCount(50, 'teamMembers', 1500);
+            animateCount(1500, 'customers', 2500);
+            animateCount(16, 'years', 1500);
+            animateCount(50, 'awards', 1500);
             animateCount(3245, 'resolvedTickets', 3000);
           }
         });
@@ -62,9 +62,9 @@ const NumbersStrip = () => {
   }, [hasAnimated]);
 
   return (
-    <section ref={stripRef} className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 py-10 sm:py-14 md:py-16 mb-12">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-4 gap-3 sm:gap-6 md:gap-10 items-center">
+    <section ref={stripRef} className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 py-8 sm:py-10 md:py-12">
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
+        <div className="grid grid-cols-4 gap-4 sm:gap-8 md:gap-12 items-center">
           {statistics.map((stat, index) => (
             <div key={index} className="text-center text-white">
               <div className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold mb-1 sm:mb-2 whitespace-nowrap">

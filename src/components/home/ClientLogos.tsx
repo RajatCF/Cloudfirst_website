@@ -1,36 +1,22 @@
 import React from 'react';
 
 const trustedByEnterprisesLogos = [
-  '/logo/wma.png',
-  '/logo/redif.png',
-  '/logo/path-logo.png',
-  '/logo/netmagic-logo.png',
-  '/logo/my.png',
-  '/logo/microsoft_azure-logo.png',
-  '/logo/google-cloud-logo.png',
-  '/logo/cisco-meraki.png',
-  '/logo/big-cloud.png',
-  '/logo/backupify.png',
-  '/logo/aws-logo.png',
-  '/logo/acunetic.png',
+  '/logo/trusted_by_logo/Screenshot_2026-05-13_171830-removebg-preview.png',
+  '/logo/trusted_by_logo/Screenshot_2026-05-13_171817-removebg-preview.png',
+  '/logo/trusted_by_logo/Screenshot_2026-05-13_171712-removebg-preview (1).png',
+  '/logo/trusted_by_logo/Screenshot_2026-05-13_171802-removebg-preview.png',
+  '/logo/trusted_by_logo/Screenshot_2026-05-13_171723-removebg-preview.png',
+  '/logo/trusted_by_logo/Screenshot_2026-05-13_171658-removebg-preview.png',
+  '/logo/trusted_by_logo/Screenshot_2026-05-13_171650-removebg-preview.png',
 ];
 
 const ourClientLogos = [
   '/aws_advance partner logo.png',
   '/microsoft_new_logo.png',
   '/logo/new_GCI.png',
-  '/logo/our partner/Screenshot 2026-05-08 181609.png',
-  '/logo/our partner/Screenshot 2026-05-08 181603.png',
-  '/logo/our partner/Screenshot 2026-05-08 181555.png',
-  '/logo/our partner/Screenshot 2026-05-08 181548.png',
-  '/logo/our partner/Screenshot 2026-05-08 181541.png',
-  '/logo/our partner/Screenshot 2026-05-08 181533.png',
-  '/logo/our partner/Screenshot 2026-05-08 181526.png',
-  '/logo/our partner/Screenshot 2026-05-08 181519.png',
-  '/logo/our partner/Screenshot 2026-05-08 181511.png',
-  '/logo/our partner/Screenshot 2026-05-08 181504.png',
-  '/logo/our partner/Screenshot 2026-05-08 181457.png',
-  '/logo/our partner/Screenshot 2026-05-08 181447.png',
+  '/logo/Screenshot_2026-05-08_181526-removebg-preview.png',
+  '/logo/Screenshot_2026-05-08_181555-removebg-preview.png',
+  '/logo/Screenshot_2026-05-08_181609-removebg-preview.png',
 ];
 
 const repeat = <T,>(arr: T[], times: number) => {
@@ -51,7 +37,7 @@ const LogoMarqueeSection = ({ id, title, logos, animationClassName }: LogoMarque
   const loop = logos.length > 0 ? repeat(logos, 5) : repeat(placeholders, 5);
 
   return (
-    <section id={id} className="py-20 bg-transparent scroll-mt-28">
+    <section id={id} className="py-20 bg-white scroll-mt-28">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
         <h3 className="text-center text-3xl lg:text-4xl font-semibold text-foreground mb-10">
           {title}
@@ -59,7 +45,7 @@ const LogoMarqueeSection = ({ id, title, logos, animationClassName }: LogoMarque
         <div className="overflow-hidden">
           <div className={`flex gap-6 sm:gap-8 lg:gap-10 whitespace-nowrap will-change-transform ${animationClassName}`}>
             {loop.map((src, idx) => (
-              <div key={idx} className="flex justify-center flex-shrink-0">
+              <div key={idx} className="flex justify-center flex-shrink-0 bg-white rounded-xl px-3 py-2">
                 {logos.length > 0 ? (
                   <img
                     src={encodeURI(src)}
@@ -68,7 +54,7 @@ const LogoMarqueeSection = ({ id, title, logos, animationClassName }: LogoMarque
                     loading="lazy"
                   />
                 ) : (
-                  <div className="h-10 w-28 sm:h-12 sm:w-32 lg:h-16 lg:w-44 rounded-xl border border-dashed border-slate-300/70 bg-white/60" />
+                  <div className="h-10 w-28 sm:h-12 sm:w-32 lg:h-16 lg:w-44 rounded-xl border border-dashed border-slate-300/70 bg-white" />
                 )}
               </div>
             ))}

@@ -97,6 +97,7 @@ const About = () => {
       <section className="relative overflow-hidden bg-[#07111f]">
         {/* Ambient glow */}
         <div className="pointer-events-none absolute inset-0">
+          <div className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-35" style={{ backgroundImage: "url('/About_bg.png')" }} />
           <div className="absolute -top-40 -left-40 h-[640px] w-[640px] rounded-full bg-blue-700/10 blur-[130px]" />
           <div className="absolute top-0 right-0 h-[500px] w-[500px] rounded-full bg-indigo-700/10 blur-[110px]" />
         </div>
@@ -134,39 +135,7 @@ const About = () => {
               </div>
             </div>
 
-            {/* Right — image with floating badges */}
-            <div className="relative flex items-center justify-center">
-              <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-blue-500/20 via-transparent to-indigo-500/15 blur-2xl" />
-              <div className="relative w-full rounded-2xl overflow-hidden shadow-2xl border border-white/10">
-                <img
-                  src="/About_us.png"
-                  alt="CloudFirst team collaborating"
-                  className="w-full h-72 lg:h-96 object-cover"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#07111f]/70 via-transparent to-transparent" />
-              </div>
-
-              {/* Floating badge — top left */}
-              <div className="absolute -top-4 -left-4 flex items-center gap-2 rounded-xl bg-[#0d1a2e] border border-blue-500/30 px-4 py-2.5 shadow-xl backdrop-blur-sm">
-                <ShieldCheck className="w-4 h-4 text-blue-400" />
-                <span className="text-xs font-semibold text-white">ISO 27001:2013 Certified</span>
-              </div>
-
-              {/* Floating badge — bottom right */}
-              <div className="absolute -bottom-4 -right-4 rounded-xl bg-[#0d1a2e] border border-white/10 px-4 py-3 shadow-xl backdrop-blur-sm">
-                <div className="text-xs text-white/50 mb-0.5">Markets served</div>
-                <div className="text-xl font-bold text-blue-400" style={{ fontFamily: "'Georgia', serif" }}>Trusted across 5+ countries</div>
-              </div>
-
-              {/* Floating badge — bottom left */}
-              <div className="absolute bottom-8 -left-5 rounded-xl bg-[#0d1a2e] border border-emerald-500/20 px-3 py-2 shadow-xl backdrop-blur-sm">
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                  <span className="text-xs font-medium text-white">ISO 9001:2015 Certified</span>
-                </div>
-              </div>
-            </div>
+            <div className="hidden lg:block" />
           </div>
 
           {/* Stats strip */}

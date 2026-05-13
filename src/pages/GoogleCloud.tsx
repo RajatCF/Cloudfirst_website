@@ -1,70 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
-import { Cloud, Code2, ShieldCheck, Database, BarChart3, Zap, Wrench, Globe, Lock, TrendingUp, CheckCircle2, Cpu, Layers, GitBranch, HardDrive, Brain } from "lucide-react";
-
-const services = [
-  {
-    icon: Layers,
-    color: "text-cyan-400",
-    bg: "bg-cyan-400/10",
-    border: "border-cyan-400/20",
-    title: "GKE & Kubernetes Engineering",
-    tag: "Kubernetes",
-    problem: "Running Kubernetes on GKE without hardened configurations leads to insecure clusters, runaway costs, and deployment failures.",
-    solution: "We design, deploy, and operate production-grade GKE clusters — node pool tuning, autoscaling, Workload Identity, Anthos config, and CI/CD integration — so you get the power of Kubernetes without the operational burden.",
-  },
-  {
-    icon: ShieldCheck,
-    color: "text-emerald-400",
-    bg: "bg-emerald-400/10",
-    border: "border-emerald-400/20",
-    title: "GCP Security & Identity",
-    tag: "Security",
-    problem: "Default GCP permissions, open service accounts, and missing VPC controls create exploitable attack surfaces most teams never see.",
-    solution: "We implement least-privilege IAM, Workload Identity Federation, VPC Service Controls, Security Command Center, and Cloud Armor — hardening your GCP environment against external and internal threats.",
-  },
-  {
-    icon: Database,
-    color: "text-violet-400",
-    bg: "bg-violet-400/10",
-    border: "border-violet-400/20",
-    title: "Data & Analytics Platform",
-    tag: "BigQuery · Dataflow",
-    problem: "Poorly structured BigQuery datasets and unoptimised data pipelines cause query costs to spiral and analytics to lag behind business needs.",
-    solution: "We architect modern data platforms on BigQuery, Dataflow, Pub/Sub, and Looker — with optimised schemas, partitioning strategies, pipeline automation, and governance controls.",
-  },
-  {
-    icon: BarChart3,
-    color: "text-amber-400",
-    bg: "bg-amber-400/10",
-    border: "border-amber-400/20",
-    title: "Cost Optimisation & FinOps",
-    tag: "FinOps",
-    problem: "GCP billing is complex. Without committed use discounts, right-sizing, and label-based allocation, costs grow faster than your revenue.",
-    solution: "We conduct GCP cost audits, implement CUD and Spot VM strategies, enforce labelling policies, and build budget dashboards — giving you full visibility and measurable savings.",
-  },
-  {
-    icon: Zap,
-    color: "text-rose-400",
-    bg: "bg-rose-400/10",
-    border: "border-rose-400/20",
-    title: "Cloud Run & Serverless",
-    tag: "Serverless",
-    problem: "Ad hoc serverless deployments without proper resource limits, cold start management, or observability result in unpredictable performance and costs.",
-    solution: "We design Cloud Run, Cloud Functions, and App Engine workloads with proper concurrency limits, observability, secret management, and deployment pipelines — serverless done right.",
-  },
-  {
-    icon: Wrench,
-    color: "text-sky-400",
-    bg: "bg-sky-400/10",
-    border: "border-sky-400/20",
-    title: "Managed GCP Operations",
-    tag: "Managed Service",
-    problem: "GCP environments require continuous tuning, security patching, quota management, and incident response that internal teams can't sustain alongside delivery.",
-    solution: "We provide fully managed GCP operations — 24x7 monitoring, incident response, patch management, quota reviews, and proactive optimisation — as an extension of your engineering team.",
-  },
-];
+import { Cloud, Code2, ShieldCheck, Database, Wrench, Globe, Lock, TrendingUp, CheckCircle2, Cpu, Layers, GitBranch, HardDrive, Brain } from "lucide-react";
 
 const stats = [
   { value: "Google Premier", label: "Partner status", icon: Globe },
@@ -233,8 +170,8 @@ const GoogleCloud: React.FC = () => {
             </h2>
             <div className="relative">
               <img
-                src="/gcp_img.png"
-                alt="Google Cloud"
+                src="/logo/new_GCI.png"
+                alt="Google Cloud Partner"
                 className="absolute -right-56 -top-12 w-40 h-40 object-contain opacity-100"
               />
               <div className="relative z-10">
@@ -319,45 +256,6 @@ const GoogleCloud: React.FC = () => {
             >
               Request an AI roadmap
             </button>
-          </div>
-        </div>
-      </div>
-
-      {/* ── Services grid ── */}
-      <div className="bg-white border-y border-gray-100">
-        <div className="max-w-6xl mx-auto px-6 py-16">
-          <div className="flex items-end justify-between mb-10 gap-6 flex-wrap">
-            <div>
-              <span className="text-xs font-bold uppercase tracking-widest text-blue-600">What we do</span>
-              <h2 className="mt-2 text-2xl font-bold text-gray-900" style={{ fontFamily: "'Georgia', serif" }}>6 GCP practice areas</h2>
-            </div>
-            <p className="text-gray-400 text-sm max-w-xs">Every engagement addresses a real problem with a specific, measurable solution.</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {services.map(({ icon: Icon, color, bg, border, title, tag, problem, solution }) => (
-              <article key={title} className="group relative bg-[#f7f8fa] rounded-2xl border border-gray-100 p-6 hover:shadow-md hover:border-blue-100 transition-all duration-200 overflow-hidden">
-                <div className={`absolute top-0 left-0 right-0 h-0.5 ${bg} opacity-0 group-hover:opacity-100 transition-opacity`} />
-                <div className="flex items-start justify-between mb-4">
-                  <div className={`inline-flex items-center justify-center h-10 w-10 rounded-xl ${bg} border ${border}`}>
-                    <Icon className={`w-5 h-5 ${color}`} />
-                  </div>
-                  <span className="text-[11px] font-semibold text-blue-700 bg-blue-50 border border-blue-100 rounded-full px-2.5 py-1">{tag}</span>
-                </div>
-                <h3 className="text-base font-bold text-gray-900 mb-3">{title}</h3>
-                <div className="flex items-start gap-2 mb-3">
-                  <span className="mt-1 w-3.5 h-3.5 flex-shrink-0 rounded-full bg-red-100 flex items-center justify-center">
-                    <span className="block w-1.5 h-1.5 rounded-full bg-red-400" />
-                  </span>
-                  <p className="text-xs text-gray-400 leading-relaxed">{problem}</p>
-                </div>
-                <div className="flex items-start gap-2">
-                  <span className="mt-1 w-3.5 h-3.5 flex-shrink-0 rounded-full bg-emerald-100 flex items-center justify-center">
-                    <span className="block w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                  </span>
-                  <p className="text-xs text-gray-600 leading-relaxed">{solution}</p>
-                </div>
-              </article>
-            ))}
           </div>
         </div>
       </div>

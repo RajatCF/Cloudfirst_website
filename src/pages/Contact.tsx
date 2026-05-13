@@ -98,9 +98,11 @@ const Contact = () => {
   return (
     <Layout>
       <section className="relative pt-28 lg:pt-32 pb-16 lg:pb-20 overflow-hidden">
-        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/New_world_map.png')" }} />
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('/latest_contact.avif')" }}
+        />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/95" />
-
         <div className="relative max-w-[1400px] mx-auto px-6 lg:px-10">
           <div className="h-[46vh] min-h-[360px] w-full" />
         </div>
@@ -272,6 +274,14 @@ const Contact = () => {
                   </div>
                 ) : null}
               </form>
+              <div className="mt-8 flex-1 min-h-40 sm:min-h-48 rounded-2xl overflow-hidden border border-violet-300/30 bg-white/70">
+                <img
+                  src="/New_world_map.png"
+                  alt="World map"
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
             </div>
           </div>
         </div>

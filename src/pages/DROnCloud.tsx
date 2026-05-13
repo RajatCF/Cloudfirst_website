@@ -74,29 +74,13 @@ const DROnCloud = () => {
             </div>
 
             <div className="relative">
-              <div className="relative mx-auto w-[320px] h-[320px] sm:w-[380px] sm:h-[380px] md:w-[420px] md:h-[420px]">
-                <div className="absolute inset-0 rounded-full bg-gradient-to-br from-slate-100 to-white" />
-                <div className="absolute inset-[18%] rounded-full bg-white shadow-xl border border-slate-200" />
-                <div className="absolute inset-[24%] rounded-full bg-white border-4 border-slate-100 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="text-2xl sm:text-3xl font-bold text-gray-900 leading-tight">DR</div>
-                    <div className="text-2xl sm:text-3xl font-bold text-gray-900 leading-tight">on</div>
-                    <div className="text-2xl sm:text-3xl font-bold text-gray-900 leading-tight">Cloud</div>
-                  </div>
-                </div>
-
-                {items.map(({ label, color, Icon, pos }) => (
-                  <div key={label} className={`absolute ${pos} flex items-center gap-3`}>
-                    <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${color} p-[2px] shadow-lg`}>
-                      <div className="w-full h-full rounded-full bg-white flex items-center justify-center">
-                        <Icon className="w-5 h-5 text-gray-800" />
-                      </div>
-                    </div>
-                    <div className="text-[11px] sm:text-xs font-semibold text-gray-600 leading-snug whitespace-pre-line">
-                      {label}
-                    </div>
-                  </div>
-                ))}
+              <div className="relative mx-auto w-full max-w-[720px] lg:max-w-[820px]">
+                <img
+                  src="/dr_cloud.png"
+                  alt="DR on Cloud"
+                  className="w-full h-auto object-contain"
+                  loading="lazy"
+                />
               </div>
             </div>
             </div>

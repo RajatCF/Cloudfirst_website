@@ -234,9 +234,9 @@ const MicrosoftAzure = () => {
             </h2>
             <div className="relative">
               <img
-                src="/azure_img.png"
-                alt="Microsoft Azure"
-                className="absolute -right-56 -top-12 w-40 h-40 object-contain opacity-100"
+                src="/microsoft_new_logo.png"
+                alt="Microsoft Solutions Partner"
+                className="absolute -right-64 -top-16 w-52 h-52 object-contain opacity-100"
               />
               <p className="text-gray-500 text-lg leading-relaxed relative z-10">
                 Azure Managed Cloud Services take the operational burden off your team. CloudFirst's certified engineers manage your VMs, databases, containers, applications, and security posture — ensuring optimal performance, compliance, and cost efficiency every day.
