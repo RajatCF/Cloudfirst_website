@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import gsap from 'gsap';
  
 const STATS = [
-  { value: '4000+', label: 'Enterprise Clients' },
+  { value: '1500+', label: 'Enterprise Clients' },
   { value: '99.99%', label: 'Uptime SLA' },
   { value: '24/7', label: 'Expert Support' },
   { value: '50+', label: 'Certifications' },
@@ -383,7 +383,7 @@ const HeroSection = ({ isPageReady }: HeroSectionProps) => {
                 style={{ fontSize: '1.05rem', lineHeight: 1.75, color: '#ffffff', maxWidth: 480 }}
               >
                 Enterprise-grade cloud security, compliance automation, and AI-driven data
-                governance — trusted by 4000+ organizations worldwide.
+                governance — trusted by 1500+ organizations worldwide.
               </p>
  
               {/* CTAs */}

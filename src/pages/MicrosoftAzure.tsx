@@ -87,6 +87,7 @@ const stats = [
 const aiServices = [
   {
     name: "Copilot Customization & Enablement",
+    logoSrc: "/logo/azure_copilot.png",
     icon: Brain,
     color: "text-sky-500",
     bg: "bg-sky-500/10",
@@ -95,16 +96,8 @@ const aiServices = [
       "Roll out Copilot experiences with governance, secure data access, and adoption planning aligned to your teams and workflows.",
   },
   {
-    name: "Copilot Studio Solutions",
-    icon: Code2,
-    color: "text-indigo-500",
-    bg: "bg-indigo-500/10",
-    border: "border-indigo-500/20",
-    description:
-      "Design and build copilots and automations with structured intents, integrations, and guardrails to deliver real business outcomes.",
-  },
-  {
     name: "LLM Apps on Azure (Azure OpenAI-ready)",
+    logoSrc: "/logo/azure_openai.png",
     icon: Cpu,
     color: "text-emerald-500",
     bg: "bg-emerald-500/10",
@@ -114,6 +107,7 @@ const aiServices = [
   },
   {
     name: "AI Security, Governance & Compliance",
+    logoSrc: "/logo/azure_ai_security.png",
     icon: ShieldCheck,
     color: "text-rose-500",
     bg: "bg-rose-500/10",
@@ -176,34 +170,12 @@ const MicrosoftAzure = () => {
               <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-sky-500/20 via-transparent to-blue-600/15 blur-2xl" />
 
               {/* Main image frame */}
-              <div className="relative w-full rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+              <div className="relative w-full max-w-xs lg:max-w-sm">
                 <img
-                  src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=900&q=80"
-                  alt="Microsoft Azure cloud infrastructure"
-                  className="w-full h-72 lg:h-96 object-cover"
+                  src="/microsoft_new_logo.png"
+                  alt="Microsoft partner"
+                  className="w-full h-44 sm:h-52 lg:h-56 object-contain"
                 />
-                {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#060c1f]/70 via-transparent to-transparent" />
-              </div>
-
-              {/* Floating badge — top left */}
-              <div className="absolute -top-4 -left-4 flex items-center gap-2 rounded-xl bg-[#0d1530] border border-sky-500/30 px-4 py-2.5 shadow-xl backdrop-blur-sm">
-                <span className="h-2 w-2 rounded-full bg-sky-400 animate-pulse" />
-                <span className="text-xs font-semibold text-white">Azure Expert MSP</span>
-              </div>
-
-              {/* Floating badge — bottom right */}
-              <div className="absolute -bottom-4 -right-4 rounded-xl bg-[#0d1530] border border-white/10 px-4 py-3 shadow-xl backdrop-blur-sm">
-                <div className="text-xs text-white/50 mb-0.5">Customers migrated</div>
-                <div className="text-xl font-bold text-sky-400" style={{ fontFamily: "'Georgia', serif" }}>150 +</div>
-              </div>
-
-              {/* Floating badge — bottom left */}
-              <div className="absolute bottom-8 -left-5 rounded-xl bg-[#0d1530] border border-emerald-500/20 px-3 py-2 shadow-xl backdrop-blur-sm">
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                  <span className="text-xs font-medium text-white">Zero-downtime migration</span>
-                </div>
               </div>
             </div>
           </div>
@@ -232,16 +204,9 @@ const MicrosoftAzure = () => {
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4" style={{ fontFamily: "'Georgia', serif" }}>
               Let Azure experts handle your cloud operations
             </h2>
-            <div className="relative">
-              <img
-                src="/microsoft_new_logo.png"
-                alt="Microsoft Solutions Partner"
-                className="absolute -right-64 -top-16 w-52 h-52 object-contain opacity-100"
-              />
-              <p className="text-gray-500 text-lg leading-relaxed relative z-10">
-                Azure Managed Cloud Services take the operational burden off your team. CloudFirst's certified engineers manage your VMs, databases, containers, applications, and security posture — ensuring optimal performance, compliance, and cost efficiency every day.
-              </p>
-            </div>
+            <p className="text-gray-500 text-lg leading-relaxed">
+              Azure Managed Cloud Services take the operational burden off your team. CloudFirst&apos;s certified engineers manage your VMs, databases, containers, applications, and security posture — ensuring optimal performance, compliance, and cost efficiency every day.
+            </p>
           </div>
         </div>
       </section>
@@ -316,15 +281,26 @@ const MicrosoftAzure = () => {
             </p>
           </div>
 
-          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-            {aiServices.map(({ name, icon: Icon, color, bg, border, description }) => (
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3 lg:max-w-5xl mx-auto">
+            {aiServices.map(({ name, logoSrc, icon: Icon, color, bg, border, description }) => (
               <article
                 key={name}
                 className="group relative bg-white/90 backdrop-blur-sm rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 overflow-hidden"
               >
                 <div className={`absolute top-0 left-0 right-0 h-0.5 ${bg} opacity-0 group-hover:opacity-100 transition-opacity`} />
-                <div className={`inline-flex items-center justify-center h-10 w-10 rounded-xl ${bg} border ${border} mb-4`}>
+                <div className={`relative inline-flex items-center justify-center h-10 w-10 rounded-xl ${bg} border ${border} mb-4`}>
                   <Icon className={`w-5 h-5 ${color}`} />
+                  {logoSrc ? (
+                    <img
+                      src={logoSrc}
+                      alt={name}
+                      className="absolute inset-0 m-auto w-6 h-6 object-contain"
+                      loading="lazy"
+                      onError={(e) => {
+                        e.currentTarget.style.display = 'none';
+                      }}
+                    />
+                  ) : null}
                 </div>
                 <h3 className="text-base font-bold text-gray-900 mb-2">{name}</h3>
                 <p className="text-gray-500 text-sm leading-relaxed">{description}</p>

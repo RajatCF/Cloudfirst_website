@@ -87,6 +87,7 @@ const stats = [
 const aiServices = [
   {
     name: "GenAI on AWS (Bedrock-ready)",
+    logoSrc: "/logo/Bedrock.png",
     icon: Brain,
     color: "text-amber-500",
     bg: "bg-amber-500/10",
@@ -95,16 +96,18 @@ const aiServices = [
       "Design and deliver generative AI workloads on AWS with strong security, cost controls, and a clear path to production.",
   },
   {
-    name: "LLM Apps & RAG Pipelines",
-    icon: Database,
+    name: "Keyrow",
+    logoSrc: "/logo/kiro_51769_logo_1753086501_0boi4.avif",
+    icon: Lock,
     color: "text-blue-400",
     bg: "bg-blue-400/10",
     border: "border-blue-400/20",
     description:
-      "Build retrieval-augmented generation (RAG) applications connected to enterprise knowledge with reliable evaluation and guardrails.",
+      "Deploy and operationalise Keyrow on AWS with secure access controls and governance aligned to production requirements.",
   },
   {
     name: "MLOps, Model Ops & Observability",
+    logoSrc: "/logo/mlops.webp",
     icon: Cpu,
     color: "text-emerald-400",
     bg: "bg-emerald-400/10",
@@ -114,6 +117,7 @@ const aiServices = [
   },
   {
     name: "AI Security, Governance & Compliance",
+    logoSrc: "/logo/ai-security-governance.webp",
     icon: Shield,
     color: "text-rose-400",
     bg: "bg-rose-400/10",
@@ -176,34 +180,12 @@ const AmazonWebServices = () => {
               <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-amber-500/20 via-transparent to-orange-500/15 blur-2xl" />
 
               {/* Main image frame */}
-              <div className="relative w-full rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+              <div className="relative w-full max-w-xs lg:max-w-sm">
                 <img
-                  src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=900&q=80"
-                  alt="AWS cloud infrastructure"
-                  className="w-full h-72 lg:h-96 object-cover"
+                  src="/aws_advance partner logo.png"
+                  alt="AWS Advanced Partner"
+                  className="w-full h-44 sm:h-52 lg:h-56 object-contain"
                 />
-                {/* Gradient overlay for text legibility */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0e1a]/70 via-transparent to-transparent" />
-              </div>
-
-              {/* Floating badge — top left */}
-              <div className="absolute -top-4 -left-4 flex items-center gap-2 rounded-xl bg-[#13192e] border border-amber-500/30 px-4 py-2.5 shadow-xl backdrop-blur-sm">
-                <span className="h-2 w-2 rounded-full bg-amber-400 animate-pulse" />
-                <span className="text-xs font-semibold text-white">AWS Advanced Partner</span>
-              </div>
-
-              {/* Floating badge — bottom right */}
-              <div className="absolute -bottom-4 -right-4 rounded-xl bg-[#13192e] border border-white/10 px-4 py-3 shadow-xl backdrop-blur-sm">
-                <div className="text-xs text-white/50 mb-0.5">Avg. cost savings</div>
-                <div className="text-xl font-bold text-amber-400" style={{ fontFamily: "'Georgia', serif" }}>35 %</div>
-              </div>
-
-              {/* Floating badge — bottom left */}
-              <div className="absolute bottom-8 -left-5 rounded-xl bg-[#13192e] border border-emerald-500/20 px-3 py-2 shadow-xl backdrop-blur-sm">
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                  <span className="text-xs font-medium text-white">Migration complete</span>
-                </div>
               </div>
             </div>
           </div>
@@ -232,16 +214,9 @@ const AmazonWebServices = () => {
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4" style={{ fontFamily: "'Georgia', serif" }}>
               Offload AWS complexity to certified experts
             </h2>
-            <div className="relative">
-              <img
-                src="/aws_advance partner logo.png"
-                alt="AWS"
-                className="absolute -right-56 -top-12 w-40 h-40 object-contain opacity-100"
-              />
-              <p className="text-gray-500 text-lg leading-relaxed relative z-10">
-                AWS Managed Cloud Services simplify the day-to-day management of your cloud infrastructure. CloudFirst's engineers handle monitoring, optimisation, patching, and incident response — so you can concentrate on delivering value to your customers.
-              </p>
-            </div>
+            <p className="text-gray-500 text-lg leading-relaxed">
+              AWS Managed Cloud Services simplify the day-to-day management of your cloud infrastructure. CloudFirst&apos;s engineers handle monitoring, optimisation, patching, and incident response — so you can concentrate on delivering value to your customers.
+            </p>
           </div>
         </div>
       </section>
@@ -318,14 +293,26 @@ const AmazonWebServices = () => {
           </div>
 
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-            {aiServices.map(({ name, icon: Icon, color, bg, border, description }) => (
+            {aiServices.map(({ name, logoSrc, icon: Icon, color, bg, border, description }) => (
               <article
                 key={name}
                 className="group relative bg-white/90 backdrop-blur-sm rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 overflow-hidden"
               >
                 <div className={`absolute top-0 left-0 right-0 h-0.5 ${bg} opacity-0 group-hover:opacity-100 transition-opacity`} />
-                <div className={`inline-flex items-center justify-center h-10 w-10 rounded-xl ${bg} border ${border} mb-4`}>
-                  <Icon className={`w-5 h-5 ${color}`} />
+                <div className={`relative inline-flex items-center justify-center h-10 w-10 rounded-xl ${bg} border ${border} mb-4`}>
+                  {logoSrc ? (
+                    <img
+                      src={logoSrc}
+                      alt={name}
+                      className="absolute inset-0 w-full h-full object-contain scale-125"
+                      loading="lazy"
+                      onError={(e) => {
+                        e.currentTarget.style.display = 'none';
+                      }}
+                    />
+                  ) : (
+                    <Icon className={`w-5 h-5 ${color}`} />
+                  )}
                 </div>
                 <h3 className="text-base font-bold text-gray-900 mb-2">{name}</h3>
                 <p className="text-gray-500 text-sm leading-relaxed">{description}</p>

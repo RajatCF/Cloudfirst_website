@@ -113,33 +113,12 @@ const GoogleCloud: React.FC = () => {
             {/* Right — image with floating badges */}
             <div className="relative flex items-center justify-center">
               <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-blue-500/20 via-transparent to-emerald-500/15 blur-2xl" />
-              <div className="relative w-full rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+              <div className="relative w-full max-w-xs lg:max-w-sm">
                 <img
-                  src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=900&q=80"
-                  alt="Google Cloud infrastructure"
-                  className="w-full h-72 lg:h-96 object-cover"
+                  src="/logo/new_GCI.png"
+                  alt="Google Cloud Partner"
+                  className="w-full h-44 sm:h-52 lg:h-56 object-contain"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0a1628]/70 via-transparent to-transparent" />
-              </div>
-
-              {/* Floating badge — top left */}
-              <div className="absolute -top-4 -left-4 flex items-center gap-2 rounded-xl bg-[#0f1e38] border border-blue-500/30 px-4 py-2.5 shadow-xl backdrop-blur-sm">
-                <span className="h-2 w-2 rounded-full bg-blue-400 animate-pulse" />
-                <span className="text-xs font-semibold text-white">Google Premier Partner</span>
-              </div>
-
-              {/* Floating badge — bottom right */}
-              <div className="absolute -bottom-4 -right-4 rounded-xl bg-[#0f1e38] border border-white/10 px-4 py-3 shadow-xl backdrop-blur-sm">
-                <div className="text-xs text-white/50 mb-0.5">Avg. cost savings</div>
-                <div className="text-xl font-bold text-emerald-400" style={{ fontFamily: "'Georgia', serif" }}>30 %</div>
-              </div>
-
-              {/* Floating badge — bottom left */}
-              <div className="absolute bottom-8 -left-5 rounded-xl bg-[#0f1e38] border border-emerald-500/20 px-3 py-2 shadow-xl backdrop-blur-sm">
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                  <span className="text-xs font-medium text-white">GCP architecture review</span>
-                </div>
               </div>
             </div>
           </div>
@@ -168,20 +147,13 @@ const GoogleCloud: React.FC = () => {
             <h2 className="text-2xl font-bold text-gray-900 mb-4" style={{ fontFamily: "'Georgia', serif" }}>
               Why GCP projects stall without the right architecture
             </h2>
-            <div className="relative">
-              <img
-                src="/logo/new_GCI.png"
-                alt="Google Cloud Partner"
-                className="absolute -right-56 -top-12 w-40 h-40 object-contain opacity-100"
-              />
-              <div className="relative z-10">
-                <p className="text-gray-500 text-[15px] leading-relaxed mb-3">
-                  Google Cloud moves fast and rewards teams who understand its primitives deeply. But most organisations onboard GCP reactively — spinning up projects, assigning broad IAM roles, and copying patterns from the internet — and wonder why costs spike, security posture scores are low, and deployments remain unreliable.
-                </p>
-                <p className="text-gray-500 text-[15px] leading-relaxed">
-                  CloudFirst brings deep GCP engineering expertise across GKE, BigQuery, networking, security, and serverless. We've designed and operated GCP environments for startups shipping AI products and enterprises running regulated financial workloads.
-                </p>
-              </div>
+            <div>
+              <p className="text-gray-500 text-[15px] leading-relaxed mb-3">
+                Google Cloud moves fast and rewards teams who understand its primitives deeply. But most organisations onboard GCP reactively — spinning up projects, assigning broad IAM roles, and copying patterns from the internet — and wonder why costs spike, security posture scores are low, and deployments remain unreliable.
+              </p>
+              <p className="text-gray-500 text-[15px] leading-relaxed">
+                CloudFirst brings deep GCP engineering expertise across GKE, BigQuery, networking, security, and serverless. We've designed and operated GCP environments for startups shipping AI products and enterprises running regulated financial workloads.
+              </p>
             </div>
           </div>
         </div>

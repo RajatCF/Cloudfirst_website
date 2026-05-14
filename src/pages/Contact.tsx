@@ -3,11 +3,10 @@ import Layout from '@/components/Layout';
 import { Send, MapPin, Phone, Mail, Calendar } from 'lucide-react';
 
 const corporateOffice = {
-  heading: 'Corporate Office – Mumbai',
+  heading: 'Corporate Office – Bengaluru',
   lines: [
     'CloudFirst Technology Pvt. Ltd.',
-    '3rd Floor, Chintamani Plaza,',
-    'Andheri East, Mumbai – 400099, India',
+    'Awfis Sabari complex , Residencial road , MG Road , Bengaluru,  - 560025',
   ],
 };
 
@@ -20,15 +19,16 @@ const internationalOffices = [
       'Gate Avenue, Zone D – Level 1,',
       "Al Mustaqbal St, Zaa'beel Second, DIFC,",
       'Dubai, United Arab Emirates',
+      '+971 58 575 1693',
     ],
   },
   {
     heading: 'United States',
-    lines: ['2055 Limestone Rd, STE 200-C,', 'Wilmington, DE 19808,', 'United States'],
+    lines: ['2055 Limestone Rd, STE 200-C,', 'Wilmington, DE 19808,', 'United States', '+91-844 844 0769'],
   },
   {
     heading: 'Singapore',
-    lines: ['10 Anson Road, International Plaza,', '079903, Singapore'],
+    lines: ['10 Anson Road, International Plaza,', '079903, Singapore', '+91-844 844 0769'],
   },
 ];
 
@@ -97,18 +97,7 @@ const Contact = () => {
 
   return (
     <Layout>
-      <section className="relative pt-28 lg:pt-32 pb-16 lg:pb-20 overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: "url('/latest_contact.avif')" }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/95" />
-        <div className="relative max-w-[1400px] mx-auto px-6 lg:px-10">
-          <div className="h-[46vh] min-h-[360px] w-full" />
-        </div>
-      </section>
-
-      <section className="bg-background py-16 lg:py-20">
+      <section className="bg-background pt-10 lg:pt-12 pb-16 lg:pb-20">
         <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
           <div className="mb-10">
             <h1 className="section-title mb-4">let's build <span className="text-bright-blue">together</span></h1>

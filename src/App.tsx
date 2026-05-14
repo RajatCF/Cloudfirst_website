@@ -2,8 +2,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useNavigate, Navigate } from "react-router-dom";
-import { lazy, Suspense } from "react";
+import { BrowserRouter, Routes, Route, useNavigate, Navigate, useLocation } from "react-router-dom";
+import { lazy, Suspense, useEffect } from "react";
 import { Leaf } from "lucide-react";
 import ScrollToTop from "./components/ScrollToTop";
 import Footer from "./components/Footer";
@@ -77,6 +77,92 @@ const TermsOfService = lazy(() => import("./pages/TermsOfService"));
  
 const queryClient = new QueryClient();
 
+const SectionThemeController = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    const root = document.documentElement;
+
+    const sectionKey = (() => {
+      if (pathname.startsWith("/cloud-platforms")) return "cloud-platforms";
+      if (pathname.startsWith("/solutions") || pathname.startsWith("/industries")) return "solutions";
+      if (pathname.startsWith("/services")) return "services";
+      if (
+        pathname.startsWith("/resources") ||
+        pathname.startsWith("/blog") ||
+        pathname.startsWith("/videos") ||
+        pathname.startsWith("/life-at-cloudfirst") ||
+        pathname.startsWith("/current-openings") ||
+        pathname.startsWith("/events") ||
+        pathname.startsWith("/work-benefits")
+      )
+        return "resources";
+      if (
+        pathname.startsWith("/company") ||
+        pathname.startsWith("/about") ||
+        pathname.startsWith("/contact") ||
+        pathname.startsWith("/support-plans") ||
+        pathname.startsWith("/privacy-policy") ||
+        pathname.startsWith("/terms-of-service") ||
+        pathname.startsWith("/go-global-award") ||
+        pathname.startsWith("/reinforce360tm")
+      )
+        return "company";
+      return "default";
+    })();
+
+    const themeBySection: Record<
+      string,
+      { brightBlue: string; lightBlue: string; primary: string; ring: string }
+    > = {
+      "cloud-platforms": {
+        brightBlue: "216 100% 50%",
+        lightBlue: "216 100% 68%",
+        primary: "216 100% 50%",
+        ring: "216 100% 50%",
+      },
+      solutions: {
+        brightBlue: "142 72% 45%",
+        lightBlue: "142 70% 60%",
+        primary: "142 72% 45%",
+        ring: "142 72% 45%",
+      },
+      services: {
+        brightBlue: "270 85% 60%",
+        lightBlue: "270 85% 72%",
+        primary: "270 85% 60%",
+        ring: "270 85% 60%",
+      },
+      resources: {
+        brightBlue: "35 95% 55%",
+        lightBlue: "35 95% 68%",
+        primary: "35 95% 55%",
+        ring: "35 95% 55%",
+      },
+      company: {
+        brightBlue: "330 80% 55%",
+        lightBlue: "330 80% 68%",
+        primary: "330 80% 55%",
+        ring: "330 80% 55%",
+      },
+      default: {
+        brightBlue: "216 100% 50%",
+        lightBlue: "216 100% 68%",
+        primary: "216 100% 50%",
+        ring: "216 100% 50%",
+      },
+    };
+
+    const theme = themeBySection[sectionKey] ?? themeBySection.default;
+    root.style.setProperty("--bright-blue", theme.brightBlue);
+    root.style.setProperty("--light-blue", theme.lightBlue);
+    root.style.setProperty("--primary", theme.primary);
+    root.style.setProperty("--ring", theme.ring);
+  }, [pathname]);
+
+  return null;
+};
+
 const OgGreenTreeButton = () => {
   const navigate = useNavigate();
 
@@ -98,6 +184,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <SectionThemeController />
         <ScrollToTop />
         <OgGreenTreeButton />
         <Suspense fallback={null}>

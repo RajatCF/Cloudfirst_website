@@ -73,9 +73,15 @@ const ManagedServices: React.FC = () => {
               <div className={`inline-flex items-center gap-2 self-start text-[11px] font-bold uppercase tracking-wider border rounded px-2.5 py-1 mb-5 ${p.badge}`}>
                 <span>Managed</span>
               </div>
-              <div className="h-14 w-full bg-white rounded-xl border border-gray-100 flex items-center justify-center px-4 mb-5 overflow-hidden">
-                <img src={p.logo} alt={p.alt} className="h-10 w-auto object-contain" loading="lazy" />
-              </div>
+              {p.path === "/cloud-platforms/azure" || p.path === "/cloud-platforms/gcp" ? (
+                <div className="h-14 w-full flex items-center justify-center mb-5 overflow-hidden">
+                  <img src={p.logo} alt={p.alt} className="h-12 w-auto object-contain" loading="lazy" />
+                </div>
+              ) : (
+                <div className="h-14 w-full bg-white rounded-xl border border-gray-100 flex items-center justify-center px-4 mb-5 overflow-hidden">
+                  <img src={p.logo} alt={p.alt} className="h-10 w-auto object-contain" loading="lazy" />
+                </div>
+              )}
               <h3 className="text-lg font-bold text-gray-900 mb-2" style={{ fontFamily: "'Georgia', serif" }}>{p.name}</h3>
               <p className="text-sm text-gray-600 leading-relaxed flex-1">{p.description}</p>
               <button

@@ -9,43 +9,33 @@ interface Testimonial {
 const testimonials: Testimonial[] = [
   {
     quote:
-      'Their Microsoft solutions brought automation and smarter workflows that eliminated years of manual tasks, and the efficiency gains were visible almost immediately. Our teams are now focused on work that truly moves the needle.',
-    company: 'Cygnett Hotels',
-  },
-  {
-    quote:
-      'CloudFirst Technology delivered an enterprise-level Google Workspace setup that fit our budget perfectly. As we grew, they grew with us, always patient, transparent, and genuinely invested in our success.',
+      'CloudFirst Technology delivered a seamless Google Workspace setup that improved collaboration, communication, and scalability across our teams. Their support made the transition smooth and efficient.',
     company: 'Lendingkart',
   },
   {
     quote:
-      'We have been with CloudFirst Technology for years now, and the relationship only gets better with time. They have been a consistent, dependable presence through every phase of our growth. Their global recognition and certifications reflect the quality and professionalism they bring to every engagement.',
-    company: 'CJ Darcl Logistics',
-  },
-  {
-    quote:
-      'Within just a few months, they optimized our Google Workspace setup, cutting costs significantly without compromising performance.',
-    company: 'Limeroad',
-  },
-  {
-    quote:
-      'Migrating to Google Workspace was seamless, thanks to their hands-on support and deep expertise. The team at CloudFirst truly understands what modern businesses need to stay ahead.',
+      'From Google Workspace migration to AWS cloud support, CloudFirst Technology delivered a smooth, scalable, and secure infrastructure experience tailored to our growing business needs.',
     company: 'GoKwik',
   },
   {
     quote:
-      'CloudFirst implemented a well-architected framework aligned with best practices, strengthening our cloud posture and ensuring operational resilience. Their expertise gave us complete peace of mind.',
+      'CloudFirst Technology strengthened our cloud infrastructure with Google Cloud best practices, enabling better performance, scalability, and operational resilience.',
     company: 'Fretron',
   },
   {
     quote:
-      'As a leadership team, we needed a cloud partner we could trust completely. CloudFirst Technology exceeded our expectations at every level. The execution was flawless and the results spoke for themselves.',
+      'CloudFirst optimized our Google Workspace setup to improve efficiency, simplify workflows, and reduce operational complexity without compromising performance.',
+    company: 'Limeroad',
+  },
+  {
+    quote:
+      'CloudFirst Technology delivered a secure and well-managed Azure environment that supported our business operations with reliability, flexibility, and seamless execution.',
     company: 'Cybermarine',
   },
   {
     quote:
-      'With Reinforce360, CloudFirst provided us with continuous cloud monitoring, proactive security reinforcement, and performance optimization. The structured approach ensured our infrastructure remained secure, compliant, and cost-efficient at all times. Reinforce360 has added an extra layer of confidence to our cloud operations.',
-    company: 'Vaarta.ai',
+      'CloudFirst Technology helped us streamline operations with a reliable Google Workspace environment that enhanced productivity and team connectivity across locations.',
+    company: 'CJ Darcl Logistics',
   },
 ];
 

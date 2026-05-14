@@ -1,13 +1,6 @@
 import Layout from '@/components/Layout';
-import { CheckCircle2, Globe, Award, Users, TrendingUp, ShieldCheck, Lightbulb, Heart, Star, ArrowRight } from 'lucide-react';
+import { Globe, Award, Users, TrendingUp, ShieldCheck, Lightbulb, Heart, Star, ArrowRight } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
-
-const stats = [
-  { value: "ISO 27001", label: "Information Security", icon: ShieldCheck },
-  { value: "ISO 9001", label: "Quality Management", icon: Award },
-  { value: "5+ Countries", label: "International clients", icon: Globe },
-  { value: "Govt. Projects", label: "Indian public sector", icon: Star },
-];
 
 const values = [
   {
@@ -93,99 +86,23 @@ const About = () => {
 
   return (
     <Layout>
-      {/* ── Hero ── */}
-      <section className="relative overflow-hidden bg-[#07111f]">
-        {/* Ambient glow */}
-        <div className="pointer-events-none absolute inset-0">
-          <div className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-35" style={{ backgroundImage: "url('/About_bg.png')" }} />
-          <div className="absolute -top-40 -left-40 h-[640px] w-[640px] rounded-full bg-blue-700/10 blur-[130px]" />
-          <div className="absolute top-0 right-0 h-[500px] w-[500px] rounded-full bg-indigo-700/10 blur-[110px]" />
-        </div>
-
-        <div className="relative max-w-[1200px] mx-auto px-6 lg:px-10">
-          <div className="grid items-center gap-12 lg:grid-cols-2 py-16 lg:py-24">
-            {/* Left */}
-            <div>
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-blue-400 mb-6">
-                About CloudFirst®
-              </span>
-              <h1
-                className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-5"
-                style={{ fontFamily: "'Georgia', serif" }}
-              >
-                Technology that{" "}
-                <span className="text-blue-400">powers your cloud journey</span>
-              </h1>
-              <p className="text-white/60 text-lg leading-relaxed max-w-lg mb-8">
-                CloudFirst Technology® Private Limited is an ISO 27001:2013 and ISO 9001:2015 certified company empowering clients globally through cutting-edge IT services — from US and Australia to Indian government projects.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <Link
-                  to="/contact"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-blue-500 hover:bg-blue-400 text-white text-sm font-bold rounded-lg transition-colors"
-                >
-                  Work with us <ArrowRight className="w-4 h-4" />
-                </Link>
-                <Link
-                  to="/careers"
-                  className="inline-flex items-center gap-2 px-6 py-3 border border-white/20 hover:border-white/40 text-white/80 text-sm font-medium rounded-lg transition-colors"
-                >
-                  Join the team
-                </Link>
-              </div>
-            </div>
-
-            <div className="hidden lg:block" />
-          </div>
-
-          {/* Stats strip */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/5 rounded-2xl overflow-hidden border border-white/5 mb-0">
-            {stats.map(({ value, label, icon: Icon }) => (
-              <div key={label} className="bg-[#0a1628] px-6 py-5 flex items-center gap-4">
-                <div className="h-9 w-9 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center flex-shrink-0">
-                  <Icon className="w-4 h-4 text-blue-400" />
-                </div>
-                <div>
-                  <div className="text-lg font-bold text-white" style={{ fontFamily: "'Georgia', serif" }}>{value}</div>
-                  <div className="text-xs text-white/40">{label}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {!showLeadership && (
         <section className="bg-white border-b border-gray-100">
           <div className="max-w-[1200px] mx-auto px-6 lg:px-10 py-16">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-              <div className="rounded-2xl overflow-hidden border border-gray-100 shadow-sm bg-white">
-                <img
-                  src="/about_us3.jpg"
-                  alt="About CloudFirst"
-                  className="w-full h-[520px] md:h-[620px] object-cover"
-                  loading="lazy"
-                  onError={(e) => {
-                    e.currentTarget.src = "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1200&q=80";
-                  }}
-                />
-              </div>
-
-              <div>
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4" style={{ fontFamily: "'Georgia', serif" }}>
+            <div className="max-w-4xl mx-auto text-center">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6" style={{ fontFamily: "'Georgia', serif" }}>
                   About CloudFirst
-                </h2>
-                <div className="space-y-5 text-gray-700 leading-relaxed text-[18px]">
-                  <p>
-                    CloudFirst Technology® Private Limited—an ISO 27001:2013 and ISO 9001:2015 certified company—is empowering its client base by leveraging information technology resources.
-                  </p>
-                  <p>
-                    The company encompasses experience and expertise in catering to international clients from the US, Canada, Dubai, Singapore, and many more, and has also undertaken several Indian government projects.
-                  </p>
-                  <p>
-                    CloudFirst Technology® is a workforce of skilled and passionate professionals who align their future with company and client success. Leverage our pioneering spirit, innovation, and excellence on your journey towards growth.
-                  </p>
-                </div>
+              </h2>
+              <div className="space-y-6 text-gray-700 leading-relaxed text-lg md:text-xl">
+                <p>
+                  CloudFirst Technology® Private Limited—an ISO 27001:2013 and ISO 9001:2015 certified company—is empowering its client base by leveraging information technology resources.
+                </p>
+                <p>
+                  The company encompasses experience and expertise in catering to international clients from the US, Canada, Dubai, Singapore, and many more, and has also undertaken several Indian government projects.
+                </p>
+                <p>
+                  CloudFirst Technology® is a workforce of skilled and passionate professionals who align their future with company and client success. Leverage our pioneering spirit, innovation, and excellence on your journey towards growth.
+                </p>
               </div>
             </div>
           </div>
@@ -194,13 +111,13 @@ const About = () => {
 
       {showLeadership && (
         <section id="our-leadership" className="bg-white border-b border-gray-100">
-          <div className="max-w-[1200px] mx-auto px-6 lg:px-10 py-16">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+          <div className="max-w-[1400px] mx-auto px-6 lg:px-10 py-16">
+            <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-10 items-center">
               <div className="rounded-2xl overflow-hidden border border-gray-100 shadow-sm bg-white">
                 <img
                   src="/Our_leadership.png"
                   alt="Our leadership"
-                  className="w-full h-[520px] md:h-[620px] object-contain bg-white"
+                  className="w-full h-[560px] md:h-[680px] object-contain bg-white"
                   loading="lazy"
                   onError={(e) => {
                     e.currentTarget.src = "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80";
@@ -214,13 +131,13 @@ const About = () => {
                 </h2>
                 <div className="space-y-5 text-gray-700 leading-relaxed text-[18px]">
                   <p>
-                    CloudFirst is led by experienced professionals who combine deep cloud expertise with a strong focus on delivery quality, security, and customer outcomes.
+                    CloudFirst Technology® is redefining the future of IT and cloud innovation under the dynamic leadership of Ashish Srivastava, our Founder and CTO. Based in Mumbai, Ashish is a technology visionary with over 15 years of experience transforming the IT landscape across both the public and private sectors. He is recognized for pioneering projects in AI, cloud infrastructure, security, and digital transformation, serving international clients from the US to Australia and delivering high-impact solutions to numerous Indian government ministries.
                   </p>
                   <p>
-                    Our leadership team works closely with engineering and customer success to ensure every engagement is aligned to business goals, executed with clarity, and measured with real results.
+                    Ashish&apos;s expertise spans strategic leadership, hands-on IT services delivery, and cutting-edge research and development. His unique approach blends a deep passion for technological advancement with an unwavering commitment to social impact—driving initiatives that advance education, health, rural empowerment, and digital literacy. As a result, CloudFirst is not just a technology provider but a dedicated partner in empowering organizations to adapt, secure, and thrive in the digital era.
                   </p>
                   <p>
-                    From strategy to execution, we build partnerships rooted in trust, accountability, and continuous improvement.
+                    He is also an active member of the Business Council for Innovation and Technology. Notably, he participated in an insightful and interactive session with the Hon&apos;ble President of India, Smt. Droupadi Murmu, held in Bratislava, Slovakia.
                   </p>
                 </div>
               </div>
