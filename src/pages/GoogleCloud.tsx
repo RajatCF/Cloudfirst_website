@@ -211,7 +211,11 @@ const GoogleCloud: React.FC = () => {
               >
                 <div className={`absolute top-0 left-0 right-0 h-0.5 ${bg} opacity-0 group-hover:opacity-100 transition-opacity`} />
                 <div className={`relative inline-flex items-center justify-center h-12 w-12 rounded-xl ${bg} border ${border} mb-4`}>
-                  <Icon className={`w-5 h-5 ${color}`} />
+                  <Icon
+                    data-fallback-icon="true"
+                    className={`w-5 h-5 ${color}`}
+                    style={{ opacity: logoSrc ? 0 : 1 }}
+                  />
                   {logoSrc ? (
                     <img
                       src={logoSrc}
@@ -238,6 +242,8 @@ const GoogleCloud: React.FC = () => {
 
                         const next = candidates[step + 1];
                         if (!next) {
+                          const iconEl = e.currentTarget.parentElement?.querySelector('[data-fallback-icon="true"]') as HTMLElement | null;
+                          if (iconEl) iconEl.style.opacity = '1';
                           e.currentTarget.style.display = 'none';
                           return;
                         }

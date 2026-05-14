@@ -864,7 +864,7 @@ const renderGallery = () => {
   };
 
   const heroBannerImages = [
-    "/events/events_banner/image%20(4).jpg",
+    "/events/events_banner/Team.jpg",
     "/events/events_banner/image%20(5).jpg",
     "/events/events_banner/image%20(6).jpg",
     "https://gragwebsite.s3.ap-south-1.amazonaws.com/Dubai+Pics/WhatsApp+Image+2025-04-24+at+8.05.32+PM.jpeg",

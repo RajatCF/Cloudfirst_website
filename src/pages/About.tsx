@@ -229,33 +229,82 @@ const About = () => {
       ) : (
         <section className="bg-[#f7f8fa] border-b border-gray-100">
           <div className="max-w-[1200px] mx-auto px-6 lg:px-10 py-16">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {[
-                {
-                  src: "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/india+Ai+impact+summit/IMG-20260216-WA0023+(1).jpg",
-                },
-                {
-                  src: "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/aws+summit+bengaluru/1000106663.jpg",
-                },
-                {
-                  src: "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/india+Ai+impact+summit/IMG-20260216-WA0025+(1).jpg",
-                },
-                {
-                  src: "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/aws+summit+bengaluru/WhatsApp+Image+2026-04-24+at+06.57.58+(4).jpeg",
-                },
-                {
-                  src: "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/india+Ai+impact+summit/IMG-20260218-WA0016.jpg",
-                },
-                {
-                  src: "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/aws+summit+bengaluru/1000106663.jpg",
-                },
-              ].map((item, index) => (
-                <div key={`${item.src}-${index}`} className="rounded-2xl border border-gray-100 bg-white shadow-sm overflow-hidden">
-                  <div className="aspect-[4/3] w-full bg-slate-100">
-                    <img src={item.src} alt="" className="w-full h-full object-cover" loading="lazy" />
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.3fr_1fr] gap-6 items-center">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-1 gap-6">
+                {[
+                  {
+                    src: "https://gragwebsite.s3.ap-south-1.amazonaws.com/London+Pics/1750014704224.jpeg",
+                    alt: "London image",
+                  },
+                  {
+                    src: "https://gragwebsite.s3.ap-south-1.amazonaws.com/Dubai+Pics/WhatsApp+Image+2025-04-24+at+6.25.05+PM.jpeg",
+                    alt: "Dubai image",
+                  },
+                  {
+                    src: "https://gragwebsite.s3.ap-south-1.amazonaws.com/London+Pics/Slovakia+Pics/1000001380.jpeg",
+                    alt: "Slovakia image",
+                  },
+                ].map((item, index) => (
+                  <div key={`${item.src}-${index}`} className="rounded-2xl border border-gray-100 bg-white shadow-sm overflow-hidden">
+                    <div className="aspect-[4/3] w-full bg-slate-100">
+                      <img
+                        src={item.src}
+                        alt={item.alt}
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                        onError={(e) => {
+                          e.currentTarget.src = "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80";
+                        }}
+                      />
+                    </div>
                   </div>
+                ))}
+              </div>
+
+              <div className="rounded-2xl border border-gray-100 bg-white shadow-sm overflow-hidden">
+                <div className="aspect-[4/5] w-full bg-white p-3 md:p-4">
+                  <img
+                    src="/events/president_new_image.jpg"
+                    alt="Presidential image"
+                    className="w-full h-full object-contain"
+                    loading="lazy"
+                    onError={(e) => {
+                      e.currentTarget.src = "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80";
+                    }}
+                  />
                 </div>
-              ))}
+              </div>
+
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-1 gap-6">
+                {[
+                  {
+                    src: "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/india+Ai+impact+summit/IMG-20260216-WA0035+(1).jpg",
+                    alt: "AI summit highlight",
+                  },
+                  {
+                    src: "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/aws+summit+bengaluru/WhatsApp+Image+2026-04-24+at+06.57.58+(4).jpeg",
+                    alt: "Bengaluru summit highlight",
+                  },
+                  {
+                    src: "/events/IMG_3467.jpg",
+                    alt: "MSME summit highlight",
+                  },
+                ].map((item, index) => (
+                  <div key={`${item.src}-${index}`} className="rounded-2xl border border-gray-100 bg-white shadow-sm overflow-hidden">
+                    <div className="aspect-[4/3] w-full bg-slate-100">
+                      <img
+                        src={item.src}
+                        alt={item.alt}
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                        onError={(e) => {
+                          e.currentTarget.src = "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80";
+                        }}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </section>

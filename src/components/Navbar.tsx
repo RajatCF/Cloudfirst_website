@@ -181,8 +181,8 @@ const menuConfig: Record<MenuKey, MenuConfig> = {
           heading: '',
           items: [
             { label: 'About us', path: '/about' },
-            { label: 'Careers', path: '/company/careers' },
-            { label: 'Press & media', path: '/company/press-media' },
+            { label: 'Our leadership', path: '/about#our-leadership' },
+            { label: 'Contact us', path: '/contact' },
           ],
         },
       ],
@@ -192,8 +192,8 @@ const menuConfig: Record<MenuKey, MenuConfig> = {
           items: [
             { label: 'Our partners', path: '/company/partners' },
             { label: 'Our clients', path: '/company/clients' },
-            { label: 'Our leadership', path: '/about#our-leadership' },
-            { label: 'Contact us', path: '/contact' },
+            { label: 'Press & media', path: '/company/press-media' },
+            { label: 'Careers', path: '/company/careers' },
           ],
         },
       ],
@@ -215,6 +215,7 @@ const Navbar = () => {
   const [activeMenu, setActiveMenu] = useState<MenuKey | null>(null);
   const [mobileExpanded, setMobileExpanded] = useState<MenuKey | null>(null);
   const hideTimeout = useRef<number | null>(null);
+  const navRef = useRef<HTMLElement | null>(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -225,22 +226,53 @@ const Navbar = () => {
 
   useEffect(() => {
     setMobileOpen(false);
+    setMobileExpanded(null);
     setActiveMenu(null);
   }, [location]);
 
   const handleMouseEnter = (key: MenuKey) => {
-    if (hideTimeout.current) clearTimeout(hideTimeout.current);
+    if (hideTimeout.current) {
+      clearTimeout(hideTimeout.current);
+      hideTimeout.current = null;
+    }
     setActiveMenu(key);
   };
 
   const handleMouseLeave = () => {
+    if (hideTimeout.current) {
+      clearTimeout(hideTimeout.current);
+      hideTimeout.current = null;
+    }
     hideTimeout.current = window.setTimeout(() => setActiveMenu(null), 150);
   };
 
   const currentData = activeMenu ? menuConfig[activeMenu] : null;
+  const dropdownOpen = Boolean(activeMenu && currentData);
+
+  useEffect(() => {
+    if (!dropdownOpen) return;
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setActiveMenu(null);
+    };
+
+    const onMouseDown = (e: MouseEvent) => {
+      if (!navRef.current) return;
+      if (navRef.current.contains(e.target as Node)) return;
+      setActiveMenu(null);
+    };
+
+    document.addEventListener('keydown', onKeyDown);
+    document.addEventListener('mousedown', onMouseDown);
+    return () => {
+      document.removeEventListener('keydown', onKeyDown);
+      document.removeEventListener('mousedown', onMouseDown);
+    };
+  }, [dropdownOpen]);
 
   return (
     <nav
+      ref={navRef}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled ? 'bg-background/90 backdrop-blur-xl shadow-sm' : 'bg-background/70 backdrop-blur-md'
       }`}
@@ -250,111 +282,122 @@ const Navbar = () => {
           <img src="/cf-tp.png" alt="CloudFirst logo" className="h-14 sm:h-16 lg:h-24 w-auto" />
         </Link>
 
-        <div className="hidden lg:flex items-center gap-1 relative" onMouseLeave={handleMouseLeave}>
-          {navLinks.map((link) => (
-            <button
-              key={link.key}
-              className={`flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-md transition-colors hover:text-primary ${
-                activeMenu === link.key ? 'text-primary' : 'text-foreground'
-              }`}
-              onMouseEnter={() => handleMouseEnter(link.key)}
-            >
-              {link.label}
-              <ChevronDown
-                className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                  activeMenu === link.key ? 'rotate-180' : ''
+        <div className="hidden lg:flex flex-1 items-center justify-center relative" onMouseLeave={handleMouseLeave}>
+          <div className="flex items-center gap-1">
+            {navLinks.map((link) => (
+              <button
+                key={link.key}
+                className={`flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-md transition-colors hover:text-primary ${
+                  activeMenu === link.key ? 'text-primary' : 'text-foreground'
                 }`}
-              />
-            </button>
-          ))}
+                onMouseEnter={() => handleMouseEnter(link.key)}
+                onClick={() => {
+                  if (hideTimeout.current) {
+                    clearTimeout(hideTimeout.current);
+                    hideTimeout.current = null;
+                  }
+                  setActiveMenu((prev) => (prev === link.key ? null : link.key));
+                }}
+              >
+                {link.label}
+                <ChevronDown
+                  className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                    activeMenu === link.key ? 'rotate-180' : ''
+                  }`}
+                />
+              </button>
+            ))}
+          </div>
 
           <div
-            // className={`absolute left-1/2 -translate-x-1/2 top-full mt-2 w-auto min-w-max bg-gradient-to-b from-[#669bbc] to-white text-foreground rounded-b-2xl shadow-2xl backdrop-blur-sm transition-all duration-200 z-40 ${
-            //   activeMenu ? 'opacity-100 pointer-events-auto translate-y-0' : 'opacity-0 pointer-events-none -translate-y-1'
-            // }`}
-            className={`absolute left-0 top-full mt-2 w-full bg-gradient-to-b from-[#669bbc] to-white text-foreground rounded-b-2xl shadow-2xl backdrop-blur-sm transition-all duration-200 z-40 ${
-  activeMenu ? 'opacity-100 pointer-events-auto translate-y-0' : 'opacity-0 pointer-events-none -translate-y-1'
-}`}
+            className={`absolute left-0 right-0 top-full text-foreground rounded-b-2xl shadow-2xl backdrop-blur-sm transition-all duration-200 z-[60] ${
+              dropdownOpen ? 'opacity-100 pointer-events-auto translate-y-0' : 'opacity-0 pointer-events-none -translate-y-1'
+            }`}
             onMouseEnter={() => {
-              if (hideTimeout.current) clearTimeout(hideTimeout.current);
+              if (hideTimeout.current) {
+                clearTimeout(hideTimeout.current);
+                hideTimeout.current = null;
+              }
             }}
             onMouseLeave={handleMouseLeave}
           >
             {currentData && (
-              <div className="px-8 py-6">
-                <div className="flex gap-10">
-                  <div
-                    className={`grid gap-8 flex-1 ${
-                      currentData.columns.length === 1
-                        ? 'grid-cols-1 max-w-xs'
-                        : currentData.columns.length === 2
-                        ? 'grid-cols-2 max-w-2xl'
-                        : 'grid-cols-3'
-                    }`}
-                  >
-                    {currentData.columns.map((sections, colIdx) => (
-                      <div key={colIdx} className="space-y-5">
-                        {sections.map((section) => (
-                          <div key={section.heading || colIdx}>
-                            {section.heading && (
-                              <div className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-3">
-                                {section.heading}
-                              </div>
-                            )}
-                            <ul className="space-y-2.5">
-                              {section.items.map((item) => (
-                                <li key={item.label}>
-                                  <Link
-                                    to={item.path}
-                                    className="flex items-center gap-2.5 text-sm font-medium text-foreground hover:text-primary transition-colors group"
-                                    onClick={() => setActiveMenu(null)}
-                                  >
-                                    {item.icon ? (
-                                      <span className="w-4 h-4 flex-shrink-0 inline-flex items-center justify-center text-foreground group-hover:text-primary transition-colors">
-                                        {BrandIcons[item.icon]}
+              <div className="bg-gradient-to-b from-[#669bbc] to-white rounded-b-2xl">
+                <div className="max-w-[1400px] mx-auto px-6 lg:px-10 py-6">
+                  <div className="flex gap-10">
+                    <div
+                      className={`grid gap-8 flex-1 ${
+                        currentData.columns.length === 1
+                          ? 'grid-cols-1 max-w-xs'
+                          : currentData.columns.length === 2
+                          ? 'grid-cols-2 max-w-2xl'
+                          : 'grid-cols-3'
+                      }`}
+                    >
+                      {currentData.columns.map((sections, colIdx) => (
+                        <div key={colIdx} className="space-y-5">
+                          {sections.map((section) => (
+                            <div key={section.heading || colIdx}>
+                              {section.heading && (
+                                <div className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-3">
+                                  {section.heading}
+                                </div>
+                              )}
+                              <ul className="space-y-2.5">
+                                {section.items.map((item) => (
+                                  <li key={item.label}>
+                                    <Link
+                                      to={item.path}
+                                      className="flex items-center gap-2.5 text-sm font-medium text-foreground hover:text-primary transition-colors group"
+                                      onClick={() => setActiveMenu(null)}
+                                    >
+                                      {item.icon ? (
+                                        <span className="w-4 h-4 flex-shrink-0 inline-flex items-center justify-center text-foreground group-hover:text-primary transition-colors">
+                                          {BrandIcons[item.icon]}
+                                        </span>
+                                      ) : item.dot ? (
+                                        <span
+                                          className="w-2 h-2 rounded-full flex-shrink-0"
+                                          style={{ backgroundColor: item.dot }}
+                                        />
+                                      ) : null}
+                                      <span className="group-hover:translate-x-0.5 transition-transform duration-150">
+                                        {item.label}
                                       </span>
-                                    ) : item.dot ? (
-                                      <span
-                                        className="w-2 h-2 rounded-full flex-shrink-0"
-                                        style={{ backgroundColor: item.dot }}
-                                      />
-                                    ) : null}
-                                    <span className="group-hover:translate-x-0.5 transition-transform duration-150">
-                                      {item.label}
-                                    </span>
-                                  </Link>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        ))}
-                      </div>
-                    ))}
-                  </div>
-
-                  {currentData.rightPanel && (
-                    <div className="w-48 flex-shrink-0 border-l border-foreground/15 pl-8">
-                      <div className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-3">
-                        {currentData.rightPanel.heading}
-                      </div>
-                      <ul className="space-y-2.5">
-                        {currentData.rightPanel.items.map((item) => (
-                          <li key={item.label}>
-                            <Link
-                              to={item.path}
-                              className="flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary transition-colors group"
-                              onClick={() => setActiveMenu(null)}
-                            >
-                              <span className="text-muted-foreground group-hover:text-primary transition-colors">•</span>
-                              <span className="group-hover:translate-x-0.5 transition-transform duration-150">
-                                {item.label}
-                              </span>
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
+                                    </Link>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          ))}
+                        </div>
+                      ))}
                     </div>
-                  )}
+
+                    {currentData.rightPanel && (
+                      <div className="w-48 flex-shrink-0 border-l border-foreground/15 pl-8">
+                        <div className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-3">
+                          {currentData.rightPanel.heading}
+                        </div>
+                        <ul className="space-y-2.5">
+                          {currentData.rightPanel.items.map((item) => (
+                            <li key={item.label}>
+                              <Link
+                                to={item.path}
+                                className="flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary transition-colors group"
+                                onClick={() => setActiveMenu(null)}
+                              >
+                                <span className="text-muted-foreground group-hover:text-primary transition-colors">•</span>
+                                <span className="group-hover:translate-x-0.5 transition-transform duration-150">
+                                  {item.label}
+                                </span>
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             )}
@@ -410,6 +453,7 @@ const Navbar = () => {
                               <Link
                                 to={item.path}
                                 className="flex items-center gap-2.5 text-sm text-foreground/80 hover:text-foreground transition-colors"
+                                onClick={() => setMobileOpen(false)}
                               >
                                 {item.icon ? (
                                   <span className="w-4 h-4 flex-shrink-0 inline-flex items-center justify-center text-foreground/80 hover:text-foreground transition-colors">

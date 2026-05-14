@@ -96,7 +96,7 @@ const aiServices = [
       "Design and deliver generative AI workloads on AWS with strong security, cost controls, and a clear path to production.",
   },
   {
-    name: "Keyrow",
+    name: "Kiro",
     logoSrc: "/logo/kiro_51769_logo_1753086501_0boi4.avif",
     icon: Lock,
     color: "text-blue-400",

@@ -173,9 +173,15 @@ const OgGreenTreeButton = () => {
       type="button"
       onClick={() => navigate("/og-green-tree")}
       aria-label="Open OG Green Tree"
-      className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[60] w-16 h-16 sm:w-20 sm:h-20 bg-transparent transition-all duration-200 flex items-center justify-center"
+      className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[60] w-16 h-16 sm:w-20 sm:h-20 bg-transparent transition-all duration-200"
     >
-      <Leaf className="w-[72%] h-[72%] text-emerald-600" strokeWidth={2.5} aria-hidden="true" />
+      <span className="relative w-full h-full block" aria-hidden="true">
+        <span
+          className="absolute inset-0 bg-gray-200"
+          style={{ clipPath: "polygon(100% 0%, 100% 100%, 0% 100%)" }}
+        />
+        <Leaf className="absolute bottom-[14%] right-[14%] w-[40%] h-[40%] text-emerald-600" strokeWidth={2.5} />
+      </span>
     </button>
   );
 };

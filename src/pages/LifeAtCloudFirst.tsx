@@ -320,7 +320,9 @@ const LifeAtCloudFirst = () => {
                         <img
                           src={encodeURI(photo.src)}
                           alt={photo.title}
-                          className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                          className={`w-full h-full object-cover transition-transform duration-300 hover:scale-105 ${
+                            activeCategory === 'csr' && photo.src === '/cloudfirst_csr/1.png' ? 'object-top' : ''
+                          }`}
                           loading="lazy"
                           onError={(e) => {
                             e.currentTarget.style.display = 'none';
