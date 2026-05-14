@@ -117,7 +117,7 @@ const aiServices = [
   },
   {
     name: "AI Security, Governance & Compliance",
-    logoSrc: "/logo/ai-security-governance.webp",
+    logoSrc: "/logo/ai.png",
     icon: Shield,
     color: "text-rose-400",
     bg: "bg-rose-400/10",
@@ -299,15 +299,41 @@ const AmazonWebServices = () => {
                 className="group relative bg-white/90 backdrop-blur-sm rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 overflow-hidden"
               >
                 <div className={`absolute top-0 left-0 right-0 h-0.5 ${bg} opacity-0 group-hover:opacity-100 transition-opacity`} />
-                <div className={`relative inline-flex items-center justify-center h-10 w-10 rounded-xl ${bg} border ${border} mb-4`}>
+                <div className={`relative inline-flex items-center justify-center h-12 w-12 rounded-xl ${bg} border ${border} mb-4`}>
                   {logoSrc ? (
                     <img
                       src={logoSrc}
                       alt={name}
-                      className="absolute inset-0 w-full h-full object-contain scale-125"
+                      className={
+                        logoSrc.toLowerCase().includes('bedrock')
+                          ? "absolute inset-0 w-full h-full object-contain scale-[1.7]"
+                          : "absolute inset-0 w-full h-full object-contain p-1"
+                      }
                       loading="lazy"
                       onError={(e) => {
-                        e.currentTarget.style.display = 'none';
+                        const src = e.currentTarget.getAttribute('src') ?? '';
+                        if (!src.toLowerCase().includes('/logo/ai.')) {
+                          e.currentTarget.style.display = 'none';
+                          return;
+                        }
+
+                        const step = e.currentTarget.dataset.fallbackStep ?? '0';
+                        const next =
+                          step === '0'
+                            ? '/logo/ai.webp'
+                            : step === '1'
+                              ? '/logo/ai.jpg'
+                              : step === '2'
+                                ? '/logo/ai-security-governance.webp'
+                                : '';
+
+                        if (!next) {
+                          e.currentTarget.style.display = 'none';
+                          return;
+                        }
+
+                        e.currentTarget.dataset.fallbackStep = String(Number(step) + 1);
+                        e.currentTarget.src = next;
                       }}
                     />
                   ) : (

@@ -40,14 +40,14 @@ const CloudDataBackup = () => {
     <Layout>
       <section className="relative overflow-hidden bg-[#07111f]">
         <div className="pointer-events-none absolute inset-0">
-          <div className="absolute -top-40 -left-40 h-[640px] w-[640px] rounded-full bg-blue-700/10 blur-[130px]" />
-          <div className="absolute top-0 right-0 h-[520px] w-[520px] rounded-full bg-emerald-700/10 blur-[120px]" />
+          <div className="absolute -top-40 -left-40 h-[640px] w-[640px] rounded-full bg-bright-blue/10 blur-[130px]" />
+          <div className="absolute top-0 right-0 h-[520px] w-[520px] rounded-full bg-light-blue/10 blur-[120px]" />
         </div>
 
         <div className="relative max-w-[1200px] mx-auto px-6 lg:px-10 py-20 lg:py-28">
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <div>
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-blue-400">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-bright-blue/30 bg-bright-blue/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-light-blue">
                 Solutions
               </span>
               <h1
@@ -55,7 +55,7 @@ const CloudDataBackup = () => {
                 style={{ fontFamily: "'Georgia', serif" }}
               >
                 Cloud Data{" "}
-                <span className="text-blue-400">Backup</span>
+                <span className="text-light-blue">Backup</span>
               </h1>
               <p className="text-white/60 text-lg leading-relaxed max-w-xl mb-8">
                 Backups that are not tested are not backups — they’re assumptions. CloudFirst designs, automates, and validates
@@ -64,7 +64,7 @@ const CloudDataBackup = () => {
               <div className="flex flex-wrap gap-4">
                 <Link
                   to="/contact"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-blue-500 hover:bg-blue-400 text-white text-sm font-bold rounded-lg transition-colors"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-bright-blue hover:bg-bright-blue/90 text-white text-sm font-bold rounded-lg transition-colors"
                 >
                   Talk to our team <ArrowRight className="w-4 h-4" />
                 </Link>
@@ -78,7 +78,7 @@ const CloudDataBackup = () => {
             </div>
 
             <div className="relative">
-              <div className="absolute -inset-4 rounded-3xl bg-gradient-to-br from-blue-500/15 via-transparent to-emerald-500/10 blur-2xl" />
+              <div className="absolute -inset-4 rounded-3xl bg-gradient-to-br from-bright-blue/15 via-transparent to-light-blue/10 blur-2xl" />
               <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
                 <img
                   src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&w=1200&q=80"
@@ -92,11 +92,11 @@ const CloudDataBackup = () => {
         </div>
       </section>
 
-      <section className="bg-[#f7f8fa]">
+      <section className="bg-bright-blue/5">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-10 py-16">
           <div className="flex items-end justify-between mb-10 gap-6 flex-wrap">
             <div>
-              <span className="text-xs font-bold uppercase tracking-widest text-blue-600">What we deliver</span>
+              <span className="text-xs font-bold uppercase tracking-widest text-bright-blue">What we deliver</span>
               <h2 className="mt-2 text-2xl md:text-3xl font-bold text-gray-900" style={{ fontFamily: "'Georgia', serif" }}>
                 A complete cloud backup program
               </h2>
@@ -112,9 +112,9 @@ const CloudDataBackup = () => {
                 key={title}
                 className="group relative bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 overflow-hidden"
               >
-                <div className="absolute top-0 left-0 right-0 h-0.5 bg-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div className="inline-flex items-center justify-center h-10 w-10 rounded-xl bg-blue-500/10 border border-blue-500/20 mb-4">
-                  <Icon className="w-5 h-5 text-blue-600" />
+                <div className="absolute top-0 left-0 right-0 h-0.5 bg-bright-blue/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="inline-flex items-center justify-center h-10 w-10 rounded-xl bg-bright-blue/10 border border-bright-blue/20 mb-4">
+                  <Icon className="w-5 h-5 text-bright-blue" />
                 </div>
                 <h3 className="text-base font-bold text-gray-900 mb-2">{title}</h3>
                 <p className="text-gray-500 text-sm leading-relaxed">{body}</p>
@@ -126,11 +126,11 @@ const CloudDataBackup = () => {
 
       <section className="relative overflow-hidden bg-white">
         <div className="pointer-events-none absolute inset-0">
-          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-500/20 to-transparent" />
-          <div className="absolute -bottom-40 left-1/2 -translate-x-1/2 h-96 w-96 rounded-full bg-blue-500/10 blur-[90px]" />
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-bright-blue/20 to-transparent" />
+          <div className="absolute -bottom-40 left-1/2 -translate-x-1/2 h-96 w-96 rounded-full bg-bright-blue/10 blur-[90px]" />
         </div>
         <div className="relative max-w-[1200px] mx-auto px-6 lg:px-10 py-16 text-center">
-          <span className="inline-block text-xs font-bold uppercase tracking-widest text-blue-600 mb-4">Get started</span>
+          <span className="inline-block text-xs font-bold uppercase tracking-widest text-bright-blue mb-4">Get started</span>
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4" style={{ fontFamily: "'Georgia', serif" }}>
             Want a backup posture review?
           </h2>
@@ -140,7 +140,7 @@ const CloudDataBackup = () => {
           <div className="flex flex-wrap gap-4 justify-center">
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 px-7 py-3.5 bg-blue-500 hover:bg-blue-400 text-white text-sm font-bold rounded-lg transition-colors"
+              className="inline-flex items-center gap-2 px-7 py-3.5 bg-bright-blue hover:bg-bright-blue/90 text-white text-sm font-bold rounded-lg transition-colors"
             >
               Request assessment <ArrowRight className="w-4 h-4" />
             </Link>

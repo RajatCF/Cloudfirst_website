@@ -239,7 +239,7 @@ const Blogs: React.FC = () => {
         >
           <div className="absolute inset-0 bg-black opacity-30 z-0"></div>
           <div className="relative container mx-auto px-4 text-center text-white z-10 max-w-xl">
-            <h1 className="text-4xl md:text-5xl font-sans bg-gradient-to-r from-blue-200 via-white to-blue-500 bg-clip-text text-transparent drop-shadow-xl mb-4 tracking-tight">
+            <h1 className="text-4xl md:text-5xl font-sans bg-gradient-to-r from-light-blue via-white to-bright-blue bg-clip-text text-transparent drop-shadow-xl mb-4 tracking-tight">
               CloudFirst Blogs
             </h1>
             <p className="text-lg md:text-xl font-sans font-light mx-auto max-w-md drop-shadow-lg mb-8">
@@ -259,7 +259,7 @@ const Blogs: React.FC = () => {
               placeholder="Search articles..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-4 focus:ring-blue-400 focus:border-transparent"
+              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-4 focus:ring-bright-blue/30 focus:border-transparent"
             />
           </div>
         </section>
@@ -267,11 +267,11 @@ const Blogs: React.FC = () => {
         {/* Featured Article */}
         {featuredBlog && (
           <section className="max-w-7xl mx-auto px-4 mb-16">
-            <div className="w-full bg-gradient-to-br from-blue-50 via-white to-purple-50 rounded-3xl p-8 border border-blue-100 shadow-lg hover:shadow-xl transition-all duration-300">
+            <div className="w-full bg-gradient-to-br from-bright-blue/10 via-white to-light-blue/10 rounded-3xl p-8 border border-bright-blue/15 shadow-lg hover:shadow-xl transition-all duration-300">
               <div className="grid md:grid-cols-2 gap-8 items-center">
                 <div>
                   <div className="flex items-center gap-2 mb-4">
-                    <span className="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-xs font-medium">
+                    <span className="bg-bright-blue/10 text-bright-blue px-3 py-1 rounded-full text-xs font-medium">
                       Featured Article
                     </span>
                     <span className="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs font-medium">
@@ -304,7 +304,7 @@ const Blogs: React.FC = () => {
                  
                   <button
                     onClick={() => navigate(`/blog/${featuredBlog.id || featuredBlog.postId || featuredBlog.PK}`)}
-                    className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium px-8 py-3 rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                    className="inline-flex items-center gap-2 bg-gradient-to-r from-bright-blue to-light-blue text-white font-medium px-8 py-3 rounded-xl hover:from-bright-blue hover:to-light-blue transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
                   >
                     Read Full Article <ArrowRight className="w-4 h-4" />
                   </button>
@@ -318,7 +318,7 @@ const Blogs: React.FC = () => {
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <div className="absolute -bottom-4 -right-4 w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center shadow-lg">
+                  <div className="absolute -bottom-4 -right-4 w-20 h-20 bg-gradient-to-br from-bright-blue to-light-blue rounded-full flex items-center justify-center shadow-lg">
                     <Brain className="w-8 h-8 text-white" />
                   </div>
                 </div>
@@ -331,7 +331,7 @@ const Blogs: React.FC = () => {
         <section className="max-w-7xl mx-auto px-4 pb-20">
           <div className="flex items-center justify-between mb-10">
             <div className="flex items-center gap-3">
-              <BookOpen className="w-6 h-6 text-blue-600" />
+              <BookOpen className="w-6 h-6 text-bright-blue" />
               <h2 className="text-3xl font-light text-gray-800">Latest Articles</h2>
             </div>
             <div className="flex items-center gap-4">
@@ -347,7 +347,7 @@ const Blogs: React.FC = () => {
                     key={blog.id || blog.postId || blog.PK}
                     className="bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 group hover:scale-105"
                   >
-                    <div className="h-48 bg-gradient-to-br from-blue-100 to-purple-100 relative overflow-hidden">
+                    <div className="h-48 bg-gradient-to-br from-bright-blue/10 to-light-blue/10 relative overflow-hidden">
                       <img
                         src={blog.imageUrl || getDefaultImage()}
                         alt={blog.title}
@@ -361,7 +361,7 @@ const Blogs: React.FC = () => {
                     </div>
                    
                     <div className="p-6">
-                      <h3 className="text-xl font-medium text-gray-900 mb-3 leading-tight group-hover:text-blue-600 transition-colors">
+                      <h3 className="text-xl font-medium text-gray-900 mb-3 leading-tight group-hover:text-bright-blue transition-colors">
                         {blog.title}
                       </h3>
  

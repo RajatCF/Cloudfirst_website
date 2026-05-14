@@ -126,7 +126,7 @@ const Microsoft365: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-[#f7f8fa]">
+    <div className="min-h-screen bg-bright-blue/5">
       <Navbar />
 
       {/* Hero */}
@@ -135,14 +135,12 @@ const Microsoft365: React.FC = () => {
           className="absolute inset-0 opacity-20"
           style={{
             background:
-              "radial-gradient(ellipse at 80% 40%, #0078d4 0%, transparent 55%), radial-gradient(ellipse at 10% 80%, #107c10 0%, transparent 50%)",
+              "radial-gradient(ellipse at 80% 40%, hsl(var(--bright-blue)) 0%, transparent 55%), radial-gradient(ellipse at 10% 80%, hsl(var(--light-blue)) 0%, transparent 50%)",
           }}
         />
         <div className="max-w-6xl mx-auto px-6 pt-24 pb-20 relative z-10">
           <div className="flex items-center gap-2 mb-5">
-            <span className="text-xs font-semibold uppercase tracking-widest text-blue-300 border border-blue-400/30 bg-blue-400/10 rounded-full px-3 py-1">
-              Cloud Platforms
-            </span>
+            <span className="text-xs font-semibold uppercase tracking-widest text-light-blue border border-bright-blue/30 bg-bright-blue/10 rounded-full px-3 py-1">Resources</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-xs text-white/40 font-medium">Microsoft 365</span>
           </div>
@@ -151,7 +149,7 @@ const Microsoft365: React.FC = () => {
             style={{ fontFamily: "'Georgia', serif" }}
           >
             Microsoft 365 that{" "}
-            <span className="text-blue-400">works for your business</span>, not against it
+            <span className="text-light-blue">works for your business</span>, not against it
           </h1>
           <p className="text-white/60 text-base md:text-lg leading-relaxed max-w-2xl mb-10">
             Most organisations deploy Microsoft 365 and inherit default settings that create security gaps, governance nightmares, and user frustration. CloudFirst designs, migrates, secures, and manages your M365 tenant the right way from day one.
@@ -213,7 +211,7 @@ const Microsoft365: React.FC = () => {
           {capabilities.map((c) => (
             <div
               key={c.app}
-              className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 hover:shadow-md hover:border-blue-100 transition-all duration-200"
+              className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 hover:shadow-md hover:border-bright-blue/20 transition-all duration-200"
             >
               <div className="flex items-center gap-3 mb-3">
                 <span className="text-2xl">{c.icon}</span>
@@ -240,13 +238,13 @@ const Microsoft365: React.FC = () => {
           {services.map((svc) => (
             <div
               key={svc.title}
-              className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 hover:shadow-md hover:border-blue-100 transition-all duration-200"
+              className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 hover:shadow-md hover:border-bright-blue/20 transition-all duration-200"
             >
               <div className="flex items-start justify-between mb-4">
-                <div className="w-10 h-10 bg-blue-50 text-blue-700 rounded-xl flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 bg-bright-blue/10 text-bright-blue rounded-xl flex items-center justify-center flex-shrink-0">
                   {svc.icon}
                 </div>
-                <span className="text-[11px] font-semibold text-blue-700 bg-blue-50 rounded px-2.5 py-1">
+                <span className="text-[11px] font-semibold text-bright-blue bg-bright-blue/10 rounded px-2.5 py-1">
                   {svc.tag}
                 </span>
               </div>
@@ -285,7 +283,7 @@ const Microsoft365: React.FC = () => {
               { step: "04", title: "Manage", desc: "We provide ongoing admin, monitoring, optimization, and support so your Microsoft 365 environment stays secure and efficient." },
             ].map((p) => (
               <div key={p.step}>
-                <div className="text-4xl font-bold text-blue-500/70 mb-3" style={{ fontFamily: "'Georgia', serif" }}>
+                <div className="text-4xl font-bold text-bright-blue/20 mb-3" style={{ fontFamily: "'Georgia', serif" }}>
                   {p.step}
                 </div>
                 <h3 className="text-sm font-bold text-gray-900 mb-2">{p.title}</h3>
@@ -332,10 +330,10 @@ const Microsoft365: React.FC = () => {
         <div className="bg-[#0d1b4b] rounded-2xl px-8 py-12 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
           <div
             className="absolute inset-0 opacity-20"
-            style={{ background: "radial-gradient(ellipse at 90% 50%, #0078d4 0%, transparent 60%)" }}
+            style={{ background: "radial-gradient(ellipse at 90% 50%, hsl(var(--bright-blue)) 0%, transparent 60%)" }}
           />
           <div className="relative z-10 max-w-lg">
-            <span className="inline-block text-xs font-semibold uppercase tracking-widest text-blue-400 mb-3">
+            <span className="inline-block text-xs font-semibold uppercase tracking-widest text-light-blue mb-3">
               Free assessment
             </span>
             <h2
@@ -351,7 +349,7 @@ const Microsoft365: React.FC = () => {
           <div className="relative z-10 flex flex-col gap-3 flex-shrink-0">
             <button
               onClick={() => navigate("/contact")}
-              className="inline-flex items-center gap-2 px-7 py-3 bg-blue-400 hover:bg-blue-300 text-[#0d1b4b] text-sm font-bold rounded-lg transition-colors duration-200 whitespace-nowrap"
+              className="inline-flex items-center gap-2 px-7 py-3 bg-bright-blue hover:bg-bright-blue/90 text-white text-sm font-bold rounded-lg transition-colors duration-200 whitespace-nowrap"
             >
               Request a tenant audit →
             </button>

@@ -15,22 +15,22 @@ const InfrastructureModernisation: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-[#f7f8fa]">
+    <div className="min-h-screen bg-bright-blue/5">
       <Navbar />
 
       {/* Hero — purple accent, split with image */}
       <div className="max-w-7xl mx-auto px-6 pt-28 pb-16">
         <div className="max-w-3xl mx-auto text-center">
-          <span className="inline-block text-xs font-semibold uppercase tracking-widest text-purple-600 bg-purple-50 border border-purple-100 rounded-full px-3 py-1 mb-5">Solutions</span>
+          <span className="inline-block text-xs font-semibold uppercase tracking-widest text-bright-blue bg-bright-blue/10 border border-bright-blue/20 rounded-full px-3 py-1 mb-5">Solutions</span>
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-5" style={{ fontFamily: "'Georgia', serif" }}>
             From legacy infrastructure<br />
-            <span className="text-purple-600">to cloud-native platform</span>
+            <span className="text-bright-blue">to cloud-native platform</span>
           </h1>
           <p className="text-gray-500 text-lg leading-relaxed mb-8 max-w-xl">
             Outdated infrastructure creates bottlenecks and hidden risks. CloudFirst Technology modernizes your environment by transitioning from rigid, manual systems to agile, automated cloud-native platforms—so your teams can move faster and scale without limits.
           </p>
           <div className="flex flex-wrap gap-3 justify-center">
-            <button onClick={() => navigate("/contact")} className="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white text-sm font-semibold rounded-lg transition-colors">Start modernising →</button>
+            <button onClick={() => navigate("/contact")} className="px-6 py-3 bg-bright-blue hover:bg-bright-blue/90 text-white text-sm font-semibold rounded-lg transition-colors">Start modernising →</button>
             <button onClick={() => navigate(-1)} className="px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-semibold rounded-lg transition-colors">← Back</button>
           </div>
         </div>
@@ -74,7 +74,7 @@ const InfrastructureModernisation: React.FC = () => {
             { icon: "🛡️", title: "Security hardening", desc: "Shift-left security with IaC scanning, image vulnerability scanning, RBAC, network policies, and secrets management baked into the platform." },
             { icon: "💰", title: "Cost governance", desc: "Namespace-level cost allocation, resource quotas, autoscaling policies, and spot/preemptible instance integration to keep infrastructure costs predictable." },
           ].map((p) => (
-            <div key={p.title} className="bg-gray-50 rounded-xl p-5 hover:bg-purple-50 hover:border-purple-100 border border-gray-100 transition-all">
+            <div key={p.title} className="bg-gray-50 rounded-xl p-5 hover:bg-bright-blue/5 hover:border-bright-blue/20 border border-gray-100 transition-all">
               <div className="text-2xl mb-3">{p.icon}</div>
               <h3 className="text-sm font-bold text-gray-900 mb-2">{p.title}</h3>
               <p className="text-xs text-gray-500 leading-relaxed">{p.desc}</p>
@@ -85,14 +85,14 @@ const InfrastructureModernisation: React.FC = () => {
 
       {/* CTA */}
       <div className="max-w-6xl mx-auto px-6 pb-16">
-        <div className="bg-purple-600 rounded-2xl px-8 py-12 flex flex-col md:flex-row items-center justify-between gap-8">
+        <div className="bg-bright-blue rounded-2xl px-8 py-12 flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="max-w-lg">
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-3" style={{ fontFamily: "'Georgia', serif" }}>Assess your modernisation readiness</h2>
-            <p className="text-purple-100 text-sm leading-relaxed">We'll evaluate your current infrastructure, identify the highest-value modernisation opportunities, and build a phased plan your teams can execute.</p>
+            <p className="text-white/85 text-sm leading-relaxed">We'll evaluate your current infrastructure, identify the highest-value modernisation opportunities, and build a phased plan your teams can execute.</p>
           </div>
           <div className="flex flex-col gap-3 flex-shrink-0">
-            <button onClick={() => navigate("/contact")} className="px-7 py-3 bg-white hover:bg-purple-50 text-purple-700 text-sm font-bold rounded-lg transition-colors whitespace-nowrap">Book a free assessment →</button>
-            <button onClick={() => navigate(-1)} className="text-xs text-purple-200 hover:text-white transition-colors text-center">← Back</button>
+            <button onClick={() => navigate("/contact")} className="px-7 py-3 bg-white hover:bg-white/95 text-bright-blue text-sm font-bold rounded-lg transition-colors whitespace-nowrap">Book a free assessment →</button>
+            <button onClick={() => navigate(-1)} className="text-xs text-white/75 hover:text-white transition-colors text-center">← Back</button>
           </div>
         </div>
       </div>

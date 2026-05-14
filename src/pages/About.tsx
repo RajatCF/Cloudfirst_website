@@ -181,50 +181,85 @@ const About = () => {
         </section>
       )}
 
-      <section className="bg-[#f7f8fa] border-b border-gray-100">
-        <div className="max-w-[1200px] mx-auto px-6 lg:px-10 py-16">
-          <div className="mb-10">
-            <span className="text-xs font-bold uppercase tracking-widest text-blue-600">Milestones & journey</span>
-            <h2 className="mt-2 text-2xl md:text-3xl font-bold text-gray-900" style={{ fontFamily: "'Georgia', serif" }}>
-              Our milestones
-            </h2>
-          </div>
-
-          <div className="grid lg:grid-cols-2 gap-10 items-start">
-            <div className="rounded-2xl border border-gray-100 bg-white shadow-sm overflow-hidden">
-              <div className="aspect-[16/10] w-full bg-gradient-to-br from-blue-50 via-white to-indigo-50 flex items-center justify-center">
-                <div className="mx-8 w-full rounded-2xl border-2 border-dashed border-blue-200/70 bg-white/70 px-6 py-10 text-center">
-                  <div className="text-sm font-semibold text-gray-900 mb-1">Milestones image</div>
-                  <div className="text-sm text-gray-500">Add your journey graphic here</div>
-                </div>
-              </div>
+      {!showLeadership ? (
+        <section className="bg-[#f7f8fa] border-b border-gray-100">
+          <div className="max-w-[1200px] mx-auto px-6 lg:px-10 py-16">
+            <div className="mb-10">
+              <span className="text-xs font-bold uppercase tracking-widest text-blue-600">Milestones & journey</span>
+              <h2 className="mt-2 text-2xl md:text-3xl font-bold text-gray-900" style={{ fontFamily: "'Georgia', serif" }}>
+                Our milestones
+              </h2>
             </div>
 
-            <div className="rounded-2xl border border-gray-100 bg-white shadow-sm p-6 md:p-8">
-              <div className="relative">
-                <div className="absolute left-[18px] top-2 bottom-2 w-px bg-gradient-to-b from-blue-200 via-indigo-200 to-transparent" />
-                <div className="space-y-6">
-                  {milestones.map(({ year, title, desc, icon: Icon }) => (
-                    <div key={year} className="relative pl-12">
-                      <div className="absolute left-0 top-0">
-                        <div className="h-9 w-9 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
-                          <Icon className="w-4 h-4 text-blue-600" />
+            <div className="grid lg:grid-cols-2 gap-10 items-start">
+              <div className="rounded-2xl border border-gray-100 bg-white shadow-sm overflow-hidden">
+                <div className="aspect-[16/10] w-full bg-gradient-to-br from-blue-50 via-white to-indigo-50 flex items-center justify-center">
+                  <div className="mx-8 w-full rounded-2xl border-2 border-dashed border-blue-200/70 bg-white/70 px-6 py-10 text-center">
+                    <div className="text-sm font-semibold text-gray-900 mb-1">Milestones image</div>
+                    <div className="text-sm text-gray-500">Add your journey graphic here</div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-gray-100 bg-white shadow-sm p-6 md:p-8">
+                <div className="relative">
+                  <div className="absolute left-[18px] top-2 bottom-2 w-px bg-gradient-to-b from-blue-200 via-indigo-200 to-transparent" />
+                  <div className="space-y-6">
+                    {milestones.map(({ year, title, desc, icon: Icon }) => (
+                      <div key={year} className="relative pl-12">
+                        <div className="absolute left-0 top-0">
+                          <div className="h-9 w-9 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
+                            <Icon className="w-4 h-4 text-blue-600" />
+                          </div>
                         </div>
+                        <div className="flex items-center gap-3 mb-1">
+                          <span className="text-xs font-bold tracking-widest text-blue-600">{year}</span>
+                          <span className="h-1 w-1 rounded-full bg-blue-300" />
+                          <h3 className="text-base font-bold text-gray-900">{title}</h3>
+                        </div>
+                        <p className="text-sm text-gray-500 leading-relaxed">{desc}</p>
                       </div>
-                      <div className="flex items-center gap-3 mb-1">
-                        <span className="text-xs font-bold tracking-widest text-blue-600">{year}</span>
-                        <span className="h-1 w-1 rounded-full bg-blue-300" />
-                        <h3 className="text-base font-bold text-gray-900">{title}</h3>
-                      </div>
-                      <p className="text-sm text-gray-500 leading-relaxed">{desc}</p>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      ) : (
+        <section className="bg-[#f7f8fa] border-b border-gray-100">
+          <div className="max-w-[1200px] mx-auto px-6 lg:px-10 py-16">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {[
+                {
+                  src: "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/india+Ai+impact+summit/IMG-20260216-WA0023+(1).jpg",
+                },
+                {
+                  src: "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/aws+summit+bengaluru/1000106663.jpg",
+                },
+                {
+                  src: "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/india+Ai+impact+summit/IMG-20260216-WA0025+(1).jpg",
+                },
+                {
+                  src: "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/aws+summit+bengaluru/WhatsApp+Image+2026-04-24+at+06.57.58+(4).jpeg",
+                },
+                {
+                  src: "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/india+Ai+impact+summit/IMG-20260218-WA0016.jpg",
+                },
+                {
+                  src: "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/aws+summit+bengaluru/1000106663.jpg",
+                },
+              ].map((item, index) => (
+                <div key={`${item.src}-${index}`} className="rounded-2xl border border-gray-100 bg-white shadow-sm overflow-hidden">
+                  <div className="aspect-[4/3] w-full bg-slate-100">
+                    <img src={item.src} alt="" className="w-full h-full object-cover" loading="lazy" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ── Values ── */}
       <section className="bg-[#f7f8fa]">

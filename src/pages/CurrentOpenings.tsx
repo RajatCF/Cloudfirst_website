@@ -19,7 +19,7 @@ const CurrentOpenings = () => {
     <Layout>
       <div className="min-h-screen bg-white text-black">
       {/* Hero Banner Section */}
-      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 to-cyan-100">
+      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-bright-blue/10 to-light-blue/10">
         <div className="max-w-7xl mx-auto">
           <motion.div
             className="text-center mb-12"
@@ -28,7 +28,7 @@ const CurrentOpenings = () => {
             variants={fadeInUp}
           >
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-gray-900">
-              Current <span className="text-blue-500">Openings</span>
+              Current <span className="text-bright-blue">Openings</span>
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
               Join our team and help shape the future of cloud technology. 
@@ -36,7 +36,7 @@ const CurrentOpenings = () => {
             </p>
             <div className="mt-8 flex items-center justify-center">
               <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm">
-                <Briefcase className="w-5 h-5 text-blue-600" />
+                <Briefcase className="w-5 h-5 text-bright-blue" />
                 <span className="text-gray-700 font-medium">Upcoming roles will be posted soon</span>
               </div>
             </div>

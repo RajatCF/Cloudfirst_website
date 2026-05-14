@@ -13,6 +13,7 @@ const stats = [
 const aiServices = [
   {
     title: "Google Gemini (AI Studio)",
+    logoSrc: "/logo/gemini.png",
     icon: Brain,
     color: "text-blue-500",
     bg: "bg-blue-500/10",
@@ -22,6 +23,7 @@ const aiServices = [
   },
   {
     title: "Google Workspace Studio",
+    logoSrc: "/logo/google_workspace.png",
     icon: Code2,
     color: "text-sky-600",
     bg: "bg-sky-600/10",
@@ -31,6 +33,7 @@ const aiServices = [
   },
   {
     title: "Vertex AI, MLOps & LLMOps",
+    logoSrc: "/logo/Vertex-AI.png",
     icon: GitBranch,
     color: "text-emerald-600",
     bg: "bg-emerald-600/10",
@@ -40,6 +43,7 @@ const aiServices = [
   },
   {
     title: "LLM Apps & RAG on Google Cloud",
+    logoSrc: "/llm_logo.webp",
     icon: Database,
     color: "text-indigo-600",
     bg: "bg-indigo-600/10",
@@ -200,14 +204,49 @@ const GoogleCloud: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
-            {aiServices.map(({ title, icon: Icon, color, bg, border, description }) => (
+            {aiServices.map(({ title, logoSrc, icon: Icon, color, bg, border, description }) => (
               <div
                 key={title}
                 className="group relative bg-white/90 backdrop-blur-sm rounded-2xl border border-gray-100 shadow-sm p-6 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 overflow-hidden"
               >
                 <div className={`absolute top-0 left-0 right-0 h-0.5 ${bg} opacity-0 group-hover:opacity-100 transition-opacity`} />
-                <div className={`inline-flex items-center justify-center h-10 w-10 rounded-xl ${bg} border ${border} mb-4`}>
+                <div className={`relative inline-flex items-center justify-center h-12 w-12 rounded-xl ${bg} border ${border} mb-4`}>
                   <Icon className={`w-5 h-5 ${color}`} />
+                  {logoSrc ? (
+                    <img
+                      src={logoSrc}
+                      alt={title}
+                      className={
+                        logoSrc.toLowerCase().includes('llm')
+                          ? "absolute inset-0 w-full h-full object-contain scale-[1.55]"
+                          : "absolute inset-0 w-full h-full object-contain p-1"
+                      }
+                      loading="lazy"
+                      onError={(e) => {
+                        const src = (e.currentTarget.getAttribute('src') ?? '').toLowerCase();
+                        const step = Number(e.currentTarget.dataset.fallbackStep ?? '0');
+
+                        const candidates = src.includes('gemini')
+                          ? ['/logo/gemini.png', '/logo/gemini.webp', '/logo/gemini.jpg', '/gemini.png', '/Gemini.png']
+                          : src.includes('vertex')
+                            ? ['/logo/Vertex-AI.png', '/logo/vertex.png', '/logo/vertex.webp', '/logo/vertex.jpg', '/Vertex-AI.png', '/vertex.png', '/Vertex.png']
+                            : src.includes('workspace')
+                              ? ['/logo/google_workspace.png', '/logo/google workspace.png', '/google_workspace.png', '/google workspace.png']
+                              : src.includes('llm')
+                                ? ['/llm_logo.webp', '/logo/llm_logo.webp']
+                                : [];
+
+                        const next = candidates[step + 1];
+                        if (!next) {
+                          e.currentTarget.style.display = 'none';
+                          return;
+                        }
+
+                        e.currentTarget.dataset.fallbackStep = String(step + 1);
+                        e.currentTarget.src = next;
+                      }}
+                    />
+                  ) : null}
                 </div>
                 <h3 className="text-base font-bold text-gray-900 mb-2">{title}</h3>
                 <p className="text-gray-500 text-sm leading-relaxed">{description}</p>

@@ -10,10 +10,11 @@ const corporateOffice = {
   ],
 };
 
-const regionalOffices = ['Bengaluru', 'Delhi NCR', 'Hyderabad', 'Kolkata'];
+const regionalOffices = ['Mumbai', 'Delhi NCR', 'Hyderabad', 'Kolkata'];
 
 const internationalOffices = [
   {
+    flagCode: 'ae',
     heading: 'Dubai, UAE',
     lines: [
       'Gate Avenue, Zone D – Level 1,',
@@ -23,10 +24,12 @@ const internationalOffices = [
     ],
   },
   {
+    flagCode: 'us',
     heading: 'United States',
     lines: ['2055 Limestone Rd, STE 200-C,', 'Wilmington, DE 19808,', 'United States', '+91-844 844 0769'],
   },
   {
+    flagCode: 'sg',
     heading: 'Singapore',
     lines: ['10 Anson Road, International Plaza,', '079903, Singapore', '+91-844 844 0769'],
   },
@@ -149,7 +152,12 @@ const Contact = () => {
                   <div className="space-y-6">
                     {internationalOffices.map((office) => (
                       <div key={office.heading} className="flex gap-4">
-                        <MapPin className="w-5 h-5 text-bright-blue flex-shrink-0 mt-1" />
+                        <img
+                          src={`https://flagcdn.com/24x18/${office.flagCode}.png`}
+                          alt=""
+                          className="w-6 h-[18px] flex-shrink-0 mt-1 rounded-sm object-cover"
+                          loading="lazy"
+                        />
                         <div>
                           <h3 className="font-display font-bold">{office.heading}</h3>
                           <div className="mt-1 space-y-0.5">

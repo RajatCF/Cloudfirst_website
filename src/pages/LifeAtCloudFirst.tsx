@@ -86,7 +86,6 @@ const MotionImageCarousel = ({
 const LifeAtCloudFirst = () => {
   const [activeCategory, setActiveCategory] = useState<string>('festivals');
   const [viewMode, setViewMode] = useState<'overview' | 'gallery'>('overview');
-  const [openPhoto, setOpenPhoto] = useState<{ src: string; title: string } | null>(null);
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
     visible: { 
@@ -98,19 +97,6 @@ const LifeAtCloudFirst = () => {
       }
     }
   };
-
-  useEffect(() => {
-    if (!openPhoto) return;
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setOpenPhoto(null);
-    };
-    window.addEventListener('keydown', onKeyDown);
-    document.body.style.overflow = 'hidden';
-    return () => {
-      window.removeEventListener('keydown', onKeyDown);
-      document.body.style.overflow = '';
-    };
-  }, [openPhoto]);
 
   const photoCategories = useMemo(() => {
     const categories = [
@@ -164,7 +150,7 @@ const LifeAtCloudFirst = () => {
       <Navbar />
       
       {/* Hero Banner Section */}
-      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-purple-50 to-pink-100">
+      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-bright-blue/10 to-light-blue/10">
         <div className="max-w-7xl mx-auto">
           <motion.div
             className="text-center mb-12"
@@ -173,7 +159,7 @@ const LifeAtCloudFirst = () => {
             variants={fadeInUp}
           >
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-gray-900">
-              Life@<span className="text-purple-600">CloudFirst</span>
+              Life@<span className="text-bright-blue">CloudFirst</span>
             </h1>
             <p className="text-xl text-gray-800 mb-8 max-w-3xl mx-auto">
               Join a team of passionate innovators building the future of cloud technology and creating lasting impact together.
@@ -181,7 +167,7 @@ const LifeAtCloudFirst = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 to="/current-openings"
-                className="px-8 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors text-center"
+                className="px-8 py-3 bg-bright-blue text-white rounded-lg hover:bg-bright-blue/90 transition-colors text-center"
               >
                 Explore Careers
               </Link>
@@ -292,7 +278,7 @@ const LifeAtCloudFirst = () => {
                         </div>
                       </div>
                       <div className="p-5">
-                        <div className="inline-flex items-center gap-2 text-sm font-semibold text-purple-700">
+                        <div className="inline-flex items-center gap-2 text-sm font-semibold text-bright-blue">
                           View photos <span className="transition-transform group-hover:translate-x-0.5">→</span>
                         </div>
                       </div>
@@ -312,13 +298,13 @@ const LifeAtCloudFirst = () => {
                         : 'CSR & Social Activities'}
                     </h3>
                     <p className="mt-2 text-gray-600">
-                      Tap any image to view it in full size.
+                      Explore moments from this category.
                     </p>
                   </div>
                   <button
                     type="button"
                     onClick={() => setViewMode('overview')}
-                    className="px-5 py-2.5 rounded-full text-sm font-semibold border border-gray-200 bg-white hover:border-purple-300 hover:text-purple-700 transition-colors"
+                    className="px-5 py-2.5 rounded-full text-sm font-semibold border border-gray-200 bg-white hover:border-bright-blue/30 hover:text-bright-blue transition-colors"
                   >
                     ← Back
                   </button>
@@ -326,10 +312,8 @@ const LifeAtCloudFirst = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                   {activePhotos.map((photo) => (
-                    <button
+                    <div
                       key={`${activeCategory}-${photo.src}`}
-                      type="button"
-                      onClick={() => setOpenPhoto(photo)}
                       className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 text-left"
                     >
                       <div className="relative h-72 overflow-hidden bg-gray-50">
@@ -343,7 +327,7 @@ const LifeAtCloudFirst = () => {
                           }}
                         />
                       </div>
-                    </button>
+                    </div>
                   ))}
                   {activePhotos.length === 0 ? (
                     <div className="sm:col-span-2 lg:col-span-3 text-center text-gray-500">
@@ -357,41 +341,8 @@ const LifeAtCloudFirst = () => {
         </div>
       </section>
 
-      {openPhoto ? (
-        <div
-          className="fixed inset-0 z-[80] bg-black/70 px-4 py-8 flex items-center justify-center"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Image preview"
-          onClick={() => setOpenPhoto(null)}
-        >
-          <div
-            className="relative w-full max-w-6xl max-h-[90vh] rounded-2xl bg-white overflow-hidden shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              type="button"
-              onClick={() => setOpenPhoto(null)}
-              aria-label="Close"
-              className="absolute right-3 top-3 z-10 rounded-full bg-black/70 text-white px-3 py-2 text-sm hover:bg-black/80 transition-colors"
-            >
-              Close
-            </button>
-            <div className="w-full h-full bg-white p-4">
-              <img
-                src={encodeURI(openPhoto.src)}
-                alt={openPhoto.title}
-                className="w-full h-full max-h-[calc(90vh-2rem)] object-contain"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-          </div>
-        </div>
-      ) : null}
-
       {/* Employee Testimonials Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-purple-50 to-pink-50">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-bright-blue/10 to-light-blue/10">
         <div className="max-w-7xl mx-auto">
           <motion.div
             className="text-center mb-16"
@@ -438,21 +389,21 @@ const LifeAtCloudFirst = () => {
                 position: "Software Developer",
                 quote: "As a Software Developer at CloudFirst, I get to work on real-world cloud solutions with a team that values clean engineering, ownership, and continuous learning. The environment is collaborative and supportive, which helps me grow my technical skills while delivering impactful work for clients.",
                 avatar: "AP",
-                bgColor: "bg-purple-500"
+                bgColor: "bg-bright-blue"
               },
               {
                 name: "Deepika Verma",
                 position: "Senior HR Executive",
                 quote: "As a Senior HR Executive at CloudFirst, I'm proud to be part of a culture that truly values people, collaboration, and growth. The environment here is positive and inclusive, where every individual is encouraged to learn, contribute, and thrive. It's a workplace that genuinely supports both professional development and personal well-being",
                 avatar: "DV",
-                bgColor: "bg-blue-500"
+                bgColor: "bg-bright-blue"
               },
               {
                 name: "Pragya Raghuvanshi",
                 position: "Partner Manager",
                 quote: "As a Partner Manager at CloudFirst, I've experienced a culture built on trust, collaboration, and innovation. The work environment is energetic and supportive, empowering us to build strong partnerships and drive meaningful growth. It's a place where teamwork and continuous learning truly fuel success.",
                 avatar: "PR",
-                bgColor: "bg-pink-500"
+                bgColor: "bg-bright-blue"
               },
             ].map((employee, index) => (
               <motion.div
@@ -471,7 +422,7 @@ const LifeAtCloudFirst = () => {
                 }}
               >
                 {/* Quote Icon */}
-                <div className="text-4xl text-purple-300 mb-4">"</div>
+                <div className="text-4xl text-bright-blue/30 mb-4">"</div>
                 
                 {/* Quote Text */}
                 <p className="text-gray-700 mb-6 leading-relaxed italic">
@@ -503,7 +454,7 @@ const LifeAtCloudFirst = () => {
             <p className="text-gray-600 mb-6">Ready to join our amazing team?</p>
             <Link
               to="/current-openings"
-              className="inline-flex items-center px-8 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+              className="inline-flex items-center px-8 py-3 bg-bright-blue text-white rounded-lg hover:bg-bright-blue/90 transition-colors"
             >
               View Open Positions
             </Link>

@@ -21,18 +21,18 @@ const HealthcareIndustry: React.FC = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-green-900/90 via-green-900/70 to-transparent" />
         <div className="relative z-10 max-w-6xl mx-auto px-6 h-full flex items-end pb-14">
           <div>
-            <span className="inline-block text-xs font-semibold uppercase tracking-widest text-green-300 border border-green-400/30 bg-green-400/10 rounded-full px-3 py-1 mb-4">By Industry</span>
-            <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-4" style={{ fontFamily: "'Georgia', serif" }}>Healthcare cloud —<br /><span className="text-green-300">secure, compliant, available</span></h1>
+            <span className="inline-block text-xs font-semibold uppercase tracking-widest text-light-blue border border-bright-blue/30 bg-bright-blue/10 rounded-full px-3 py-1 mb-4">By Industry</span>
+            <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-4" style={{ fontFamily: "'Georgia', serif" }}>Healthcare cloud —<br /><span className="text-light-blue">secure, compliant, available</span></h1>
             <p className="text-white/70 text-lg max-w-xl">Patient data demands the highest security and availability. CloudFirst builds and operates healthcare cloud platforms that meet HIPAA, ISO 27001, and clinical reliability requirements.</p>
           </div>
         </div>
       </div>
 
       {/* Stats */}
-      <div className="bg-green-600 py-8">
+      <div className="bg-bright-blue py-8">
         <div className="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
           {[{ v: "HIPAA Ready", l: "Compliant architecture" }, { v: "99.99%", l: "Clinical system uptime" }, { v: "60%", l: "Storage cost reduction" }, { v: "24/7", l: "Clinical ops support" }].map(s => (
-            <div key={s.l}><div className="text-xl font-bold text-white mb-0.5" style={{ fontFamily: "'Georgia', serif" }}>{s.v}</div><div className="text-xs text-green-100">{s.l}</div></div>
+            <div key={s.l}><div className="text-xl font-bold text-white mb-0.5" style={{ fontFamily: "'Georgia', serif" }}>{s.v}</div><div className="text-xs text-white/80">{s.l}</div></div>
           ))}
         </div>
       </div>
@@ -48,9 +48,9 @@ const HealthcareIndustry: React.FC = () => {
                 <span className="w-2 h-2 rounded-full bg-red-400 flex-shrink-0 mt-1.5" />
                 <div><div className="text-xs font-bold text-red-500 uppercase tracking-wider mb-1">Challenge</div><p className="text-sm text-gray-700 font-medium">{c.challenge}</p></div>
               </div>
-              <div className="bg-green-50 p-6 flex items-start gap-3">
-                <svg className="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" /></svg>
-                <div><div className="text-xs font-bold text-green-600 uppercase tracking-wider mb-1">Our solution</div><p className="text-sm text-gray-600 leading-relaxed">{c.solution}</p></div>
+              <div className="bg-bright-blue/5 p-6 flex items-start gap-3">
+                <svg className="w-4 h-4 text-bright-blue flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" /></svg>
+                <div><div className="text-xs font-bold text-bright-blue uppercase tracking-wider mb-1">Our solution</div><p className="text-sm text-gray-600 leading-relaxed">{c.solution}</p></div>
               </div>
             </div>
           ))}
@@ -79,14 +79,14 @@ const HealthcareIndustry: React.FC = () => {
 
       {/* CTA */}
       <div className="max-w-6xl mx-auto px-6 py-16">
-        <div className="bg-green-700 rounded-2xl px-8 py-12 flex flex-col md:flex-row items-center justify-between gap-8">
+        <div className="bg-gradient-to-r from-bright-blue to-light-blue rounded-2xl px-8 py-12 flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="max-w-lg">
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-3" style={{ fontFamily: "'Georgia', serif" }}>Build a compliant healthcare cloud</h2>
-            <p className="text-green-100 text-sm leading-relaxed">Talk to a CloudFirst healthcare cloud specialist about your environment and compliance requirements.</p>
+            <p className="text-white/85 text-sm leading-relaxed">Talk to a CloudFirst healthcare cloud specialist about your environment and compliance requirements.</p>
           </div>
           <div className="flex flex-col gap-3 flex-shrink-0">
-            <button onClick={() => navigate("/contact")} className="px-7 py-3 bg-white hover:bg-green-50 text-green-700 text-sm font-bold rounded-lg transition-colors whitespace-nowrap">Talk to a specialist →</button>
-            <button onClick={() => navigate(-1)} className="text-xs text-green-200 hover:text-white transition-colors text-center">← Back</button>
+            <button onClick={() => navigate("/contact")} className="px-7 py-3 bg-white hover:bg-white/95 text-bright-blue text-sm font-bold rounded-lg transition-colors whitespace-nowrap">Talk to a specialist →</button>
+            <button onClick={() => navigate(-1)} className="text-xs text-white/70 hover:text-white transition-colors text-center">← Back</button>
           </div>
         </div>
       </div>

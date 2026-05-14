@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 
 const partners = [
-  { name: "Amazon Web Services", tier: "Premier Partner", logo: "☁️", color: "border-[#FF9900]/30 bg-[#FF9900]/5", tierColor: "text-[#b36a00] bg-[#FF9900]/10", desc: "CloudFirst is an AWS Premier Consulting Partner — the highest tier — with specialisms in migration, DevOps, and Well-Architected Framework reviews." },
-  { name: "Google Cloud", tier: "Premier Partner", logo: "🌐", color: "border-blue-200 bg-blue-50/50", tierColor: "text-blue-700 bg-blue-50", desc: "Google Cloud Premier Partner with specialisms across Google Workspace, GCP Infrastructure, and Data & AI." },
-  { name: "Microsoft Azure", tier: "Solutions Partner", logo: "🔷", color: "border-[#00a4ef]/30 bg-[#00a4ef]/5", tierColor: "text-[#006ba6] bg-[#00a4ef]/10", desc: "Microsoft Solutions Partner for Infrastructure and Digital & App Innovation with Azure Expert MSP designation." },
+  { name: "Amazon Web Services", tier: "Premier Partner", logo: "/aws_advance partner logo.png", color: "border-[#FF9900]/30 bg-[#FF9900]/5", tierColor: "text-[#b36a00] bg-[#FF9900]/10", desc: "CloudFirst is an AWS Premier Consulting Partner — the highest tier — with specialisms in migration, DevOps, and Well-Architected Framework reviews." },
+  { name: "Google Cloud", tier: "Premier Partner", logo: "/logo/new_GCI.png", color: "border-blue-200 bg-blue-50/50", tierColor: "text-blue-700 bg-blue-50", desc: "Google Cloud Premier Partner with specialisms across Google Workspace, GCP Infrastructure, and Data & AI." },
+  { name: "Microsoft Azure", tier: "Solutions Partner", logo: "/microsoft_new_logo.png", color: "border-[#00a4ef]/30 bg-[#00a4ef]/5", tierColor: "text-[#006ba6] bg-[#00a4ef]/10", desc: "Microsoft Solutions Partner for Infrastructure and Digital & App Innovation with Azure Expert MSP designation." },
   { name: "HashiCorp / Terraform", tier: "Technology Partner", logo: "🟣", color: "border-purple-200 bg-purple-50/50", tierColor: "text-purple-700 bg-purple-50", desc: "Official HashiCorp technology partner — with certified practitioners delivering IaC at enterprise scale." },
   { name: "Datadog", tier: "Technology Partner", logo: "📊", color: "border-violet-200 bg-violet-50/50", tierColor: "text-violet-700 bg-violet-50", desc: "Datadog partner for observability — deploying full-stack monitoring, APM, and security signals for CloudFirst customers." },
   { name: "Palo Alto Networks", tier: "MSSP Partner", logo: "🛡️", color: "border-red-200 bg-red-50/50", tierColor: "text-red-700 bg-red-50", desc: "Prisma Cloud MSSP partner — providing cloud-native security posture management and workload protection." },
@@ -39,7 +39,13 @@ const OurPartners: React.FC = () => {
           {partners.map((p) => (
             <div key={p.name} className={`rounded-2xl border-2 p-6 ${p.color} bg-white hover:shadow-md transition-all`}>
               <div className="flex items-start justify-between mb-4">
-                <span className="text-3xl">{p.logo}</span>
+                {typeof p.logo === 'string' && p.logo.startsWith('/') ? (
+                  <div className="h-10 w-16 flex items-center justify-start">
+                    <img src={p.logo} alt={p.name} className="h-10 w-auto object-contain" loading="lazy" />
+                  </div>
+                ) : (
+                  <span className="text-3xl">{p.logo}</span>
+                )}
                 <span className={`text-[10px] font-bold uppercase tracking-wider rounded-full px-2.5 py-1 ${p.tierColor}`}>{p.tier}</span>
               </div>
               <h3 className="text-base font-bold text-gray-900 mb-2" style={{ fontFamily: "'Georgia', serif" }}>{p.name}</h3>

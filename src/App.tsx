@@ -84,6 +84,8 @@ const SectionThemeController = () => {
     const root = document.documentElement;
 
     const sectionKey = (() => {
+      if (pathname.startsWith("/cloud-platforms/google-workspace")) return "resources";
+      if (pathname.startsWith("/cloud-platforms/microsoft-365")) return "resources";
       if (pathname.startsWith("/cloud-platforms")) return "cloud-platforms";
       if (pathname.startsWith("/solutions") || pathname.startsWith("/industries")) return "solutions";
       if (pathname.startsWith("/services")) return "services";
@@ -122,28 +124,28 @@ const SectionThemeController = () => {
         ring: "216 100% 50%",
       },
       solutions: {
-        brightBlue: "142 72% 45%",
-        lightBlue: "142 70% 60%",
-        primary: "142 72% 45%",
-        ring: "142 72% 45%",
+        brightBlue: "28 95% 55%",
+        lightBlue: "28 95% 70%",
+        primary: "28 95% 55%",
+        ring: "28 95% 55%",
       },
       services: {
-        brightBlue: "270 85% 60%",
-        lightBlue: "270 85% 72%",
-        primary: "270 85% 60%",
-        ring: "270 85% 60%",
+        brightBlue: "142 70% 45%",
+        lightBlue: "142 70% 70%",
+        primary: "142 70% 45%",
+        ring: "142 70% 45%",
       },
       resources: {
-        brightBlue: "35 95% 55%",
-        lightBlue: "35 95% 68%",
-        primary: "35 95% 55%",
-        ring: "35 95% 55%",
+        brightBlue: "330 80% 60%",
+        lightBlue: "330 80% 75%",
+        primary: "330 80% 60%",
+        ring: "330 80% 60%",
       },
       company: {
-        brightBlue: "330 80% 55%",
-        lightBlue: "330 80% 68%",
-        primary: "330 80% 55%",
-        ring: "330 80% 55%",
+        brightBlue: "204 90% 55%",
+        lightBlue: "204 90% 72%",
+        primary: "204 90% 55%",
+        ring: "204 90% 55%",
       },
       default: {
         brightBlue: "216 100% 50%",

@@ -21,8 +21,8 @@ const EnterpriseIndustry: React.FC = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-[#0d1b4b]/95 via-[#0d1b4b]/75 to-transparent" />
         <div className="relative z-10 max-w-6xl mx-auto px-6 h-full flex items-end pb-14">
           <div>
-            <span className="inline-block text-xs font-semibold uppercase tracking-widest text-blue-300 border border-blue-400/30 bg-blue-400/10 rounded-full px-3 py-1 mb-4">By Industry</span>
-            <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-4" style={{ fontFamily: "'Georgia', serif" }}>Enterprise cloud —<br /><span className="text-blue-300">governed, optimised, scalable</span></h1>
+            <span className="inline-block text-xs font-semibold uppercase tracking-widest text-light-blue border border-bright-blue/30 bg-bright-blue/10 rounded-full px-3 py-1 mb-4">By Industry</span>
+            <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-4" style={{ fontFamily: "'Georgia', serif" }}>Enterprise cloud —<br /><span className="text-light-blue">governed, optimised, scalable</span></h1>
             <p className="text-white/70 text-lg max-w-xl">Large organisations need cloud at scale with governance that doesn't slow teams down. CloudFirst delivers enterprise cloud programmes — from strategy through to managed operations.</p>
           </div>
         </div>
@@ -32,7 +32,7 @@ const EnterpriseIndustry: React.FC = () => {
       <div className="bg-[#0d1b4b] py-8">
         <div className="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
           {[{ v: "500+", l: "Workloads migrated" }, { v: "40%", l: "Cost optimised" }, { v: "Multi-cloud", l: "AWS, Azure, GCP" }, { v: "Enterprise SLA", l: "99.99% availability" }].map(s => (
-            <div key={s.l}><div className="text-xl font-bold text-blue-300 mb-0.5" style={{ fontFamily: "'Georgia', serif" }}>{s.v}</div><div className="text-xs text-white/50">{s.l}</div></div>
+            <div key={s.l}><div className="text-xl font-bold text-light-blue mb-0.5" style={{ fontFamily: "'Georgia', serif" }}>{s.v}</div><div className="text-xs text-white/50">{s.l}</div></div>
           ))}
         </div>
       </div>
@@ -48,9 +48,9 @@ const EnterpriseIndustry: React.FC = () => {
                 <span className="w-2 h-2 rounded-full bg-red-400 flex-shrink-0 mt-1.5" />
                 <div><div className="text-xs font-bold text-red-500 uppercase tracking-wider mb-1">Challenge</div><p className="text-sm text-gray-700 font-medium">{c.challenge}</p></div>
               </div>
-              <div className="bg-blue-50 p-6 flex items-start gap-3">
-                <svg className="w-4 h-4 text-blue-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" /></svg>
-                <div><div className="text-xs font-bold text-blue-600 uppercase tracking-wider mb-1">Our solution</div><p className="text-sm text-gray-600 leading-relaxed">{c.solution}</p></div>
+              <div className="bg-bright-blue/5 p-6 flex items-start gap-3">
+                <svg className="w-4 h-4 text-bright-blue flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" /></svg>
+                <div><div className="text-xs font-bold text-bright-blue uppercase tracking-wider mb-1">Our solution</div><p className="text-sm text-gray-600 leading-relaxed">{c.solution}</p></div>
               </div>
             </div>
           ))}
@@ -80,13 +80,13 @@ const EnterpriseIndustry: React.FC = () => {
       {/* CTA */}
       <div className="max-w-6xl mx-auto px-6 py-16">
         <div className="bg-[#0d1b4b] rounded-2xl px-8 py-12 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
-          <div className="absolute inset-0 opacity-20" style={{ background: "radial-gradient(ellipse at 90% 50%, #3b82f6 0%, transparent 60%)" }} />
+          <div className="absolute inset-0 opacity-20" style={{ background: "radial-gradient(ellipse at 90% 50%, hsl(var(--bright-blue)) 0%, transparent 60%)" }} />
           <div className="relative z-10 max-w-lg">
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-3" style={{ fontFamily: "'Georgia', serif" }}>Ready to accelerate your enterprise cloud programme?</h2>
             <p className="text-white/60 text-sm leading-relaxed">Talk to our enterprise team about your cloud strategy, migration backlog, or multi-cloud governance requirements.</p>
           </div>
           <div className="relative z-10 flex flex-col gap-3 flex-shrink-0">
-            <button onClick={() => navigate("/contact")} className="px-7 py-3 bg-blue-500 hover:bg-blue-400 text-white text-sm font-bold rounded-lg transition-colors whitespace-nowrap">Talk to our enterprise team →</button>
+            <button onClick={() => navigate("/contact")} className="px-7 py-3 bg-bright-blue hover:bg-bright-blue/90 text-white text-sm font-bold rounded-lg transition-colors whitespace-nowrap">Talk to our enterprise team →</button>
             <button onClick={() => navigate(-1)} className="text-xs text-white/40 hover:text-white/70 transition-colors text-center">← Back</button>
           </div>
         </div>

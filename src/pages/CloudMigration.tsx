@@ -4,7 +4,7 @@ import Layout from '@/components/Layout';
 const CloudMigration = () => {
   return (
     <Layout>
-      <div className="bg-gradient-to-br from-blue-50 to-white min-h-screen">
+      <div className="bg-gradient-to-br from-bright-blue/10 to-white min-h-screen">
         {/* Hero Section */}
         <section className="relative flex flex-col md:flex-row items-center justify-between max-w-7xl mx-auto px-4 md:px-12 pt-20 pb-12 md:pb-24">
           <div className="flex-1 text-center md:text-left z-10">
@@ -23,7 +23,9 @@ const CloudMigration = () => {
               className="rounded-2xl shadow-2xl w-full max-w-md md:max-w-lg border-4 border-bright-blue/10"
             />
           </div>
-          <svg className="absolute top-0 right-0 w-64 h-64 opacity-10 -z-1 hidden md:block" viewBox="0 0 400 400" fill="none"><circle cx="200" cy="200" r="200" fill="#3B82F6" /></svg>
+          <svg className="absolute top-0 right-0 w-64 h-64 opacity-10 -z-1 hidden md:block" viewBox="0 0 400 400" fill="none">
+            <circle cx="200" cy="200" r="200" fill="currentColor" className="fill-current text-bright-blue" />
+          </svg>
         </section>
 
         {/* Features Section */}

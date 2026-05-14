@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { MapPin, ArrowLeft, ExternalLink, ChevronDown, Calendar, Users } from "lucide-react";
-import Lightbox from "yet-another-react-lightbox";
-import "yet-another-react-lightbox/styles.css";
 import Navbar from "../components/Navbar";
 
 
@@ -118,8 +116,6 @@ const eventThumbnails = {
 
 const ResourceEvents = () => {
   const [selectedEvent, setSelectedEvent] = useState<keyof typeof images | null>(null);
-  const [index, setIndex] = useState(-1); // For tab gallery
-  const [eventIndex, setEventIndex] = useState(-1); // For event gallery
   const [activeTab, setActiveTab] = useState<string>('overview'); // Changed back to 'overview' to show event cards by default
   const [selectedYear, setSelectedYear] = useState<string>('2025'); // New state for year selection
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // New state for dropdown
@@ -444,8 +440,8 @@ const ResourceEvents = () => {
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                   className={`px-6 py-3 rounded-lg text-sm font-medium transition-all duration-300 border flex items-center gap-2 ${
                     activeTab === 'events'
-                      ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white border-purple-500 shadow-lg'
-                      : 'bg-gradient-to-r from-gray-50 to-gray-100 text-gray-700 border-gray-200 hover:from-blue-50 hover:to-purple-50'
+                      ? 'bg-gradient-to-r from-bright-blue to-light-blue text-white border-bright-blue/30 shadow-lg'
+                      : 'bg-gradient-to-r from-gray-50 to-gray-100 text-gray-700 border-gray-200 hover:from-bright-blue/5 hover:to-light-blue/5'
                   }`}
                 >
                   {tab.label}
@@ -470,7 +466,7 @@ const ResourceEvents = () => {
                           }}
                           className={`w-full text-left px-4 py-2 text-sm transition-colors ${
                             selectedYear === year
-                              ? 'bg-gradient-to-r from-blue-50 to-purple-50 text-blue-700 border-r-2 border-blue-500'
+                              ? 'bg-gradient-to-r from-bright-blue/10 to-light-blue/10 text-bright-blue border-r-2 border-bright-blue'
                               : 'text-gray-700 hover:bg-gray-50'
                           }`}
                         >
@@ -491,8 +487,8 @@ const ResourceEvents = () => {
                 }}
                 className={`px-6 py-3 rounded-lg text-sm font-medium transition-all duration-300 border ${
                   activeTab === tab.id
-                    ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white border-purple-500 shadow-lg'
-                    : 'bg-gradient-to-r from-gray-50 to-gray-100 text-gray-700 border-gray-200 hover:from-blue-50 hover:to-purple-50'
+                    ? 'bg-gradient-to-r from-bright-blue to-light-blue text-white border-bright-blue/30 shadow-lg'
+                    : 'bg-gradient-to-r from-gray-50 to-gray-100 text-gray-700 border-gray-200 hover:from-bright-blue/5 hover:to-light-blue/5'
                 }`}
               >
                 {tab.label}
@@ -523,7 +519,7 @@ const ResourceEvents = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">Events {selectedYear}</h2>
+          <h2 className="text-4xl font-semibold bg-gradient-to-r from-bright-blue to-light-blue bg-clip-text text-transparent mb-4">Events {selectedYear}</h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Explore our events and activities from {selectedYear}
           </p>
@@ -537,8 +533,7 @@ const ResourceEvents = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: idx * 0.1 }}
-                className="group w-full max-w-md bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden cursor-pointer border border-gray-100"
-                onClick={() => setIndex(idx)}
+                className="group w-full max-w-md bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100"
               >
                 <div className="relative h-64 overflow-hidden">
                   <img
@@ -567,10 +562,10 @@ const ResourceEvents = () => {
                   </div>
                   
                   <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                    <span className="text-sm font-medium bg-gradient-to-r from-bright-blue to-light-blue bg-clip-text text-transparent">
                       {event.images.length} {event.images.length === 1 ? 'photo' : 'photos'}
                     </span>
-                    <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-purple-600 transition-colors" />
+                    <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-bright-blue transition-colors" />
                   </div>
                 </div>
               </motion.div>
@@ -584,13 +579,6 @@ const ResourceEvents = () => {
           </div>
         )}
 
-        {/* Lightbox for 2026 events */}
-        <Lightbox
-          open={index >= 0}
-          close={() => setIndex(-1)}
-          slides={events.flatMap(event => event.images).map((src) => ({ src }))}
-          index={index}
-        />
       </div>
     );
   };
@@ -609,21 +597,21 @@ const ResourceEvents = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="bg-gradient-to-br from-white to-blue-50 rounded-2xl shadow-xl p-8 mb-8 border border-blue-100"
+          className="bg-gradient-to-br from-white to-bright-blue/5 rounded-2xl shadow-xl p-8 mb-8 border border-bright-blue/15"
         >
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-700 to-purple-700 bg-clip-text text-transparent mb-4">{details.title}</h1>
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-bright-blue to-light-blue bg-clip-text text-transparent mb-4">{details.title}</h1>
           <p className="text-lg text-gray-700 mb-6">{details.description}</p>
           <div className="flex flex-wrap gap-4">
             <div className="flex items-center text-sm text-gray-600 bg-white px-4 py-2 rounded-full shadow-sm">
-              <Calendar className="w-4 h-4 mr-2 text-blue-600" />
+              <Calendar className="w-4 h-4 mr-2 text-bright-blue" />
               {details.date}
             </div>
             <div className="flex items-center text-sm text-gray-600 bg-white px-4 py-2 rounded-full shadow-sm">
-              <MapPin className="w-4 h-4 mr-2 text-purple-600" />
+              <MapPin className="w-4 h-4 mr-2 text-bright-blue" />
               {details.location}
             </div>
             <div className="flex items-center text-sm text-gray-600 bg-white px-4 py-2 rounded-full shadow-sm">
-              <Users className="w-4 h-4 mr-2 text-indigo-600" />
+              <Users className="w-4 h-4 mr-2 text-bright-blue" />
               {details.attendees} attendees
             </div>
           </div>
@@ -635,7 +623,7 @@ const ResourceEvents = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <h2 className="text-2xl font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-6 text-center">Event Gallery ({imgs.length} photos)</h2>
+          <h2 className="text-2xl font-semibold bg-gradient-to-r from-bright-blue to-light-blue bg-clip-text text-transparent mb-6 text-center">Event Gallery ({imgs.length} photos)</h2>
           
           {/* Dynamic grid layout based on number of images */}
           <div className={`grid gap-4 justify-items-center ${
@@ -653,10 +641,9 @@ const ResourceEvents = () => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.4, delay: idx * 0.05 }}
-                className={`group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer border border-gray-100 ${
+                className={`group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 ${
                   imgs.length === 1 ? 'max-w-2xl w-full' : 'w-full'
                 }`}
-                onClick={() => setIndex(idx)}
               >
                 <img
                   src={src}
@@ -664,23 +651,10 @@ const ResourceEvents = () => {
                   className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500 bg-gray-50"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 border-3 border-transparent group-hover:border-purple-500 transition-colors duration-300 flex items-center justify-center">
-                  <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-blue-600/90 to-purple-600/90 backdrop-blur-sm rounded-full p-4">
-                    <ExternalLink className="w-6 h-6 text-white" />
-                  </div>
-                </div>
               </motion.div>
             ))}
           </div>
         </motion.div>
-
-        {/* Lightbox for tab gallery */}
-        <Lightbox
-          open={index >= 0}
-          close={() => setIndex(-1)}
-          slides={imgs.map((src) => ({ src }))}
-          index={index}
-        />
       </div>
     );
   };
@@ -745,7 +719,7 @@ const ResourceEvents = () => {
         transition={{ duration: 0.6 }}
         className="text-center mb-16"
       >
-        <h2 className="text-4xl font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">Our Event Journey</h2>
+        <h2 className="text-4xl font-semibold bg-gradient-to-r from-bright-blue to-light-blue bg-clip-text text-transparent mb-4">Our Event Journey</h2>
         <p className="text-xl text-gray-600 max-w-3xl mx-auto">
           Join us through our remarkable journey of conferences, summits, and networking events across the globe.
         </p>
@@ -791,10 +765,10 @@ const ResourceEvents = () => {
               </div>
               
               <div className="flex items-center justify-between">
-                <span className="text-sm font-medium bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                <span className="text-sm font-medium bg-gradient-to-r from-bright-blue to-light-blue bg-clip-text text-transparent">
                   View Gallery
                 </span>
-                <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-purple-600 transition-colors" />
+                <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-bright-blue transition-colors" />
               </div>
             </div>
           </motion.div>
@@ -821,26 +795,26 @@ const renderGallery = () => {
         >
           <button
             onClick={() => setSelectedEvent(null)}
-            className="flex items-center text-gradient-to-r from-blue-600 to-purple-600 hover:text-blue-800 font-medium mb-6 group transition-colors"
+            className="flex items-center text-bright-blue hover:text-bright-blue/80 font-medium mb-6 group transition-colors"
           >
             <ArrowLeft className="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" />
             Back to Events
           </button>
           
-          <div className="bg-gradient-to-br from-white to-blue-50 rounded-2xl shadow-xl p-8 mb-8 border border-blue-100">
-            <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-700 to-purple-700 bg-clip-text text-transparent mb-4">{details.title}</h1>
+          <div className="bg-gradient-to-br from-white to-bright-blue/5 rounded-2xl shadow-xl p-8 mb-8 border border-bright-blue/15">
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-bright-blue to-light-blue bg-clip-text text-transparent mb-4">{details.title}</h1>
             <p className="text-lg text-gray-700 mb-6">{details.description}</p>
             <div className="flex flex-wrap gap-4">
               <div className="flex items-center text-sm text-gray-600 bg-white px-4 py-2 rounded-full shadow-sm">
-                <Calendar className="w-4 h-4 mr-2 text-blue-600" />
+                <Calendar className="w-4 h-4 mr-2 text-bright-blue" />
                 {details.date}
               </div>
               <div className="flex items-center text-sm text-gray-600 bg-white px-4 py-2 rounded-full shadow-sm">
-                <MapPin className="w-4 h-4 mr-2 text-purple-600" />
+                <MapPin className="w-4 h-4 mr-2 text-bright-blue" />
                 {details.location}
               </div>
               <div className="flex items-center text-sm text-gray-600 bg-white px-4 py-2 rounded-full shadow-sm">
-                <Users className="w-4 h-4 mr-2 text-indigo-600" />
+                <Users className="w-4 h-4 mr-2 text-bright-blue" />
                 {details.attendees} attendees
               </div>
             </div>
@@ -853,7 +827,7 @@ const renderGallery = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <h2 className="text-2xl font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-6 text-center">Event Gallery ({imgs.length} photos)</h2>
+          <h2 className="text-2xl font-semibold bg-gradient-to-r from-bright-blue to-light-blue bg-clip-text text-transparent mb-6 text-center">Event Gallery ({imgs.length} photos)</h2>
           
           {/* Dynamic grid layout based on number of images */}
           <div className={`grid gap-4 justify-items-center ${
@@ -871,10 +845,9 @@ const renderGallery = () => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.4, delay: idx * 0.05 }}
-                className={`group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer border border-gray-100 ${
+                className={`group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 ${
                   imgs.length === 1 ? 'max-w-2xl w-full' : 'w-full'
                 }`}
-                onClick={() => setEventIndex(idx)}
               >
                 <img
                   src={src}
@@ -882,23 +855,10 @@ const renderGallery = () => {
                   className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500 bg-gray-50"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 border-3 border-transparent group-hover:border-purple-500 transition-colors duration-300 flex items-center justify-center">
-                  <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-blue-600/90 to-purple-600/90 backdrop-blur-sm rounded-full p-4">
-                    <ExternalLink className="w-6 h-6 text-white" />
-                  </div>
-                </div>
               </motion.div>
             ))}
           </div>
         </motion.div>
-
-        {/* Lightbox */}
-        <Lightbox
-          open={eventIndex >= 0}
-          close={() => setEventIndex(-1)}
-          slides={imgs.map((src) => ({ src }))}
-          index={eventIndex}
-        />
       </div>
     );
   };

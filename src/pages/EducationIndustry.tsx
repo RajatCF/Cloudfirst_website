@@ -21,18 +21,18 @@ const EducationIndustry: React.FC = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-sky-900/92 via-sky-900/70 to-transparent" />
         <div className="relative z-10 max-w-6xl mx-auto px-6 h-full flex items-end pb-14">
           <div>
-            <span className="inline-block text-xs font-semibold uppercase tracking-widest text-sky-300 border border-sky-400/30 bg-sky-400/10 rounded-full px-3 py-1 mb-4">By Industry</span>
-            <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-4" style={{ fontFamily: "'Georgia', serif" }}>Education cloud —<br /><span className="text-sky-300">affordable, scalable, student-first</span></h1>
+            <span className="inline-block text-xs font-semibold uppercase tracking-widest text-light-blue border border-bright-blue/30 bg-bright-blue/10 rounded-full px-3 py-1 mb-4">By Industry</span>
+            <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-4" style={{ fontFamily: "'Georgia', serif" }}>Education cloud —<br /><span className="text-light-blue">affordable, scalable, student-first</span></h1>
             <p className="text-white/70 text-lg max-w-xl">From universities to EdTech platforms, CloudFirst builds cloud infrastructure that handles academic scale, protects student data, and keeps costs within education budgets.</p>
           </div>
         </div>
       </div>
 
       {/* Stats */}
-      <div className="bg-sky-700 py-8">
+      <div className="bg-bright-blue py-8">
         <div className="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
           {[{ v: "50%", l: "Avg cost reduction" }, { v: "100x", l: "Exam peak scalability" }, { v: "FERPA", l: "Privacy compliant" }, { v: "Google for Edu", l: "Workspace partner" }].map(s => (
-            <div key={s.l}><div className="text-xl font-bold text-white mb-0.5" style={{ fontFamily: "'Georgia', serif" }}>{s.v}</div><div className="text-xs text-sky-100">{s.l}</div></div>
+            <div key={s.l}><div className="text-xl font-bold text-white mb-0.5" style={{ fontFamily: "'Georgia', serif" }}>{s.v}</div><div className="text-xs text-white/80">{s.l}</div></div>
           ))}
         </div>
       </div>
@@ -48,9 +48,9 @@ const EducationIndustry: React.FC = () => {
                 <span className="w-2 h-2 rounded-full bg-red-400 flex-shrink-0 mt-1.5" />
                 <div><div className="text-xs font-bold text-red-500 uppercase tracking-wider mb-1">Challenge</div><p className="text-sm text-gray-700 font-medium">{c.challenge}</p></div>
               </div>
-              <div className="bg-sky-50 p-6 flex items-start gap-3">
-                <svg className="w-4 h-4 text-sky-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" /></svg>
-                <div><div className="text-xs font-bold text-sky-600 uppercase tracking-wider mb-1">Our solution</div><p className="text-sm text-gray-600 leading-relaxed">{c.solution}</p></div>
+              <div className="bg-bright-blue/5 p-6 flex items-start gap-3">
+                <svg className="w-4 h-4 text-bright-blue flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" /></svg>
+                <div><div className="text-xs font-bold text-bright-blue uppercase tracking-wider mb-1">Our solution</div><p className="text-sm text-gray-600 leading-relaxed">{c.solution}</p></div>
               </div>
             </div>
           ))}
@@ -79,14 +79,14 @@ const EducationIndustry: React.FC = () => {
 
       {/* CTA */}
       <div className="max-w-6xl mx-auto px-6 py-16">
-        <div className="bg-sky-700 rounded-2xl px-8 py-12 flex flex-col md:flex-row items-center justify-between gap-8">
+        <div className="bg-gradient-to-r from-bright-blue to-light-blue rounded-2xl px-8 py-12 flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="max-w-lg">
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-3" style={{ fontFamily: "'Georgia', serif" }}>Build a better digital campus</h2>
-            <p className="text-sky-100 text-sm leading-relaxed">Talk to CloudFirst about your institution's cloud strategy — from Google Workspace rollout to full cloud migration and managed operations.</p>
+            <p className="text-white/85 text-sm leading-relaxed">Talk to CloudFirst about your institution's cloud strategy — from Google Workspace rollout to full cloud migration and managed operations.</p>
           </div>
           <div className="flex flex-col gap-3 flex-shrink-0">
-            <button onClick={() => navigate("/contact")} className="px-7 py-3 bg-white hover:bg-sky-50 text-sky-700 text-sm font-bold rounded-lg transition-colors whitespace-nowrap">Talk to a specialist →</button>
-            <button onClick={() => navigate(-1)} className="text-xs text-sky-200 hover:text-white transition-colors text-center">← Back</button>
+            <button onClick={() => navigate("/contact")} className="px-7 py-3 bg-white hover:bg-white/95 text-bright-blue text-sm font-bold rounded-lg transition-colors whitespace-nowrap">Talk to a specialist →</button>
+            <button onClick={() => navigate(-1)} className="text-xs text-white/70 hover:text-white transition-colors text-center">← Back</button>
           </div>
         </div>
       </div>

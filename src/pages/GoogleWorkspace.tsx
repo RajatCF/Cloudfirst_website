@@ -91,24 +91,24 @@ const GoogleWorkspace: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-[#f7f8fa]">
+    <div className="min-h-screen bg-bright-blue/5">
       <Navbar />
 
       {/* Hero */}
       <div className="w-full bg-[#0d1b4b] relative overflow-hidden pt-16 lg:pt-20">
         <div
           className="absolute inset-0 opacity-20"
-          style={{ background: "radial-gradient(ellipse at 80% 40%, #4285f4 0%, transparent 55%), radial-gradient(ellipse at 10% 80%, #34a853 0%, transparent 50%)" }}
+          style={{ background: "radial-gradient(ellipse at 80% 40%, hsl(var(--bright-blue)) 0%, transparent 55%), radial-gradient(ellipse at 10% 80%, hsl(var(--light-blue)) 0%, transparent 50%)" }}
         />
         <div className="max-w-6xl mx-auto px-6 pt-24 pb-20 relative z-10">
           <div className="flex items-center gap-2 mb-5">
-            <span className="text-xs font-semibold uppercase tracking-widest text-blue-300 border border-blue-400/30 bg-blue-400/10 rounded-full px-3 py-1">Cloud Platforms</span>
+            <span className="text-xs font-semibold uppercase tracking-widest text-light-blue border border-bright-blue/30 bg-bright-blue/10 rounded-full px-3 py-1">Resources</span>
             <span className="text-white/30 text-xs">·</span>
             <span className="text-xs text-white/40 font-medium">Google Workspace</span>
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-5 max-w-3xl">
             Google Workspace that{" "}
-            <span className="text-blue-400">actually works for your team</span>
+            <span className="text-light-blue">actually works for your team</span>
           </h1>
           <p className="text-white/60 text-base md:text-lg leading-relaxed max-w-2xl mb-10">
             Most organisations deploy Google Workspace and accept the defaults — then struggle with security gaps, unmanaged sharing, and no identity governance. CloudFirst migrates, secures, and manages your Workspace tenant so collaboration is productive and compliant from day one.
@@ -153,7 +153,7 @@ const GoogleWorkspace: React.FC = () => {
         <p className="text-gray-400 text-sm mb-8">A deeply integrated productivity suite — powerful when configured correctly.</p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {capabilities.map((c) => (
-            <div key={c.app} className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 hover:shadow-md hover:border-blue-100 transition-all duration-200">
+            <div key={c.app} className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 hover:shadow-md hover:border-bright-blue/20 transition-all duration-200">
               <div className="flex items-center gap-3 mb-3">
                 <span className="text-2xl">{c.icon}</span>
                 <h3 className="text-sm font-bold text-gray-900">{c.app}</h3>
@@ -172,10 +172,10 @@ const GoogleWorkspace: React.FC = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {services.map((svc) => (
-            <div key={svc.title} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 hover:shadow-md hover:border-blue-100 transition-all duration-200">
+            <div key={svc.title} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 hover:shadow-md hover:border-bright-blue/20 transition-all duration-200">
               <div className="flex items-start justify-between mb-4">
-                <div className="w-10 h-10 bg-blue-50 text-blue-700 rounded-xl flex items-center justify-center flex-shrink-0">{svc.icon}</div>
-                <span className="text-[11px] font-semibold text-blue-700 bg-blue-50 rounded px-2.5 py-1">{svc.tag}</span>
+                <div className="w-10 h-10 bg-bright-blue/10 text-bright-blue rounded-xl flex items-center justify-center flex-shrink-0">{svc.icon}</div>
+                <span className="text-[11px] font-semibold text-bright-blue bg-bright-blue/10 rounded px-2.5 py-1">{svc.tag}</span>
               </div>
               <h3 className="text-base font-bold text-gray-900 mb-3">{svc.title}</h3>
               <div className="flex items-start gap-2 mb-3">
@@ -232,14 +232,14 @@ const GoogleWorkspace: React.FC = () => {
       {/* CTA */}
       <div className="max-w-6xl mx-auto px-6 pb-16">
         <div className="bg-[#0d1b4b] rounded-2xl px-8 py-12 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
-          <div className="absolute inset-0 opacity-20" style={{ background: "radial-gradient(ellipse at 90% 50%, #4285f4 0%, transparent 60%)" }} />
+          <div className="absolute inset-0 opacity-20" style={{ background: "radial-gradient(ellipse at 90% 50%, hsl(var(--bright-blue)) 0%, transparent 60%)" }} />
           <div className="relative z-10 max-w-lg">
-            <span className="inline-block text-xs font-semibold uppercase tracking-widest text-blue-400 mb-3">Free assessment</span>
+            <span className="inline-block text-xs font-semibold uppercase tracking-widest text-light-blue mb-3">Free assessment</span>
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-3 leading-snug">Get your Workspace security scorecard</h2>
             <p className="text-white/60 text-sm leading-relaxed">We'll audit your Workspace configuration, identify sharing and security gaps, and deliver a prioritised remediation plan — no cost, no commitment.</p>
           </div>
           <div className="relative z-10 flex flex-col gap-3 flex-shrink-0">
-            <button onClick={() => navigate("/contact")} className="inline-flex items-center gap-2 px-7 py-3 bg-blue-400 hover:bg-blue-300 text-[#0d1b4b] text-sm font-bold rounded-lg transition-colors duration-200 whitespace-nowrap">Request a Workspace audit →</button>
+            <button onClick={() => navigate("/contact")} className="inline-flex items-center gap-2 px-7 py-3 bg-bright-blue hover:bg-bright-blue/90 text-white text-sm font-bold rounded-lg transition-colors duration-200 whitespace-nowrap">Request a Workspace audit →</button>
             <button onClick={() => navigate(-1)} className="text-xs text-white/40 hover:text-white/70 transition-colors duration-150 text-center">← Back</button>
           </div>
         </div>

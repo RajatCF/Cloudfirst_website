@@ -7,7 +7,7 @@ const CloudDevOps = () => {
 
   return (
     <Layout>
-      <div className="bg-gradient-to-br from-yellow-50 to-white min-h-screen">
+      <div className="bg-gradient-to-br from-bright-blue/10 to-white min-h-screen">
       {/* Hero Section */}
       <section className="relative max-w-7xl mx-auto px-4 md:px-12 pt-20 pb-12 md:pb-24">
         <div className="text-center z-10 max-w-3xl mx-auto">
@@ -20,7 +20,9 @@ const CloudDevOps = () => {
           <a href="/contact" className="btn-primary text-lg px-8 py-3 shadow-lg inline-block">Boost with DevOps</a>
         </div>
         {/* Decorative SVG */}
-        <svg className="absolute top-0 right-0 w-64 h-64 opacity-10 -z-1 hidden md:block" viewBox="0 0 400 400" fill="none"><circle cx="200" cy="200" r="200" fill="#3B82F6" /></svg>
+        <svg className="absolute top-0 right-0 w-64 h-64 opacity-10 -z-1 hidden md:block" viewBox="0 0 400 400" fill="none">
+          <circle cx="200" cy="200" r="200" fill="currentColor" className="fill-current text-bright-blue" />
+        </svg>
       </section>
 
         {/* About the Service */}

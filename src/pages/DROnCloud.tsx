@@ -45,10 +45,10 @@ const serviceCards = [
 
 const CornerFrame = () => (
   <>
-    <span className="pointer-events-none absolute left-0 top-0 h-5 w-0.5 bg-sky-500" />
-    <span className="pointer-events-none absolute left-0 top-0 h-0.5 w-8 bg-sky-500" />
-    <span className="pointer-events-none absolute right-0 bottom-0 h-5 w-0.5 bg-sky-500" />
-    <span className="pointer-events-none absolute right-0 bottom-0 h-0.5 w-8 bg-sky-500" />
+    <span className="pointer-events-none absolute left-0 top-0 h-5 w-0.5 bg-bright-blue" />
+    <span className="pointer-events-none absolute left-0 top-0 h-0.5 w-8 bg-bright-blue" />
+    <span className="pointer-events-none absolute right-0 bottom-0 h-5 w-0.5 bg-bright-blue" />
+    <span className="pointer-events-none absolute right-0 bottom-0 h-0.5 w-8 bg-bright-blue" />
   </>
 );
 
@@ -56,12 +56,12 @@ const DROnCloud = () => {
   return (
     <Layout>
       <div className="bg-white min-h-screen">
-        <section className="bg-gradient-to-br from-rose-50 via-white to-rose-50">
+        <section className="bg-gradient-to-br from-bright-blue/10 via-white to-bright-blue/5">
           <div className="max-w-[1400px] mx-auto px-6 lg:px-10 pt-24 pb-16">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
               <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-6">
-                <span className="text-sky-600 border-b-2 border-sky-600 pb-1">Disaster</span>{" "}
+                <span className="text-bright-blue border-b-2 border-bright-blue pb-1">Disaster</span>{" "}
                 <span className="text-gray-900">Recovery</span>
               </h1>
 
@@ -88,17 +88,17 @@ const DROnCloud = () => {
         </section>
 
         <section className="relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-50 via-white to-slate-50" />
+          <div className="absolute inset-0 bg-gradient-to-b from-bright-blue/5 via-white to-bright-blue/5" />
           <div className="relative max-w-[1400px] mx-auto px-6 lg:px-10 pb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-8">
-              <span className="bg-gradient-to-r from-sky-600 via-indigo-600 to-rose-600 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-bright-blue to-light-blue bg-clip-text text-transparent">
                 Our Disaster Recovery (DR) on cloud services include:
               </span>
             </h2>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {serviceCards.slice(0, 3).map((card) => (
-                <div key={card.title} className="relative bg-white border border-slate-200 rounded-md shadow-sm px-8 py-10 min-h-[230px]">
+                <div key={card.title} className="relative bg-white border border-bright-blue/15 rounded-md shadow-sm px-8 py-10 min-h-[230px]">
                   <CornerFrame />
                   <div className="flex flex-col items-center text-center">
                     <div className="text-3xl mb-3">{card.icon}</div>
@@ -111,7 +111,7 @@ const DROnCloud = () => {
 
             <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-8">
               {serviceCards.slice(3).map((card) => (
-                <div key={card.title} className="relative bg-white border border-slate-200 rounded-md shadow-sm px-10 py-10 min-h-[220px]">
+                <div key={card.title} className="relative bg-white border border-bright-blue/15 rounded-md shadow-sm px-10 py-10 min-h-[220px]">
                   <CornerFrame />
                   <div className="flex flex-col items-center text-center">
                     <div className="text-3xl mb-3">{card.icon}</div>

@@ -28,16 +28,16 @@ const ArchitectureReview: React.FC = () => {
       {/* Hero — split layout */}
       <div className="max-w-7xl mx-auto px-6 pt-28 pb-16 flex flex-col lg:flex-row items-center gap-12">
         <div className="flex-1">
-          <span className="inline-block text-xs font-semibold uppercase tracking-widest text-blue-600 bg-blue-50 border border-blue-100 rounded-full px-3 py-1 mb-5">Services</span>
+          <span className="inline-block text-xs font-semibold uppercase tracking-widest text-bright-blue bg-bright-blue/10 border border-bright-blue/20 rounded-full px-3 py-1 mb-5">Services</span>
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-5" style={{ fontFamily: "'Georgia', serif" }}>
             Know exactly what's wrong —<br />
-            <span className="text-blue-600">before it becomes a crisis</span>
+            <span className="text-bright-blue">before it becomes a crisis</span>
           </h1>
           <p className="text-gray-500 text-lg leading-relaxed mb-8 max-w-xl">
             CloudFirst engineers review your cloud architecture against battle-tested best practices — finding security gaps, performance risks, and cost inefficiencies before your next incident does.
           </p>
           <div className="flex flex-wrap gap-3">
-            <button onClick={() => navigate("/contact")} className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-lg transition-colors">Book a review →</button>
+            <button onClick={() => navigate("/contact")} className="px-6 py-3 bg-bright-blue hover:bg-bright-blue/90 text-white text-sm font-semibold rounded-lg transition-colors">Book a review →</button>
             <button onClick={() => navigate(-1)} className="px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-semibold rounded-lg transition-colors">← Back</button>
           </div>
         </div>
@@ -73,10 +73,10 @@ const ArchitectureReview: React.FC = () => {
         <p className="text-gray-400 text-sm mb-10">Six critical domains — every gap documented, every risk quantified.</p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {reviewAreas.map((area) => (
-            <div key={area.title} className="flex gap-4 p-5 bg-gray-50 rounded-xl hover:bg-blue-50 transition-colors group">
+            <div key={area.title} className="flex gap-4 p-5 bg-gray-50 rounded-xl hover:bg-bright-blue/5 transition-colors group">
               <span className="text-2xl flex-shrink-0 mt-0.5">{area.icon}</span>
               <div>
-                <h3 className="text-sm font-bold text-gray-900 mb-1.5 group-hover:text-blue-700 transition-colors">{area.title}</h3>
+                <h3 className="text-sm font-bold text-gray-900 mb-1.5 group-hover:text-bright-blue transition-colors">{area.title}</h3>
                 <p className="text-xs text-gray-500 leading-relaxed">{area.desc}</p>
               </div>
             </div>
@@ -92,7 +92,7 @@ const ArchitectureReview: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {deliverables.map((d, i) => (
               <div key={d.title} className="flex gap-4 bg-white rounded-xl p-5 border border-gray-100 shadow-sm">
-                <div className="w-8 h-8 bg-blue-600 text-white rounded-lg flex items-center justify-center flex-shrink-0 text-sm font-bold">{String(i + 1).padStart(2, "0")}</div>
+                <div className="w-8 h-8 bg-bright-blue text-white rounded-lg flex items-center justify-center flex-shrink-0 text-sm font-bold">{String(i + 1).padStart(2, "0")}</div>
                 <div>
                   <h3 className="text-sm font-bold text-gray-900 mb-1">{d.title}</h3>
                   <p className="text-xs text-gray-500 leading-relaxed">{d.desc}</p>
@@ -114,7 +114,7 @@ const ArchitectureReview: React.FC = () => {
             { step: "04", title: "Readout", desc: "We present findings, walk through the remediation backlog, and answer questions from your team." },
           ].map((p) => (
             <div key={p.step}>
-              <div className="text-5xl font-bold text-blue-50 mb-3" style={{ fontFamily: "'Georgia', serif" }}>{p.step}</div>
+              <div className="text-5xl font-bold text-bright-blue/10 mb-3" style={{ fontFamily: "'Georgia', serif" }}>{p.step}</div>
               <h3 className="text-sm font-bold text-gray-900 mb-2">{p.title}</h3>
               <p className="text-xs text-gray-500 leading-relaxed">{p.desc}</p>
             </div>
@@ -124,14 +124,14 @@ const ArchitectureReview: React.FC = () => {
 
       {/* CTA */}
       <div className="max-w-6xl mx-auto px-6 pb-16">
-        <div className="bg-blue-600 rounded-2xl px-8 py-12 flex flex-col md:flex-row items-center justify-between gap-8">
+        <div className="bg-bright-blue rounded-2xl px-8 py-12 flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="max-w-lg">
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-3" style={{ fontFamily: "'Georgia', serif" }}>Start with a free scoping call</h2>
-            <p className="text-blue-100 text-sm leading-relaxed">Tell us about your environment and we'll scope the right review — at no cost and no commitment required.</p>
+            <p className="text-white/85 text-sm leading-relaxed">Tell us about your environment and we'll scope the right review — at no cost and no commitment required.</p>
           </div>
           <div className="flex flex-col gap-3 flex-shrink-0">
-            <button onClick={() => navigate("/contact")} className="px-7 py-3 bg-white hover:bg-blue-50 text-blue-600 text-sm font-bold rounded-lg transition-colors whitespace-nowrap">Book a free review →</button>
-            <button onClick={() => navigate(-1)} className="text-xs text-blue-200 hover:text-white transition-colors text-center">← Back</button>
+            <button onClick={() => navigate("/contact")} className="px-7 py-3 bg-white hover:bg-white/95 text-bright-blue text-sm font-bold rounded-lg transition-colors whitespace-nowrap">Book a free review →</button>
+            <button onClick={() => navigate(-1)} className="text-xs text-white/70 hover:text-white transition-colors text-center">← Back</button>
           </div>
         </div>
       </div>

@@ -87,7 +87,7 @@ const stats = [
 const aiServices = [
   {
     name: "Copilot Customization & Enablement",
-    logoSrc: "/logo/azure_copilot.png",
+    logoSrc: "/copilot_logo.png",
     icon: Brain,
     color: "text-sky-500",
     bg: "bg-sky-500/10",
@@ -97,7 +97,7 @@ const aiServices = [
   },
   {
     name: "LLM Apps on Azure (Azure OpenAI-ready)",
-    logoSrc: "/logo/azure_openai.png",
+    logoSrc: "/llm_logo.webp",
     icon: Cpu,
     color: "text-emerald-500",
     bg: "bg-emerald-500/10",
@@ -107,7 +107,7 @@ const aiServices = [
   },
   {
     name: "AI Security, Governance & Compliance",
-    logoSrc: "/logo/azure_ai_security.png",
+    logoSrc: "/logo/ai.png",
     icon: ShieldCheck,
     color: "text-rose-500",
     bg: "bg-rose-500/10",
@@ -288,19 +288,46 @@ const MicrosoftAzure = () => {
                 className="group relative bg-white/90 backdrop-blur-sm rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 overflow-hidden"
               >
                 <div className={`absolute top-0 left-0 right-0 h-0.5 ${bg} opacity-0 group-hover:opacity-100 transition-opacity`} />
-                <div className={`relative inline-flex items-center justify-center h-10 w-10 rounded-xl ${bg} border ${border} mb-4`}>
-                  <Icon className={`w-5 h-5 ${color}`} />
+                <div className={`relative inline-flex items-center justify-center h-12 w-12 rounded-xl ${bg} border ${border} mb-4`}>
                   {logoSrc ? (
                     <img
                       src={logoSrc}
                       alt={name}
-                      className="absolute inset-0 m-auto w-6 h-6 object-contain"
+                      className={
+                        logoSrc.toLowerCase().includes('llm_logo')
+                          ? "absolute inset-0 w-full h-full object-contain scale-[1.7]"
+                          : "absolute inset-0 w-full h-full object-contain p-1"
+                      }
                       loading="lazy"
                       onError={(e) => {
-                        e.currentTarget.style.display = 'none';
+                        const src = e.currentTarget.getAttribute('src') ?? '';
+                        if (!src.toLowerCase().includes('/logo/ai.')) {
+                          e.currentTarget.style.display = 'none';
+                          return;
+                        }
+
+                        const step = e.currentTarget.dataset.fallbackStep ?? '0';
+                        const next =
+                          step === '0'
+                            ? '/logo/ai.webp'
+                            : step === '1'
+                              ? '/logo/ai.jpg'
+                              : step === '2'
+                                ? '/logo/ai-security-governance.webp'
+                                : '';
+
+                        if (!next) {
+                          e.currentTarget.style.display = 'none';
+                          return;
+                        }
+
+                        e.currentTarget.dataset.fallbackStep = String(Number(step) + 1);
+                        e.currentTarget.src = next;
                       }}
                     />
-                  ) : null}
+                  ) : (
+                    <Icon className={`w-5 h-5 ${color}`} />
+                  )}
                 </div>
                 <h3 className="text-base font-bold text-gray-900 mb-2">{name}</h3>
                 <p className="text-gray-500 text-sm leading-relaxed">{description}</p>

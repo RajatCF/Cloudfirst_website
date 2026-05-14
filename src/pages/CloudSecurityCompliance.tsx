@@ -93,20 +93,19 @@ const CloudSecurityCompliance: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-[#f7f8fa]">
+    <div className="min-h-screen bg-bright-blue/5">
       <Navbar />
 
       {/* Hero — dark red/slate */}
-      <div className="w-full bg-[#1a0a0a] relative overflow-hidden pt-16 lg:pt-20">
-        <div className="absolute inset-0 opacity-40" style={{ background: "radial-gradient(ellipse at 70% 30%, #991b1b 0%, transparent 55%), radial-gradient(ellipse at 20% 80%, #1e1b4b 0%, transparent 50%)" }} />
+      <div className="w-full bg-gradient-to-br from-bright-blue/20 via-white to-white relative overflow-hidden pt-16 lg:pt-20 border-b border-bright-blue/10">
         <div className="max-w-6xl mx-auto px-6 pt-24 pb-20 relative z-10 flex flex-col lg:flex-row items-center gap-10">
           <div className="flex-1">
-            <span className="inline-block text-xs font-semibold uppercase tracking-widest text-red-300 border border-red-400/30 bg-red-400/10 rounded-full px-3 py-1 mb-5">Solutions</span>
-            <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-5" style={{ fontFamily: "'Georgia', serif" }}>
+            <span className="inline-block text-xs font-semibold uppercase tracking-widest text-bright-blue border border-bright-blue/25 bg-bright-blue/10 rounded-full px-3 py-1 mb-5">Solutions</span>
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-5" style={{ fontFamily: "'Georgia', serif" }}>
               Security posture &<br />
-              <span className="text-red-400">compliance — by design</span>
+              <span className="text-bright-blue">compliance — by design</span>
             </h1>
-            <p className="text-white/60 text-base md:text-lg leading-relaxed max-w-xl">
+            <p className="text-gray-600 text-base md:text-lg leading-relaxed max-w-xl">
               Compliance is not a checkbox exercise — it's an architecture decision. CloudFirst embeds security controls and compliance evidence into your cloud platform, so audits become routine rather than emergencies.
             </p>
           </div>
@@ -117,9 +116,9 @@ const CloudSecurityCompliance: React.FC = () => {
               { v: "8+", l: "Frameworks supported" },
               { v: "Zero", l: "Audit failures for our customers" },
             ].map((s) => (
-              <div key={s.l} className="bg-white/5 border border-white/10 rounded-xl p-5">
-                <div className="text-2xl font-bold text-white mb-1" style={{ fontFamily: "'Georgia', serif" }}>{s.v}</div>
-                <div className="text-xs text-white/50">{s.l}</div>
+              <div key={s.l} className="bg-white border border-bright-blue/10 rounded-xl p-5 shadow-sm">
+                <div className="text-2xl font-bold text-gray-900 mb-1" style={{ fontFamily: "'Georgia', serif" }}>{s.v}</div>
+                <div className="text-xs text-gray-500">{s.l}</div>
               </div>
             ))}
           </div>
@@ -132,7 +131,7 @@ const CloudSecurityCompliance: React.FC = () => {
         <p className="text-gray-400 text-sm mb-8">We map your cloud controls to the frameworks your customers, regulators, and auditors expect.</p>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {frameworks.map((f) => (
-            <div key={f.name} className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 text-center hover:border-red-200 hover:shadow-md transition-all">
+            <div key={f.name} className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 text-center hover:border-bright-blue/25 hover:shadow-md transition-all">
               <div className="text-base font-bold text-gray-900 mb-1">{f.name}</div>
               <div className="text-xs text-gray-500">{f.desc}</div>
             </div>
@@ -149,13 +148,13 @@ const CloudSecurityCompliance: React.FC = () => {
             {controls.map((c) => (
               <div key={c.category} className="bg-gray-50 rounded-2xl p-6">
                 <h3 className="text-sm font-bold text-gray-900 mb-4 flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-red-500" />
+                  <span className="w-2 h-2 rounded-full bg-bright-blue" />
                   {c.category}
                 </h3>
                 <ul className="space-y-2">
                   {c.items.map((item) => (
                     <li key={item} className="flex items-center gap-2 text-xs text-gray-600">
-                      <svg className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" /></svg>
+                      <svg className="w-3.5 h-3.5 text-bright-blue flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" /></svg>
                       {item}
                     </li>
                   ))}
@@ -169,7 +168,7 @@ const CloudSecurityCompliance: React.FC = () => {
       <div className="max-w-6xl mx-auto px-6 py-16">
         <div className="flex items-end justify-between mb-10 gap-6 flex-wrap">
           <div>
-            <span className="text-xs font-bold uppercase tracking-widest text-red-600">Cloud security</span>
+            <span className="text-xs font-bold uppercase tracking-widest text-bright-blue">Cloud security</span>
             <h2 className="mt-2 text-2xl font-bold text-gray-900" style={{ fontFamily: "'Georgia', serif" }}>
               Common problems
             </h2>
@@ -180,16 +179,16 @@ const CloudSecurityCompliance: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {securityChallenges.map(({ title, tag, icon: Icon, color, bg, problem }) => (
+          {securityChallenges.map(({ title, tag, icon: Icon, problem }) => (
             <div
               key={title}
-              className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 hover:shadow-md hover:border-red-200 transition-all duration-200"
+              className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 hover:shadow-md hover:border-bright-blue/25 transition-all duration-200"
             >
               <div className="flex items-start justify-between gap-3 mb-4">
-                <div className={`h-10 w-10 rounded-xl ${bg} border border-black/5 flex items-center justify-center flex-shrink-0`}>
-                  <Icon className={`w-5 h-5 ${color}`} />
+                <div className="h-10 w-10 rounded-xl bg-bright-blue/10 border border-black/5 flex items-center justify-center flex-shrink-0">
+                  <Icon className="w-5 h-5 text-bright-blue" />
                 </div>
-                <span className="text-[11px] font-semibold text-red-700 bg-red-50 border border-red-100 rounded-full px-2.5 py-1">
+                <span className="text-[11px] font-semibold text-bright-blue bg-bright-blue/10 border border-bright-blue/20 rounded-full px-2.5 py-1">
                   {tag}
                 </span>
               </div>
@@ -197,8 +196,8 @@ const CloudSecurityCompliance: React.FC = () => {
               <h3 className="text-base font-bold text-gray-900 mb-3">{title}</h3>
 
               <div className="flex items-start gap-2">
-                <span className="mt-0.5 w-4 h-4 flex-shrink-0 rounded-full bg-red-50 flex items-center justify-center">
-                  <span className="block w-1.5 h-1.5 rounded-full bg-red-400" />
+                <span className="mt-0.5 w-4 h-4 flex-shrink-0 rounded-full bg-bright-blue/10 flex items-center justify-center">
+                  <span className="block w-1.5 h-1.5 rounded-full bg-bright-blue" />
                 </span>
                 <p className="text-xs text-gray-400 leading-relaxed">{problem}</p>
               </div>
@@ -211,7 +210,7 @@ const CloudSecurityCompliance: React.FC = () => {
         <div className="max-w-6xl mx-auto px-6 py-16">
           <div className="flex items-end justify-between mb-10 gap-6 flex-wrap">
             <div>
-              <span className="text-xs font-bold uppercase tracking-widest text-red-600">Cloud security</span>
+              <span className="text-xs font-bold uppercase tracking-widest text-bright-blue">Cloud security</span>
               <h2 className="mt-2 text-2xl font-bold text-gray-900" style={{ fontFamily: "'Georgia', serif" }}>
                 Solutions & tools
               </h2>
@@ -222,16 +221,16 @@ const CloudSecurityCompliance: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {solutionsChallenges.map(({ title, tag, icon: Icon, color, bg, solution, tools }) => (
+            {solutionsChallenges.map(({ title, tag, icon: Icon, solution, tools }) => (
               <div
                 key={title}
-                className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 hover:shadow-md hover:border-red-200 transition-all duration-200"
+                className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 hover:shadow-md hover:border-bright-blue/25 transition-all duration-200"
               >
                 <div className="flex items-start justify-between gap-3 mb-4">
-                  <div className={`h-10 w-10 rounded-xl ${bg} border border-black/5 flex items-center justify-center flex-shrink-0`}>
-                    <Icon className={`w-5 h-5 ${color}`} />
+                  <div className="h-10 w-10 rounded-xl bg-bright-blue/10 border border-black/5 flex items-center justify-center flex-shrink-0">
+                    <Icon className="w-5 h-5 text-bright-blue" />
                   </div>
-                  <span className="text-[11px] font-semibold text-red-700 bg-red-50 border border-red-100 rounded-full px-2.5 py-1">
+                  <span className="text-[11px] font-semibold text-bright-blue bg-bright-blue/10 border border-bright-blue/20 rounded-full px-2.5 py-1">
                     {tag}
                   </span>
                 </div>
@@ -239,8 +238,8 @@ const CloudSecurityCompliance: React.FC = () => {
                 <h3 className="text-base font-bold text-gray-900 mb-3">{title}</h3>
 
                 <div className="flex items-start gap-2 mb-4">
-                  <span className="mt-0.5 w-4 h-4 flex-shrink-0 rounded-full bg-emerald-50 flex items-center justify-center">
-                    <span className="block w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                  <span className="mt-0.5 w-4 h-4 flex-shrink-0 rounded-full bg-bright-blue/10 flex items-center justify-center">
+                    <span className="block w-1.5 h-1.5 rounded-full bg-bright-blue" />
                   </span>
                   <p className="text-xs text-gray-600 leading-relaxed">{solution}</p>
                 </div>
@@ -269,7 +268,7 @@ const CloudSecurityCompliance: React.FC = () => {
             { step: "04", title: "Audit support", desc: "We participate in auditor interviews, respond to information requests, and resolve findings with your audit team." },
           ].map((p) => (
             <div key={p.step}>
-              <div className="text-5xl font-bold text-red-50 mb-3" style={{ fontFamily: "'Georgia', serif" }}>{p.step}</div>
+              <div className="text-5xl font-bold text-bright-blue/10 mb-3" style={{ fontFamily: "'Georgia', serif" }}>{p.step}</div>
               <h3 className="text-sm font-bold text-gray-900 mb-2">{p.title}</h3>
               <p className="text-xs text-gray-500 leading-relaxed">{p.desc}</p>
             </div>
@@ -279,16 +278,16 @@ const CloudSecurityCompliance: React.FC = () => {
 
       {/* CTA */}
       <div className="max-w-6xl mx-auto px-6 pb-16">
-        <div className="bg-[#1a0a0a] rounded-2xl px-8 py-12 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
-          <div className="absolute inset-0 opacity-40" style={{ background: "radial-gradient(ellipse at 90% 50%, #991b1b 0%, transparent 60%)" }} />
+        <div className="bg-bright-blue rounded-2xl px-8 py-12 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
+          <div className="absolute inset-0 opacity-30" style={{ background: "radial-gradient(ellipse at 90% 50%, hsl(var(--light-blue)) 0%, transparent 60%)" }} />
           <div className="relative z-10 max-w-lg">
-            <span className="inline-block text-xs font-semibold uppercase tracking-widest text-red-400 mb-3">Free gap assessment</span>
+            <span className="inline-block text-xs font-semibold uppercase tracking-widest text-white/80 mb-3">Free gap assessment</span>
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-3" style={{ fontFamily: "'Georgia', serif" }}>Know your compliance gaps in 48 hours</h2>
             <p className="text-white/60 text-sm leading-relaxed">We'll assess your cloud environment against your target framework and deliver a prioritised control remediation plan.</p>
           </div>
           <div className="relative z-10 flex flex-col gap-3 flex-shrink-0">
-            <button onClick={() => navigate("/contact")} className="px-7 py-3 bg-red-500 hover:bg-red-400 text-white text-sm font-bold rounded-lg transition-colors whitespace-nowrap">Request a gap assessment →</button>
-            <button onClick={() => navigate(-1)} className="text-xs text-white/40 hover:text-white/70 transition-colors text-center">← Back</button>
+            <button onClick={() => navigate("/contact")} className="px-7 py-3 bg-white hover:bg-white/95 text-bright-blue text-sm font-bold rounded-lg transition-colors whitespace-nowrap">Request a gap assessment →</button>
+            <button onClick={() => navigate(-1)} className="text-xs text-white/70 hover:text-white transition-colors text-center">← Back</button>
           </div>
         </div>
       </div>

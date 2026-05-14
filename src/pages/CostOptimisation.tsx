@@ -15,29 +15,28 @@ const CostOptimisation: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-[#f7f8fa]">
+    <div className="min-h-screen bg-bright-blue/5">
       <Navbar />
 
       {/* Hero — emerald green savings focus */}
-      <div className="w-full bg-[#052e16] relative overflow-hidden pt-16 lg:pt-20">
-        <div className="absolute inset-0 opacity-40" style={{ background: "radial-gradient(ellipse at 70% 30%, #16a34a 0%, transparent 55%), radial-gradient(ellipse at 10% 80%, #064e3b 0%, transparent 50%)" }} />
+      <div className="w-full bg-gradient-to-br from-bright-blue/20 via-white to-white relative overflow-hidden pt-16 lg:pt-20 border-b border-bright-blue/10">
         <div className="max-w-6xl mx-auto px-6 pt-24 pb-20 relative z-10 flex flex-col lg:flex-row items-center gap-10">
           <div className="flex-1">
-            <span className="inline-block text-xs font-semibold uppercase tracking-widest text-emerald-300 border border-emerald-400/30 bg-emerald-400/10 rounded-full px-3 py-1 mb-5">Solutions</span>
-            <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-5" style={{ fontFamily: "'Georgia', serif" }}>
+            <span className="inline-block text-xs font-semibold uppercase tracking-widest text-bright-blue border border-bright-blue/25 bg-bright-blue/10 rounded-full px-3 py-1 mb-5">Solutions</span>
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-5" style={{ fontFamily: "'Georgia', serif" }}>
               Spend less.<br />
-              <span className="text-emerald-400">Get more.</span>
+              <span className="text-bright-blue">Get more.</span>
             </h1>
-            <p className="text-white/60 text-lg leading-relaxed mb-8 max-w-xl">
+            <p className="text-gray-600 text-lg leading-relaxed mb-8 max-w-xl">
               The average organisation wastes 32% of its cloud budget. CloudFirst identifies where your money is going, implements FinOps practices that stick, and delivers measurable savings within 30 days.
             </p>
-            <button onClick={() => navigate("/contact")} className="px-7 py-3 bg-emerald-500 hover:bg-emerald-400 text-white text-sm font-bold rounded-lg transition-colors">Get a free cost audit →</button>
+            <button onClick={() => navigate("/contact")} className="px-7 py-3 bg-bright-blue hover:bg-bright-blue/90 text-white text-sm font-bold rounded-lg transition-colors">Get a free cost audit →</button>
           </div>
           <div className="flex-1 flex flex-col gap-3">
-            <div className="bg-white/10 border border-white/10 rounded-xl p-5">
-              <div className="text-xs text-white/40 mb-1">Average savings achieved</div>
-              <div className="text-4xl font-bold text-emerald-400 mb-1" style={{ fontFamily: "'Georgia', serif" }}>32–48%</div>
-              <div className="text-xs text-white/50">Reduction in monthly cloud spend within 90 days</div>
+            <div className="bg-white border border-bright-blue/15 rounded-xl p-5 shadow-sm">
+              <div className="text-xs text-gray-500 mb-1">Average savings achieved</div>
+              <div className="text-4xl font-bold text-bright-blue mb-1" style={{ fontFamily: "'Georgia', serif" }}>32–48%</div>
+              <div className="text-xs text-gray-500">Reduction in monthly cloud spend within 90 days</div>
             </div>
             <div className="grid grid-cols-2 gap-3">
               {[
@@ -46,9 +45,9 @@ const CostOptimisation: React.FC = () => {
                 { v: "3 clouds", l: "AWS · Azure · GCP" },
                 { v: "Zero", l: "Performance regressions" },
               ].map((s) => (
-                <div key={s.l} className="bg-white/5 border border-white/10 rounded-xl px-4 py-3">
-                  <div className="text-lg font-bold text-white mb-0.5" style={{ fontFamily: "'Georgia', serif" }}>{s.v}</div>
-                  <div className="text-[11px] text-white/40">{s.l}</div>
+                <div key={s.l} className="bg-white border border-bright-blue/10 rounded-xl px-4 py-3 shadow-sm">
+                  <div className="text-lg font-bold text-gray-900 mb-0.5" style={{ fontFamily: "'Georgia', serif" }}>{s.v}</div>
+                  <div className="text-[11px] text-gray-500">{s.l}</div>
                 </div>
               ))}
             </div>
@@ -62,10 +61,10 @@ const CostOptimisation: React.FC = () => {
         <p className="text-gray-400 text-sm mb-10">Six proven optimisation areas — each with documented savings ranges across our customer base.</p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {savingsAreas.map((s) => (
-            <div key={s.area} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 hover:border-emerald-200 hover:shadow-md transition-all">
+            <div key={s.area} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 hover:border-bright-blue/25 hover:shadow-md transition-all">
               <div className="flex items-start justify-between mb-4">
                 <span className="text-2xl">{s.icon}</span>
-                <span className="text-sm font-bold text-emerald-600 bg-emerald-50 rounded-full px-3 py-1">{s.saving}</span>
+                <span className="text-sm font-bold text-bright-blue bg-bright-blue/10 rounded-full px-3 py-1">{s.saving}</span>
               </div>
               <h3 className="text-base font-bold text-gray-900 mb-2">{s.area}</h3>
               <p className="text-xs text-gray-500 leading-relaxed">{s.desc}</p>
@@ -86,7 +85,7 @@ const CostOptimisation: React.FC = () => {
               { step: "04", title: "Govern", desc: "FinOps dashboards, budget alerts, and tagging policies to prevent cost drift and maintain savings." },
             ].map((p) => (
               <div key={p.step}>
-                <div className="text-5xl font-bold text-emerald-50 mb-3" style={{ fontFamily: "'Georgia', serif" }}>{p.step}</div>
+                <div className="text-5xl font-bold text-bright-blue/10 mb-3" style={{ fontFamily: "'Georgia', serif" }}>{p.step}</div>
                 <h3 className="text-sm font-bold text-gray-900 mb-2">{p.title}</h3>
                 <p className="text-xs text-gray-500 leading-relaxed">{p.desc}</p>
               </div>
@@ -97,16 +96,16 @@ const CostOptimisation: React.FC = () => {
 
       {/* CTA */}
       <div className="max-w-6xl mx-auto px-6 py-16">
-        <div className="bg-[#052e16] rounded-2xl px-8 py-12 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
-          <div className="absolute inset-0 opacity-40" style={{ background: "radial-gradient(ellipse at 90% 50%, #16a34a 0%, transparent 60%)" }} />
+        <div className="bg-bright-blue rounded-2xl px-8 py-12 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
+          <div className="absolute inset-0 opacity-30" style={{ background: "radial-gradient(ellipse at 90% 50%, hsl(var(--light-blue)) 0%, transparent 60%)" }} />
           <div className="relative z-10 max-w-lg">
-            <span className="inline-block text-xs font-semibold uppercase tracking-widest text-emerald-400 mb-3">Free audit</span>
+            <span className="inline-block text-xs font-semibold uppercase tracking-widest text-white/80 mb-3">Free audit</span>
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-3" style={{ fontFamily: "'Georgia', serif" }}>Find out what you're wasting this month</h2>
             <p className="text-white/60 text-sm leading-relaxed">We'll run a free cost audit against your cloud accounts and deliver a prioritised savings plan within 48 hours.</p>
           </div>
           <div className="relative z-10 flex flex-col gap-3 flex-shrink-0">
-            <button onClick={() => navigate("/contact")} className="px-7 py-3 bg-emerald-500 hover:bg-emerald-400 text-white text-sm font-bold rounded-lg transition-colors whitespace-nowrap">Get a free cost audit →</button>
-            <button onClick={() => navigate(-1)} className="text-xs text-white/40 hover:text-white/70 transition-colors text-center">← Back</button>
+            <button onClick={() => navigate("/contact")} className="px-7 py-3 bg-white hover:bg-white/95 text-bright-blue text-sm font-bold rounded-lg transition-colors whitespace-nowrap">Get a free cost audit →</button>
+            <button onClick={() => navigate(-1)} className="text-xs text-white/70 hover:text-white transition-colors text-center">← Back</button>
           </div>
         </div>
       </div>
