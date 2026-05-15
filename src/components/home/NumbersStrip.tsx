@@ -5,16 +5,16 @@ const NumbersStrip = () => {
     customers: 0,
     years: 0,
     awards: 0,
-    certified: 0
+    services: 0
   });
   const [hasAnimated, setHasAnimated] = useState(false);
   const stripRef = useRef<HTMLDivElement>(null);
 
   const statistics = [
-    { value: "1500+", label: "Customers", count: counts.customers, isStatic: false },
+    { value: "7000+", label: "Customers", count: counts.customers, isStatic: false },
     { value: "16+", label: "Years of building", count: counts.years, isStatic: false },
     { value: "50+", label: "Awards and Certificates", count: counts.awards, isStatic: false },
-    { value: "100+", label: "Certified Specialists", count: counts.certified, isStatic: false }
+    { value: "50+", label: "Services", count: counts.services, isStatic: false }
   ];
 
   useEffect(() => {
@@ -40,10 +40,10 @@ const NumbersStrip = () => {
               }, 16);
             };
 
-            animateCount(1500, 'customers', 2500);
+            animateCount(7000, 'customers', 2500);
             animateCount(16, 'years', 1500);
             animateCount(50, 'awards', 1500);
-            animateCount(100, 'certified', 1800);
+            animateCount(50, 'services', 1800);
           }
         });
       },

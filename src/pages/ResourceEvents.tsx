@@ -51,7 +51,17 @@ const images = {
     "/events/IMG_3415.jpg",
     "/events/IMG_3454.jpg",
     "/events/IMG_3467.jpg"
-  ]
+  ],
+  "assocham-smart-datacenters-cloud-infra-conclave": [
+    "/events/IMG_3454.jpg",
+    "/events/IMG_3415.jpg",
+    "/events/IMG_3389.jpg",
+  ],
+  "go-global-awards": [
+    "/goglobal.jpg",
+    "/events/president_new_image.jpg",
+    "/events/IMG_3467.jpg",
+  ],
 };
 
 const eventDetails = {
@@ -102,6 +112,22 @@ const eventDetails = {
     location: "India",
     attendees: "1000+",
     highlights: "Digital transformation, MSME empowerment, business growth strategies"
+  },
+  "assocham-smart-datacenters-cloud-infra-conclave": {
+    title: "ASSOCHAM Smart Datacenters & Cloud Infrastructure Conclave",
+    description: "Industry conclave focused on smart datacenters and cloud infrastructure.",
+    date: "2025",
+    location: "India",
+    attendees: "—",
+    highlights: "Datacenters, cloud infrastructure, industry connections"
+  },
+  "go-global-awards": {
+    title: "GO GLOBAL AWARDS",
+    description: "Recognition and event highlights from the Go Global Awards.",
+    date: "2025",
+    location: "United Kingdom",
+    attendees: "—",
+    highlights: "Awards recognition, global networking, brand visibility"
   }
 };
 
@@ -111,7 +137,9 @@ const eventThumbnails = {
   slovakia: "https://gragwebsite.s3.ap-south-1.amazonaws.com/London+Pics/Slovakia+Pics/1000001380.jpeg",
   "aws-summit-bengaluru": "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/aws+summit+bengaluru/1000106663.jpg",
   "india-ai-impact-summit": "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/india+Ai+impact+summit/IMG-20260216-WA0023+(1).jpg",
-  "msme-summit-2026": "/events/IMG_3389.jpg"
+  "msme-summit-2026": "/events/IMG_3389.jpg",
+  "assocham-smart-datacenters-cloud-infra-conclave": "/events/IMG_3454.jpg",
+  "go-global-awards": "/goglobal.jpg"
 };
 
 const ResourceEvents = () => {
@@ -191,7 +219,25 @@ const ResourceEvents = () => {
         images: [
           "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/AshishSirWithPresident.jpg"
         ]
-      }
+      },
+      {
+        id: 'assocham-smart-datacenters-cloud-infra-conclave',
+        title: 'ASSOCHAM Smart Datacenters & Cloud Infrastructure Conclave',
+        description: 'Event highlights and photo folder.',
+        date: '2025',
+        location: 'India',
+        attendees: '—',
+        images: images["assocham-smart-datacenters-cloud-infra-conclave"]
+      },
+      {
+        id: 'go-global-awards',
+        title: 'GO GLOBAL AWARDS',
+        description: 'Event highlights and photo folder.',
+        date: '2025',
+        location: 'United Kingdom',
+        attendees: '—',
+        images: images["go-global-awards"]
+      },
     ],
     '2024': [
       {
@@ -533,7 +579,11 @@ const ResourceEvents = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: idx * 0.1 }}
-                className="group w-full max-w-md bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100"
+                className="group w-full max-w-md bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 cursor-pointer"
+                onClick={() => {
+                  setSelectedEvent(event.id as keyof typeof images);
+                  setActiveTab(event.id);
+                }}
               >
                 <div className="relative h-64 overflow-hidden">
                   <img
@@ -563,7 +613,7 @@ const ResourceEvents = () => {
                   
                   <div className="flex items-center justify-between">
                     <span className="text-sm font-medium bg-gradient-to-r from-bright-blue to-light-blue bg-clip-text text-transparent">
-                      {event.images.length} {event.images.length === 1 ? 'photo' : 'photos'}
+                      View Gallery
                     </span>
                     <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-bright-blue transition-colors" />
                   </div>
@@ -708,6 +758,22 @@ const ResourceEvents = () => {
       thumbnail: eventThumbnails['msme-summit-2026'],
       date: 'April 2026',
       location: 'India'
+    },
+    {
+      id: 'assocham-smart-datacenters-cloud-infra-conclave',
+      title: 'ASSOCHAM Smart Datacenters & Cloud Infrastructure Conclave',
+      description: 'Smart datacenters and cloud infrastructure conclave highlights.',
+      thumbnail: "/events/IMG_3454.jpg",
+      date: '2025',
+      location: 'India'
+    },
+    {
+      id: 'go-global-awards',
+      title: 'GO GLOBAL AWARDS',
+      description: 'Go Global Awards highlights.',
+      thumbnail: "/goglobal.jpg",
+      date: '2025',
+      location: 'United Kingdom'
     }
   ];
 

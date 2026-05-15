@@ -127,25 +127,11 @@ const Footer = () => {
             )}
           </div>
 
-          <div className="border-t border-primary-foreground/10 pt-6">
-            <h4 className="text-xs uppercase tracking-widest font-semibold mb-4 opacity-40">Contact Details</h4>
-            <div className="space-y-4 text-sm opacity-60">
-              <div>
-                <p className="font-semibold mb-1">Phone:</p>
-                <p className="text-xs">+91-8448440769</p>
-              </div>
-
-              <div>
-                <p className="font-semibold mb-1">E-mail:</p>
-                <p className="text-xs">solutions@cloudfirst.in</p>
-                <p className="text-xs">support@cloudfirst.in</p>
-              </div>
-            </div>
-          </div>
         </div>
 
-        <div className="hidden sm:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-8">
-          <div className="lg:col-span-1">
+        <div className="hidden sm:flex justify-center">
+          <div className="w-full max-w-5xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 lg:gap-10">
+          <div className="md:col-span-1">
             <Link to="/" className="inline-block leading-none -mt-1">
               <img src="/cflogo.png" alt="CloudFirst logo" className="h-16 sm:h-20 w-auto block" />
             </Link>
@@ -197,22 +183,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div>
-            <h4 className="text-xs uppercase tracking-widest font-semibold mb-6 opacity-40">Contact Details</h4>
-            <div className="space-y-3 text-xs opacity-60">
-              <div>
-                <p className="font-semibold mb-1">Phone:</p>
-                <p className="text-xs">+91-8448440769</p>
-              </div>
-
-              <div>
-                <p className="font-semibold mb-1">E-mail:</p>
-                <p className="text-xs">solutions@cloudfirst.in</p>
-                <p className="text-xs">support@cloudfirst.in</p>
-              </div>
-            </div>
           </div>
-
         </div>
 
         <div className="mt-12 pt-6 border-t border-amber-300/50 shadow-[0_-1px_0_rgba(251,191,36,0.35)]">

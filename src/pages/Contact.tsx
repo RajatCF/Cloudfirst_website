@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Layout from '@/components/Layout';
 import { Send, MapPin, Phone, Mail, Calendar } from 'lucide-react';
 
@@ -40,6 +40,16 @@ const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [submitError, setSubmitError] = useState<string>('');
+  const [isMapOpen, setIsMapOpen] = useState(false);
+
+  useEffect(() => {
+    if (!isMapOpen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsMapOpen(false);
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [isMapOpen]);
 
   const getPublicIp = async () => {
     try {
@@ -126,6 +136,20 @@ const Contact = () => {
                           </p>
                         ))}
                       </div>
+                      <div className="mt-4 flex flex-col gap-2">
+                        <a
+                          href="mailto:solutions@cloudfirst.in"
+                          className="flex items-center gap-3 text-sm text-muted-foreground hover:text-bright-blue transition-colors"
+                        >
+                          <Mail className="w-4 h-4" /> solutions@cloudfirst.in
+                        </a>
+                        <a
+                          href="tel:+918448440769"
+                          className="flex items-center gap-3 text-sm text-muted-foreground hover:text-bright-blue transition-colors"
+                        >
+                          <Phone className="w-4 h-4" /> +91-8448440769
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -172,18 +196,6 @@ const Contact = () => {
                     ))}
                   </div>
                 </div>
-              </div>
-
-              <div className="mt-12 flex flex-col gap-3">
-                <a href="mailto:solutions@cloudfirst.in" className="flex items-center gap-3 text-sm text-muted-foreground hover:text-bright-blue transition-colors">
-                  <Mail className="w-4 h-4" /> solutions@cloudfirst.in
-                </a>
-                <a href="mailto:support@cloudfirst.in" className="flex items-center gap-3 text-sm text-muted-foreground hover:text-bright-blue transition-colors">
-                  <Mail className="w-4 h-4" /> support@cloudfirst.in
-                </a>
-                <a href="tel:+918448440769" className="flex items-center gap-3 text-sm text-muted-foreground hover:text-bright-blue transition-colors">
-                  <Phone className="w-4 h-4" /> +91-8448440769
-                </a>
               </div>
 
               <div className="mt-auto pt-12">
@@ -271,18 +283,46 @@ const Contact = () => {
                   </div>
                 ) : null}
               </form>
-              <div className="mt-8 flex-1 min-h-40 sm:min-h-48 rounded-2xl overflow-hidden border border-violet-300/30 bg-white/70">
+              <button
+                type="button"
+                onClick={() => setIsMapOpen(true)}
+                className="mt-8 flex-1 min-h-40 sm:min-h-48 rounded-2xl overflow-hidden border border-violet-300/30 bg-white/70 cursor-pointer hover:shadow-md transition-shadow"
+                aria-label="Open map"
+              >
                 <img
-                  src="/New_world_map.png"
-                  alt="World map"
+                  src="/mapp.png"
+                  alt="Map"
                   className="w-full h-full object-cover"
                   loading="lazy"
                 />
-              </div>
+              </button>
             </div>
           </div>
         </div>
       </section>
+      {isMapOpen ? (
+        <div
+          className="fixed inset-0 z-[60] bg-black/70 flex items-center justify-center p-4"
+          onClick={() => setIsMapOpen(false)}
+        >
+          <div className="relative w-full max-w-5xl" onClick={(e) => e.stopPropagation()}>
+            <button
+              type="button"
+              onClick={() => setIsMapOpen(false)}
+              className="absolute -top-3 -right-3 h-10 w-10 rounded-full bg-white text-gray-900 shadow-md hover:bg-gray-50 transition-colors"
+              aria-label="Close map"
+            >
+              ×
+            </button>
+            <img
+              src="/mapp.png"
+              alt="Map"
+              className="w-full max-h-[85vh] object-contain rounded-2xl bg-white"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      ) : null}
     </Layout>
   );
 };

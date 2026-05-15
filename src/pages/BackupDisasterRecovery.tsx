@@ -31,7 +31,7 @@ const services = [
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
     ),
-    title: "DR Testing & Validation",
+    title: "Disaster Recovery Testing & Validation",
     tag: "Testing",
     problem: "A backup that has never been restored is just an assumption. Most businesses discover failures during the actual disaster.",
     solution: "We run scheduled DR drills — non-disruptive failover tests, restore validations, and chaos engineering — and produce test reports that prove your recovery works before you need it.",
@@ -186,7 +186,7 @@ const BackupDisasterRecovery: React.FC = () => {
             className="text-2xl font-bold text-gray-900 mb-4"
             style={{ fontFamily: "'Georgia', serif" }}
           >
-            Why most DR plans fail when it matters
+            Why most Disaster recovery plans fail when it matters
           </h2>
           <p className="text-gray-500 text-[15px] leading-relaxed mb-3">
             Nearly 60% of businesses that suffer a major data loss event shut down within six months. The cause is rarely the disaster itself — it's the absence of a tested, documented, and automated recovery process.

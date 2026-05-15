@@ -44,6 +44,9 @@ const EnterpriseIndustry = lazy(() => import("./pages/EnterpriseIndustry"));
 const FinanceBfsi = lazy(() => import("./pages/FinanceBfsi"));
 const HealthcareIndustry = lazy(() => import("./pages/HealthcareIndustry"));
 const EducationIndustry = lazy(() => import("./pages/EducationIndustry"));
+const AdvertisingMarketingIndustry = lazy(() => import("./pages/AdvertisingMarketingIndustry"));
+const ManufacturingIndustry = lazy(() => import("./pages/ManufacturingIndustry"));
+const SportsIndustry = lazy(() => import("./pages/SportsIndustry"));
 const CloudStrategyRoadmap = lazy(() => import("./pages/CloudStrategyRoadmap"));
 const ArchitectureReview = lazy(() => import("./pages/ArchitectureReview"));
 const MigrationPlanning = lazy(() => import("./pages/MigrationPlanning"));
@@ -173,7 +176,7 @@ const OgGreenTreeButton = () => {
       type="button"
       onClick={() => navigate("/og-green-tree")}
       aria-label="Open OG Green Tree"
-      className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[60] w-16 h-16 sm:w-20 sm:h-20 bg-transparent transition-all duration-200"
+      className="fixed bottom-0 right-0 z-[60] w-16 h-16 sm:w-20 sm:h-20 bg-transparent transition-all duration-200"
     >
       <span className="relative w-full h-full block" aria-hidden="true">
         <span
@@ -237,6 +240,9 @@ const App = () => (
             <Route path="/industries/finance-bfsi" element={<FinanceBfsi />} />
             <Route path="/industries/healthcare" element={<HealthcareIndustry />} />
             <Route path="/industries/education" element={<EducationIndustry />} />
+            <Route path="/industries/advertising-marketing" element={<AdvertisingMarketingIndustry />} />
+            <Route path="/industries/manufacturing" element={<ManufacturingIndustry />} />
+            <Route path="/industries/sports" element={<SportsIndustry />} />
  
             <Route path="/services/cloud-strategy" element={<CloudStrategyRoadmap />} />
             <Route path="/services/architecture-review" element={<ArchitectureReview />} />

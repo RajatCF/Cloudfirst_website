@@ -1,6 +1,7 @@
 import React from 'react';
 
 const trustedByEnterprisesLogos = [
+  '/logo/trusted_by_logo/cj.png',
   '/logo/trusted_by_logo/Screenshot_2026-05-13_171830-removebg-preview.png',
   '/logo/trusted_by_logo/Screenshot_2026-05-13_171817-removebg-preview.png',
   '/logo/trusted_by_logo/Screenshot_2026-05-13_171712-removebg-preview (1).png',
@@ -11,6 +12,7 @@ const trustedByEnterprisesLogos = [
 ];
 
 const ourClientLogos = [
+  '/aws_logo.png',
   '/aws_advance partner logo.png',
   '/microsoft_new_logo.png',
   '/logo/new_GCI.png',

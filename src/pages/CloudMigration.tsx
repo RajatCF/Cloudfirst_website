@@ -79,32 +79,6 @@ const CloudMigration = () => {
           </div>
         </section>
 
-        {/* Testimonials Section */}
-        <section className="max-w-5xl mx-auto px-4 py-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">Customer Stories</h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-white rounded-xl shadow-md p-8">
-              <p className="text-lg mb-4">“CloudFirst Technology made our cloud migration seamless and disruption-free. Their expertise ensured a secure transition with improved performance—our users didn’t experience a single interruption.”</p>
-              <div className="flex items-center gap-3">
-                <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Client" className="w-10 h-10 rounded-full" />
-                <div>
-                  <div className="font-semibold">Sneha P., CIO</div>
-                  <div className="text-xs text-muted-foreground">Healthcare Provider</div>
-                </div>
-              </div>
-            </div>
-            <div className="bg-white rounded-xl shadow-md p-8">
-              <p className="text-lg mb-4">“We cut our infrastructure costs by 45% after the migration, and performance improved dramatically.”</p>
-              <div className="flex items-center gap-3">
-                <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Client" className="w-10 h-10 rounded-full" />
-                <div>
-                  <div className="font-semibold">Raj M., CTO</div>
-                  <div className="text-xs text-muted-foreground">Retail Enterprise</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
       </div>
     </Layout>
   );

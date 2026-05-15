@@ -27,24 +27,24 @@ const SecurityMonitoring: React.FC = () => {
 
       {/* Hero — dark slate with orange glow */}
       <div className="relative overflow-hidden pt-16 lg:pt-20">
-        <div className="absolute inset-0 opacity-30" style={{ background: "radial-gradient(ellipse at 80% 30%, #22c55e 0%, transparent 50%), radial-gradient(ellipse at 10% 80%, #0f766e 0%, transparent 50%)" }} />
+        <div className="absolute inset-0 opacity-30" style={{ background: "radial-gradient(ellipse at 80% 30%, hsl(var(--bright-blue)) 0%, transparent 50%), radial-gradient(ellipse at 10% 80%, hsl(var(--light-blue)) 0%, transparent 50%)" }} />
         <div className="max-w-6xl mx-auto px-6 pt-24 pb-20 relative z-10">
-          <span className="inline-block text-xs font-semibold uppercase tracking-widest text-emerald-300 border border-emerald-400/30 bg-emerald-400/10 rounded-full px-3 py-1 mb-5">Services</span>
+          <span className="inline-block text-xs font-semibold uppercase tracking-widest text-light-blue border border-bright-blue/30 bg-bright-blue/10 rounded-full px-3 py-1 mb-5">Services</span>
           <div className="flex flex-col lg:flex-row items-start gap-12">
             <div className="flex-1">
               <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-5" style={{ fontFamily: "'Georgia', serif" }}>
                 See every threat.<br />
-                <span className="text-emerald-400">Respond before damage.</span>
+                <span className="text-light-blue">Respond before damage.</span>
               </h1>
               <p className="text-white/60 text-lg leading-relaxed mb-8">
                 Most breaches aren't detected for days — sometimes months. CloudFirst's 24/7 security monitoring gives you eyes across your entire cloud estate, with real-time detection and rapid response that stops threats at the perimeter, not the post-mortem.
               </p>
-              <button onClick={() => navigate("/contact")} className="px-7 py-3 bg-emerald-500 hover:bg-emerald-400 text-black text-sm font-bold rounded-lg transition-colors">Get a monitoring demo →</button>
+              <button onClick={() => navigate("/contact")} className="px-7 py-3 bg-bright-blue hover:bg-bright-blue/90 text-white text-sm font-bold rounded-lg transition-colors">Get a monitoring demo →</button>
             </div>
             <div className="flex-1 grid grid-cols-2 gap-3">
               {metrics.map((m) => (
                 <div key={m.label} className="bg-white/5 border border-white/10 rounded-xl px-5 py-5">
-                  <div className="text-2xl font-bold text-emerald-400 mb-1" style={{ fontFamily: "'Georgia', serif" }}>{m.value}</div>
+                  <div className="text-2xl font-bold text-light-blue mb-1" style={{ fontFamily: "'Georgia', serif" }}>{m.value}</div>
                   <div className="text-xs text-white/50">{m.label}</div>
                 </div>
               ))}
@@ -59,7 +59,7 @@ const SecurityMonitoring: React.FC = () => {
         <p className="text-white/40 text-sm mb-10">Full-spectrum visibility across your cloud, identity, and application layers.</p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {detectionCapabilities.map((cap) => (
-            <div key={cap.title} className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-emerald-500/30 hover:bg-white/8 transition-all">
+            <div key={cap.title} className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-bright-blue/30 hover:bg-white/8 transition-all">
               <div className="text-2xl mb-3">{cap.icon}</div>
               <h3 className="text-sm font-bold text-white mb-2">{cap.title}</h3>
               <p className="text-xs text-white/50 leading-relaxed">{cap.desc}</p>
@@ -81,8 +81,8 @@ const SecurityMonitoring: React.FC = () => {
               { step: "Report", icon: "📄", desc: "Incident report delivered with timeline, impact, and prevention recommendations" },
             ].map((s, i) => (
               <div key={s.step} className="text-center">
-                <div className="w-10 h-10 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-lg mx-auto mb-3">{s.icon}</div>
-                <div className="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-2">{s.step}</div>
+                <div className="w-10 h-10 rounded-full bg-bright-blue/20 border border-bright-blue/30 flex items-center justify-center text-lg mx-auto mb-3">{s.icon}</div>
+                <div className="text-xs font-bold text-light-blue uppercase tracking-wider mb-2">{s.step}</div>
                 <p className="text-xs text-white/40 leading-relaxed">{s.desc}</p>
                 {i < 4 && <div className="hidden md:block absolute" />}
               </div>
@@ -93,14 +93,14 @@ const SecurityMonitoring: React.FC = () => {
 
       {/* CTA */}
       <div className="max-w-6xl mx-auto px-6 pb-16">
-        <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-2xl px-8 py-12 flex flex-col md:flex-row items-center justify-between gap-8">
+        <div className="bg-bright-blue/10 border border-bright-blue/20 rounded-2xl px-8 py-12 flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="max-w-lg">
-            <span className="inline-block text-xs font-semibold uppercase tracking-widest text-emerald-400 mb-3">Free assessment</span>
+            <span className="inline-block text-xs font-semibold uppercase tracking-widest text-light-blue mb-3">Free assessment</span>
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-3" style={{ fontFamily: "'Georgia', serif" }}>Get a free threat exposure review</h2>
             <p className="text-white/50 text-sm leading-relaxed">We'll assess your current monitoring coverage, identify detection gaps, and show you what a threat actor could do in your environment today.</p>
           </div>
           <div className="flex flex-col gap-3 flex-shrink-0">
-            <button onClick={() => navigate("/contact")} className="px-7 py-3 bg-emerald-500 hover:bg-emerald-400 text-black text-sm font-bold rounded-lg transition-colors whitespace-nowrap">Book a threat review →</button>
+            <button onClick={() => navigate("/contact")} className="px-7 py-3 bg-bright-blue hover:bg-bright-blue/90 text-white text-sm font-bold rounded-lg transition-colors whitespace-nowrap">Book a threat review →</button>
             <button onClick={() => navigate(-1)} className="text-xs text-white/40 hover:text-white/70 transition-colors text-center">← Back</button>
           </div>
         </div>

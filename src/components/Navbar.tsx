@@ -40,7 +40,7 @@ aws: (
   ),
 };
 
-type MenuKey = 'cloud-platforms' | 'solutions' | 'services' | 'resources' | 'company';
+type MenuKey = 'cloud-platforms' | 'solutions' | 'services' | 'product' | 'resources' | 'company';
 
 interface NavItem {
   label: string;
@@ -113,6 +113,11 @@ const menuConfig: Record<MenuKey, MenuConfig> = {
             { label: 'Startups & SMBs', path: '/industries/startups-smbs' },
             { label: 'Enterprise', path: '/industries/enterprise' },
             { label: 'Finance & BFSI', path: '/industries/finance-bfsi' },
+            { label: 'Healthcare', path: '/industries/healthcare' },
+            { label: 'Education', path: '/industries/education' },
+            { label: 'Advertising & marketing', path: '/industries/advertising-marketing' },
+            { label: 'Manufacturing', path: '/industries/manufacturing' },
+            { label: 'Sports', path: '/industries/sports' },
           ],
         },
       ],
@@ -138,6 +143,16 @@ const menuConfig: Record<MenuKey, MenuConfig> = {
             { label: 'FinOps & billing management', path: '/services/finops' },
             { label: 'Security monitoring', path: '/services/security-monitoring' },
           ],
+        },
+      ],
+    ],
+  },
+  product: {
+    columns: [
+      [
+        {
+          heading: '',
+          items: [{ label: 'reinforce360™', path: '/reinforce360tm' }],
         },
       ],
     ],
@@ -205,6 +220,7 @@ const navLinks: { label: string; key: MenuKey }[] = [
   { label: 'Cloud platforms', key: 'cloud-platforms' },
   { label: 'Solutions', key: 'solutions' },
   { label: 'Services', key: 'services' },
+  { label: 'Product', key: 'product' },
   { label: 'Resources', key: 'resources' },
   { label: 'Company', key: 'company' },
 ];
@@ -214,8 +230,20 @@ const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState<MenuKey | null>(null);
   const [mobileExpanded, setMobileExpanded] = useState<MenuKey | null>(null);
+  const [dropdownLeft, setDropdownLeft] = useState(0);
+  const [dropdownWidth, setDropdownWidth] = useState(0);
   const hideTimeout = useRef<number | null>(null);
   const navRef = useRef<HTMLElement | null>(null);
+  const desktopMenuRef = useRef<HTMLDivElement | null>(null);
+  const dropdownInnerRef = useRef<HTMLDivElement | null>(null);
+  const triggerRefs = useRef<Record<MenuKey, HTMLButtonElement | null>>({
+    'cloud-platforms': null,
+    solutions: null,
+    services: null,
+    product: null,
+    resources: null,
+    company: null,
+  });
   const location = useLocation();
 
   useEffect(() => {
@@ -248,6 +276,42 @@ const Navbar = () => {
 
   const currentData = activeMenu ? menuConfig[activeMenu] : null;
   const dropdownOpen = Boolean(activeMenu && currentData);
+
+  const getMenuWidth = (data: MenuConfig) => {
+    const colCount = data.columns.length;
+    const base = colCount <= 1 ? 360 : colCount === 2 ? 560 : 820;
+    return data.rightPanel ? base + 240 : base;
+  };
+
+  useEffect(() => {
+    if (!dropdownOpen || !activeMenu || !currentData) return;
+
+    const updatePosition = () => {
+      const containerEl = dropdownInnerRef.current;
+      const triggerEl = triggerRefs.current[activeMenu];
+      if (!containerEl || !triggerEl) return;
+      const containerRect = containerEl.getBoundingClientRect();
+      const triggerRect = triggerEl.getBoundingClientRect();
+      const width = Math.min(getMenuWidth(currentData), containerRect.width);
+
+      let left = triggerRect.left - containerRect.left;
+      if (left + width > containerRect.width) {
+        left = containerRect.width - width;
+      }
+      left = Math.max(0, left);
+      setDropdownWidth(width);
+      setDropdownLeft(left);
+
+    updatePosition();
+    window.addEventListener('resize', updatePosition);
+    window.addEventListener('scroll', updatePosition, true);
+    window.addEventListener('scroll', updatePosition, true);
+      window.removeEventListener('resize', updatePosition);
+      window.removeEventListener('scroll', updatePosition, true);
+    };
+  }, [activeMenu, currentData, dropdownOpen]);
+
+
 
   useEffect(() => {
     if (!dropdownOpen) return;
@@ -282,13 +346,16 @@ const Navbar = () => {
           <img src="/cf-tp.png" alt="CloudFirst logo" className="h-14 sm:h-16 lg:h-24 w-auto" />
         </Link>
 
-        <div className="hidden lg:flex flex-1 items-center justify-center relative" onMouseLeave={handleMouseLeave}>
+        <div ref={desktopMenuRef} className="hidden lg:flex flex-1 items-center justify-center relative" onMouseLeave={handleMouseLeave}>
           <div className="flex items-center gap-1">
             {navLinks.map((link) => (
               <button
                 key={link.key}
-                className={`flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-md transition-colors hover:text-primary ${
-                  activeMenu === link.key ? 'text-primary' : 'text-foreground'
+                ref={(el) => {
+                  triggerRefs.current[link.key] = el;
+                }}
+                className={`flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-md transition-colors hover:text-blue-600 ${
+                  activeMenu === link.key ? 'text-blue-600' : 'text-foreground'
                 }`}
                 onMouseEnter={() => handleMouseEnter(link.key)}
                 onClick={() => {
@@ -322,81 +389,87 @@ const Navbar = () => {
             onMouseLeave={handleMouseLeave}
           >
             {currentData && (
-              <div className="bg-gradient-to-b from-[#669bbc] to-white rounded-b-2xl">
-                <div className="max-w-[1400px] mx-auto px-6 lg:px-10 py-6">
-                  <div className="flex gap-10">
-                    <div
-                      className={`grid gap-8 flex-1 ${
-                        currentData.columns.length === 1
-                          ? 'grid-cols-1 max-w-xs'
-                          : currentData.columns.length === 2
-                          ? 'grid-cols-2 max-w-2xl'
-                          : 'grid-cols-3'
-                      }`}
-                    >
-                      {currentData.columns.map((sections, colIdx) => (
-                        <div key={colIdx} className="space-y-5">
-                          {sections.map((section) => (
-                            <div key={section.heading || colIdx}>
-                              {section.heading && (
-                                <div className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-3">
-                                  {section.heading}
-                                </div>
-                              )}
-                              <ul className="space-y-2.5">
-                                {section.items.map((item) => (
-                                  <li key={item.label}>
-                                    <Link
-                                      to={item.path}
-                                      className="flex items-center gap-2.5 text-sm font-medium text-foreground hover:text-primary transition-colors group"
-                                      onClick={() => setActiveMenu(null)}
-                                    >
-                                      {item.icon ? (
-                                        <span className="w-4 h-4 flex-shrink-0 inline-flex items-center justify-center text-foreground group-hover:text-primary transition-colors">
-                                          {BrandIcons[item.icon]}
+              <div className="bg-gradient-to-b from-[#669bbc] to-white rounded-2xl">
+                <div ref={dropdownInnerRef} className="px-6 lg:px-10 py-6">
+                  <div style={{ marginLeft: dropdownLeft, width: dropdownWidth || undefined }}>
+                    <div className="flex gap-10">
+                      <div
+                        className={`grid gap-8 flex-1 ${
+                          currentData.columns.length === 1
+                            ? currentData.rightPanel
+                              ? 'grid-cols-1 max-w-xs'
+                              : 'grid-cols-1 max-w-xs'
+                            : currentData.columns.length === 2
+                            ? currentData.rightPanel
+                              ? 'grid-cols-2 max-w-2xl'
+                              : 'grid-cols-2 max-w-2xl'
+                            : 'grid-cols-3'
+                        }`}
+                      >
+                        {currentData.columns.map((sections, colIdx) => (
+                          <div key={colIdx} className="space-y-5">
+                            {sections.map((section) => (
+                              <div key={section.heading || colIdx}>
+                                {section.heading && (
+                                  <div className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-3">
+                                    {section.heading}
+                                  </div>
+                                )}
+                                <ul className="space-y-2.5">
+                                  {section.items.map((item) => (
+                                    <li key={item.label}>
+                                      <Link
+                                        to={item.path}
+                                      className="flex items-center gap-2.5 text-sm font-medium text-foreground hover:text-blue-600 transition-colors group"
+                                        onClick={() => setActiveMenu(null)}
+                                      >
+                                        {item.icon ? (
+                                        <span className="w-4 h-4 flex-shrink-0 inline-flex items-center justify-center text-foreground group-hover:text-blue-600 transition-colors">
+                                            {BrandIcons[item.icon]}
+                                          </span>
+                                        ) : item.dot ? (
+                                          <span
+                                            className="w-2 h-2 rounded-full flex-shrink-0"
+                                            style={{ backgroundColor: item.dot }}
+                                          />
+                                        ) : null}
+                                        <span className="group-hover:translate-x-0.5 transition-transform duration-150">
+                                          {item.label}
                                         </span>
-                                      ) : item.dot ? (
-                                        <span
-                                          className="w-2 h-2 rounded-full flex-shrink-0"
-                                          style={{ backgroundColor: item.dot }}
-                                        />
-                                      ) : null}
-                                      <span className="group-hover:translate-x-0.5 transition-transform duration-150">
-                                        {item.label}
-                                      </span>
-                                    </Link>
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                          ))}
-                        </div>
-                      ))}
-                    </div>
-
-                    {currentData.rightPanel && (
-                      <div className="w-48 flex-shrink-0 border-l border-foreground/15 pl-8">
-                        <div className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-3">
-                          {currentData.rightPanel.heading}
-                        </div>
-                        <ul className="space-y-2.5">
-                          {currentData.rightPanel.items.map((item) => (
-                            <li key={item.label}>
-                              <Link
-                                to={item.path}
-                                className="flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary transition-colors group"
-                                onClick={() => setActiveMenu(null)}
-                              >
-                                <span className="text-muted-foreground group-hover:text-primary transition-colors">•</span>
-                                <span className="group-hover:translate-x-0.5 transition-transform duration-150">
-                                  {item.label}
-                                </span>
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
+                                      </Link>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            ))}
+                          </div>
+                        ))}
                       </div>
-                    )}
+
+                      {currentData.rightPanel && (
+                        <div className="w-48 flex-shrink-0 border-l border-foreground/15 pl-8">
+                          <div className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-3">
+                            {currentData.rightPanel.heading}
+                          </div>
+                          <ul className="space-y-2.5">
+                            {currentData.rightPanel.items.map((item) => (
+                              <li key={item.label}>
+                                <Link
+                                  to={item.path}
+                                  className="flex items-center gap-2 text-sm font-medium text-foreground hover:text-blue-600 transition-colors group"
+                                  onClick={() => setActiveMenu(null)}
+                                >
+                                  <span className="text-muted-foreground group-hover:text-blue-600 transition-colors">•</span>
+                                  <span className="group-hover:translate-x-0.5 transition-transform duration-150">
+                                    {item.label}
+                                  </span>
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>

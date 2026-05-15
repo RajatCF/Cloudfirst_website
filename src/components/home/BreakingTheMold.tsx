@@ -41,18 +41,18 @@ const BreakingTheMold = () => {
           <div className="mold-content">
             <h2 className="section-title mb-10">
               <span className="bg-gradient-to-r from-bright-blue via-blue-400 to-purple-400 bg-clip-text text-transparent">
-                reinforce360™
+                reinforce360
               </span>
             </h2>
             <div className="space-y-6 text-base leading-relaxed opacity-70">
               <p>
-                reinforce360™ is designed to meet the complex and evolving needs of modern cloud operations. It delivers a unified platform that integrates cost governance, resource optimization, and intelligent automation, helping organizations operate more efficiently, securely, and sustainably in the cloud.
+                reinforce360 is designed to meet the complex and evolving needs of modern cloud operations. It delivers a unified platform that integrates cost governance, resource optimization, and intelligent automation, helping organizations operate more efficiently, securely, and sustainably in the cloud.
               </p>
               <p>
                 This platform goes beyond traditional cloud management tools by combining AI-powered analytics, automated tagging compliance, and real-time cost control into a single, seamless experience.
               </p>
               <p>
-                Traditional methods are prone to inaccuracies, manual errors, and lack scalability, leading to unnecessary costs, resource inefficiencies, and potential compliance risks. A smarter solution is needed to streamline management, optimize cloud operations, and mitigate risks effectively.
+                reinforce360 doesn't just cut costs, it cuts carbon. Reduced cloud spend means fewer active instances, lower data center energy draw, and a measurably smaller environmental footprint. As ESG accountability becomes non-negotiable, reinforce360 transforms cloud efficiency into a sustainability advantage. Less consumption, less waste, less impact on the planet, all without compromising performance. It's not just smarter cloud management; it's responsible innovation at scale. Every dollar saved is a step toward a greener digital future.
               </p>
             </div>
             <div className="mt-12 pt-8 border-t border-primary-foreground/10">

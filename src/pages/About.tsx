@@ -1,6 +1,7 @@
 import Layout from '@/components/Layout';
-import { Globe, Award, Users, TrendingUp, ShieldCheck, Lightbulb, Heart, Star, ArrowRight } from 'lucide-react';
+import { Globe, Award, Users, TrendingUp, ShieldCheck, Lightbulb, Heart, Star, ArrowRight, Linkedin } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 
 const values = [
   {
@@ -80,6 +81,39 @@ const milestones = [
   },
 ];
 
+const leadershipLinks = [
+  { label: "YouTube video", href: "https://www.youtube.com/watch?v=_5K0VRnATqs" },
+  {
+    label: "Medium article",
+    href: "https://medium.com/@ashishsrivastava_41825/cloudfirsts-expertise-in-cloud-security-aab0cd396a49",
+  },
+  { label: "Corporate Connect Global", href: "https://corporateconnectglobal.com/cloudfirst-technology-pvt-ltd/" },
+  { label: "Innovative Zone India", href: "https://innovativezoneindia.com/cloudfirst-technology-private-limited/" },
+  {
+    label: "Insights Success",
+    href: "https://www.insightssuccess.in/cloudfirst-technology-private-limited-elevating-your-biz-into-the-future-virtual-verse/",
+  },
+];
+
+const perspectiveTypeColours: Record<string, string> = {
+  Video: "text-purple-700 bg-purple-50 border-purple-100",
+  Article: "text-blue-700 bg-blue-50 border-blue-100",
+};
+
+const getDomain = (url: string) => {
+  try {
+    return new URL(url).hostname.replace(/^www\./, "");
+  } catch {
+    return "";
+  }
+};
+
+const getPerspectiveType = (url: string) => {
+  const u = url.toLowerCase();
+  if (u.includes("youtube.com") || u.includes("youtu.be")) return "Video";
+  return "Article";
+};
+
 const About = () => {
   const { hash } = useLocation();
   const showLeadership = hash === '#our-leadership';
@@ -110,40 +144,93 @@ const About = () => {
       )}
 
       {showLeadership && (
-        <section id="our-leadership" className="bg-white border-b border-gray-100">
-          <div className="max-w-[1400px] mx-auto px-6 lg:px-10 py-16">
-            <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-10 items-center">
-              <div className="rounded-2xl overflow-hidden border border-gray-100 shadow-sm bg-white">
-                <img
-                  src="/Our_leadership.png"
-                  alt="Our leadership"
-                  className="w-full h-[560px] md:h-[680px] object-contain bg-white"
-                  loading="lazy"
-                  onError={(e) => {
-                    e.currentTarget.src = "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80";
-                  }}
-                />
-              </div>
-
-              <div>
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4" style={{ fontFamily: "'Georgia', serif" }}>
-                  Our Leadership
-                </h2>
-                <div className="space-y-5 text-gray-700 leading-relaxed text-[18px]">
-                  <p>
-                    CloudFirst Technology® is redefining the future of IT and cloud innovation under the dynamic leadership of Ashish Srivastava, our Founder and CTO. Based in Mumbai, Ashish is a technology visionary with over 15 years of experience transforming the IT landscape across both the public and private sectors. He is recognized for pioneering projects in AI, cloud infrastructure, security, and digital transformation, serving international clients from the US to Australia and delivering high-impact solutions to numerous Indian government ministries.
-                  </p>
-                  <p>
-                    Ashish&apos;s expertise spans strategic leadership, hands-on IT services delivery, and cutting-edge research and development. His unique approach blends a deep passion for technological advancement with an unwavering commitment to social impact—driving initiatives that advance education, health, rural empowerment, and digital literacy. As a result, CloudFirst is not just a technology provider but a dedicated partner in empowering organizations to adapt, secure, and thrive in the digital era.
-                  </p>
-                  <p>
-                    He is also an active member of the Business Council for Innovation and Technology. Notably, he participated in an insightful and interactive session with the Hon&apos;ble President of India, Smt. Droupadi Murmu, held in Bratislava, Slovakia.
-                  </p>
+        <>
+          <section id="our-leadership" className="relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-700 via-teal-600 to-sky-700" />
+            <div
+              className="absolute inset-0 opacity-20"
+              style={{
+                backgroundImage: "url('/New_world_map.png')",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+            />
+            <div className="absolute inset-0 bg-black/10" />
+            <div className="relative max-w-6xl mx-auto px-6 py-16 md:py-20 text-center text-white">
+              <h1 className="text-3xl md:text-5xl font-bold mb-6" style={{ fontFamily: "'Georgia', serif" }}>
+                Our leadership
+              </h1>
+              <div className="flex justify-center">
+                <div className="rounded-full border border-white/30 bg-white/10 px-4 py-2">
+                  <Breadcrumb>
+                    <BreadcrumbList className="text-white/80">
+                      <BreadcrumbItem>
+                        <BreadcrumbLink asChild className="text-white/80 hover:text-white">
+                          <Link to="/">Home</Link>
+                        </BreadcrumbLink>
+                      </BreadcrumbItem>
+                      <BreadcrumbSeparator className="text-white/70" />
+                      <BreadcrumbItem>
+                        <BreadcrumbPage className="text-white">Our leadership</BreadcrumbPage>
+                      </BreadcrumbItem>
+                    </BreadcrumbList>
+                  </Breadcrumb>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+
+          <section className="bg-white border-b border-gray-100">
+            <div className="max-w-[1400px] mx-auto px-6 lg:px-10 py-16">
+              <div className="grid grid-cols-1 lg:grid-cols-[0.95fr_1.05fr] gap-10 items-center">
+                <div className="overflow-hidden w-full max-w-sm md:max-w-md mx-auto">
+                  <div className="h-[420px] md:h-[520px] w-full">
+                    <img
+                      src="/Our_leadership.png"
+                      alt="Our leadership"
+                      className="w-full h-full object-cover object-[50%_35%]"
+                      loading="lazy"
+                      onError={(e) => {
+                        e.currentTarget.src = "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80";
+                      }}
+                    />
+                  </div>
+                  <div className="mt-4 flex justify-center">
+                    <a
+                      href="https://www.linkedin.com/in/cloudfirstashish/"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 hover:text-blue-700 transition-colors"
+                    >
+                      <Linkedin className="w-4 h-4" />
+                      LinkedIn
+                    </a>
+                  </div>
+                </div>
+
+                <div>
+                  <div className="space-y-5 text-gray-700 leading-relaxed text-[18px]">
+                    <div className="space-y-1">
+                      <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+                        Ashish Srivastava
+                      </h2>
+                      <div className="text-blue-600 font-medium">Founder &amp; CTO</div>
+                    </div>
+                    <p>
+                      CloudFirst Technology® is redefining the future of IT and cloud innovation under the dynamic leadership of Ashish Srivastava. Based in Mumbai, Ashish is a technology visionary with over 15 years of experience transforming the IT landscape across both the public and private sectors. He is recognized for pioneering projects in AI, cloud infrastructure, security, and digital transformation, serving international clients from the US to Australia and delivering high-impact solutions to numerous Indian government ministries.
+                    </p>
+                    <p>
+                      Ashish&apos;s expertise spans strategic leadership, hands-on IT services delivery, and cutting-edge research and development. His unique approach blends a deep passion for technological advancement with an unwavering commitment to social impact—driving initiatives that advance education, health, rural empowerment, and digital literacy. As a result, CloudFirst is not just a technology provider but a dedicated partner in empowering organizations to adapt, secure, and thrive in the digital era.
+                    </p>
+                    <p>
+                      He is also an active member of the Business Council for Innovation and Technology. Notably, he participated in an insightful and interactive session with the Hon&apos;ble President of India, Smt. Droupadi Murmu, held in Bratislava, Slovakia.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </>
       )}
 
       {!showLeadership && (
@@ -278,16 +365,16 @@ const About = () => {
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-1 gap-6">
                 {[
                   {
-                    src: "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/india+Ai+impact+summit/IMG-20260216-WA0035+(1).jpg",
-                    alt: "AI summit highlight",
+                    src: "/events/1763897496613.jpg",
+                    alt: "Leadership collage image 1",
                   },
                   {
-                    src: "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/aws+summit+bengaluru/WhatsApp+Image+2026-04-24+at+06.57.58+(4).jpeg",
-                    alt: "Bengaluru summit highlight",
+                    src: "/events/1763897495547 (1) (1).jpg",
+                    alt: "Leadership collage image 2",
                   },
                   {
-                    src: "/events/IMG_3467.jpg",
-                    alt: "MSME summit highlight",
+                    src: "/events/IMG-20260218-WA0023 (1).jpg",
+                    alt: "Leadership collage image 3",
                   },
                 ].map((item, index) => (
                   <div key={`${item.src}-${index}`} className="rounded-2xl border border-gray-100 bg-white shadow-sm overflow-hidden">
@@ -310,32 +397,141 @@ const About = () => {
         </section>
       )}
 
-      {/* ── Values ── */}
-      <section className="bg-[#f7f8fa]">
-        <div className="max-w-[1200px] mx-auto px-6 lg:px-10 py-16">
-          <div className="mb-10">
-            <span className="text-xs font-bold uppercase tracking-widest text-blue-600">What drives us</span>
-            <h2 className="mt-2 text-2xl md:text-3xl font-bold text-gray-900" style={{ fontFamily: "'Georgia', serif" }}>
-              Our core values
-            </h2>
+      {showLeadership && (
+        <section className="bg-white border-b border-gray-100">
+          <div className="max-w-[1200px] mx-auto px-6 lg:px-10 py-16">
+            <div className="text-center mb-10">
+              <h2 className="text-3xl md:text-4xl font-bold text-blue-600" style={{ fontFamily: "'Georgia', serif" }}>
+                Founder’s Perspective
+              </h2>
+            </div>
+
+            <div className="space-y-10 max-w-4xl mx-auto">
+              <div className="space-y-4">
+                {leadershipLinks.filter((l) => getPerspectiveType(l.href) === "Article").map((link) => {
+                  const domain = getDomain(link.href);
+                  const type = getPerspectiveType(link.href);
+                  return (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="block bg-white rounded-2xl border border-gray-100 shadow-sm p-6 hover:border-gray-200 hover:shadow-md transition-all"
+                    >
+                      <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                        <div className="flex items-start gap-4 flex-1">
+                          <div className="w-16 h-12 rounded-xl border border-gray-100 bg-gray-50 flex items-center justify-center overflow-hidden flex-shrink-0">
+                            <img
+                              src={domain ? `https://logo.clearbit.com/${domain}` : ""}
+                              alt=""
+                              className="w-full h-full object-contain p-2"
+                              loading="lazy"
+                              onError={(e) => {
+                                const fallbackDomain = getDomain(link.href);
+                                e.currentTarget.src = fallbackDomain ? `https://www.google.com/s2/favicons?domain=${fallbackDomain}&sz=256` : "";
+                              }}
+                            />
+                          </div>
+                          <div className="flex-1">
+                            <div className="flex items-center gap-3 mb-3 flex-wrap">
+                              <span className={`text-[10px] font-bold border rounded px-2.5 py-1 uppercase tracking-wider ${perspectiveTypeColours[type]}`}>
+                                {type}
+                              </span>
+                              {domain ? <span className="text-xs text-gray-400">{domain}</span> : null}
+                            </div>
+                            <h3 className="text-base font-bold text-gray-900 mb-1" style={{ fontFamily: "'Georgia', serif" }}>
+                              {link.label}
+                            </h3>
+                          </div>
+                        </div>
+                        <span className="flex-shrink-0 text-xs text-blue-600 hover:text-blue-800 font-semibold transition-colors whitespace-nowrap self-start">
+                          Read more →
+                        </span>
+                      </div>
+                    </a>
+                  );
+                })}
+              </div>
+
+              <div className="space-y-4">
+                {leadershipLinks.filter((l) => getPerspectiveType(l.href) === "Video").map((link) => {
+                  const domain = getDomain(link.href);
+                  const type = getPerspectiveType(link.href);
+                  return (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="block bg-white rounded-2xl border border-gray-100 shadow-sm p-6 hover:border-gray-200 hover:shadow-md transition-all"
+                    >
+                      <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                        <div className="flex items-start gap-4 flex-1">
+                          <div className="w-16 h-12 rounded-xl border border-gray-100 bg-gray-50 flex items-center justify-center overflow-hidden flex-shrink-0">
+                            <img
+                              src={domain ? `https://logo.clearbit.com/${domain}` : ""}
+                              alt=""
+                              className="w-full h-full object-contain p-2"
+                              loading="lazy"
+                              onError={(e) => {
+                                const fallbackDomain = getDomain(link.href);
+                                e.currentTarget.src = fallbackDomain ? `https://www.google.com/s2/favicons?domain=${fallbackDomain}&sz=256` : "";
+                              }}
+                            />
+                          </div>
+                          <div className="flex-1">
+                            <div className="flex items-center gap-3 mb-3 flex-wrap">
+                              <span className={`text-[10px] font-bold border rounded px-2.5 py-1 uppercase tracking-wider ${perspectiveTypeColours[type]}`}>
+                                {type}
+                              </span>
+                              {domain ? <span className="text-xs text-gray-400">{domain}</span> : null}
+                            </div>
+                            <h3 className="text-base font-bold text-gray-900 mb-1" style={{ fontFamily: "'Georgia', serif" }}>
+                              {link.label}
+                            </h3>
+                          </div>
+                        </div>
+                        <span className="flex-shrink-0 text-xs text-blue-600 hover:text-blue-800 font-semibold transition-colors whitespace-nowrap self-start">
+                          Read more →
+                        </span>
+                      </div>
+                    </a>
+                  );
+                })}
+              </div>
+            </div>
           </div>
-          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {values.map(({ icon: Icon, color, bg, border, title, desc }) => (
-              <article
-                key={title}
-                className="group relative bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 overflow-hidden"
-              >
-                <div className={`absolute top-0 left-0 right-0 h-0.5 ${bg} opacity-0 group-hover:opacity-100 transition-opacity`} />
-                <div className={`inline-flex items-center justify-center h-10 w-10 rounded-xl ${bg} border ${border} mb-4`}>
-                  <Icon className={`w-5 h-5 ${color}`} />
-                </div>
-                <h3 className="text-base font-bold text-gray-900 mb-2">{title}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{desc}</p>
-              </article>
-            ))}
+        </section>
+      )}
+
+      {!showLeadership && (
+        <section className="bg-[#f7f8fa]">
+          <div className="max-w-[1200px] mx-auto px-6 lg:px-10 py-16">
+            <div className="mb-10">
+              <span className="text-xs font-bold uppercase tracking-widest text-blue-600">What drives us</span>
+              <h2 className="mt-2 text-2xl md:text-3xl font-bold text-gray-900" style={{ fontFamily: "'Georgia', serif" }}>
+                Our core values
+              </h2>
+            </div>
+            <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+              {values.map(({ icon: Icon, color, bg, border, title, desc }) => (
+                <article
+                  key={title}
+                  className="group relative bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 overflow-hidden"
+                >
+                  <div className={`absolute top-0 left-0 right-0 h-0.5 ${bg} opacity-0 group-hover:opacity-100 transition-opacity`} />
+                  <div className={`inline-flex items-center justify-center h-10 w-10 rounded-xl ${bg} border ${border} mb-4`}>
+                    <Icon className={`w-5 h-5 ${color}`} />
+                  </div>
+                  <h3 className="text-base font-bold text-gray-900 mb-2">{title}</h3>
+                  <p className="text-gray-500 text-sm leading-relaxed">{desc}</p>
+                </article>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* ── CTA ── */}
       <section className="relative overflow-hidden bg-[#07111f]">
