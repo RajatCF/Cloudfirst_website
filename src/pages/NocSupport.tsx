@@ -11,35 +11,35 @@ const NocSupport: React.FC = () => {
 
       {/* Hero — dark charcoal with amber glow */}
       <div className="relative overflow-hidden pt-16 lg:pt-20">
-        <div className="absolute inset-0 opacity-25" style={{ background: "radial-gradient(ellipse at 70% 30%, #d97706 0%, transparent 50%), radial-gradient(ellipse at 20% 80%, #1e3a5f 0%, transparent 50%)" }} />
+        <div className="absolute inset-0 opacity-25" style={{ background: "radial-gradient(ellipse at 70% 30%, #0284c7 0%, transparent 50%), radial-gradient(ellipse at 20% 80%, #1e3a5f 0%, transparent 50%)" }} />
         <div className="max-w-6xl mx-auto px-6 pt-24 pb-20 relative z-10 flex flex-col lg:flex-row items-center gap-12">
           <div className="flex-1">
-            <span className="inline-block text-xs font-semibold uppercase tracking-widest text-amber-300 border border-amber-400/30 bg-amber-400/10 rounded-full px-3 py-1 mb-5">Support Tiers</span>
+            <span className="inline-block text-xs font-semibold uppercase tracking-widest text-sky-300 border border-sky-400/30 bg-sky-400/10 rounded-full px-3 py-1 mb-5">Support Tiers</span>
             <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-5" style={{ fontFamily: "'Georgia', serif" }}>
               Always-on monitoring.<br />
-              <span className="text-amber-400">Zero missed incidents.</span>
+              <span className="text-sky-400">Zero missed incidents.</span>
             </h1>
             <p className="text-white/60 text-lg leading-relaxed mb-8 max-w-xl">
               Your cloud doesn't sleep — and neither does our NOC. CloudFirst's 24x7 Network Operations Centre watches your entire cloud estate, responds to incidents in minutes, and keeps your SLAs intact around the clock.
             </p>
-            <button onClick={() => navigate("/contact")} className="px-7 py-3 bg-amber-500 hover:bg-amber-400 text-black text-sm font-bold rounded-lg transition-colors">Activate NOC support →</button>
+            <button onClick={() => navigate("/contact")} className="px-7 py-3 bg-sky-500 hover:bg-sky-400 text-black text-sm font-bold rounded-lg transition-colors">Activate NOC support →</button>
           </div>
           {/* Live clock visualization */}
           <div className="flex-1 flex justify-center">
             <div className="relative w-64 h-64">
-              <div className="absolute inset-0 rounded-full border-4 border-amber-400/20 flex items-center justify-center">
+              <div className="absolute inset-0 rounded-full border-4 border-sky-400/20 flex items-center justify-center">
                 <div className="text-center">
-                  <div className="text-5xl font-bold text-amber-400 mb-1" style={{ fontFamily: "'Georgia', serif" }}>24/7</div>
+                  <div className="text-5xl font-bold text-sky-400 mb-1" style={{ fontFamily: "'Georgia', serif" }}>24/7</div>
                   <div className="text-sm text-white/50">Live NOC coverage</div>
                   <div className="flex gap-1 justify-center mt-3">
                     {Array.from({ length: 8 }).map((_, i) => (
-                      <div key={i} className={`w-1.5 h-4 rounded-full ${i % 3 === 0 ? "bg-amber-400" : "bg-white/20"}`} style={{ animationDelay: `${i * 0.1}s` }} />
+                      <div key={i} className={`w-1.5 h-4 rounded-full ${i % 3 === 0 ? "bg-sky-400" : "bg-white/20"}`} style={{ animationDelay: `${i * 0.1}s` }} />
                     ))}
                   </div>
                 </div>
               </div>
-              <div className="absolute inset-0 rounded-full border border-amber-400/10" style={{ transform: "scale(1.15)" }} />
-              <div className="absolute inset-0 rounded-full border border-amber-400/5" style={{ transform: "scale(1.3)" }} />
+              <div className="absolute inset-0 rounded-full border border-sky-400/10" style={{ transform: "scale(1.15)" }} />
+              <div className="absolute inset-0 rounded-full border border-sky-400/5" style={{ transform: "scale(1.3)" }} />
             </div>
           </div>
         </div>
@@ -55,7 +55,7 @@ const NocSupport: React.FC = () => {
             { v: "8 zones", l: "Global coverage" },
           ].map((s) => (
             <div key={s.l} className="text-center">
-              <div className="text-2xl font-bold text-amber-400 mb-1" style={{ fontFamily: "'Georgia', serif" }}>{s.v}</div>
+              <div className="text-2xl font-bold text-sky-400 mb-1" style={{ fontFamily: "'Georgia', serif" }}>{s.v}</div>
               <div className="text-xs text-white/40">{s.l}</div>
             </div>
           ))}
@@ -74,7 +74,7 @@ const NocSupport: React.FC = () => {
             { icon: "🔔", title: "Alert management", desc: "Intelligent alert deduplication, noise suppression, and enrichment — so your on-call receives meaningful, actionable notifications, not alert storms." },
             { icon: "📝", title: "Incident documentation", desc: "Every incident logged with timeline, impact assessment, root cause analysis, and prevention recommendations — audit-ready and shareable." },
           ].map((cap) => (
-            <div key={cap.title} className="flex gap-4 bg-white/5 border border-white/10 rounded-xl p-5 hover:border-amber-500/30 transition-all">
+            <div key={cap.title} className="flex gap-4 bg-white/5 border border-white/10 rounded-xl p-5 hover:border-sky-500/30 transition-all">
               <span className="text-2xl flex-shrink-0">{cap.icon}</span>
               <div>
                 <h3 className="text-sm font-bold text-white mb-1.5">{cap.title}</h3>
@@ -108,13 +108,13 @@ const NocSupport: React.FC = () => {
 
       {/* CTA */}
       <div className="max-w-6xl mx-auto px-6 py-12 pb-16">
-        <div className="bg-amber-500/10 border border-amber-500/20 rounded-2xl px-8 py-12 flex flex-col md:flex-row items-center justify-between gap-8">
+        <div className="bg-sky-500/10 border border-sky-500/20 rounded-2xl px-8 py-12 flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="max-w-lg">
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-3" style={{ fontFamily: "'Georgia', serif" }}>Never miss another incident</h2>
             <p className="text-white/50 text-sm leading-relaxed">Talk to our NOC team about activating 24/7 monitoring and incident response for your cloud environment.</p>
           </div>
           <div className="flex flex-col gap-3 flex-shrink-0">
-            <button onClick={() => navigate("/contact")} className="px-7 py-3 bg-amber-500 hover:bg-amber-400 text-black text-sm font-bold rounded-lg transition-colors whitespace-nowrap">Activate 24/7 NOC →</button>
+            <button onClick={() => navigate("/contact")} className="px-7 py-3 bg-sky-500 hover:bg-sky-400 text-black text-sm font-bold rounded-lg transition-colors whitespace-nowrap">Activate 24/7 NOC →</button>
             <button onClick={() => navigate(-1)} className="text-xs text-white/40 hover:text-white/70 transition-colors text-center">← Back</button>
           </div>
         </div>
