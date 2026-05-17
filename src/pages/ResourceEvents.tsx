@@ -52,16 +52,6 @@ const images = {
     "/events/IMG_3454.jpg",
     "/events/IMG_3467.jpg"
   ],
-  "assocham-smart-datacenters-cloud-infra-conclave": [
-    "/events/IMG_3454.jpg",
-    "/events/IMG_3415.jpg",
-    "/events/IMG_3389.jpg",
-  ],
-  "go-global-awards": [
-    "/goglobal.jpg",
-    "/events/president_new_image.jpg",
-    "/events/IMG_3467.jpg",
-  ],
 };
 
 const eventDetails = {
@@ -113,22 +103,6 @@ const eventDetails = {
     attendees: "1000+",
     highlights: "Digital transformation, MSME empowerment, business growth strategies"
   },
-  "assocham-smart-datacenters-cloud-infra-conclave": {
-    title: "ASSOCHAM Smart Datacenters & Cloud Infrastructure Conclave",
-    description: "Industry conclave focused on smart datacenters and cloud infrastructure.",
-    date: "2025",
-    location: "India",
-    attendees: "—",
-    highlights: "Datacenters, cloud infrastructure, industry connections"
-  },
-  "go-global-awards": {
-    title: "GO GLOBAL AWARDS",
-    description: "Recognition and event highlights from the Go Global Awards.",
-    date: "2025",
-    location: "United Kingdom",
-    attendees: "—",
-    highlights: "Awards recognition, global networking, brand visibility"
-  }
 };
 
 const eventThumbnails = {
@@ -137,13 +111,23 @@ const eventThumbnails = {
   slovakia: "https://gragwebsite.s3.ap-south-1.amazonaws.com/London+Pics/Slovakia+Pics/1000001380.jpeg",
   "aws-summit-bengaluru": "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/aws+summit+bengaluru/1000106663.jpg",
   "india-ai-impact-summit": "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/india+Ai+impact+summit/IMG-20260216-WA0023+(1).jpg",
-  "msme-summit-2026": "/events/IMG_3389.jpg",
-  "assocham-smart-datacenters-cloud-infra-conclave": "/events/IMG_3454.jpg",
-  "go-global-awards": "/goglobal.jpg"
+  "msme-summit-2026": "/events/IMG_3389.jpg"
+};
+
+type GalleryEvent = {
+  id: string;
+  title: string;
+  description: string;
+  date: string;
+  location: string;
+  attendees: string;
+  images: string[];
+  externalUrl?: string;
+  driveFolderId?: string;
 };
 
 const ResourceEvents = () => {
-  const [selectedEvent, setSelectedEvent] = useState<keyof typeof images | null>(null);
+  const [selectedEvent, setSelectedEvent] = useState<GalleryEvent | null>(null);
   const [activeTab, setActiveTab] = useState<string>('overview'); // Changed back to 'overview' to show event cards by default
   const [selectedYear, setSelectedYear] = useState<string>('2025'); // New state for year selection
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // New state for dropdown
@@ -219,24 +203,6 @@ const ResourceEvents = () => {
         images: [
           "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/AshishSirWithPresident.jpg"
         ]
-      },
-      {
-        id: 'assocham-smart-datacenters-cloud-infra-conclave',
-        title: 'ASSOCHAM Smart Datacenters & Cloud Infrastructure Conclave',
-        description: 'Event highlights and photo folder.',
-        date: '2025',
-        location: 'India',
-        attendees: '—',
-        images: images["assocham-smart-datacenters-cloud-infra-conclave"]
-      },
-      {
-        id: 'go-global-awards',
-        title: 'GO GLOBAL AWARDS',
-        description: 'Event highlights and photo folder.',
-        date: '2025',
-        location: 'United Kingdom',
-        attendees: '—',
-        images: images["go-global-awards"]
       },
     ],
     '2024': [
@@ -548,7 +514,7 @@ const ResourceEvents = () => {
 
   // Render yearly events based on selected year
   const renderYearlyEvents = () => {
-    const events = yearlyEvents[selectedYear as keyof typeof yearlyEvents] || [];
+    const events = (yearlyEvents[selectedYear as keyof typeof yearlyEvents] || []) as GalleryEvent[];
     const gridColsClass =
       events.length === 1
         ? "grid-cols-1"
@@ -581,8 +547,7 @@ const ResourceEvents = () => {
                 transition={{ duration: 0.6, delay: idx * 0.1 }}
                 className="group w-full max-w-md bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 cursor-pointer"
                 onClick={() => {
-                  setSelectedEvent(event.id as keyof typeof images);
-                  setActiveTab(event.id);
+                  setSelectedEvent(event);
                 }}
               >
                 <div className="relative h-64 overflow-hidden">
@@ -759,22 +724,6 @@ const ResourceEvents = () => {
       date: 'April 2026',
       location: 'India'
     },
-    {
-      id: 'assocham-smart-datacenters-cloud-infra-conclave',
-      title: 'ASSOCHAM Smart Datacenters & Cloud Infrastructure Conclave',
-      description: 'Smart datacenters and cloud infrastructure conclave highlights.',
-      thumbnail: "/events/IMG_3454.jpg",
-      date: '2025',
-      location: 'India'
-    },
-    {
-      id: 'go-global-awards',
-      title: 'GO GLOBAL AWARDS',
-      description: 'Go Global Awards highlights.',
-      thumbnail: "/goglobal.jpg",
-      date: '2025',
-      location: 'United Kingdom'
-    }
   ];
 
   return (
@@ -800,8 +749,23 @@ const ResourceEvents = () => {
             transition={{ duration: 0.6, delay: idx * 0.1 }}
             className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden cursor-pointer border border-gray-100"
             onClick={() => {
-              setSelectedEvent(event.id as keyof typeof images);
-              setActiveTab(event.id);
+              const eventFromYear = (Object.values(yearlyEvents).flat() as GalleryEvent[]).find((e) => e.id === event.id);
+              if (eventFromYear) {
+                setSelectedEvent(eventFromYear);
+                return;
+              }
+              if (event.id in images) {
+                const details = eventDetails[event.id as keyof typeof eventDetails];
+                setSelectedEvent({
+                  id: event.id,
+                  title: details?.title || event.title,
+                  description: details?.description || event.description,
+                  date: details?.date || event.date,
+                  location: details?.location || event.location,
+                  attendees: details?.attendees || "—",
+                  images: images[event.id as keyof typeof images],
+                });
+              }
             }}
           >
             <div className="relative h-64 overflow-hidden">
@@ -846,9 +810,10 @@ const ResourceEvents = () => {
 
 const renderGallery = () => {
     if (!selectedEvent) return null;
-    
-    const imgs = images[selectedEvent];
-    const details = eventDetails[selectedEvent];
+    const imgs = selectedEvent.images || [];
+    const driveEmbedUrl = selectedEvent.driveFolderId
+      ? `https://drive.google.com/embeddedfolderview?id=${encodeURIComponent(selectedEvent.driveFolderId)}#grid`
+      : null;
 
     return (
       <div className="max-w-7xl mx-auto px-4 py-8">
@@ -868,20 +833,34 @@ const renderGallery = () => {
           </button>
           
           <div className="bg-gradient-to-br from-white to-bright-blue/5 rounded-2xl shadow-xl p-8 mb-8 border border-bright-blue/15">
-            <h1 className="text-3xl font-bold bg-gradient-to-r from-bright-blue to-light-blue bg-clip-text text-transparent mb-4">{details.title}</h1>
-            <p className="text-lg text-gray-700 mb-6">{details.description}</p>
+            <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
+              <h1 className="text-3xl font-bold bg-gradient-to-r from-bright-blue to-light-blue bg-clip-text text-transparent" style={{ fontFamily: "'Georgia', serif" }}>
+                {selectedEvent.title}
+              </h1>
+              {selectedEvent.externalUrl ? (
+                <a
+                  href={selectedEvent.externalUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-bright-blue/20 text-sm font-semibold text-bright-blue hover:border-bright-blue/35 transition-colors whitespace-nowrap"
+                >
+                  Open full folder <ExternalLink className="w-4 h-4" />
+                </a>
+              ) : null}
+            </div>
+            <p className="text-lg text-gray-700 mb-6">{selectedEvent.description}</p>
             <div className="flex flex-wrap gap-4">
               <div className="flex items-center text-sm text-gray-600 bg-white px-4 py-2 rounded-full shadow-sm">
                 <Calendar className="w-4 h-4 mr-2 text-bright-blue" />
-                {details.date}
+                {selectedEvent.date}
               </div>
               <div className="flex items-center text-sm text-gray-600 bg-white px-4 py-2 rounded-full shadow-sm">
                 <MapPin className="w-4 h-4 mr-2 text-bright-blue" />
-                {details.location}
+                {selectedEvent.location}
               </div>
               <div className="flex items-center text-sm text-gray-600 bg-white px-4 py-2 rounded-full shadow-sm">
                 <Users className="w-4 h-4 mr-2 text-bright-blue" />
-                {details.attendees} attendees
+                {selectedEvent.attendees} attendees
               </div>
             </div>
           </div>
@@ -893,37 +872,56 @@ const renderGallery = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <h2 className="text-2xl font-semibold bg-gradient-to-r from-bright-blue to-light-blue bg-clip-text text-transparent mb-6 text-center">Event Gallery ({imgs.length} photos)</h2>
-          
-          {/* Dynamic grid layout based on number of images */}
-          <div className={`grid gap-4 justify-items-center ${
-            imgs.length === 1 
-              ? 'grid-cols-1' 
-              : imgs.length === 2 
-              ? 'grid-cols-1 md:grid-cols-2' 
-              : imgs.length === 3 
-              ? 'grid-cols-1 md:grid-cols-3' 
-              : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
-          }`}>
-            {imgs.map((src, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4, delay: idx * 0.05 }}
-                className={`group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 ${
-                  imgs.length === 1 ? 'max-w-2xl w-full' : 'w-full'
-                }`}
-              >
-                <img
-                  src={src}
-                  alt={`${selectedEvent} highlight ${idx + 1}`}
-                  className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500 bg-gray-50"
+          {driveEmbedUrl ? (
+            <>
+              <h2 className="text-2xl font-semibold bg-gradient-to-r from-bright-blue to-light-blue bg-clip-text text-transparent mb-6 text-center">
+                Event Gallery
+              </h2>
+              <div className="w-full overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-lg">
+                <iframe
+                  title={`${selectedEvent.title} Drive Gallery`}
+                  src={driveEmbedUrl}
+                  className="w-full h-[75vh]"
                   loading="lazy"
+                  referrerPolicy="no-referrer"
                 />
-              </motion.div>
-            ))}
-          </div>
+              </div>
+            </>
+          ) : (
+            <>
+              <h2 className="text-2xl font-semibold bg-gradient-to-r from-bright-blue to-light-blue bg-clip-text text-transparent mb-6 text-center">
+                Event Gallery ({imgs.length} photos)
+              </h2>
+              <div className={`grid gap-4 justify-items-center ${
+                imgs.length === 1 
+                  ? 'grid-cols-1' 
+                  : imgs.length === 2 
+                  ? 'grid-cols-1 md:grid-cols-2' 
+                  : imgs.length === 3 
+                  ? 'grid-cols-1 md:grid-cols-3' 
+                  : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
+              }`}>
+                {imgs.map((src, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.4, delay: idx * 0.05 }}
+                    className={`group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 ${
+                      imgs.length === 1 ? 'max-w-2xl w-full' : 'w-full'
+                    }`}
+                  >
+                    <img
+                      src={src}
+                      alt={`${selectedEvent.title} highlight ${idx + 1}`}
+                      className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500 bg-gray-50"
+                      loading="lazy"
+                    />
+                  </motion.div>
+                ))}
+              </div>
+            </>
+          )}
         </motion.div>
       </div>
     );

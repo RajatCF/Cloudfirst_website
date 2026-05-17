@@ -294,18 +294,17 @@ const Navbar = () => {
       const triggerRect = triggerEl.getBoundingClientRect();
       const width = Math.min(getMenuWidth(currentData), containerRect.width);
 
-      let left = triggerRect.left - containerRect.left;
-      if (left + width > containerRect.width) {
-        left = containerRect.width - width;
-      }
-      left = Math.max(0, left);
+      const triggerCenterX = triggerRect.left + triggerRect.width / 2;
+      let left = triggerCenterX - containerRect.left - width / 2;
+      left = Math.max(0, Math.min(left, containerRect.width - width));
       setDropdownWidth(width);
       setDropdownLeft(left);
+    };
 
     updatePosition();
     window.addEventListener('resize', updatePosition);
     window.addEventListener('scroll', updatePosition, true);
-    window.addEventListener('scroll', updatePosition, true);
+    return () => {
       window.removeEventListener('resize', updatePosition);
       window.removeEventListener('scroll', updatePosition, true);
     };
