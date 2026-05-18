@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const GoGlobalAward: React.FC = () => {
   return (
@@ -95,9 +96,9 @@ const GoGlobalAward: React.FC = () => {
           <div className="bg-gradient-to-r from-[#7b6cf6] to-[#6e8efb] rounded-2xl shadow-xl p-6 text-center">
             <h4 className="text-lg font-bold text-white mb-2">Learn More About CloudFirst</h4>
             <p className="text-white/90 mb-4">Discover how we can transform your business with innovative cloud solutions.</p>
-            <a href="/contact" className="inline-block px-6 py-2 bg-white text-[#7b6cf6] font-semibold rounded-full shadow hover:bg-[#edeaff] transition-colors duration-200">
+            <Link to="/contact" className="inline-block px-6 py-2 bg-white text-[#7b6cf6] font-semibold rounded-full shadow hover:bg-[#edeaff] transition-colors duration-200">
               Contact Us
-            </a>
+            </Link>
           </div>
         </div>
 

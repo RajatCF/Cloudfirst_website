@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Link } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -56,17 +57,15 @@ const BreakingTheMold = () => {
               </p>
             </div>
             <div className="mt-12 pt-8 border-t border-primary-foreground/10">
-              <a 
-                href="/reinforce360tm" 
-                target="_blank" 
-                rel="noopener noreferrer"
+              <Link
+                to="/reinforce360tm"
                 className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-semibold text-sm transition-all duration-300 bg-gradient-to-r from-bright-blue to-blue-600 text-white hover:from-blue-600 hover:to-purple-600 hover:shadow-lg hover:shadow-blue-500/25"
               >
                 Explore Product
                 <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
                   <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

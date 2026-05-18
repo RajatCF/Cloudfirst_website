@@ -38,6 +38,13 @@ const images = {
     "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/india+Ai+impact+summit/IMG-20260216-WA0025+(1).jpg",
     "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/india+Ai+impact+summit/IMG-20260216-WA0035+(1).jpg",
     "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/india+Ai+impact+summit/IMG-20260218-WA0016.jpg",
+    "/events/indian_ai_summit/27415.jpg",
+    "/events/indian_ai_summit/IMG-20260216-WA0013.jpg",
+    "/events/indian_ai_summit/IMG-20260216-WA0019 (1).jpg",
+    "/events/indian_ai_summit/IMG-20260217-WA0003.jpg",
+    "/events/indian_ai_summit/IMG-20260217-WA0019.jpg",
+    "/events/indian_ai_summit/IMG-20260217-WA0023 (1).jpg",
+    "/events/indian_ai_summit/IMG-20260218-WA0023 (1) (1).jpg",
   ],
   "msme-startup-summit": [
     "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/msme+and++startup+innovation+summit/IMG_3389+(1).HEIC",
@@ -110,7 +117,7 @@ const eventThumbnails = {
   london: "https://gragwebsite.s3.ap-south-1.amazonaws.com/London+Pics/1750014704224.jpeg",
   slovakia: "https://gragwebsite.s3.ap-south-1.amazonaws.com/London+Pics/Slovakia+Pics/1000001380.jpeg",
   "aws-summit-bengaluru": "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/aws+summit+bengaluru/1000106663.jpg",
-  "india-ai-impact-summit": "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/india+Ai+impact+summit/IMG-20260216-WA0023+(1).jpg",
+  "india-ai-impact-summit": "/events/indian_ai_summit/IMG-20260216-WA0013.jpg",
   "msme-summit-2026": "/events/IMG_3389.jpg",
   "assocham-smart-datacenters-cloud-infra-conclave": "/events/Assocham/1765126233127.jpeg",
   "go-global-awards": "/events/go_global/1763897494384.jpg"
@@ -196,6 +203,14 @@ const ResourceEvents = () => {
           "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/india+Ai+impact+summit/IMG-20260216-WA0023+(1).jpg",
           "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/india+Ai+impact+summit/IMG-20260216-WA0025+(1).jpg",
           "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/india+Ai+impact+summit/IMG-20260218-WA0016.jpg"
+          ,
+          "/events/indian_ai_summit/27415.jpg",
+          "/events/indian_ai_summit/IMG-20260216-WA0013.jpg",
+          "/events/indian_ai_summit/IMG-20260216-WA0019 (1).jpg",
+          "/events/indian_ai_summit/IMG-20260217-WA0003.jpg",
+          "/events/indian_ai_summit/IMG-20260217-WA0019.jpg",
+          "/events/indian_ai_summit/IMG-20260217-WA0023 (1).jpg",
+          "/events/indian_ai_summit/IMG-20260218-WA0023 (1) (1).jpg"
         ]
       }
     ],

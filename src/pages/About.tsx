@@ -271,44 +271,46 @@ const About = () => {
       {!showLeadership ? (
         <section className="bg-[#f7f8fa] border-b border-gray-100">
           <div className="max-w-[1200px] mx-auto px-6 lg:px-10 py-16">
-            <div className="mb-10">
-              <span className="text-xs font-bold uppercase tracking-widest text-blue-600">Milestones & journey</span>
-              <h2 className="mt-2 text-2xl md:text-3xl font-bold text-gray-900" style={{ fontFamily: "'Georgia', serif" }}>
-                Our milestones
-              </h2>
-            </div>
-
-            <div className="grid lg:grid-cols-2 gap-10 items-start">
-              <div className="rounded-2xl border border-gray-100 bg-white shadow-sm overflow-hidden">
-                <div className="aspect-[16/10] w-full bg-gradient-to-br from-blue-50 via-white to-indigo-50 flex items-center justify-center">
-                  <div className="mx-8 w-full rounded-2xl border-2 border-dashed border-blue-200/70 bg-white/70 px-6 py-10 text-center">
-                    <div className="text-sm font-semibold text-gray-900 mb-1">Milestones image</div>
-                    <div className="text-sm text-gray-500">Add your journey graphic here</div>
-                  </div>
+            <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-10 items-start">
+              <div>
+                <span className="text-xs font-bold uppercase tracking-widest text-blue-600">Milestones & journey</span>
+                <h2 className="mt-2 text-4xl md:text-5xl font-bold text-gray-900" style={{ fontFamily: "'Georgia', serif" }}>
+                  Our milestones
+                </h2>
+                <div className="mt-6 space-y-6 text-gray-700 leading-relaxed text-base max-w-2xl">
+                  <p>
+                    Making your online life easier requires the right technology partners. Shivaami has quickly established itself as a trusted cloud and cybersecurity solutions company. At Shivaami, businesses are helped to understand technology&apos;s potential for growth.
+                  </p>
+                  <p>
+                    Shivaami is an authorized partner for leading technology brands. Our team of experts is directly trained by our partners. Solutions across cloud platforms, AI solutions, cybersecurity tools, and IT management systems are offered by us.
+                  </p>
+                  <p>
+                    Punit Thakkar founded Shivaami in 2004 with a clear vision. Companies were to be allowed to drive business growth with flexibility. Today, cloud computing is drastically changing the online business environment. Businesses are helped to run faster at reduced costs.
+                  </p>
+                  <p>
+                    Shivaami combines its commitment to the latest technology with customer satisfaction. Our passion is to fulfill customer needs effectively.
+                  </p>
                 </div>
               </div>
 
-              <div className="rounded-2xl border border-gray-100 bg-white shadow-sm p-6 md:p-8">
-                <div className="relative">
-                  <div className="absolute left-[18px] top-2 bottom-2 w-px bg-gradient-to-b from-blue-200 via-indigo-200 to-transparent" />
-                  <div className="space-y-6">
-                    {milestones.map(({ year, title, desc, icon: Icon }) => (
-                      <div key={year} className="relative pl-12">
-                        <div className="absolute left-0 top-0">
-                          <div className="h-9 w-9 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
-                            <Icon className="w-4 h-4 text-blue-600" />
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-3 mb-1">
-                          <span className="text-xs font-bold tracking-widest text-blue-600">{year}</span>
-                          <span className="h-1 w-1 rounded-full bg-blue-300" />
-                          <h3 className="text-base font-bold text-gray-900">{title}</h3>
-                        </div>
-                        <p className="text-sm text-gray-500 leading-relaxed">{desc}</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {milestones.map(({ year, title, desc, icon: Icon }) => (
+                  <div key={year} className="rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
+                    <div className="flex items-center justify-between mb-5">
+                      <div
+                        className="text-5xl font-bold text-blue-700 leading-none"
+                        style={{ fontFamily: "'Georgia', serif" }}
+                      >
+                        {year}
                       </div>
-                    ))}
+                      <div className="h-12 w-12 rounded-2xl bg-blue-500/10 border border-blue-500/15 flex items-center justify-center">
+                        <Icon className="w-5 h-5 text-blue-700" />
+                      </div>
+                    </div>
+                    <div className="text-base font-semibold text-gray-900">{title}</div>
+                    <div className="mt-2 text-sm text-gray-500 leading-relaxed">{desc}</div>
                   </div>
-                </div>
+                ))}
               </div>
             </div>
           </div>

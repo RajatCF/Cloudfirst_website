@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import gsap from 'gsap';
+import { Link } from 'react-router-dom';
  
 const STATS = [
   { value: '7000+', label: 'Enterprise Clients' },
@@ -391,8 +392,8 @@ const HeroSection = ({ isPageReady }: HeroSectionProps) => {
                 ref={ctaRef}
                 className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start opacity-0"
               >
-                <a
-                  href="/contact"
+                <Link
+                  to="/contact"
                   className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-semibold text-sm transition-all duration-300"
                   style={{
                     background: 'linear-gradient(135deg, #2563eb, #6d28d9)',
@@ -413,9 +414,9 @@ const HeroSection = ({ isPageReady }: HeroSectionProps) => {
                   <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
                     <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
-                </a>
-                <a
-                  href="/about"
+                </Link>
+                <Link
+                  to="/about"
                   className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-semibold text-sm transition-all duration-300"
                   style={{
                     border: '1.5px solid rgba(255,255,255,0.40)',
@@ -435,7 +436,7 @@ const HeroSection = ({ isPageReady }: HeroSectionProps) => {
                   }}
                 >
                   See How It Works
-                </a>
+                </Link>
               </div>
  
               {/* Stats */}

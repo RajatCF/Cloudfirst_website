@@ -1,5 +1,6 @@
 import React from 'react';
 import Layout from '@/components/Layout';
+import { Link } from 'react-router-dom';
 
 const CloudSecurity = () => {
   return (
@@ -14,7 +15,7 @@ const CloudSecurity = () => {
             <p className="text-lg md:text-2xl text-muted-foreground mb-8 max-w-xl">
               Protect your cloud environment with end-to-end security measures. From identity management to threat response, we keep your data safe.
             </p>
-            <a href="/contact" className="btn-primary text-lg px-8 py-3 shadow-lg inline-block">Secure My Cloud</a>
+            <Link to="/contact" className="btn-primary text-lg px-8 py-3 shadow-lg inline-block">Secure My Cloud</Link>
           </div>
           <svg className="absolute top-0 right-0 w-64 h-64 opacity-10 -z-1 hidden md:block" viewBox="0 0 400 400" fill="none">
             <circle cx="200" cy="200" r="200" fill="currentColor" className="fill-current text-bright-blue" />

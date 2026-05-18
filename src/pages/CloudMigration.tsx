@@ -1,5 +1,6 @@
 import React from 'react';
 import Layout from '@/components/Layout';
+import { Link } from 'react-router-dom';
 
 const CloudMigration = () => {
   return (
@@ -14,7 +15,7 @@ const CloudMigration = () => {
             <p className="text-lg md:text-2xl text-muted-foreground mb-8 max-w-xl">
               Seamlessly migrate your workloads and data to the cloud with minimal disruption. At CloudFirst Technology, our experts ensure secure, high-performance, and cost-optimized transitions across AWS, Azure, and Google Cloud
             </p>
-            <a href="/contact" className="btn-primary text-lg px-8 py-3 shadow-lg inline-block">Start Your Migration</a>
+            <Link to="/contact" className="btn-primary text-lg px-8 py-3 shadow-lg inline-block">Start Your Migration</Link>
           </div>
           <div className="flex-1 flex justify-center md:justify-end mt-10 md:mt-0">
             <img

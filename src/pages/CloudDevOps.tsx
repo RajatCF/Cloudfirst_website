@@ -1,6 +1,7 @@
 
 import React from 'react';
 import Layout from '@/components/Layout';
+import { Link } from 'react-router-dom';
 
 const CloudDevOps = () => {
   const tools = ['Docker', 'Kubernetes', 'Jenkins', 'Terraform'];
@@ -17,7 +18,7 @@ const CloudDevOps = () => {
           <p className="text-lg md:text-2xl text-muted-foreground mb-8 max-w-xl">
             Accelerate your development and operations with automation, scalability, and reliability. Empower your teams to innovate faster and deliver value continuously.
           </p>
-          <a href="/contact" className="btn-primary text-lg px-8 py-3 shadow-lg inline-block">Boost with DevOps</a>
+          <Link to="/contact" className="btn-primary text-lg px-8 py-3 shadow-lg inline-block">Boost with DevOps</Link>
         </div>
         {/* Decorative SVG */}
         <svg className="absolute top-0 right-0 w-64 h-64 opacity-10 -z-1 hidden md:block" viewBox="0 0 400 400" fill="none">
@@ -124,7 +125,7 @@ const CloudDevOps = () => {
       <section className="py-16 bg-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-4">Ready to transform your development lifecycle?</h2>
-          <a href="/contact" className="btn-primary text-xl px-10 py-4">Get Started Today</a>
+          <Link to="/contact" className="btn-primary text-xl px-10 py-4">Get Started Today</Link>
         </div>
       </section>
     </div>

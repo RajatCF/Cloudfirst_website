@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import ArrowRight from 'lucide-react/dist/esm/icons/arrow-right';
 import ArrowLeft from 'lucide-react/dist/esm/icons/arrow-left';
 import Shield from 'lucide-react/dist/esm/icons/shield';
@@ -11,6 +12,8 @@ import Lock from 'lucide-react/dist/esm/icons/lock';
 import Users from 'lucide-react/dist/esm/icons/users';
 import TrendingUp from 'lucide-react/dist/esm/icons/trending-up';
 
+const MotionLink = motion(Link);
+
 const Reinforce360TM = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-reinforce-green-50 via-white to-reinforce-green-100">
@@ -18,8 +21,8 @@ const Reinforce360TM = () => {
       
       {/* Back Button */}
       <div className="max-w-7xl mx-auto px-6 pt-4">
-        <motion.a
-          href="/"
+        <MotionLink
+          to="/"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
@@ -27,7 +30,7 @@ const Reinforce360TM = () => {
         >
           <ArrowLeft className="w-4 h-4" />
           <span className="text-sm font-medium">Back to CloudFirst</span>
-        </motion.a>
+        </MotionLink>
       </div>
       
       {/* Hero Section */}
