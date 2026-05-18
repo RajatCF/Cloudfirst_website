@@ -3,13 +3,19 @@ import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import { useEffect, useMemo, useState } from 'react';
 
+const S3_IMAGE_BASE = 'https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/S3_image/';
+const CSR_IMAGE_1 = `${S3_IMAGE_BASE}1.png`;
+const CSR_IMAGE_3 = `${S3_IMAGE_BASE}3.png`;
+const CSR_IMAGE_4 = `${S3_IMAGE_BASE}4.png`;
+const CSR_IMAGE_5 = `${S3_IMAGE_BASE}5.png`;
+
 const overviewCardImages: Record<string, string[]> = {
   festivals: [
     '/cloudfirts_festivals/Holi Vibes.png',
     '/cloudfirts_festivals/Christmas Post.png',
     '/cloudfirts_festivals/WhatsApp Image 2026-03-11 at 12.06.34 (1).jpeg',
   ],
-  csr: ['/cloudfirst_csr/1.png', '/cloudfirst_csr/3.png', '/cloudfirst_csr/4.png', '/cloudfirst_csr/5.png'],
+  csr: [CSR_IMAGE_1, CSR_IMAGE_3, CSR_IMAGE_4, CSR_IMAGE_5],
   offsites: [
     '/cloudfirst_offsite/Image (2).jpg',
     '/cloudfirst_offsite/Image (3).jpg',
@@ -113,10 +119,10 @@ const LifeAtCloudFirst = () => {
         key: 'csr',
         label: 'CSR and Social Activities',
         photos: [
-          { src: '/cloudfirst_csr/1.png', title: 'CSR Drive' },
-          { src: '/cloudfirst_csr/3.png', title: 'CSR Drive' },
-          { src: '/cloudfirst_csr/4.png', title: 'CSR Drive' },
-          { src: '/cloudfirst_csr/5.png', title: 'CSR Drive' },
+          { src: CSR_IMAGE_1, title: 'CSR Drive' },
+          { src: CSR_IMAGE_3, title: 'CSR Drive' },
+          { src: CSR_IMAGE_4, title: 'CSR Drive' },
+          { src: CSR_IMAGE_5, title: 'CSR Drive' },
         ],
       },
       {
@@ -321,7 +327,7 @@ const LifeAtCloudFirst = () => {
                           src={encodeURI(photo.src)}
                           alt={photo.title}
                           className={`w-full h-full object-cover transition-transform duration-300 hover:scale-105 ${
-                            activeCategory === 'csr' && photo.src === '/cloudfirst_csr/1.png' ? 'object-top' : ''
+                            activeCategory === 'csr' && photo.src === CSR_IMAGE_1 ? 'object-top' : ''
                           }`}
                           loading="lazy"
                           onError={(e) => {

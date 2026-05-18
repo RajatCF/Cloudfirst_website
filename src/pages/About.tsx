@@ -3,6 +3,8 @@ import { Globe, Award, Users, TrendingUp, ShieldCheck, Lightbulb, Heart, Star, A
 import { Link, useLocation } from 'react-router-dom';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 
+const S3_IMAGE_BASE = 'https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/S3_image/';
+
 const values = [
   {
     icon: Lightbulb,
@@ -275,20 +277,23 @@ const About = () => {
               <div>
                 <span className="text-xs font-bold uppercase tracking-widest text-blue-600">Milestones & journey</span>
                 <h2 className="mt-2 text-4xl md:text-5xl font-bold text-gray-900" style={{ fontFamily: "'Georgia', serif" }}>
-                  Our milestones
+                  Our Journey
                 </h2>
+                <div className="mt-3 text-lg md:text-xl font-semibold text-gray-900" style={{ fontFamily: "'Georgia', serif" }}>
+                  Building the Future with Cloud-First Innovation
+                </div>
                 <div className="mt-6 space-y-6 text-gray-700 leading-relaxed text-base max-w-2xl">
                   <p>
-                    Making your online life easier requires the right technology partners. Shivaami has quickly established itself as a trusted cloud and cybersecurity solutions company. At Shivaami, businesses are helped to understand technology&apos;s potential for growth.
+                    Since its inception, CloudFirst Technology has been committed to helping businesses embrace digital transformation through scalable, secure, and future-ready cloud solutions. Over the years, we have grown into a trusted technology partner for startups, enterprises, and high-growth organizations across industries.
                   </p>
                   <p>
-                    Shivaami is an authorized partner for leading technology brands. Our team of experts is directly trained by our partners. Solutions across cloud platforms, AI solutions, cybersecurity tools, and IT management systems are offered by us.
+                    From enabling seamless cloud adoption and modern workplace transformation to delivering advanced cloud security, AI, and infrastructure solutions, our journey has been driven by innovation, reliability, and customer success.
                   </p>
                   <p>
-                    Punit Thakkar founded Shivaami in 2004 with a clear vision. Companies were to be allowed to drive business growth with flexibility. Today, cloud computing is drastically changing the online business environment. Businesses are helped to run faster at reduced costs.
+                    Today, CloudFirst Technology works with leading cloud ecosystems including Google Cloud, AWS, and Microsoft technologies, supporting organizations in building resilient digital operations and accelerating business growth.
                   </p>
                   <p>
-                    Shivaami combines its commitment to the latest technology with customer satisfaction. Our passion is to fulfill customer needs effectively.
+                    Our milestones reflect more than growth, they represent the partnerships we’ve built, the businesses we’ve empowered, and our continued commitment to shaping the future of cloud and digital transformation.
                   </p>
                 </div>
               </div>
@@ -366,11 +371,11 @@ const About = () => {
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-1 gap-6">
                 {[
                   {
-                    src: "/events/1763897496613.jpg",
+                    src: `${S3_IMAGE_BASE}1763897496613.jpg`,
                     alt: "Leadership collage image 1",
                   },
                   {
-                    src: "/events/1763897495547 (1) (1).jpg",
+                    src: `${S3_IMAGE_BASE}1763897495547+(1)+(1).jpg`,
                     alt: "Leadership collage image 2",
                   },
                   {

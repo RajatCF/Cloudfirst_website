@@ -5,8 +5,8 @@ import Navbar from "@/components/Navbar";
 const cloudPlatforms = [
   {
     name: "AWS Managed Services",
-    logo: "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/aws_advance+partner+logo.png",
-    alt: "AWS Advanced Partner",
+    logo: "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/aws_logo.png",
+    alt: "AWS",
     path: "/cloud-platforms/aws",
     badge: "text-amber-700 bg-amber-50 border-amber-200",
     card: "bg-white border-amber-200",
@@ -14,8 +14,8 @@ const cloudPlatforms = [
   },
   {
     name: "Azure Managed Services",
-    logo: "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/microsoft_new_logo.png",
-    alt: "Microsoft Solutions Partner",
+    logo: "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/azure_img.png",
+    alt: "Microsoft Azure",
     path: "/cloud-platforms/azure",
     badge: "text-sky-700 bg-sky-50 border-sky-200",
     card: "bg-white border-sky-200",
@@ -23,8 +23,8 @@ const cloudPlatforms = [
   },
   {
     name: "Google Cloud Managed Services",
-    logo: "/logo/new_GCI.png",
-    alt: "Google Cloud Partner",
+    logo: "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/gcp_img.png",
+    alt: "Google Cloud",
     path: "/cloud-platforms/gcp",
     badge: "text-emerald-700 bg-emerald-50 border-emerald-200",
     card: "bg-white border-emerald-200",
@@ -73,15 +73,9 @@ const ManagedServices: React.FC = () => {
               <div className={`inline-flex items-center gap-2 self-start text-[11px] font-bold uppercase tracking-wider border rounded px-2.5 py-1 mb-5 ${p.badge}`}>
                 <span>Managed</span>
               </div>
-              {p.path === "/cloud-platforms/azure" || p.path === "/cloud-platforms/gcp" ? (
-                <div className="h-14 w-full flex items-center justify-center mb-5 overflow-hidden">
-                  <img src={p.logo} alt={p.alt} className="h-12 w-auto object-contain" loading="lazy" />
-                </div>
-              ) : (
-                <div className="h-14 w-full bg-white rounded-xl border border-gray-100 flex items-center justify-center px-4 mb-5 overflow-hidden">
-                  <img src={p.logo} alt={p.alt} className="h-10 w-auto object-contain" loading="lazy" />
-                </div>
-              )}
+              <div className="h-14 w-full flex items-center justify-center mb-5 overflow-hidden">
+                <img src={p.logo} alt={p.alt} className="h-12 w-auto object-contain" loading="lazy" />
+              </div>
               <h3 className="text-lg font-bold text-gray-900 mb-2" style={{ fontFamily: "'Georgia', serif" }}>{p.name}</h3>
               <p className="text-sm text-gray-600 leading-relaxed flex-1">{p.description}</p>
               <button

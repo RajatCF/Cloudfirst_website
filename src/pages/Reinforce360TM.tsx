@@ -48,7 +48,7 @@ const Reinforce360TM = () => {
                 transition={{ duration: 0.8 }}
                 className="text-4xl lg:text-5xl font-bold mb-6"
               >
-                reinforce360™
+                reinforce360
               </motion.h1>
               <motion.p 
                 initial={{ opacity: 0, y: 30 }}

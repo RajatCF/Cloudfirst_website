@@ -377,7 +377,7 @@ const Navbar = () => {
           </div>
 
           <div
-            className={`absolute left-0 right-0 top-full text-foreground backdrop-blur-sm transition-all duration-200 z-[60] ${
+            className={`absolute left-0 right-0 top-full text-foreground bg-transparent transition-all duration-200 z-[60] ${
               dropdownOpen ? 'opacity-100 pointer-events-auto translate-y-0' : 'opacity-0 pointer-events-none -translate-y-1'
             }`}
             onMouseEnter={() => {

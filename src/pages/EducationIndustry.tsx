@@ -18,12 +18,20 @@ const EducationIndustry: React.FC = () => {
       {/* Hero with education image */}
       <div className="relative h-[480px] overflow-hidden pt-16 lg:pt-20">
         <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&w=1600&q=80" alt="Education" className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-r from-sky-900/92 via-sky-900/70 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-sky-900/95 via-sky-900/80 to-transparent" />
         <div className="relative z-10 max-w-6xl mx-auto px-6 h-full flex items-end pb-14">
           <div>
             <span className="inline-block text-xs font-semibold uppercase tracking-widest text-light-blue border border-bright-blue/30 bg-bright-blue/10 rounded-full px-3 py-1 mb-4">By Industry</span>
-            <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-4" style={{ fontFamily: "'Georgia', serif" }}>Education cloud —<br /><span className="text-light-blue">affordable, scalable, student-first</span></h1>
-            <p className="text-white/70 text-lg max-w-xl">From universities to EdTech platforms, CloudFirst builds cloud infrastructure that handles academic scale, protects student data, and keeps costs within education budgets.</p>
+            <h1
+              className="text-4xl md:text-5xl font-bold text-white leading-tight mb-4"
+              style={{ fontFamily: "'Georgia', serif", textShadow: "0 2px 18px rgba(0,0,0,0.55)" }}
+            >
+              Education cloud —<br />
+              <span className="text-light-blue">affordable, scalable, student-first</span>
+            </h1>
+            <p className="text-white/85 text-lg max-w-xl" style={{ textShadow: "0 1px 12px rgba(0,0,0,0.55)" }}>
+              From universities to EdTech platforms, CloudFirst builds cloud infrastructure that handles academic scale, protects student data, and keeps costs within education budgets.
+            </p>
           </div>
         </div>
       </div>

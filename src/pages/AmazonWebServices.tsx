@@ -2,6 +2,8 @@ import Layout from "@/components/Layout";
 import { ArrowRight, Zap, Database, Boxes, Layers, Code2, HardDrive, Shield, CheckCircle2, TrendingUp, Globe, Lock, Brain, Cpu } from "lucide-react";
 import { Link } from "react-router-dom";
 
+const S3_IMAGE_BASE = "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/S3_image/";
+
 const awsManagedServices = [
   {
     name: "AWS Landing Zone & Governance",
@@ -87,7 +89,7 @@ const stats = [
 const aiServices = [
   {
     name: "GenAI on AWS (Bedrock-ready)",
-    logoSrc: "/logo/Bedrock.png",
+    logoSrc: `${S3_IMAGE_BASE}Bedrock.png`,
     icon: Brain,
     color: "text-amber-500",
     bg: "bg-amber-500/10",
@@ -324,7 +326,7 @@ const AmazonWebServices = () => {
                             : step === '1'
                               ? '/logo/ai.jpg'
                               : step === '2'
-                                ? '/logo/ai-security-governance.webp'
+                                ? `${S3_IMAGE_BASE}ai-security-governance.webp`
                                 : '';
 
                         if (!next) {

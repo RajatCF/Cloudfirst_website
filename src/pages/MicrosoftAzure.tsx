@@ -2,6 +2,8 @@ import Layout from "@/components/Layout";
 import { ArrowRight, Server, Database, Boxes, ShieldCheck, CheckCircle2, TrendingUp, Globe, Lock, Cpu, Layers, HardDrive, Code2, Brain } from "lucide-react";
 import { Link } from "react-router-dom";
 
+const S3_IMAGE_BASE = "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/S3_image/";
+
 const azureManagedServices = [
   {
     name: "Azure Landing Zone & Governance",
@@ -313,7 +315,7 @@ const MicrosoftAzure = () => {
                             : step === '1'
                               ? '/logo/ai.jpg'
                               : step === '2'
-                                ? '/logo/ai-security-governance.webp'
+                                ? `${S3_IMAGE_BASE}ai-security-governance.webp`
                                 : '';
 
                         if (!next) {
