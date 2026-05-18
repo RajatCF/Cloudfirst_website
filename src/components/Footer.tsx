@@ -11,6 +11,16 @@ const footerLinks = {
     { label: 'Cost Optimization', path: '/solutions/cost-optimisation' },
     { label: 'Managed Services', path: '/solutions/managed-cloud-service' },
   ],
+  industries: [
+    { label: 'Startups & SMBs', path: '/industries/startups-smbs' },
+    { label: 'Enterprise', path: '/industries/enterprise' },
+    { label: 'Finance & BFSI', path: '/industries/finance-bfsi' },
+    { label: 'Healthcare', path: '/industries/healthcare' },
+    { label: 'Education', path: '/industries/education' },
+    { label: 'Advertising & marketing', path: '/industries/advertising-marketing' },
+    { label: 'Manufacturing', path: '/industries/manufacturing' },
+    { label: 'Sports', path: '/industries/sports' },
+  ],
   company: [
     { label: 'About Us', path: '/about' },
     { label: 'Insights', path: '/insights' },
@@ -28,7 +38,7 @@ const footerLinks = {
 };
 
 const Footer = () => {
-  const [mobileExpanded, setMobileExpanded] = useState<'services' | 'company' | null>(null);
+  const [mobileExpanded, setMobileExpanded] = useState<'services' | 'industries' | 'company' | null>(null);
 
   return (
     <footer className="bg-navy-dark text-primary-foreground">
@@ -105,6 +115,32 @@ const Footer = () => {
             <button
               type="button"
               className="w-full flex items-center justify-between py-3"
+              onClick={() => setMobileExpanded(mobileExpanded === 'industries' ? null : 'industries')}
+            >
+              <span className="text-xs uppercase tracking-widest font-semibold opacity-40">Industries</span>
+              <ChevronDown
+                className={`w-4 h-4 opacity-60 transition-transform duration-200 ${
+                  mobileExpanded === 'industries' ? 'rotate-180' : ''
+                }`}
+              />
+            </button>
+            {mobileExpanded === 'industries' && (
+              <ul className="space-y-3 pb-4">
+                {footerLinks.industries.map((link) => (
+                  <li key={link.label}>
+                    <Link to={link.path} className="block text-sm opacity-60 hover:opacity-100 hover:text-bright-blue transition-all">
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+
+          <div className="border-t border-primary-foreground/10 pt-6">
+            <button
+              type="button"
+              className="w-full flex items-center justify-between py-3"
               onClick={() => setMobileExpanded(mobileExpanded === 'company' ? null : 'company')}
             >
               <span className="text-xs uppercase tracking-widest font-semibold opacity-40">Company</span>
@@ -130,7 +166,7 @@ const Footer = () => {
         </div>
 
         <div className="hidden sm:flex justify-center">
-          <div className="w-full max-w-5xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 lg:gap-10">
+          <div className="w-full max-w-6xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 lg:gap-10">
           <div className="md:col-span-1">
             <Link to="/" className="inline-block leading-none -mt-1">
               <img src="/cflogo.png" alt="CloudFirst logo" className="h-16 sm:h-20 w-auto block" />
@@ -161,6 +197,19 @@ const Footer = () => {
             <h4 className="text-xs uppercase tracking-widest font-semibold mb-6 opacity-40">Services</h4>
             <ul className="space-y-3">
               {footerLinks.services.map((link) => (
+                <li key={link.label}>
+                  <Link to={link.path} className="block text-sm opacity-60 hover:opacity-100 hover:text-bright-blue transition-all">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-xs uppercase tracking-widest font-semibold mb-6 opacity-40">Industries</h4>
+            <ul className="space-y-3">
+              {footerLinks.industries.map((link) => (
                 <li key={link.label}>
                   <Link to={link.path} className="block text-sm opacity-60 hover:opacity-100 hover:text-bright-blue transition-all">
                     {link.label}

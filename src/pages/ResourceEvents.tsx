@@ -56,7 +56,7 @@ const images = {
 
 const eventDetails = {
   dubai: {
-    title: "CloudFirst Dubai Summit ",
+    title: "Dubai AI summit",
     description: "Annual technology conference showcasing cloud innovations and networking opportunities",
     date: "April 2024",
     location: "Dubai, UAE",
@@ -72,7 +72,7 @@ const eventDetails = {
     highlights: "Panel discussions, tech demos, and client meetings"
   },
   slovakia: {
-    title: "Slovakia Innovation Hub",
+    title: "Slovak–India Business Forum",
     description: "Exploring opportunities in Central European markets and partnerships",
     date: "March 2024",
     location: "Bratislava, Slovakia", 
@@ -111,7 +111,9 @@ const eventThumbnails = {
   slovakia: "https://gragwebsite.s3.ap-south-1.amazonaws.com/London+Pics/Slovakia+Pics/1000001380.jpeg",
   "aws-summit-bengaluru": "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/aws+summit+bengaluru/1000106663.jpg",
   "india-ai-impact-summit": "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/india+Ai+impact+summit/IMG-20260216-WA0023+(1).jpg",
-  "msme-summit-2026": "/events/IMG_3389.jpg"
+  "msme-summit-2026": "/events/IMG_3389.jpg",
+  "assocham-smart-datacenters-cloud-infra-conclave": "/events/Assocham/1765126233127.jpeg",
+  "go-global-awards": "/events/go_global/1763897494384.jpg"
 };
 
 type GalleryEvent = {
@@ -131,6 +133,11 @@ const ResourceEvents = () => {
   const [activeTab, setActiveTab] = useState<string>('overview'); // Changed back to 'overview' to show event cards by default
   const [selectedYear, setSelectedYear] = useState<string>('2025'); // New state for year selection
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // New state for dropdown
+
+  useEffect(() => {
+    if (!selectedEvent) return;
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }, [selectedEvent]);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -202,6 +209,38 @@ const ResourceEvents = () => {
         attendees: 'CloudFirst Leadership',
         images: [
           "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/AshishSirWithPresident.jpg"
+        ]
+      },
+      {
+        id: 'assocham-smart-datacenters-cloud-infra-conclave',
+        title: 'ASSOCHAM Smart Datacenters & Cloud Infrastructure Conclave-',
+        description: 'Smart datacenters and cloud infrastructure conclave highlights.',
+        date: '2025',
+        location: 'India',
+        attendees: '—',
+        images: [
+          "/events/Assocham/1765126233127.jpeg",
+          "/events/Assocham/Image (1).jpg",
+          "/events/Assocham/Image (2).jpg",
+          "/events/Assocham/Image (3).jpg",
+          "/events/Assocham/Image (13).jpg",
+          "/events/Assocham/Image (16).jpg",
+          "/events/Assocham/Image (25).jpg"
+        ]
+      },
+      {
+        id: 'go-global-awards',
+        title: 'GO GLOBAL AWARDS',
+        description: 'Go Global Awards highlights.',
+        date: '2025',
+        location: 'United Kingdom',
+        attendees: '—',
+        images: [
+          "/events/go_global/1763897493219 (1).jpg",
+          "/events/go_global/1763897494384.jpg",
+          "/events/go_global/1763897495682.jpg",
+          "/events/go_global/1763897496613 (1).jpg",
+          "/events/go_global/1764227053818.jpg"
         ]
       },
     ],
@@ -387,9 +426,9 @@ const ResourceEvents = () => {
     { id: 'events', label: 'Events' },
     { id: 'aws-summit-bengaluru', label: 'AWS Summit Bengaluru' },
     { id: 'india-ai-impact-summit', label: 'India AI Impact Summit' },
-    { id: 'dubai', label: 'Dubai Business Summit' },
+    { id: 'dubai', label: 'Dubai AI summit' },
     { id: 'london', label: 'London Tech Conference' },
-    { id: 'slovakia', label: 'Slovak-India Business Forum' },
+    { id: 'slovakia', label: 'Slovak–India Business Forum' },
     { id: 'csr', label: 'Corporate Social Responsibility' },
     { id: 'scaleup', label: 'ScaleUp Masterclass With Girish Mathrubootham' }
   ];
@@ -686,7 +725,7 @@ const ResourceEvents = () => {
     },
     {
       id: 'dubai',
-      title: 'CloudFirst Dubai Summit',
+      title: 'Dubai AI summit',
       description: 'Annual technology conference showcasing cloud innovations',
       thumbnail: eventThumbnails['dubai'],
       date: 'April 2024',
@@ -694,7 +733,7 @@ const ResourceEvents = () => {
     },
     {
       id: 'slovakia',
-      title: 'Slovakia Innovation Hub',
+      title: 'Slovak–India Business Forum',
       description: 'Exploring Central European market opportunities',
       thumbnail: eventThumbnails['slovakia'],
       date: 'March 2024',
@@ -724,6 +763,22 @@ const ResourceEvents = () => {
       date: 'April 2026',
       location: 'India'
     },
+    {
+      id: 'assocham-smart-datacenters-cloud-infra-conclave',
+      title: 'ASSOCHAM Smart Datacenters & Cloud Infrastructure Conclave-',
+      description: 'Smart datacenters and cloud infrastructure conclave highlights.',
+      thumbnail: eventThumbnails['assocham-smart-datacenters-cloud-infra-conclave'],
+      date: '2025',
+      location: 'India'
+    },
+    {
+      id: 'go-global-awards',
+      title: 'GO GLOBAL AWARDS',
+      description: 'Go Global Awards highlights.',
+      thumbnail: eventThumbnails['go-global-awards'],
+      date: '2025',
+      location: 'United Kingdom'
+    },
   ];
 
   return (
@@ -740,14 +795,14 @@ const ResourceEvents = () => {
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="flex flex-wrap justify-center gap-8">
         {featuredEvents.map((event, idx) => (
           <motion.div
             key={event.id}
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: idx * 0.1 }}
-            className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden cursor-pointer border border-gray-100"
+            className="group flex-none w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.34rem)] bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden cursor-pointer border border-gray-100"
             onClick={() => {
               const eventFromYear = (Object.values(yearlyEvents).flat() as GalleryEvent[]).find((e) => e.id === event.id);
               if (eventFromYear) {
