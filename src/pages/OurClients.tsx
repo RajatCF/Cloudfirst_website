@@ -17,7 +17,7 @@ const OurClients = () => {
 
           <div className="mt-10">
             <img
-              src="/Our_clients.png"
+              src="https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/Our_clients.png"
               alt="Our clients"
               className="w-full h-[520px] md:h-[680px] object-contain"
               loading="lazy"

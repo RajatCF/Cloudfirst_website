@@ -49,7 +49,7 @@ const Index = () => {
 
             <div className="px-4 sm:px-8 pb-10">
               <img
-                src="/campaign.jpg"
+                src="https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/campaign.jpg"
                 alt="Free FinOps & Security Audit for Indian Startups"
                 className="w-full rounded-2xl ring-1 ring-slate-200/80 shadow-md object-cover transition-transform duration-300 hover:scale-[1.01]"
                 loading="lazy"

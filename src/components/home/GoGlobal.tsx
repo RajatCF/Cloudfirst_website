@@ -124,7 +124,7 @@ const GoGlobal: React.FC = () => {
             >
               <div className="w-full h-full bg-white rounded-[22px] flex items-center justify-center">
                 <img
-                  src="/goglobal.jpg"
+                  src="https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/goglobal.jpg"
                   alt="Go Global Award 2025"
                   className="w-full h-full object-contain p-6 select-none"
                 />

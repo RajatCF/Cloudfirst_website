@@ -46,7 +46,7 @@ const Footer = () => {
         <div className="sm:hidden space-y-8">
           <div>
             <Link to="/" className="inline-block leading-none -mt-1">
-              <img src="/cflogo.png" alt="CloudFirst logo" className="h-16 w-auto block" />
+              <img src="https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/cflogo.png" alt="CloudFirst logo" className="h-16 w-auto block" />
             </Link>
             <p className="mt-4 text-sm leading-relaxed opacity-60 max-w-xs">
               AI-native, engineering-led cloud consultancy helping enterprises modernize intelligently.
@@ -169,7 +169,7 @@ const Footer = () => {
           <div className="w-full max-w-6xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 lg:gap-10">
           <div className="md:col-span-1">
             <Link to="/" className="inline-block leading-none -mt-1">
-              <img src="/cflogo.png" alt="CloudFirst logo" className="h-16 sm:h-20 w-auto block" />
+              <img src="https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/cflogo.png" alt="CloudFirst logo" className="h-16 sm:h-20 w-auto block" />
             </Link>
             <p className="mt-4 text-sm leading-relaxed opacity-60 max-w-xs">
               AI-native, engineering-led cloud consultancy helping enterprises modernize intelligently.

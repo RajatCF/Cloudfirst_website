@@ -23,7 +23,7 @@ const aiServices = [
   },
   {
     title: "Google Workspace Studio",
-    logoSrc: "/logo/google_workspace.png",
+    logoSrc: "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/google_workspace.png",
     icon: Code2,
     color: "text-sky-600",
     bg: "bg-sky-600/10",
@@ -43,7 +43,7 @@ const aiServices = [
   },
   {
     title: "LLM Apps & RAG on Google Cloud",
-    logoSrc: "/llm_logo.webp",
+    logoSrc: "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/llm_logo.webp",
     icon: Database,
     color: "text-indigo-600",
     bg: "bg-indigo-600/10",
@@ -235,9 +235,9 @@ const GoogleCloud: React.FC = () => {
                           : src.includes('vertex')
                             ? ['/logo/Vertex-AI.png', '/logo/vertex.png', '/logo/vertex.webp', '/logo/vertex.jpg', '/Vertex-AI.png', '/vertex.png', '/Vertex.png']
                             : src.includes('workspace')
-                              ? ['/logo/google_workspace.png', '/logo/google workspace.png', '/google_workspace.png', '/google workspace.png']
+                              ? ['https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/google_workspace.png']
                               : src.includes('llm')
-                                ? ['/llm_logo.webp', '/logo/llm_logo.webp']
+                                ? ['https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/llm_logo.webp']
                                 : [];
 
                         const next = candidates[step + 1];

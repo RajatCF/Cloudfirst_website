@@ -26,7 +26,7 @@ const BreakingTheMold = () => {
           <div className="hidden lg:flex items-center justify-center">
             <div className="w-full">
               <img
-                src="/cloud-computing.gif"
+                src="https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/cloud-computing.gif"
                 alt="reinforce360 platform dashboard"
                 className="w-full h-auto rounded-lg object-contain"
                 onError={(e) => {

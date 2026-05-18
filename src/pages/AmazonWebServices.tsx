@@ -182,7 +182,7 @@ const AmazonWebServices = () => {
               {/* Main image frame */}
               <div className="relative w-full max-w-xs lg:max-w-sm">
                 <img
-                  src="/aws_advance partner logo.png"
+                  src="https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/aws_advance+partner+logo.png"
                   alt="AWS Advanced Partner"
                   className="w-full h-44 sm:h-52 lg:h-56 object-contain"
                 />

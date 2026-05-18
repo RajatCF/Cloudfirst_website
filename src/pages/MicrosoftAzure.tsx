@@ -87,7 +87,7 @@ const stats = [
 const aiServices = [
   {
     name: "Copilot Customization & Enablement",
-    logoSrc: "/copilot_logo.png",
+    logoSrc: "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/copilot_logo.png",
     icon: Brain,
     color: "text-sky-500",
     bg: "bg-sky-500/10",
@@ -97,7 +97,7 @@ const aiServices = [
   },
   {
     name: "LLM Apps on Azure (Azure OpenAI-ready)",
-    logoSrc: "/llm_logo.webp",
+    logoSrc: "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/llm_logo.webp",
     icon: Cpu,
     color: "text-emerald-500",
     bg: "bg-emerald-500/10",
@@ -172,7 +172,7 @@ const MicrosoftAzure = () => {
               {/* Main image frame */}
               <div className="relative w-full max-w-xs lg:max-w-sm">
                 <img
-                  src="/microsoft_new_logo.png"
+                  src="https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/microsoft_new_logo.png"
                   alt="Microsoft partner"
                   className="w-full h-44 sm:h-52 lg:h-56 object-contain"
                 />

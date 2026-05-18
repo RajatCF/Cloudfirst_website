@@ -130,7 +130,7 @@ const GoogleWorkspace: React.FC = () => {
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Why Workspace deployments underdeliver</h2>
           <div className="relative">
             <img
-              src="/google_workspace.png"
+              src="https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/google_workspace.png"
               alt="Google Workspace"
               className="absolute right-0 w-64 h-64 object-contain opacity-100"
               style={{ marginRight: '-300px', top: '-40px' }}

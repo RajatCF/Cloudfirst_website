@@ -290,7 +290,7 @@ const Contact = () => {
                 aria-label="Open map"
               >
                 <img
-                  src="/mapp.png"
+                  src="https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/mapp.png"
                   alt="Map"
                   className="w-full h-full object-cover"
                   loading="lazy"
@@ -315,7 +315,7 @@ const Contact = () => {
               ×
             </button>
             <img
-              src="/mapp.png"
+              src="https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/mapp.png"
               alt="Map"
               className="w-full max-h-[85vh] object-contain rounded-2xl bg-white"
               loading="lazy"

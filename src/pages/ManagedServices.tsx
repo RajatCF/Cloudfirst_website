@@ -5,7 +5,7 @@ import Navbar from "@/components/Navbar";
 const cloudPlatforms = [
   {
     name: "AWS Managed Services",
-    logo: "/aws_advance partner logo.png",
+    logo: "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/aws_advance+partner+logo.png",
     alt: "AWS Advanced Partner",
     path: "/cloud-platforms/aws",
     badge: "text-amber-700 bg-amber-50 border-amber-200",
@@ -14,7 +14,7 @@ const cloudPlatforms = [
   },
   {
     name: "Azure Managed Services",
-    logo: "/microsoft_new_logo.png",
+    logo: "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/microsoft_new_logo.png",
     alt: "Microsoft Solutions Partner",
     path: "/cloud-platforms/azure",
     badge: "text-sky-700 bg-sky-50 border-sky-200",

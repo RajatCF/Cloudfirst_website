@@ -150,7 +150,7 @@ const About = () => {
             <div
               className="absolute inset-0 opacity-20"
               style={{
-                backgroundImage: "url('/New_world_map.png')",
+                backgroundImage: "url('https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/New_world_map.png')",
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }}
@@ -186,7 +186,7 @@ const About = () => {
                 <div className="overflow-hidden w-full max-w-sm md:max-w-md mx-auto">
                   <div className="h-[420px] md:h-[520px] w-full">
                     <img
-                      src="/Our_leadership.png"
+                      src="https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/Our_leadership.png"
                       alt="Our leadership"
                       className="w-full h-full object-cover object-[50%_35%]"
                       loading="lazy"
@@ -239,7 +239,7 @@ const About = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
               <div className="flex items-center justify-center">
                 <div className="w-full max-w-xl">
-                  <img src="/about_us2.jpg" alt="Our vision and mission" className="w-full h-auto" loading="lazy" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+                  <img src="https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/about_us2.jpg" alt="Our vision and mission" className="w-full h-auto" loading="lazy" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
                 </div>
               </div>
 
@@ -556,7 +556,7 @@ const About = () => {
               Get in touch <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
-              to="/careers"
+              to="/company/careers"
               className="inline-flex items-center gap-2 px-7 py-3.5 border border-white/20 hover:border-white/40 text-white/70 text-sm font-medium rounded-lg transition-colors"
             >
               View open roles

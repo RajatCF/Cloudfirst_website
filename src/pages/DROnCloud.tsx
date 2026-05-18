@@ -76,7 +76,7 @@ const DROnCloud = () => {
             <div className="relative">
               <div className="relative mx-auto w-full max-w-[720px] lg:max-w-[820px]">
                 <img
-                  src="/dr_cloud.png"
+                  src="https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/dr_cloud.png"
                   alt="DR on Cloud"
                   className="w-full h-auto object-contain"
                   loading="lazy"

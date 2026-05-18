@@ -34,7 +34,7 @@ const GoGlobalAward: React.FC = () => {
         <div className="flex-1 bg-white rounded-2xl shadow-xl p-8 md:p-12 mb-8 md:mb-0">
           <div className="flex flex-col md:flex-row items-center gap-8 mb-8">
             <div className="flex-shrink-0 flex justify-center items-center">
-              <img src="/goglobal.jpg" alt="Go Global Award" className="w-64 h-auto rounded-xl shadow-lg" />
+              <img src="https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/goglobal.jpg" alt="Go Global Award" className="w-64 h-auto rounded-xl shadow-lg" />
             </div>
             <div className="flex-1">
               <h2 className="text-2xl md:text-3xl font-bold text-navy-dark mb-4 leading-tight">

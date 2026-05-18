@@ -12,9 +12,9 @@ const trustedByEnterprisesLogos = [
 ];
 
 const ourClientLogos = [
-  '/aws_logo.png',
-  '/aws_advance partner logo.png',
-  '/microsoft_new_logo.png',
+  'https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/aws_logo.png',
+  'https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/aws_advance+partner+logo.png',
+  'https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/microsoft_new_logo.png',
   '/logo/new_GCI.png',
   '/logo/GRAG.png',
   '/logo/Voicex.png',
