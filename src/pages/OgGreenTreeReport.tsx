@@ -133,17 +133,6 @@ const OgGreenTreeReport = () => {
           {/* HEADER */}
           <div className="flex flex-col lg:flex-row gap-8 justify-between">
             <div>
-              <div className="inline-flex items-center gap-3 rounded-full border border-emerald-200 bg-emerald-50 px-5 py-2 text-sm font-semibold text-emerald-800">
-                <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white overflow-hidden">
-                  <img
-                    src="/logo/og-green-tree.jpg"
-                    alt="OG Green Tree"
-                    className="h-full w-full object-cover"
-                  />
-                </span>
-                OG Green Tree • Sustainability Report
-              </div>
- 
               <h1
                 className="mt-6 text-4xl lg:text-5xl font-bold text-gray-900 leading-tight"
                 style={{ fontFamily: "'Georgia', serif" }}

@@ -294,21 +294,20 @@ const About = () => {
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                {milestones.map(({ year, title, desc, icon: Icon }) => (
-                  <div key={year} className="rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
-                    <div className="flex items-center justify-between mb-5">
-                      <div
-                        className="text-5xl font-bold text-blue-700 leading-none"
-                        style={{ fontFamily: "'Georgia', serif" }}
-                      >
-                        {year}
-                      </div>
-                      <div className="h-12 w-12 rounded-2xl bg-blue-500/10 border border-blue-500/15 flex items-center justify-center">
-                        <Icon className="w-5 h-5 text-blue-700" />
-                      </div>
+                {[
+                  { value: "7000+", label: "Customers" },
+                  { value: "16+", label: "Years of building" },
+                  { value: "50+", label: "Awards and Certificates" },
+                  { value: "50+", label: "Services" },
+                ].map((item) => (
+                  <div key={item.label} className="rounded-2xl border border-gray-200 bg-white p-8 shadow-sm text-center">
+                    <div
+                      className="text-5xl font-bold text-blue-700 leading-none"
+                      style={{ fontFamily: "'Georgia', serif" }}
+                    >
+                      {item.value}
                     </div>
-                    <div className="text-base font-semibold text-gray-900">{title}</div>
-                    <div className="mt-2 text-sm text-gray-500 leading-relaxed">{desc}</div>
+                    <div className="mt-3 text-base font-medium text-gray-900">{item.label}</div>
                   </div>
                 ))}
               </div>

@@ -2,8 +2,9 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { lazy, Suspense, useEffect } from "react";
+import { Leaf } from "lucide-react";
 import ScrollToTop from "./components/ScrollToTop";
 import Footer from "./components/Footer";
  
@@ -166,6 +167,27 @@ const SectionThemeController = () => {
 
   return null;
 };
+
+const OgGreenTreeButton = () => {
+  const navigate = useNavigate();
+
+  return (
+    <button
+      type="button"
+      onClick={() => navigate("/og-green-tree")}
+      aria-label="Open OG Green Tree"
+      className="fixed bottom-0 right-0 z-[60] w-16 h-16 sm:w-20 sm:h-20 bg-transparent transition-all duration-200"
+    >
+      <span className="relative w-full h-full block" aria-hidden="true">
+        <span
+          className="absolute inset-0 bg-gray-200"
+          style={{ clipPath: "polygon(100% 0%, 100% 100%, 0% 100%)" }}
+        />
+        <Leaf className="absolute bottom-[14%] right-[14%] w-[40%] h-[40%] text-emerald-600" strokeWidth={2.5} />
+      </span>
+    </button>
+  );
+};
  
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -175,6 +197,7 @@ const App = () => (
       <BrowserRouter>
         <SectionThemeController />
         <ScrollToTop />
+        <OgGreenTreeButton />
         <Suspense fallback={null}>
           <Routes>
             <Route path="/" element={<Index />} />

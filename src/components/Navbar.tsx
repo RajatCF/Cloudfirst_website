@@ -197,7 +197,7 @@ const menuConfig: Record<MenuKey, MenuConfig> = {
           items: [
             { label: 'About us', path: '/about' },
             { label: 'Our leadership', path: '/about#our-leadership' },
-            { label: 'Contact us', path: '/contact' },
+            { label: 'Our partners', path: '/company/partners' },
           ],
         },
       ],
@@ -205,10 +205,10 @@ const menuConfig: Record<MenuKey, MenuConfig> = {
         {
           heading: '',
           items: [
-            { label: 'Our partners', path: '/company/partners' },
             { label: 'Our clients', path: '/company/clients' },
             { label: 'Press & media', path: '/company/press-media' },
             { label: 'Careers', path: '/company/careers' },
+            { label: 'Contact us', path: '/contact' },
           ],
         },
       ],
@@ -277,7 +277,8 @@ const Navbar = () => {
   const currentData = activeMenu ? menuConfig[activeMenu] : null;
   const dropdownOpen = Boolean(activeMenu && currentData);
 
-  const getMenuWidth = (data: MenuConfig) => {
+  const getMenuWidth = (key: MenuKey, data: MenuConfig) => {
+    if (key === 'company') return 440;
     const colCount = data.columns.length;
     const base = colCount <= 1 ? 360 : colCount === 2 ? 560 : 820;
     return data.rightPanel ? base + 240 : base;
@@ -292,10 +293,10 @@ const Navbar = () => {
       if (!containerEl || !triggerEl) return;
       const containerRect = containerEl.getBoundingClientRect();
       const triggerRect = triggerEl.getBoundingClientRect();
-      const width = Math.min(getMenuWidth(currentData), containerRect.width);
+      const width = Math.min(getMenuWidth(activeMenu, currentData), containerRect.width);
 
-      const triggerCenterX = triggerRect.left + triggerRect.width / 2;
-      let left = triggerCenterX - containerRect.left - width / 2;
+      const innerPadding = window.innerWidth >= 1024 ? 40 : 24;
+      let left = triggerRect.left - containerRect.left - innerPadding;
       left = Math.max(0, Math.min(left, containerRect.width - width));
       setDropdownWidth(width);
       setDropdownLeft(left);
@@ -340,9 +341,9 @@ const Navbar = () => {
         scrolled ? 'bg-background/90 backdrop-blur-xl shadow-sm' : 'bg-background/70 backdrop-blur-md'
       }`}
     >
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 flex items-center justify-between h-20 lg:h-24">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 flex items-center justify-between h-16 lg:h-20">
         <Link to="/" className="flex items-center gap-0 flex-shrink-0">
-          <img src="/cf-tp.png" alt="CloudFirst logo" className="h-14 sm:h-16 lg:h-24 w-auto" />
+          <img src="/cf-tp.png" alt="CloudFirst logo" className="h-10 sm:h-12 lg:h-16 w-auto" />
         </Link>
 
         <div ref={desktopMenuRef} className="hidden lg:flex flex-1 items-center justify-center relative" onMouseLeave={handleMouseLeave}>
@@ -353,7 +354,7 @@ const Navbar = () => {
                 ref={(el) => {
                   triggerRefs.current[link.key] = el;
                 }}
-                className={`flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-md transition-colors hover:text-blue-600 ${
+                className={`flex items-center gap-1 px-3 py-1.5 text-sm font-medium rounded-md transition-colors hover:text-blue-600 ${
                   activeMenu === link.key ? 'text-blue-600' : 'text-foreground'
                 }`}
                 onMouseEnter={() => handleMouseEnter(link.key)}
@@ -376,7 +377,7 @@ const Navbar = () => {
           </div>
 
           <div
-            className={`absolute left-0 right-0 top-full text-foreground rounded-b-2xl shadow-2xl backdrop-blur-sm transition-all duration-200 z-[60] ${
+            className={`absolute left-0 right-0 top-full text-foreground backdrop-blur-sm transition-all duration-200 z-[60] ${
               dropdownOpen ? 'opacity-100 pointer-events-auto translate-y-0' : 'opacity-0 pointer-events-none -translate-y-1'
             }`}
             onMouseEnter={() => {
@@ -388,9 +389,12 @@ const Navbar = () => {
             onMouseLeave={handleMouseLeave}
           >
             {currentData && (
-              <div className="bg-gradient-to-b from-[#669bbc] to-white rounded-2xl">
-                <div ref={dropdownInnerRef} className="px-6 lg:px-10 py-6">
-                  <div style={{ marginLeft: dropdownLeft, width: dropdownWidth || undefined }}>
+              <div ref={dropdownInnerRef} className="px-6 lg:px-10 py-6">
+                <div
+                  style={{ marginLeft: dropdownLeft, width: dropdownWidth || undefined }}
+                  className="bg-gradient-to-b from-[#669bbc] to-white rounded-2xl shadow-[0_18px_50px_rgba(0,0,0,0.18)]"
+                >
+                  <div className="px-6 lg:px-10 py-6">
                     <div className="flex gap-10">
                       <div
                         className={`grid gap-8 flex-1 ${
@@ -419,11 +423,11 @@ const Navbar = () => {
                                     <li key={item.label}>
                                       <Link
                                         to={item.path}
-                                      className="flex items-center gap-2.5 text-sm font-medium text-foreground hover:text-blue-600 transition-colors group"
+                                        className="flex items-center gap-2.5 text-sm font-medium text-foreground hover:text-blue-600 transition-colors group"
                                         onClick={() => setActiveMenu(null)}
                                       >
                                         {item.icon ? (
-                                        <span className="w-4 h-4 flex-shrink-0 inline-flex items-center justify-center text-foreground group-hover:text-blue-600 transition-colors">
+                                          <span className="w-4 h-4 flex-shrink-0 inline-flex items-center justify-center text-foreground group-hover:text-blue-600 transition-colors">
                                             {BrandIcons[item.icon]}
                                           </span>
                                         ) : item.dot ? (
@@ -477,7 +481,7 @@ const Navbar = () => {
         </div>
 
         <div className="hidden lg:flex items-center gap-4">
-          <Link to="/contact" className="btn-primary text-sm !px-6 !py-2.5">
+          <Link to="/contact" className="btn-primary text-sm !px-6 !py-2">
             Contact us
           </Link>
         </div>
