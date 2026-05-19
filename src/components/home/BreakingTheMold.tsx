@@ -53,7 +53,7 @@ const BreakingTheMold = () => {
                 This platform goes beyond traditional cloud management tools by combining AI-powered analytics, automated tagging compliance, and real-time cost control into a single, seamless experience.
               </p>
               <p>
-                reinforce360 <span className="text-bright-blue font-semibold">doesn&apos;t just cut costs, it cuts carbon</span>. Reduced cloud spend means fewer active instances, lower data center energy draw, and a measurably smaller environmental footprint. As ESG accountability becomes non-negotiable, reinforce360 transforms cloud efficiency into a sustainability advantage. Less consumption, less waste, less impact on the planet, all without compromising performance. It&apos;s not just smarter cloud management; it&apos;s responsible innovation at scale. Every dollar saved is a step toward a greener digital future.
+                reinforce360 doesn&apos;t just cut costs, it cuts carbon. Reduced cloud spend means fewer active instances, lower data center energy draw, and a measurably smaller environmental footprint. As ESG accountability becomes non-negotiable, <span className="text-bright-blue font-semibold">reinforce transforms cloud efficiency into sustainability advantage</span>. Less consumption, less waste, less impact on the planet, all without compromising performance. It&apos;s not just smarter cloud management; it&apos;s responsible innovation at scale. Every dollar saved is a step toward a greener digital future.
               </p>
             </div>
             <div className="mt-12 pt-8 border-t border-primary-foreground/10">

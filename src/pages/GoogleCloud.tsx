@@ -15,7 +15,7 @@ const stats = [
 const aiServices = [
   {
     title: "Google Gemini (AI Studio)",
-    logoSrc: `${S3_IMAGE_BASE}gemini.png`,
+    logoSrc: `/logo/${encodeURIComponent('gemini (2).png')}`,
     icon: Brain,
     color: "text-blue-500",
     bg: "bg-blue-500/10",
@@ -25,7 +25,7 @@ const aiServices = [
   },
   {
     title: "Google Workspace Studio",
-    logoSrc: "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/google_workspace.png",
+    logoSrc: "/logo/GwoL.png",
     icon: Code2,
     color: "text-sky-600",
     bg: "bg-sky-600/10",
@@ -35,7 +35,7 @@ const aiServices = [
   },
   {
     title: "Vertex AI, MLOps & LLMOps",
-    logoSrc: `${S3_IMAGE_BASE}Vertex-AI.png`,
+    logoSrc: "/logo/Vai.jpg",
     icon: GitBranch,
     color: "text-emerald-600",
     bg: "bg-emerald-600/10",
@@ -212,10 +212,16 @@ const GoogleCloud: React.FC = () => {
                 className="group relative bg-white/90 backdrop-blur-sm rounded-2xl border border-gray-100 shadow-sm p-6 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 overflow-hidden"
               >
                 <div className={`absolute top-0 left-0 right-0 h-0.5 ${bg} opacity-0 group-hover:opacity-100 transition-opacity`} />
-                <div className={`relative inline-flex items-center justify-center h-12 w-12 rounded-xl ${bg} border ${border} mb-4`}>
+                <div
+                  className={`relative inline-flex items-center justify-center h-16 w-16 rounded-xl mb-4 ${
+                    logoSrc && logoSrc.startsWith('/logo/')
+                      ? 'bg-white border border-gray-200'
+                      : `${bg} border ${border}`
+                  }`}
+                >
                   <Icon
                     data-fallback-icon="true"
-                    className={`w-5 h-5 ${color}`}
+                    className={`w-7 h-7 ${color}`}
                     style={{ opacity: logoSrc ? 0 : 1 }}
                   />
                   {logoSrc ? (
@@ -224,8 +230,8 @@ const GoogleCloud: React.FC = () => {
                       alt={title}
                       className={
                         logoSrc.toLowerCase().includes('llm')
-                          ? "absolute inset-0 w-full h-full object-contain scale-[1.55]"
-                          : "absolute inset-0 w-full h-full object-contain p-1"
+                          ? "absolute inset-0 w-full h-full object-contain scale-[1.85]"
+                          : "absolute inset-0 w-full h-full object-contain p-0 scale-[1.1]"
                       }
                       loading="lazy"
                       onError={(e) => {
@@ -236,13 +242,13 @@ const GoogleCloud: React.FC = () => {
                           ? [`${S3_IMAGE_BASE}gemini.png`]
                           : src.includes('vertex')
                             ? [`${S3_IMAGE_BASE}Vertex-AI.png`]
-                            : src.includes('workspace')
+                            : src.includes('workspace') || src.includes('gw')
                               ? ['https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/google_workspace.png']
                               : src.includes('llm')
                                 ? ['https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/llm_logo.webp']
                                 : [];
 
-                        const next = candidates[step + 1];
+                        const next = candidates[step];
                         if (!next) {
                           const iconEl = e.currentTarget.parentElement?.querySelector('[data-fallback-icon="true"]') as HTMLElement | null;
                           if (iconEl) iconEl.style.opacity = '1';
@@ -262,20 +268,7 @@ const GoogleCloud: React.FC = () => {
             ))}
           </div>
 
-          <div className="mt-10 flex flex-wrap gap-4">
-            <button
-              onClick={() => navigate("/contact")}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-blue-500 hover:bg-blue-400 text-white text-sm font-bold rounded-lg transition-colors"
-            >
-              Talk to an AI expert →
-            </button>
-            <button
-              onClick={() => navigate("/contact")}
-              className="inline-flex items-center gap-2 px-6 py-3 border border-gray-300/70 hover:border-gray-400 text-gray-900 text-sm font-semibold rounded-lg transition-colors bg-white/70 backdrop-blur-sm"
-            >
-              Request an AI roadmap
-            </button>
-          </div>
+          <div className="mt-10 flex flex-wrap gap-4" />
         </div>
       </div>
 

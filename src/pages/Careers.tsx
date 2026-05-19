@@ -9,13 +9,7 @@ const values = [
   { icon: "🤝", title: "Ownership culture", desc: "No micromanagement. You own your work, your customer relationships, and your professional development." },
 ];
 
-const openRoles = [
-  { team: "Engineering", title: "Senior Cloud Infrastructure Engineer", location: "Remote (UK/India)", type: "Full-time" },
-  { team: "Engineering", title: "DevOps / Platform Engineer", location: "Remote (UK/India)", type: "Full-time" },
-  { team: "Engineering", title: "Cloud Security Engineer", location: "Hybrid — London", type: "Full-time" },
-  { team: "Architecture", title: "Principal Cloud Architect", location: "Hybrid — London or Remote", type: "Full-time" },
-  { team: "Commercial", title: "Cloud Solutions Consultant", location: "Hybrid — London", type: "Full-time" },
-];
+const openRoles: Array<{ team: string; title: string; location: string; type: string }> = [];
 
 const Careers: React.FC = () => {
   const navigate = useNavigate();
@@ -25,8 +19,15 @@ const Careers: React.FC = () => {
       <Navbar />
 
       {/* Hero — light, human, image split */}
-      <div className="bg-white pt-16 lg:pt-20 border-b border-gray-100">
-        <div className="max-w-6xl mx-auto px-6 pt-20 pb-14 flex flex-col lg:flex-row items-center gap-10">
+      <div className="relative overflow-hidden pt-16 lg:pt-20 border-b border-gray-100 bg-gradient-to-br from-sky-50 via-white to-blue-50">
+        <div
+          className="absolute inset-0 opacity-60"
+          style={{
+            background:
+              "radial-gradient(ellipse at 15% 30%, rgba(56,189,248,0.32) 0%, transparent 55%), radial-gradient(ellipse at 85% 25%, rgba(59,130,246,0.22) 0%, transparent 55%), radial-gradient(ellipse at 80% 85%, rgba(14,165,233,0.18) 0%, transparent 60%)",
+          }}
+        />
+        <div className="relative max-w-6xl mx-auto px-6 pt-20 pb-14 flex flex-col lg:flex-row items-center gap-10">
           <div className="flex-1">
             <span className="inline-block text-xs font-semibold uppercase tracking-widest text-gray-600 border border-gray-200 bg-gray-100 rounded-full px-3 py-1 mb-4">Company</span>
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-5" style={{ fontFamily: "'Georgia', serif" }}>
@@ -73,28 +74,37 @@ const Careers: React.FC = () => {
         <div className="max-w-6xl mx-auto px-6">
           <div className="flex items-center justify-between mb-8">
             <h2 className="text-2xl font-bold text-gray-900" style={{ fontFamily: "'Georgia', serif" }}>Current openings</h2>
-            <button onClick={() => navigate("/current-openings")} className="text-sm text-blue-600 hover:text-blue-800 font-semibold">View all →</button>
+            {openRoles.length > 0 ? (
+              <button onClick={() => navigate("/current-openings")} className="text-sm text-blue-600 hover:text-blue-800 font-semibold">View all →</button>
+            ) : null}
           </div>
-          <div className="space-y-3">
-            {openRoles.map((role) => (
-              <div key={role.title} className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:border-blue-200 hover:shadow-md transition-all">
-                <div className="flex items-center gap-4">
-                  <span className="text-[10px] font-bold text-blue-600 bg-blue-50 border border-blue-100 rounded px-2 py-0.5 uppercase tracking-wider flex-shrink-0">{role.team}</span>
-                  <div>
-                    <div className="text-sm font-bold text-gray-900">{role.title}</div>
-                    <div className="text-xs text-gray-400 mt-0.5">{role.location} · {role.type}</div>
+          {openRoles.length > 0 ? (
+            <div className="space-y-3">
+              {openRoles.map((role) => (
+                <div key={role.title} className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:border-blue-200 hover:shadow-md transition-all">
+                  <div className="flex items-center gap-4">
+                    <span className="text-[10px] font-bold text-blue-600 bg-blue-50 border border-blue-100 rounded px-2 py-0.5 uppercase tracking-wider flex-shrink-0">{role.team}</span>
+                    <div>
+                      <div className="text-sm font-bold text-gray-900">{role.title}</div>
+                      <div className="text-xs text-gray-400 mt-0.5">{role.location} · {role.type}</div>
+                    </div>
                   </div>
+                  <button
+                    disabled
+                    className="flex-shrink-0 px-4 py-2 bg-blue-600 text-white text-xs font-bold rounded-lg transition-colors whitespace-nowrap cursor-not-allowed opacity-60"
+                    title="Applications currently closed"
+                  >
+                    Apply →
+                  </button>
                 </div>
-                <button
-                  disabled
-                  className="flex-shrink-0 px-4 py-2 bg-blue-600 text-white text-xs font-bold rounded-lg transition-colors whitespace-nowrap cursor-not-allowed opacity-60"
-                  title="Applications currently closed"
-                >
-                  Apply →
-                </button>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-10 text-center">
+              <div className="text-lg font-bold text-gray-900">No current opening</div>
+              <div className="text-sm text-gray-500 mt-2">Please check back later.</div>
+            </div>
+          )}
         </div>
       </div>
 

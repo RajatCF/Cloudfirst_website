@@ -6,8 +6,15 @@ const OurClients = () => {
 
   return (
     <Layout>
-      <section className="pt-28 pb-16 bg-white">
-        <div className="max-w-6xl mx-auto px-6">
+      <section className="relative overflow-hidden pt-28 pb-16 border-b border-gray-100 bg-gradient-to-br from-sky-50 via-white to-blue-50">
+        <div
+          className="absolute inset-0 opacity-60"
+          style={{
+            background:
+              "radial-gradient(ellipse at 15% 30%, rgba(56,189,248,0.32) 0%, transparent 55%), radial-gradient(ellipse at 85% 25%, rgba(59,130,246,0.22) 0%, transparent 55%), radial-gradient(ellipse at 80% 85%, rgba(14,165,233,0.18) 0%, transparent 60%)",
+          }}
+        />
+        <div className="relative max-w-6xl mx-auto px-6">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900" style={{ fontFamily: "'Georgia', serif" }}>
             Client Spotlight
           </h1>

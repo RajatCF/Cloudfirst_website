@@ -177,8 +177,15 @@ const Contact = () => {
 
   return (
     <Layout>
-      <section className="bg-background pt-10 lg:pt-12 pb-16 lg:pb-20">
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
+      <section className="relative overflow-hidden pt-10 lg:pt-12 pb-16 lg:pb-20 bg-gradient-to-br from-sky-50 via-white to-blue-50">
+        <div
+          className="absolute inset-0 opacity-60"
+          style={{
+            background:
+              "radial-gradient(ellipse at 15% 30%, rgba(56,189,248,0.32) 0%, transparent 55%), radial-gradient(ellipse at 85% 25%, rgba(59,130,246,0.22) 0%, transparent 55%), radial-gradient(ellipse at 80% 85%, rgba(14,165,233,0.18) 0%, transparent 60%)",
+          }}
+        />
+        <div className="relative max-w-[1400px] mx-auto px-6 lg:px-10">
           <div className="mb-10">
             <h1 className="section-title mb-4">let's build <span className="text-bright-blue">together</span></h1>
             <p className="text-lg text-muted-foreground max-w-2xl">
@@ -267,10 +274,9 @@ const Contact = () => {
 
               <div className="mt-auto pt-12">
                 <div className="p-6 rounded-2xl border border-cyan-400/25 bg-white/70 text-center">
-                <Calendar className="w-8 h-8 text-bright-blue mx-auto mb-3" />
-                <p className="font-display font-bold mb-1">Schedule a Call</p>
-                <p className="text-sm text-muted-foreground">Book a 30-minute discovery call with our team.</p>
-                <button className="btn-outline !px-6 !py-2.5 text-sm mt-4">Book a time</button>
+                  <Calendar className="w-8 h-8 text-bright-blue mx-auto mb-3" />
+                  <p className="font-display font-bold mb-1">Schedule a Call</p>
+                  <p className="text-sm text-muted-foreground">Book a 30-minute discovery call with our team.</p>
                 </div>
               </div>
             </div>

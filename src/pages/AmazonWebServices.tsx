@@ -349,20 +349,7 @@ const AmazonWebServices = () => {
             ))}
           </div>
 
-          <div className="mt-10 flex flex-wrap gap-4">
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-amber-500 hover:bg-amber-400 text-black text-sm font-bold rounded-lg transition-colors"
-            >
-              Talk to an AI architect <ArrowRight className="w-4 h-4" />
-            </Link>
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-2 px-6 py-3 border border-gray-300/70 hover:border-gray-400 text-gray-900 text-sm font-semibold rounded-lg transition-colors bg-white/70 backdrop-blur-sm"
-            >
-              Request an AI roadmap
-            </Link>
-          </div>
+          <div className="mt-10 flex flex-wrap gap-4" />
         </div>
       </section>
 

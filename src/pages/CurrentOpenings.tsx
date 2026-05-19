@@ -31,13 +31,12 @@ const CurrentOpenings = () => {
               Current <span className="text-bright-blue">Openings</span>
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Join our team and help shape the future of cloud technology. 
-              We're looking for passionate individuals ready to make an impact.
+              We are not hiring at the moment.
             </p>
             <div className="mt-8 flex items-center justify-center">
               <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm">
                 <Briefcase className="w-5 h-5 text-bright-blue" />
-                <span className="text-gray-700 font-medium">Upcoming roles will be posted soon</span>
+                <span className="text-gray-700 font-medium">No current opening</span>
               </div>
             </div>
           </motion.div>
@@ -69,20 +68,10 @@ const CurrentOpenings = () => {
             variants={fadeInUp}
           >
             <div className="bg-white rounded-2xl border border-gray-200 shadow-lg p-8 sm:p-10 text-center">
-              <h2 className="text-3xl sm:text-4xl font-semibold text-gray-900 mb-4">Upcoming Jobs</h2>
+              <h2 className="text-3xl sm:text-4xl font-semibold text-gray-900 mb-4">No current opening</h2>
               <p className="text-gray-600 text-lg leading-relaxed max-w-2xl mx-auto">
-                We’re updating our careers page. New roles will be listed here soon.
+                Please check back later for new opportunities.
               </p>
-              <div className="mt-8">
-                <button
-                  type="button"
-                  disabled
-                  className="inline-flex items-center justify-center bg-gray-400 text-white font-semibold px-8 py-3.5 rounded-lg transition-all duration-300 shadow-lg cursor-not-allowed opacity-60"
-                  title="Applications currently closed"
-                >
-                  Apply Now
-                </button>
-              </div>
             </div>
           </motion.div>
         </div>

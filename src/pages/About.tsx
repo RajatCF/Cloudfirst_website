@@ -123,13 +123,21 @@ const About = () => {
   return (
     <Layout>
       {!showLeadership && (
-        <section className="bg-white border-b border-gray-100">
-          <div className="max-w-[1200px] mx-auto px-6 lg:px-10 py-16">
-            <div className="max-w-4xl mx-auto text-center">
+        <section className="relative overflow-hidden border-b border-gray-100 bg-gradient-to-br from-sky-50 via-white to-blue-50">
+          <div
+            className="absolute inset-0 opacity-60"
+            style={{
+              background:
+                "radial-gradient(ellipse at 15% 30%, rgba(56,189,248,0.32) 0%, transparent 55%), radial-gradient(ellipse at 85% 25%, rgba(59,130,246,0.22) 0%, transparent 55%), radial-gradient(ellipse at 80% 85%, rgba(14,165,233,0.18) 0%, transparent 60%)",
+            }}
+          />
+
+          <div className="relative max-w-[1200px] mx-auto px-6 lg:px-10 py-20 md:py-24">
+            <div className="max-w-4xl text-left">
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6" style={{ fontFamily: "'Georgia', serif" }}>
-                  About CloudFirst
+                About CloudFirst
               </h2>
-              <div className="space-y-6 text-gray-700 leading-relaxed text-lg md:text-xl">
+              <div className="space-y-6 text-gray-800 leading-relaxed text-lg md:text-xl">
                 <p>
                   CloudFirst Technology® Private Limited—an ISO 27001:2013 and ISO 9001:2015 certified company—is empowering its client base by leveraging information technology resources.
                 </p>
@@ -236,7 +244,7 @@ const About = () => {
       )}
 
       {!showLeadership && (
-        <section className="bg-[#f7f8fa] border-b border-gray-100">
+        <section className="bg-white border-b border-gray-100">
           <div className="max-w-[1200px] mx-auto px-6 lg:px-10 py-16">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
               <div className="flex items-center justify-center">
@@ -273,18 +281,18 @@ const About = () => {
       {!showLeadership ? (
         <section className="bg-[#f7f8fa] border-b border-gray-100">
           <div className="max-w-[1200px] mx-auto px-6 lg:px-10 py-16">
-            <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-10 items-start">
+            <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-10 items-start lg:items-center">
               <div>
                 <span className="text-xs font-bold uppercase tracking-widest text-blue-600">Milestones & journey</span>
                 <h2 className="mt-2 text-4xl md:text-5xl font-bold text-gray-900" style={{ fontFamily: "'Georgia', serif" }}>
                   Our Journey
                 </h2>
-                <div className="mt-3 text-lg md:text-xl font-semibold text-gray-900" style={{ fontFamily: "'Georgia', serif" }}>
+                <div className="mt-3 text-base md:text-lg font-semibold text-gray-900" style={{ fontFamily: "'Georgia', serif" }}>
                   Building the Future with Cloud-First Innovation
                 </div>
-                <div className="mt-6 space-y-6 text-gray-700 leading-relaxed text-base max-w-2xl">
+                <div className="mt-5 space-y-4 text-gray-700 leading-[1.7] text-[15px] max-w-2xl">
                   <p>
-                    Since its inception, CloudFirst Technology has been committed to helping businesses embrace digital transformation through scalable, secure, and future-ready cloud solutions. Over the years, we have grown into a trusted technology partner for startups, enterprises, and high-growth organizations across industries.
+                    Since its inception, CloudFirst Technology has been committed to helping businesses embrace digital transformation through scalable, secure, and future-ready cloud solutions.
                   </p>
                   <p>
                     From enabling seamless cloud adoption and modern workplace transformation to delivering advanced cloud security, AI, and infrastructure solutions, our journey has been driven by innovation, reliability, and customer success.
@@ -298,21 +306,24 @@ const About = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 self-center justify-self-center w-full max-w-xl lg:mt-6">
                 {[
                   { value: "7000+", label: "Customers" },
                   { value: "16+", label: "Years of building" },
                   { value: "50+", label: "Awards and Certificates" },
                   { value: "50+", label: "Services" },
                 ].map((item) => (
-                  <div key={item.label} className="rounded-2xl border border-gray-200 bg-white p-8 shadow-sm text-center">
+                  <div
+                    key={item.label}
+                    className="rounded-2xl border border-gray-200 bg-white p-7 sm:p-8 shadow-sm text-center flex flex-col items-center justify-center h-[168px] sm:h-[176px] lg:h-[184px]"
+                  >
                     <div
-                      className="text-5xl font-bold text-blue-700 leading-none"
+                      className="text-5xl lg:text-6xl font-bold text-blue-700 leading-none"
                       style={{ fontFamily: "'Georgia', serif" }}
                     >
                       {item.value}
                     </div>
-                    <div className="mt-3 text-base font-medium text-gray-900">{item.label}</div>
+                    <div className="mt-3 text-[15px] font-medium text-gray-900 leading-snug max-w-[12rem]">{item.label}</div>
                   </div>
                 ))}
               </div>
