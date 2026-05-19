@@ -2,7 +2,7 @@ import Layout from "@/components/Layout";
 import { ArrowRight, Server, Database, Boxes, ShieldCheck, CheckCircle2, TrendingUp, Globe, Lock, Cpu, Layers, HardDrive, Code2, Brain } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const S3_IMAGE_BASE = "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/S3_image/";
+const S3_IMAGE_BASE = "https://cdn.cloudfirst.tech/S3_image/";
 
 const azureManagedServices = [
   {

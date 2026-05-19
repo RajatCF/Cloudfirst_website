@@ -234,7 +234,7 @@ const HeroSection = ({ isPageReady }: HeroSectionProps) => {
     >
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/home_page/final_hero_image.png')" }}
+        style={{ backgroundImage: "url('https://cdn.cloudfirst.tech/S3_image/final_hero_image.png')" }}
       />
       {/* Dark Overlay */}
       <div className="absolute inset-0 bg-black/40" />

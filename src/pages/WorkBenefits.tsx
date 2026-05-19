@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { Shield, Clock, Trophy, Baby, Users, TrendingUp, Brain, MessageCircle } from 'lucide-react';
 import Layout from '@/components/Layout';
 
+const S3_IMAGE_BASE = 'https://cdn.cloudfirst.tech/S3_image/';
+
 const WorkBenefits = () => {
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
@@ -87,10 +89,10 @@ const WorkBenefits = () => {
   ];
 
   const healthCheckupImages = [
-    "/work_benefits/IMG_2276.jpg",
-    "/work_benefits/IMG_2303.jpg",
-    "/work_benefits/IMG_2309.jpg",
-    "/work_benefits/IMG_2316.jpg",
+    `${S3_IMAGE_BASE}IMG_2276.jpg`,
+    `${S3_IMAGE_BASE}IMG_2303.jpg`,
+    `${S3_IMAGE_BASE}IMG_2309.jpg`,
+    `${S3_IMAGE_BASE}IMG_2316.jpg`,
   ];
 
   return (

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
+const S3_IMAGE_BASE = 'https://cdn.cloudfirst.tech/S3_image/';
+
 const PresidentialRecognition = () => {
   const [isVideoActive, setIsVideoActive] = useState(false);
   const [isImageOpen, setIsImageOpen] = useState(false);
@@ -49,7 +51,7 @@ const PresidentialRecognition = () => {
               >
                 <div className="aspect-video relative bg-white">
                   <img
-                    src="/events/president_new_image.jpg"
+                    src={`${S3_IMAGE_BASE}president_new_image.jpg`}
                     alt="Presidential Recognition 2025"
                     className="absolute inset-0 w-full h-full object-cover"
                     loading="lazy"
@@ -132,7 +134,7 @@ const PresidentialRecognition = () => {
             </button>
             <div className="w-full h-full bg-white p-4">
               <img
-                src="/events/president_new_image.jpg"
+                src={`${S3_IMAGE_BASE}president_new_image.jpg`}
                 alt="Presidential Recognition 2025"
                 className="w-full h-full max-h-[calc(90vh-2rem)] object-contain"
                 loading="lazy"

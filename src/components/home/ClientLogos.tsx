@@ -12,14 +12,14 @@ const trustedByEnterprisesLogos = [
 ];
 
 const ourClientLogos = [
-  'https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/aws_logo.png',
-  'https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/aws_advance+partner+logo.png',
-  'https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/microsoft_new_logo.png',
-  '/logo/new_GCI.png',
-  '/logo/GRAG.png',
-  '/logo/Voicex.png',
-  '/logo/Screenshot_2026-05-08_181526-removebg-preview.png',
-  '/logo/Screenshot_2026-05-08_181609-removebg-preview.png',
+  'https://cdn.cloudfirst.tech/All_image/aws_logo.png',
+  'https://cdn.cloudfirst.tech/All_image/aws_advance+partner+logo.png',
+  'https://cdn.cloudfirst.tech/All_image/microsoft_new_logo.png',
+  'https://cdn.cloudfirst.tech/S3_image/new_GCI.png',
+  'https://cdn.cloudfirst.tech/S3_image/GRAG.png',
+  'https://cdn.cloudfirst.tech/S3_image/Voicex.png',
+  'https://cdn.cloudfirst.tech/S3_image/Screenshot_2026-05-08_181526-removebg-preview.png',
+  'https://cdn.cloudfirst.tech/S3_image/Screenshot_2026-05-08_181609-removebg-preview.png',
 ];
 
 const repeat = <T,>(arr: T[], times: number) => {

@@ -3,24 +3,27 @@ import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import { useEffect, useMemo, useState } from 'react';
 
-const S3_IMAGE_BASE = 'https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/S3_image/';
+const S3_IMAGE_BASE = 'https://cdn.cloudfirst.tech/S3_image/';
 const CSR_IMAGE_1 = `${S3_IMAGE_BASE}1.png`;
 const CSR_IMAGE_3 = `${S3_IMAGE_BASE}3.png`;
 const CSR_IMAGE_4 = `${S3_IMAGE_BASE}4.png`;
 const CSR_IMAGE_5 = `${S3_IMAGE_BASE}5.png`;
+const FESTIVAL_HOLI = `${S3_IMAGE_BASE}Holi+Vibes.png`;
+const FESTIVAL_CHRISTMAS_POST = `${S3_IMAGE_BASE}Christmas+Post.png`;
+const FESTIVAL_WHATSAPP = `${S3_IMAGE_BASE}WhatsApp+Image+2026-03-11+at+12.06.34+(1).jpeg`;
 
 const overviewCardImages: Record<string, string[]> = {
   festivals: [
-    '/cloudfirts_festivals/Holi Vibes.png',
-    '/cloudfirts_festivals/Christmas Post.png',
-    '/cloudfirts_festivals/WhatsApp Image 2026-03-11 at 12.06.34 (1).jpeg',
+    FESTIVAL_HOLI,
+    FESTIVAL_CHRISTMAS_POST,
+    FESTIVAL_WHATSAPP,
   ],
   csr: [CSR_IMAGE_1, CSR_IMAGE_3, CSR_IMAGE_4, CSR_IMAGE_5],
   offsites: [
-    '/cloudfirst_offsite/Image (2).jpg',
-    '/cloudfirst_offsite/Image (3).jpg',
-    '/cloudfirst_offsite/Image (4).jpg',
-    '/cloudfirst_offsite/image_neww.jpeg',
+    `${S3_IMAGE_BASE}Image+(2).jpg`,
+    `${S3_IMAGE_BASE}Image+(3).jpg`,
+    `${S3_IMAGE_BASE}Image+(4).jpg`,
+    `${S3_IMAGE_BASE}image_neww.jpeg`,
   ],
 };
 
@@ -110,9 +113,9 @@ const LifeAtCloudFirst = () => {
         key: 'festivals',
         label: 'Festivals',
         photos: [
-          { src: '/cloudfirts_festivals/Holi Vibes.png', title: 'Celebration' },
-          { src: '/cloudfirts_festivals/Christmas Post.png', title: 'Celebration' },
-          { src: '/cloudfirts_festivals/WhatsApp Image 2026-03-11 at 12.06.34 (1).jpeg', title: 'Celebration' },
+          { src: FESTIVAL_HOLI, title: 'Celebration' },
+          { src: FESTIVAL_CHRISTMAS_POST, title: 'Celebration' },
+          { src: FESTIVAL_WHATSAPP, title: 'Celebration' },
         ],
       },
       {
@@ -129,10 +132,10 @@ const LifeAtCloudFirst = () => {
         key: 'offsites',
         label: 'Offsites & Retreats',
         photos: [
-          { src: '/cloudfirst_offsite/Image (2).jpg', title: 'Offsite' },
-          { src: '/cloudfirst_offsite/Image (3).jpg', title: 'Offsite' },
-          { src: '/cloudfirst_offsite/Image (4).jpg', title: 'Offsite' },
-          { src: '/cloudfirst_offsite/image_neww.jpeg', title: 'Offsite' },
+          { src: `${S3_IMAGE_BASE}Image+(2).jpg`, title: 'Offsite' },
+          { src: `${S3_IMAGE_BASE}Image+(3).jpg`, title: 'Offsite' },
+          { src: `${S3_IMAGE_BASE}Image+(4).jpg`, title: 'Offsite' },
+          { src: `${S3_IMAGE_BASE}image_neww.jpeg`, title: 'Offsite' },
         ],
       },
     ];

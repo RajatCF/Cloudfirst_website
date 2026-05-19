@@ -6,21 +6,21 @@ import { Menu, X, ChevronDown } from 'lucide-react';
 const BrandIcons: Record<string, React.ReactNode> = {
 aws: (
   <img
-    src="https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/aws_logo.png"
+    src="https://cdn.cloudfirst.tech/All_image/aws_logo.png"
     alt="AWS"
     className="w-10 h-10 object-contain"
   />
 ),
   azure: (
   <img
-    src="https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/azure_img.png"
+    src="https://cdn.cloudfirst.tech/All_image/azure_img.png"
     alt="Azure"
     className="w-7 h-7 object-contain"
   />
 ),
   gcp: (
   <img
-    src="https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/gcp_img.png"
+    src="https://cdn.cloudfirst.tech/All_image/gcp_img.png"
     alt="GCP"
     className="w-7 h-7 object-contain"
   />
@@ -343,7 +343,7 @@ const Navbar = () => {
     >
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 flex items-center justify-between h-16 lg:h-20">
         <Link to="/" className="flex items-center gap-0 flex-shrink-0">
-          <img src="https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/cf-tp.png" alt="CloudFirst logo" className="h-10 sm:h-12 lg:h-16 w-auto" />
+          <img src="https://cdn.cloudfirst.tech/All_image/cf-tp.png" alt="CloudFirst logo" className="h-10 sm:h-12 lg:h-16 w-auto" />
         </Link>
 
         <div ref={desktopMenuRef} className="hidden lg:flex flex-1 items-center justify-center relative" onMouseLeave={handleMouseLeave}>

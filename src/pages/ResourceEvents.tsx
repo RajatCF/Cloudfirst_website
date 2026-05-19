@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { MapPin, ArrowLeft, ExternalLink, ChevronDown, Calendar, Users } from "lucide-react";
 import Navbar from "../components/Navbar";
 
+const S3_IMAGE_BASE = "https://cdn.cloudfirst.tech/S3_image/";
 
 const images = {
   dubai: [
@@ -54,10 +55,10 @@ const images = {
     "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/msme+and++startup+innovation+summit/IMG_3389+(1).HEIC"
   ],
   "msme-summit-2026": [
-    "/events/IMG_3389.jpg",
-    "/events/IMG_3415.jpg",
-    "/events/IMG_3454.jpg",
-    "/events/IMG_3467.jpg"
+    S3_IMAGE_BASE + "IMG_3389.jpg",
+    S3_IMAGE_BASE + "IMG_3415.jpg",
+    S3_IMAGE_BASE + "IMG_3454.jpg",
+    S3_IMAGE_BASE + "IMG_3467.jpg"
   ],
 };
 
@@ -118,7 +119,7 @@ const eventThumbnails = {
   slovakia: "https://gragwebsite.s3.ap-south-1.amazonaws.com/London+Pics/Slovakia+Pics/1000001380.jpeg",
   "aws-summit-bengaluru": "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/events/aws+summit+bengaluru/1000106663.jpg",
   "india-ai-impact-summit": "/events/indian_ai_summit/IMG-20260216-WA0013.jpg",
-  "msme-summit-2026": "/events/IMG_3389.jpg",
+  "msme-summit-2026": S3_IMAGE_BASE + "IMG_3389.jpg",
   "assocham-smart-datacenters-cloud-infra-conclave": "/events/Assocham/1765126233127.jpeg",
   "go-global-awards": "/events/go_global/1763897494384.jpg"
 };
@@ -172,10 +173,10 @@ const ResourceEvents = () => {
         location: 'India',
         attendees: '1000+',
         images: [
-          "/events/IMG_3389.jpg",
-          "/events/IMG_3415.jpg",
-          "/events/IMG_3454.jpg",
-          "/events/IMG_3467.jpg"
+          S3_IMAGE_BASE + "IMG_3389.jpg",
+          S3_IMAGE_BASE + "IMG_3415.jpg",
+          S3_IMAGE_BASE + "IMG_3454.jpg",
+          S3_IMAGE_BASE + "IMG_3467.jpg"
         ]
       },
       {

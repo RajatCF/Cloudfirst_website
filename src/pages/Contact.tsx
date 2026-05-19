@@ -1,6 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import Layout from '@/components/Layout';
 import { Send, MapPin, Phone, Mail, Calendar } from 'lucide-react';
+
+const clamp = (v: number, min: number, max: number) => Math.min(max, Math.max(min, v));
 
 const corporateOffice = {
   heading: 'Corporate Office – Bengaluru',
@@ -52,25 +54,55 @@ const Contact = () => {
   const [modalIsPanning, setModalIsPanning] = useState(false);
   const modalPanRef = useRef<{ startX: number; startY: number; originX: number; originY: number } | null>(null);
 
-  const clamp = (v: number, min: number, max: number) => Math.min(max, Math.max(min, v));
+  const inlineMapInteractionRef = useRef<HTMLDivElement | null>(null);
+  const modalMapInteractionRef = useRef<HTMLDivElement | null>(null);
 
-  const inlineZoomBy = (delta: number) => {
+  const inlineZoomBy = useCallback((delta: number) => {
     setInlineMapZoom((z) => clamp(Number((z + delta).toFixed(2)), 1, 4));
-  };
+  }, []);
 
-  const resetInlineMapView = () => {
+  const resetInlineMapView = useCallback(() => {
     setInlineMapZoom(1);
     setInlineMapPan({ x: 0, y: 0 });
-  };
+  }, []);
 
-  const modalZoomBy = (delta: number) => {
+  const modalZoomBy = useCallback((delta: number) => {
     setModalMapZoom((z) => clamp(Number((z + delta).toFixed(2)), 1, 4));
-  };
+  }, []);
 
-  const resetModalMapView = () => {
+  const resetModalMapView = useCallback(() => {
     setModalMapZoom(1);
     setModalMapPan({ x: 0, y: 0 });
-  };
+  }, []);
+
+  useEffect(() => {
+    const el = inlineMapInteractionRef.current;
+    if (!el) return;
+
+    const onWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      inlineZoomBy(e.deltaY < 0 ? 0.2 : -0.2);
+    };
+
+    el.addEventListener('wheel', onWheel, { passive: false });
+    return () => el.removeEventListener('wheel', onWheel);
+  }, [inlineZoomBy]);
+
+  useEffect(() => {
+    if (!isMapOpen) return;
+    const el = modalMapInteractionRef.current;
+    if (!el) return;
+
+    const onWheel = (e: WheelEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      modalZoomBy(e.deltaY < 0 ? 0.2 : -0.2);
+    };
+
+    el.addEventListener('wheel', onWheel, { passive: false });
+    return () => el.removeEventListener('wheel', onWheel);
+  }, [isMapOpen, modalZoomBy]);
 
   useEffect(() => {
     if (!isMapOpen) return;
@@ -357,12 +389,9 @@ const Contact = () => {
                     </button>
                   </div>
                   <div
-                    className={`absolute inset-0 ${inlineIsPanning ? 'cursor-grabbing' : 'cursor-grab'}`}
+                    ref={inlineMapInteractionRef}
+                    className={`absolute inset-0 overscroll-contain ${inlineIsPanning ? 'cursor-grabbing' : 'cursor-grab'}`}
                     style={{ touchAction: 'none' }}
-                    onWheel={(e) => {
-                      e.preventDefault();
-                      inlineZoomBy(e.deltaY < 0 ? 0.2 : -0.2);
-                    }}
                     onMouseDown={(e) => {
                       e.preventDefault();
                       inlineGestureRef.current = { startX: e.clientX, startY: e.clientY, moved: false };
@@ -483,11 +512,8 @@ const Contact = () => {
             <div className="w-full h-[75vh] sm:h-[80vh] max-h-[85vh] rounded-2xl bg-white overflow-hidden">
               <div
                 className={`relative w-full h-full ${modalIsPanning ? 'cursor-grabbing' : 'cursor-grab'}`}
+                ref={modalMapInteractionRef}
                 style={{ touchAction: 'none' }}
-                onWheel={(e) => {
-                  e.preventDefault();
-                  modalZoomBy(e.deltaY < 0 ? 0.2 : -0.2);
-                }}
                 onMouseDown={(e) => {
                   e.preventDefault();
                   modalPanRef.current = { startX: e.clientX, startY: e.clientY, originX: modalMapPan.x, originY: modalMapPan.y };

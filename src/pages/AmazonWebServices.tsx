@@ -2,7 +2,8 @@ import Layout from "@/components/Layout";
 import { ArrowRight, Zap, Database, Boxes, Layers, Code2, HardDrive, Shield, CheckCircle2, TrendingUp, Globe, Lock, Brain, Cpu } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const S3_IMAGE_BASE = "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/S3_image/";
+// const S3_IMAGE_BASE = "https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/S3_image/";
+const S3_IMAGE_BASE = "https://cdn.cloudfirst.tech/S3_image/";
 
 const awsManagedServices = [
   {
@@ -99,7 +100,7 @@ const aiServices = [
   },
   {
     name: "Kiro",
-    logoSrc: "/logo/kiro_51769_logo_1753086501_0boi4.avif",
+    logoSrc: `${S3_IMAGE_BASE}kiro_51769_logo_1753086501_0boi4.avif`,
     icon: Lock,
     color: "text-blue-400",
     bg: "bg-blue-400/10",
@@ -109,7 +110,7 @@ const aiServices = [
   },
   {
     name: "MLOps, Model Ops & Observability",
-    logoSrc: "/logo/mlops.webp",
+    logoSrc: `${S3_IMAGE_BASE}mlops.webp`,
     icon: Cpu,
     color: "text-emerald-400",
     bg: "bg-emerald-400/10",
@@ -119,7 +120,7 @@ const aiServices = [
   },
   {
     name: "AI Security, Governance & Compliance",
-    logoSrc: "/logo/ai.png",
+    logoSrc: `${S3_IMAGE_BASE}ai-security-governance.webp`,
     icon: Shield,
     color: "text-rose-400",
     bg: "bg-rose-400/10",

@@ -182,7 +182,7 @@ const Microsoft365: React.FC = () => {
           </h2>
           <div className="relative">
             <img
-              src="/logo/Microsoft_Office_365_logo.png"
+              src="https://cdn.cloudfirst.tech/S3_image/Microsoft_Office_365_logo.png"
               alt="Microsoft 365"
               className="absolute -right-56 -top-12 w-40 h-40 object-contain opacity-100"
             />

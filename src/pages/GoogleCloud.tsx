@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import { Cloud, Code2, ShieldCheck, Database, Wrench, Globe, Lock, TrendingUp, CheckCircle2, Cpu, Layers, GitBranch, HardDrive, Brain } from "lucide-react";
 
+const S3_IMAGE_BASE = "https://cdn.cloudfirst.tech/S3_image/";
+
 const stats = [
   { value: "Google Premier", label: "Partner status", icon: Globe },
   { value: "99.99%", label: "GKE uptime SLA", icon: TrendingUp },
@@ -13,7 +15,7 @@ const stats = [
 const aiServices = [
   {
     title: "Google Gemini (AI Studio)",
-    logoSrc: "/logo/gemini.png",
+    logoSrc: `${S3_IMAGE_BASE}gemini.png`,
     icon: Brain,
     color: "text-blue-500",
     bg: "bg-blue-500/10",
@@ -33,7 +35,7 @@ const aiServices = [
   },
   {
     title: "Vertex AI, MLOps & LLMOps",
-    logoSrc: "/logo/Vertex-AI.png",
+    logoSrc: `${S3_IMAGE_BASE}Vertex-AI.png`,
     icon: GitBranch,
     color: "text-emerald-600",
     bg: "bg-emerald-600/10",
@@ -119,7 +121,7 @@ const GoogleCloud: React.FC = () => {
               <div className="absolute inset-0 rounded-3xl bg-gradient-to-tr from-blue-500/20 via-transparent to-emerald-500/15 blur-2xl" />
               <div className="relative w-full max-w-xs lg:max-w-sm">
                 <img
-                  src="/logo/new_GCI.png"
+                  src={`${S3_IMAGE_BASE}new_GCI.png`}
                   alt="Google Cloud Partner"
                   className="w-full h-44 sm:h-52 lg:h-56 object-contain"
                 />
@@ -231,9 +233,9 @@ const GoogleCloud: React.FC = () => {
                         const step = Number(e.currentTarget.dataset.fallbackStep ?? '0');
 
                         const candidates = src.includes('gemini')
-                          ? ['/logo/gemini.png', '/logo/gemini.webp', '/logo/gemini.jpg', '/gemini.png', '/Gemini.png']
+                          ? [`${S3_IMAGE_BASE}gemini.png`]
                           : src.includes('vertex')
-                            ? ['/logo/Vertex-AI.png', '/logo/vertex.png', '/logo/vertex.webp', '/logo/vertex.jpg', '/Vertex-AI.png', '/vertex.png', '/Vertex.png']
+                            ? [`${S3_IMAGE_BASE}Vertex-AI.png`]
                             : src.includes('workspace')
                               ? ['https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/google_workspace.png']
                               : src.includes('llm')

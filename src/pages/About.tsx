@@ -3,7 +3,7 @@ import { Globe, Award, Users, TrendingUp, ShieldCheck, Lightbulb, Heart, Star, A
 import { Link, useLocation } from 'react-router-dom';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 
-const S3_IMAGE_BASE = 'https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/S3_image/';
+const S3_IMAGE_BASE = 'https://cdn.cloudfirst.tech/S3_image/';
 
 const values = [
   {
@@ -152,7 +152,7 @@ const About = () => {
             <div
               className="absolute inset-0 opacity-20"
               style={{
-                backgroundImage: "url('https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/New_world_map.png')",
+                backgroundImage: "url('https://cdn.cloudfirst.tech/All_image/New_world_map.png')",
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }}
@@ -188,7 +188,7 @@ const About = () => {
                 <div className="overflow-hidden w-full max-w-sm md:max-w-md mx-auto">
                   <div className="h-[420px] md:h-[520px] w-full">
                     <img
-                      src="https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/Our_leadership.png"
+                      src="https://cdn.cloudfirst.tech/All_image/Our_leadership.png"
                       alt="Our leadership"
                       className="w-full h-full object-cover object-[50%_35%]"
                       loading="lazy"
@@ -241,7 +241,7 @@ const About = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
               <div className="flex items-center justify-center">
                 <div className="w-full max-w-xl">
-                  <img src="https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/about_us2.jpg" alt="Our vision and mission" className="w-full h-auto" loading="lazy" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+                  <img src="https://cdn.cloudfirst.tech/All_image/about_us2.jpg" alt="Our vision and mission" className="w-full h-auto" loading="lazy" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
                 </div>
               </div>
 
@@ -357,7 +357,7 @@ const About = () => {
               <div className="rounded-2xl border border-gray-100 bg-white shadow-sm overflow-hidden">
                 <div className="aspect-[4/5] w-full bg-white p-3 md:p-4">
                   <img
-                    src="/events/president_new_image.jpg"
+                    src={`${S3_IMAGE_BASE}president_new_image.jpg`}
                     alt="Presidential image"
                     className="w-full h-full object-contain"
                     loading="lazy"
@@ -379,7 +379,7 @@ const About = () => {
                     alt: "Leadership collage image 2",
                   },
                   {
-                    src: "/events/IMG-20260218-WA0023 (1).jpg",
+                    src: `${S3_IMAGE_BASE}IMG-20260218-WA0023+(1).jpg`,
                     alt: "Leadership collage image 3",
                   },
                 ].map((item, index) => (
