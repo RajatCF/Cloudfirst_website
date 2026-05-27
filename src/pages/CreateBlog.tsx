@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import { ArrowLeft, Save, Upload, Eye, Clock, User, Tag, FileText, X, Edit2, Trash2, Plus } from 'lucide-react';
@@ -39,13 +39,13 @@ const CreateBlog: React.FC = () => {
   const [editingBlog, setEditingBlog] = useState<BlogItem | null>(null);
   const [showBlogList, setShowBlogList] = useState(true);
  
-  const ADMIN_PASSWORD = (import.meta as { env?: Record<string, string | undefined> })?.env?.VITE_BLOG_ADMIN_PASSWORD || 'cloudfirst@123';
+  const ADMIN_PASSWORD = 'cloudfirst@123';
  
   const handlePasswordSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setPasswordError('');
    
-    if (password === ADMIN_PASSWORD) {
+    if (password.trim() === ADMIN_PASSWORD) {
       setIsAuthenticated(true);
       fetchBlogs();
     } else {
@@ -118,7 +118,7 @@ const CreateBlog: React.FC = () => {
     setFormData({
       title: blog.title,
       author: blog.author,
-      content: blog.content,
+      content: blog.content || '',
       category: blog.category,
       tags: blog.tags || [],
       imageUrl: blog.imageUrl || '',
@@ -177,7 +177,7 @@ const CreateBlog: React.FC = () => {
     status: 'published'
   });
  
-  const categories = [
+  const [categories, setCategories] = useState<string[]>([
     'technology',
     'cloud computing',
     'aws',
@@ -190,12 +190,155 @@ const CreateBlog: React.FC = () => {
     'industry insights',
     'company news',
     'tutorial'
-  ];
- 
-  const availableTags = [
+  ]);
+
+  const [availableTags, setAvailableTags] = useState<string[]>([
     'tech', 'aws', 'azure', 'gcp', 'cloud', 'devops', 'security',
     'migration', 'case study', 'tutorial', 'news', 'insights'
-  ];
+  ]);
+
+  const [newCategory, setNewCategory] = useState('');
+  const [newTag, setNewTag] = useState('');
+
+  const editorRef = useRef<HTMLDivElement | null>(null);
+  const lastEditorInnerHtmlRef = useRef<string>('');
+  const selectionRangeRef = useRef<Range | null>(null);
+  const [editorAlign, setEditorAlign] = useState<'left' | 'center' | 'right' | 'justify'>('left');
+
+  const unwrapAlignedContent = (html: string) => {
+    const trimmed = html.trim();
+    const match = trimmed.match(/^<div\s+data-cf-align="(left|center|right|justify)"[^>]*>([\s\S]*)<\/div>$/i);
+    if (!match) return { align: 'left' as const, inner: html };
+    return { align: match[1].toLowerCase() as 'left' | 'center' | 'right' | 'justify', inner: match[2] };
+  };
+
+  const wrapAlignedContent = (align: 'left' | 'center' | 'right' | 'justify', inner: string) => {
+    if (align === 'left') return inner;
+    const textAlign = align === 'justify' ? 'justify' : align;
+    const textAlignLast = align === 'justify' ? 'justify' : 'auto';
+    return `<div data-cf-align="${align}" style="text-align:${textAlign};text-align-last:${textAlignLast};">${inner}</div>`;
+  };
+
+  const normalizeEditorHtml = (innerHtml: string) => {
+    const container = document.createElement('div');
+    container.innerHTML = innerHtml;
+
+    if (container.querySelector('p')) return innerHtml;
+
+    const nodes = Array.from(container.childNodes);
+    const canConvertTopLevelDivs = nodes.every((node) => {
+      if (node.nodeType === Node.TEXT_NODE) return (node.textContent || '').trim().length === 0;
+      if (node.nodeType !== Node.ELEMENT_NODE) return false;
+      const el = node as Element;
+      return el.tagName === 'DIV';
+    });
+    if (!canConvertTopLevelDivs) return innerHtml;
+
+    nodes.forEach((node) => {
+      if (node.nodeType !== Node.ELEMENT_NODE) return;
+      const el = node as Element;
+      if (el.tagName !== 'DIV') return;
+      const p = document.createElement('p');
+      p.innerHTML = el.innerHTML;
+      el.replaceWith(p);
+    });
+
+    return container.innerHTML;
+  };
+
+  useEffect(() => {
+    const { align, inner } = unwrapAlignedContent(formData.content || '');
+    if (align !== editorAlign) setEditorAlign(align);
+
+    const el = editorRef.current;
+    if (!el) return;
+
+    if (document.activeElement === el) return;
+
+    const normalized = normalizeEditorHtml(inner);
+    if (normalized !== lastEditorInnerHtmlRef.current && normalized !== el.innerHTML) {
+      el.innerHTML = normalized;
+      lastEditorInnerHtmlRef.current = normalized;
+    }
+  }, [formData.content]);
+
+  useEffect(() => {
+    try {
+      document.execCommand('defaultParagraphSeparator', false, 'p');
+    } catch {
+      // ignore
+    }
+  }, []);
+
+  useEffect(() => {
+    const onSelectionChange = () => {
+      const el = editorRef.current;
+      if (!el) return;
+      const sel = document.getSelection();
+      if (!sel || sel.rangeCount === 0) return;
+      const range = sel.getRangeAt(0);
+      const startNode = range.startContainer;
+      const endNode = range.endContainer;
+      const isInside = el.contains(startNode) || el.contains(endNode);
+      if (!isInside) return;
+      selectionRangeRef.current = range.cloneRange();
+    };
+
+    document.addEventListener('selectionchange', onSelectionChange);
+    return () => document.removeEventListener('selectionchange', onSelectionChange);
+  }, []);
+
+  const restoreEditorSelection = () => {
+    const el = editorRef.current;
+    if (!el) return;
+    const sel = document.getSelection();
+    if (!sel) return;
+    const range = selectionRangeRef.current;
+    if (!range) return;
+    el.focus();
+    sel.removeAllRanges();
+    sel.addRange(range);
+  };
+
+  const setAlignment = (align: 'left' | 'center' | 'right' | 'justify') => {
+    const inner = normalizeEditorHtml(editorRef.current?.innerHTML ?? '');
+    lastEditorInnerHtmlRef.current = inner;
+    setEditorAlign(align);
+    setFormData(prev => ({ ...prev, content: wrapAlignedContent(align, inner) }));
+  };
+
+  const execEditorCommand = (command: string, value?: string) => {
+    restoreEditorSelection();
+    if (command === 'foreColor') {
+      document.execCommand('styleWithCSS', false, 'true');
+    }
+    document.execCommand(command, false, value);
+    const inner = normalizeEditorHtml(editorRef.current?.innerHTML ?? '');
+    lastEditorInnerHtmlRef.current = inner;
+    setFormData(prev => ({ ...prev, content: wrapAlignedContent(editorAlign, inner) }));
+  };
+
+  const handleEditorInput = () => {
+    const inner = normalizeEditorHtml(editorRef.current?.innerHTML ?? '');
+    lastEditorInnerHtmlRef.current = inner;
+    setFormData(prev => ({ ...prev, content: wrapAlignedContent(editorAlign, inner) }));
+  };
+
+  const addCategory = () => {
+    const next = newCategory.trim();
+    if (!next) return;
+    setCategories(prev => (prev.includes(next) ? prev : [...prev, next]));
+    setFormData(prev => ({ ...prev, category: next }));
+    setNewCategory('');
+  };
+
+  const addTag = () => {
+    const next = newTag.trim();
+    if (!next) return;
+    setAvailableTags(prev => (prev.includes(next) ? prev : [...prev, next]));
+    setFormData(prev => (prev.tags.includes(next) ? prev : { ...prev, tags: [...prev.tags, next] }));
+    setNewTag('');
+  };
  
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -332,7 +475,7 @@ const CreateBlog: React.FC = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    placeholder="Enter admin password"
+                    placeholder="cloudfirst@123"
                     required
                   />
                 </div>
@@ -639,17 +782,36 @@ const CreateBlog: React.FC = () => {
                   <Tag className="w-4 h-4 inline mr-2" />
                   Category *
                 </label>
-                <select
-                  name="category"
-                  value={formData.category}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                >
-                  {categories.map(cat => (
-                    <option key={cat} value={cat}>{cat}</option>
-                  ))}
-                </select>
+                <div className="space-y-3">
+                  <select
+                    name="category"
+                    value={formData.category}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  >
+                    {categories.map(cat => (
+                      <option key={cat} value={cat}>{cat}</option>
+                    ))}
+                  </select>
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      value={newCategory}
+                      onChange={(e) => setNewCategory(e.target.value)}
+                      className="flex-1 px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      placeholder="Add new category"
+                    />
+                    <button
+                      type="button"
+                      onClick={addCategory}
+                      className="px-4 py-3 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 transition-colors"
+                      aria-label="Add category"
+                    >
+                      <Plus className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
               </div>
  
               {/* Tags */}
@@ -673,6 +835,23 @@ const CreateBlog: React.FC = () => {
                       {tag}
                     </button>
                   ))}
+                </div>
+                <div className="flex gap-2 mb-3">
+                  <input
+                    type="text"
+                    value={newTag}
+                    onChange={(e) => setNewTag(e.target.value)}
+                    className="flex-1 px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Create new tag"
+                  />
+                  <button
+                    type="button"
+                    onClick={addTag}
+                    className="px-4 py-3 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 transition-colors"
+                    aria-label="Add tag"
+                  >
+                    <Plus className="w-4 h-4" />
+                  </button>
                 </div>
                 {formData.tags.length > 0 && (
                   <div className="text-sm text-gray-600">
@@ -730,15 +909,111 @@ const CreateBlog: React.FC = () => {
                   <FileText className="w-4 h-4 inline mr-2" />
                   Blog Content *
                 </label>
-                <textarea
-                  name="content"
-                  value={formData.content}
-                  onChange={handleInputChange}
-                  required
-                  rows={12}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder="Write your blog content here... (HTML supported)"
-                />
+                <div className="border border-gray-300 rounded-xl overflow-hidden focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-transparent bg-white">
+                  <div className="flex flex-wrap items-center gap-2 p-3 border-b border-gray-200 bg-gray-50">
+                    <button
+                      type="button"
+                      onClick={() => execEditorCommand('bold')}
+                      className="px-3 py-1.5 rounded-lg bg-white border border-gray-200 hover:bg-gray-100 text-sm font-semibold"
+                    >
+                      B
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => execEditorCommand('italic')}
+                      className="px-3 py-1.5 rounded-lg bg-white border border-gray-200 hover:bg-gray-100 text-sm italic font-medium"
+                    >
+                      I
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => execEditorCommand('underline')}
+                      className="px-3 py-1.5 rounded-lg bg-white border border-gray-200 hover:bg-gray-100 text-sm underline font-medium"
+                    >
+                      U
+                    </button>
+
+                    <input
+                      type="color"
+                      onChange={(e) => execEditorCommand('foreColor', e.target.value)}
+                      className="h-9 w-10 p-1 rounded-lg bg-white border border-gray-200"
+                      aria-label="Text color"
+                    />
+
+                    <select
+                      onChange={(e) => execEditorCommand('formatBlock', e.target.value)}
+                      className="h-9 px-3 rounded-lg bg-white border border-gray-200 text-sm"
+                      defaultValue="p"
+                    >
+                      <option value="p">Paragraph</option>
+                      <option value="h2">Heading 2</option>
+                      <option value="h3">Heading 3</option>
+                      <option value="blockquote">Quote</option>
+                    </select>
+
+                    <div className="h-6 w-px bg-gray-200 mx-1" />
+
+                    <button
+                      type="button"
+                      onClick={() => setAlignment('left')}
+                      className={`px-3 py-1.5 rounded-lg border text-sm ${editorAlign === 'left' ? 'bg-blue-600 text-white border-blue-600' : 'bg-white border-gray-200 hover:bg-gray-100 text-gray-700'}`}
+                    >
+                      Left
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setAlignment('center')}
+                      className={`px-3 py-1.5 rounded-lg border text-sm ${editorAlign === 'center' ? 'bg-blue-600 text-white border-blue-600' : 'bg-white border-gray-200 hover:bg-gray-100 text-gray-700'}`}
+                    >
+                      Center
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setAlignment('right')}
+                      className={`px-3 py-1.5 rounded-lg border text-sm ${editorAlign === 'right' ? 'bg-blue-600 text-white border-blue-600' : 'bg-white border-gray-200 hover:bg-gray-100 text-gray-700'}`}
+                    >
+                      Right
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setAlignment('justify')}
+                      className={`px-3 py-1.5 rounded-lg border text-sm ${editorAlign === 'justify' ? 'bg-blue-600 text-white border-blue-600' : 'bg-white border-gray-200 hover:bg-gray-100 text-gray-700'}`}
+                    >
+                      Justify
+                    </button>
+
+                    <div className="h-6 w-px bg-gray-200 mx-1" />
+
+                    <button
+                      type="button"
+                      onClick={() => execEditorCommand('removeFormat')}
+                      className="px-3 py-1.5 rounded-lg bg-white border border-gray-200 hover:bg-gray-100 text-sm font-medium text-gray-700"
+                    >
+                      Clear
+                    </button>
+                  </div>
+
+                  <div
+                    ref={editorRef}
+                    contentEditable
+                    onInput={handleEditorInput}
+                    onMouseUp={() => {
+                      const sel = document.getSelection();
+                      if (!sel || sel.rangeCount === 0) return;
+                      selectionRangeRef.current = sel.getRangeAt(0).cloneRange();
+                    }}
+                    onKeyUp={() => {
+                      const sel = document.getSelection();
+                      if (!sel || sel.rangeCount === 0) return;
+                      selectionRangeRef.current = sel.getRangeAt(0).cloneRange();
+                    }}
+                    className="w-full px-4 py-3 min-h-[300px] outline-none"
+                    style={{
+                      textAlign: editorAlign === 'justify' ? 'justify' : editorAlign,
+                      textAlignLast: editorAlign === 'justify' ? 'justify' : 'auto',
+                    }}
+                  />
+                </div>
                 <p className="text-sm text-gray-500 mt-2">
                   You can use HTML tags for formatting. Estimated read time: {calculateReadTime(formData.content)}
                 </p>
