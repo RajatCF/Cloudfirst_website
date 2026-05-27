@@ -188,6 +188,20 @@ const OgGreenTreeButton = () => {
     </button>
   );
 };
+
+const RouteLoader = () => (
+  <div className="min-h-screen w-full bg-gradient-to-br from-gray-50 via-white to-blue-50 flex items-center justify-center">
+    <div className="text-center px-6">
+      <div className="relative mx-auto mb-5 w-20 h-20 flex items-center justify-center">
+        <div className="absolute inset-0 rounded-full border-4 border-blue-200" />
+        <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-blue-600 animate-spin" />
+        <Leaf className="w-7 h-7 text-emerald-600" strokeWidth={2.5} />
+      </div>
+      <div className="text-lg font-medium text-gray-800">Loading…</div>
+      <div className="text-sm text-gray-500 mt-1">Preparing the page</div>
+    </div>
+  </div>
+);
  
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -198,7 +212,7 @@ const App = () => (
         <SectionThemeController />
         <ScrollToTop />
         <OgGreenTreeButton />
-        <Suspense fallback={null}>
+        <Suspense fallback={<RouteLoader />}>
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/industries" element={<Industries />} />
