@@ -79,6 +79,98 @@ const Blogs: React.FC = () => {
  
         // Handle the response structure from new API
         const blogsArray = data.data || data || [];
+
+        const unwrapDdbValue = (value: any): any => {
+          if (!value || typeof value !== 'object' || Array.isArray(value)) return value;
+          if (Object.prototype.hasOwnProperty.call(value, 'S')) return value.S;
+          if (Object.prototype.hasOwnProperty.call(value, 'N')) return value.N;
+          if (Object.prototype.hasOwnProperty.call(value, 'BOOL')) return value.BOOL;
+          if (Object.prototype.hasOwnProperty.call(value, 'NULL')) return null;
+          if (Object.prototype.hasOwnProperty.call(value, 'L') && Array.isArray(value.L)) return value.L.map(unwrapDdbValue);
+          if (Object.prototype.hasOwnProperty.call(value, 'M') && value.M && typeof value.M === 'object') {
+            const out: Record<string, any> = {};
+            for (const [k, v] of Object.entries(value.M)) out[k] = unwrapDdbValue(v);
+            return out;
+          }
+          return value;
+        };
+
+        const scalarString = (value: any): string => {
+          const unwrapped = unwrapDdbValue(value);
+          if (typeof unwrapped === 'string') return unwrapped;
+          if (typeof unwrapped === 'number' || typeof unwrapped === 'boolean') return String(unwrapped);
+          return '';
+        };
+
+        const normalizeDateValue = (value: unknown) => {
+          const s = scalarString(value);
+          if (!s) return '';
+          if (/^\d+$/.test(s)) return new Date(Number(s)).toISOString();
+          if (typeof value === 'number') return new Date(value).toISOString();
+          if (typeof value === 'string') return value;
+          return '';
+        };
+
+        const calculateReadTime = (content: string) => {
+          const wordsPerMinute = 200;
+          const words = stripHtml(content || '').trim().split(/\s+/).filter(Boolean).length;
+          const minutes = Math.max(1, Math.ceil(words / wordsPerMinute));
+          return `${minutes} min read`;
+        };
+
+        const normalizeBlog = (raw: any): Blog => {
+          const item = unwrapDdbValue(raw);
+          const rawId =
+            scalarString(item?.id) ||
+            scalarString(item?.postId) ||
+            scalarString(item?.PK) ||
+            scalarString(item?.SK) ||
+            '';
+          const createdAt =
+            normalizeDateValue(
+              item?.createdAt ??
+                item?.created_at ??
+                item?.post_date ??
+                item?.postDate ??
+                item?.createdOn ??
+                item?.created ??
+                item?.timestamp ??
+                ''
+            ) || '';
+          const updatedAt =
+            normalizeDateValue(
+              item?.updatedAt ??
+                item?.updated_at ??
+                item?.updated ??
+                item?.modifiedAt ??
+                item?.modified_at ??
+                createdAt
+            ) || createdAt || '';
+
+          return {
+            PK: scalarString(item?.PK),
+            SK: scalarString(item?.SK),
+            EntityType: scalarString(item?.EntityType) || scalarString(item?.entityType),
+            postId: scalarString(item?.postId) || rawId,
+            id: scalarString(item?.id) || rawId,
+            title: scalarString(item?.title) || scalarString(item?.post_title) || '',
+            author: scalarString(item?.author) || scalarString(item?.post_author) || '',
+            content: scalarString(item?.content) || scalarString(item?.post_content) || scalarString(item?.body) || '',
+            readTime:
+              scalarString(item?.readTime) ||
+              scalarString(item?.read_time) ||
+              calculateReadTime(
+                scalarString(item?.content) || scalarString(item?.post_content) || scalarString(item?.body) || ''
+              ),
+            category: scalarString(item?.category) || scalarString(item?.post_category) || '',
+            tags: unwrapDdbValue(item?.tags),
+            imageUrl: scalarString(item?.imageUrl) || scalarString(item?.featured_image) || scalarString(item?.featuredImage),
+            images: unwrapDdbValue(item?.images),
+            createdAt,
+            updatedAt,
+            status: scalarString(item?.status),
+          };
+        };
        
         // Log the first blog to check ID fields
         if (blogsArray.length > 0) {
@@ -89,7 +181,7 @@ const Blogs: React.FC = () => {
           });
         }
        
-        setBlogs(blogsArray);
+        setBlogs(blogsArray.map((b: any) => normalizeBlog(b)));
        
         // If no blogs found, set empty array but don't show error
         if (blogsArray.length === 0) {
@@ -131,14 +223,17 @@ const Blogs: React.FC = () => {
   };
  
   const filteredBlogs = blogs.filter(blog =>
-    blog.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    stripHtml(blog.content).toLowerCase().includes(searchTerm.toLowerCase())
+    (blog.title || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
+    stripHtml(blog.content || '').toLowerCase().includes(searchTerm.toLowerCase())
   );
  
   // Sort by creation date (newest first)
-  const sortedBlogs = [...filteredBlogs].sort((a, b) =>
-    new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-  );
+  const safeTime = (dateString?: string) => {
+    if (!dateString) return 0;
+    const t = new Date(dateString).getTime();
+    return Number.isNaN(t) ? 0 : t;
+  };
+  const sortedBlogs = [...filteredBlogs].sort((a, b) => safeTime(b.createdAt) - safeTime(a.createdAt));
  
   // Featured blog is most recent
   const featuredBlog = sortedBlogs[0];
@@ -147,8 +242,11 @@ const Blogs: React.FC = () => {
   const hasMoreBlogs = remainingBlogs.length > displayCount;
  
  
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
+  const formatDate = (dateString?: string) => {
+    if (!dateString) return '';
+    const d = new Date(dateString);
+    if (Number.isNaN(d.getTime())) return '';
+    return d.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
       day: 'numeric'
@@ -384,7 +482,7 @@ const Blogs: React.FC = () => {
  
                       <div className="flex items-center justify-between">
                         <div className="text-xs text-gray-500">
-                          {formatDate(blog.createdAt)}
+                          {formatDate(blog.createdAt) || '—'}
                         </div>
  
                         <button

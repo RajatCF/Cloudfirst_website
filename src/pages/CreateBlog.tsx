@@ -199,6 +199,8 @@ const CreateBlog: React.FC = () => {
 
   const [newCategory, setNewCategory] = useState('');
   const [newTag, setNewTag] = useState('');
+  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
+  const categoryDropdownRef = useRef<HTMLDivElement | null>(null);
 
   const editorRef = useRef<HTMLDivElement | null>(null);
   const lastEditorInnerHtmlRef = useRef<string>('');
@@ -339,6 +341,43 @@ const CreateBlog: React.FC = () => {
     setFormData(prev => (prev.tags.includes(next) ? prev : { ...prev, tags: [...prev.tags, next] }));
     setNewTag('');
   };
+
+  const removeCategoryValue = (target: string) => {
+    const trimmed = target.trim();
+    if (!trimmed) return;
+    setCategories(prev => {
+      if (prev.length <= 1) return prev;
+      const remaining = prev.filter(c => c !== trimmed);
+      setFormData(current => ({
+        ...current,
+        category: current.category === trimmed ? (remaining[0] || '') : current.category,
+      }));
+      return remaining;
+    });
+  };
+
+  const removeTag = (tag: string) => {
+    setAvailableTags(prev => prev.filter(t => t !== tag));
+    setFormData(prev => ({ ...prev, tags: prev.tags.filter(t => t !== tag) }));
+  };
+
+  useEffect(() => {
+    if (!isCategoryOpen) return;
+    const onMouseDown = (e: MouseEvent) => {
+      const el = categoryDropdownRef.current;
+      if (!el) return;
+      if (el.contains(e.target as Node)) return;
+      setIsCategoryOpen(false);
+    };
+    document.addEventListener('mousedown', onMouseDown);
+    return () => document.removeEventListener('mousedown', onMouseDown);
+  }, [isCategoryOpen]);
+
+  useEffect(() => {
+    if (!categories.includes(formData.category) && categories.length > 0) {
+      setFormData(prev => ({ ...prev, category: categories[0] }));
+    }
+  }, [categories]);
  
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -388,6 +427,7 @@ const CreateBlog: React.FC = () => {
     setSuccess('');
  
     try {
+      const nowIso = new Date().toISOString();
       const blogData = {
         title: formData.title,
         content: formData.content,
@@ -396,7 +436,9 @@ const CreateBlog: React.FC = () => {
         category: formData.category,
         imageUrl: formData.imageUrl,
         images: formData.images,
-        status: formData.status
+        status: formData.status,
+        createdAt: editingBlog?.createdAt || nowIso,
+        updatedAt: nowIso,
       };
  
       let response;
@@ -475,7 +517,7 @@ const CreateBlog: React.FC = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    placeholder="cloudfirst@123"
+                    placeholder=""
                     required
                   />
                 </div>
@@ -783,17 +825,59 @@ const CreateBlog: React.FC = () => {
                   Category *
                 </label>
                 <div className="space-y-3">
-                  <select
-                    name="category"
-                    value={formData.category}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  >
-                    {categories.map(cat => (
-                      <option key={cat} value={cat}>{cat}</option>
-                    ))}
-                  </select>
+                  <div className="flex gap-2">
+                    <div ref={categoryDropdownRef} className="relative flex-1">
+                      <button
+                        type="button"
+                        onClick={() => setIsCategoryOpen(prev => !prev)}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white flex items-center justify-between"
+                        aria-haspopup="listbox"
+                        aria-expanded={isCategoryOpen}
+                      >
+                        <span className={formData.category ? 'text-gray-900' : 'text-gray-400'}>
+                          {formData.category || 'Select category'}
+                        </span>
+                        <span className="text-gray-400">▾</span>
+                      </button>
+
+                      {isCategoryOpen ? (
+                        <div className="absolute z-20 mt-2 w-full bg-white border border-gray-200 rounded-xl shadow-lg max-h-56 overflow-auto">
+                          {categories.map(cat => {
+                            const isSelected = cat === formData.category;
+                            return (
+                              <div key={cat} className={`flex items-center justify-between px-2 ${isSelected ? 'bg-blue-50' : 'hover:bg-gray-50'}`}>
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    setFormData(prev => ({ ...prev, category: cat }));
+                                    setIsCategoryOpen(false);
+                                  }}
+                                  className="flex-1 text-left px-2 py-2 text-sm text-gray-700"
+                                  role="option"
+                                  aria-selected={isSelected}
+                                >
+                                  {cat}
+                                </button>
+                                <button
+                                  type="button"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    removeCategoryValue(cat);
+                                  }}
+                                  disabled={categories.length <= 1}
+                                  className="p-2 rounded-lg hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                                  aria-label={`Remove category ${cat}`}
+                                  title="Remove"
+                                >
+                                  <X className="w-4 h-4 text-gray-500" />
+                                </button>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      ) : null}
+                    </div>
+                  </div>
                   <div className="flex gap-2">
                     <input
                       type="text"
@@ -821,20 +905,33 @@ const CreateBlog: React.FC = () => {
                   Tags
                 </label>
                 <div className="flex flex-wrap gap-2 mb-3">
-                  {availableTags.map(tag => (
-                    <button
-                      key={tag}
-                      type="button"
-                      onClick={() => handleTagChange(tag)}
-                      className={`px-3 py-1 rounded-full text-sm transition-colors ${
-                        formData.tags.includes(tag)
-                          ? 'bg-blue-600 text-white'
-                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                      }`}
-                    >
-                      {tag}
-                    </button>
-                  ))}
+                  {availableTags.map(tag => {
+                    const selected = formData.tags.includes(tag);
+                    return (
+                      <div
+                        key={tag}
+                        className={`flex items-center rounded-full overflow-hidden transition-colors ${
+                          selected ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                        }`}
+                      >
+                        <button
+                          type="button"
+                          onClick={() => handleTagChange(tag)}
+                          className="px-3 py-1 text-sm"
+                        >
+                          {tag}
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => removeTag(tag)}
+                          className={`px-2 py-1 ${selected ? 'hover:bg-blue-700' : 'hover:bg-gray-300'}`}
+                          aria-label={`Remove tag ${tag}`}
+                        >
+                          <X className={`w-3 h-3 ${selected ? 'text-white' : 'text-gray-500'}`} />
+                        </button>
+                      </div>
+                    );
+                  })}
                 </div>
                 <div className="flex gap-2 mb-3">
                   <input

@@ -40,6 +40,128 @@ const BlogsPost: React.FC = () => {
   const [error, setError] = useState<string>('');
   const navigate = useNavigate();
 
+  const stripHtml = (html: string) => {
+    const tmp = document.createElement("DIV");
+    tmp.innerHTML = html;
+    return tmp.textContent || tmp.innerText || "";
+  };
+
+  const calculateReadTime = (content: string) => {
+    const wordsPerMinute = 200;
+    const words = stripHtml(content || '').trim().split(/\s+/).filter(Boolean).length;
+    const minutes = Math.max(1, Math.ceil(words / wordsPerMinute));
+    return `${minutes} min read`;
+  };
+
+  const unwrapDdbValue = (value: any): any => {
+    if (!value || typeof value !== 'object' || Array.isArray(value)) return value;
+    if (Object.prototype.hasOwnProperty.call(value, 'S')) return value.S;
+    if (Object.prototype.hasOwnProperty.call(value, 'N')) return value.N;
+    if (Object.prototype.hasOwnProperty.call(value, 'BOOL')) return value.BOOL;
+    if (Object.prototype.hasOwnProperty.call(value, 'NULL')) return null;
+    if (Object.prototype.hasOwnProperty.call(value, 'L') && Array.isArray(value.L)) return value.L.map(unwrapDdbValue);
+    if (Object.prototype.hasOwnProperty.call(value, 'M') && value.M && typeof value.M === 'object') {
+      const out: Record<string, any> = {};
+      for (const [k, v] of Object.entries(value.M)) out[k] = unwrapDdbValue(v);
+      return out;
+    }
+    return value;
+  };
+
+  const scalarString = (value: any): string => {
+    const unwrapped = unwrapDdbValue(value);
+    if (typeof unwrapped === 'string') return unwrapped;
+    if (typeof unwrapped === 'number' || typeof unwrapped === 'boolean') return String(unwrapped);
+    return '';
+  };
+
+  const normalizeDateValue = (value: unknown) => {
+    const s = scalarString(value);
+    if (!s) return '';
+    if (/^\d+$/.test(s)) return new Date(Number(s)).toISOString();
+    if (typeof value === 'number') return new Date(value).toISOString();
+    if (typeof value === 'string') return value;
+    return '';
+  };
+
+  const normalizeBlog = (raw: any): Blog => {
+    const item = unwrapDdbValue(raw);
+    const rawId =
+      scalarString(item?.id) ||
+      scalarString(item?.postId) ||
+      scalarString(item?.PK) ||
+      scalarString(item?.SK) ||
+      '';
+    const createdAt =
+      normalizeDateValue(
+        item?.createdAt ??
+          item?.created_at ??
+          item?.post_date ??
+          item?.postDate ??
+          item?.createdOn ??
+          item?.created ??
+          item?.timestamp ??
+          ''
+      ) || '';
+    const updatedAt =
+      normalizeDateValue(
+        item?.updatedAt ??
+          item?.updated_at ??
+          item?.updated ??
+          item?.modifiedAt ??
+          item?.modified_at ??
+          createdAt
+      ) || createdAt || '';
+
+    return {
+      PK: scalarString(item?.PK),
+      SK: scalarString(item?.SK),
+      EntityType: scalarString(item?.EntityType) || scalarString(item?.entityType) || 'blog',
+      postId: scalarString(item?.postId) || rawId,
+      title: scalarString(item?.title) || scalarString(item?.post_title) || '',
+      author: scalarString(item?.author) || scalarString(item?.post_author) || '',
+      content: scalarString(item?.content) || scalarString(item?.post_content) || scalarString(item?.body) || '',
+      readTime:
+        scalarString(item?.readTime) ||
+        scalarString(item?.read_time) ||
+        calculateReadTime(scalarString(item?.content) || scalarString(item?.post_content) || scalarString(item?.body) || ''),
+      category: scalarString(item?.category) || scalarString(item?.post_category) || '',
+      imageUrl: scalarString(item?.imageUrl) || scalarString(item?.featured_image) || scalarString(item?.featuredImage) || undefined,
+      createdAt,
+      updatedAt,
+      status: scalarString(item?.status) || 'published',
+    };
+  };
+
+  const tryParseJson = (value: any) => {
+    if (typeof value !== 'string') return value;
+    const trimmed = value.trim();
+    if (!trimmed) return value;
+    if (!(trimmed.startsWith('{') || trimmed.startsWith('['))) return value;
+    try {
+      return JSON.parse(trimmed);
+    } catch {
+      return value;
+    }
+  };
+
+  const extractBlogPayload = (responseData: any) => {
+    let data = tryParseJson(responseData);
+
+    if (data && typeof data === 'object') {
+      if (typeof (data as any).body === 'string') {
+        const parsedBody = tryParseJson((data as any).body);
+        if (parsedBody && parsedBody !== (data as any).body) data = parsedBody;
+      }
+
+      const wrapped = (data as any).data ?? (data as any).Item ?? (data as any).blog;
+      if (wrapped !== undefined) data = tryParseJson(wrapped);
+    }
+
+    if (Array.isArray(data)) return data[0] ?? null;
+    return data ?? null;
+  };
+
   useEffect(() => {
     if (!id) return;
     
@@ -61,26 +183,21 @@ const BlogsPost: React.FC = () => {
         console.log('Blog API Response:', responseData);
         console.log('Response structure:', JSON.stringify(responseData, null, 2));
         
-        // Handle the response structure from new API
-        // Your API returns data directly, not wrapped in 'data' property
-        const blogData = responseData;
-        console.log('Extracted blogData:', blogData);
-        console.log('Root ID:', blogData.id);
-        
-        // Map API response fields to component expected fields
-        if (blogData) {
-          // Set postId from root id field for component compatibility
-          blogData.postId = blogData.id;
-          
-          // API already returns imageUrl field directly
-          // No need to map featured_image anymore
-          
-          // Map post_date to createdAt if needed
-          if (blogData.post_date && !blogData.createdAt) {
-            blogData.createdAt = blogData.post_date;
+        const raw = extractBlogPayload(responseData);
+        if (!raw) {
+          setError("Failed to load blog post");
+          setBlog(null);
+          return;
+        }
+        const normalized = normalizeBlog(raw);
+        if (!normalized.title && !normalized.content) {
+          const alt = extractBlogPayload((responseData as any)?.data ?? (responseData as any)?.Item ?? (responseData as any)?.blog ?? (responseData as any)?.body);
+          if (alt) {
+            setBlog(normalizeBlog(alt));
+            return;
           }
         }
-        setBlog(blogData);
+        setBlog(normalized);
       } catch (error) {
         console.error("Error fetching blog:", error);
         setError("Failed to load blog post");
@@ -93,8 +210,11 @@ const BlogsPost: React.FC = () => {
     fetchBlogById();
   }, [id]);
 
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
+  const formatDate = (dateString?: string) => {
+    if (!dateString) return '';
+    const d = new Date(dateString);
+    if (Number.isNaN(d.getTime())) return '';
+    return d.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
       day: 'numeric'
@@ -211,7 +331,7 @@ const BlogsPost: React.FC = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   <Calendar className="w-5 h-5" />
-                  <span>{formatDate(blog.createdAt)}</span>
+                  <span>{formatDate(blog.createdAt) || '—'}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Clock className="w-5 h-5" />
@@ -270,9 +390,9 @@ const BlogsPost: React.FC = () => {
               {/* Published/Updated Info */}
               <div className="mt-6 pt-6 border-t border-gray-100">
                 <div className="flex items-center justify-between text-sm text-gray-500">
-                  <span>Published on {formatDate(blog.createdAt)}</span>
+                  <span>Published on {formatDate(blog.createdAt) || '—'}</span>
                   {blog.updatedAt !== blog.createdAt && (
-                    <span>Updated on {formatDate(blog.updatedAt)}</span>
+                    <span>Updated on {formatDate(blog.updatedAt) || '—'}</span>
                   )}
                 </div>
               </div>
