@@ -38,6 +38,16 @@ aws: (
       <rect x="14" y="14" width="7" height="7" fill="#FFB900"/>
     </svg>
   ),
+  reinforce360: (
+    <span className="w-4 h-4 rounded-full overflow-hidden inline-flex items-center justify-center bg-white">
+      <img
+        src="https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/Screenshot+2026-06-01+144723+(1).png"
+        alt="reinforce360"
+        className="w-full h-full object-cover"
+        loading="lazy"
+      />
+    </span>
+  ),
 };
 
 type MenuKey = 'cloud-platforms' | 'solutions' | 'services' | 'product' | 'resources' | 'company';
@@ -152,7 +162,11 @@ const menuConfig: Record<MenuKey, MenuConfig> = {
       [
         {
           heading: '',
-          items: [{ label: 'reinforce360™', path: '/reinforce360tm' }],
+          items: [
+            { label: 'reinforce360™', path: '/reinforce360tm', icon: 'reinforce360' },
+            { label: 'Google Workspace', path: '/cloud-platforms/google-workspace', icon: 'google_workspace' },
+            { label: 'Microsoft 365', path: '/cloud-platforms/microsoft-365', icon: 'microsoft365' },
+          ],
         },
       ],
     ],
@@ -160,13 +174,6 @@ const menuConfig: Record<MenuKey, MenuConfig> = {
   resources: {
     columns: [
       [
-        {
-          heading: 'Workspace',
-          items: [
-            { label: 'Google Workspace', path: '/cloud-platforms/google-workspace', icon: 'google_workspace' },
-            { label: 'Microsoft 365', path: '/cloud-platforms/microsoft-365', icon: 'microsoft365' },
-          ],
-        },
         {
           heading: 'Resources',
           items: [
@@ -208,6 +215,7 @@ const menuConfig: Record<MenuKey, MenuConfig> = {
             { label: 'Our clients', path: '/company/clients' },
             { label: 'Press & media', path: '/company/press-media' },
             { label: 'Careers', path: '/company/careers' },
+            { label: 'Support Plans', path: '/support-plans' },
             { label: 'Contact us', path: '/contact' },
           ],
         },

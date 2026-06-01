@@ -21,7 +21,7 @@ const rows: {
     label: "Description",
     labelClassName: "bg-[#00a3e0] text-white",
     values: {
-      basic: "Basic Support provides essential assistance for",
+      basic: "Basic Support provides essential assistance for day-to-day operational queries.",
       standard: "Comprehensive support services for timely assistance.",
       enhanced: "Higher level of support and personalized assistance.",
       premium: "Highest level of support and personalized attention.",
@@ -33,7 +33,7 @@ const rows: {
     values: {
       basic: (
         <ul className="space-y-2">
-          <li>Email support during business hours**</li>
+          <li>Email support during business hours</li>
           <li>Response time of 24 hours</li>
           <li>General troubleshooting assistance</li>
           <li>Access to knowledge base</li>
@@ -41,7 +41,7 @@ const rows: {
       ),
       standard: (
         <ul className="space-y-2">
-          <li>Phone and email support during business hours**</li>
+          <li>Phone and email support during business hours</li>
           <li>Response time of 8 hours</li>
           <li>Advanced troubleshooting assistance</li>
           <li>Priority handling of support requests (P3)</li>
@@ -50,7 +50,7 @@ const rows: {
       enhanced: (
         <ul className="space-y-2">
           <li>24/7 Phone and email</li>
-          <li>Response time of 2 hour</li>
+          <li>Response time of 2 hours</li>
           <li>Dedicated account manager</li>
           <li>Proactive monitoring for critical issues (P2)</li>
         </ul>
@@ -101,10 +101,10 @@ const rows: {
   {
     label: "Support languages",
     values: {
-      basic: "Hindi, English",
-      standard: "Hindi, English",
-      enhanced: "Hindi, English",
-      premium: "Hindi, English",
+      basic: "Hindi, English, Kannada",
+      standard: "Hindi, English, Kannada",
+      enhanced: "Hindi, English, Kannada",
+      premium: "Hindi, English, Kannada",
     },
   },
   {
@@ -156,7 +156,16 @@ const SupportPlans = () => {
                   <th className="w-48" />
                   {plans.map((p) => (
                     <th key={p.key} className={`px-6 py-4 text-left text-sm font-bold ${p.headerClassName}`}>
-                      {p.name}
+                      <span className="inline-flex items-center gap-1.5">
+                        <span>{p.name}</span>
+                        <span
+                          title="Support is not applicable to Microsoft."
+                          aria-label="Support is not applicable to Microsoft."
+                          className="text-white/90 cursor-default"
+                        >
+                          *
+                        </span>
+                      </span>
                     </th>
                   ))}
                 </tr>
@@ -178,6 +187,10 @@ const SupportPlans = () => {
             </table>
           </div>
 
+          <div className="mt-6 text-center text-red-600 font-semibold text-sm">
+            [Note: Support is not applicable to Microsoft.]
+          </div>
+
           <div className="mt-14 space-y-6 text-gray-700">
             <p>
               <span className="font-semibold">Basic Support :</span> Basic Support is included for all Cloud customers. With Basic Support, you have access to our documentation, community support, and support for Cloud Billing issues.
@@ -193,7 +206,7 @@ const SupportPlans = () => {
             </p>
 
             <p>
-              <span className="font-semibold">Working Hours :</span> 9:30 AM to 6:30 PM (Excluding Sunday &amp; Public holiday)
+              <span className="font-semibold">Working Hours :</span> 9:30 AM to 6:30 PM (Excluding Sunday &amp; public holidays)
             </p>
           </div>
         </div>
@@ -216,12 +229,12 @@ const SupportPlans = () => {
                     <span>
                       Visit our website at{" "}
                       <a
-                        href="http://support.cloudfirst.in"
+                        href="https://support.cloudfirst.in"
                         target="_blank"
                         rel="noreferrer"
                         className="text-blue-600 underline underline-offset-2"
                       >
-                        http://support.cloudfirst.in
+                        https://support.cloudfirst.in
                       </a>{" "}
                       to submit your request.
                     </span>
@@ -231,9 +244,6 @@ const SupportPlans = () => {
                   </div>
                 </div>
 
-                <p className="text-gray-700 mt-5">
-                  In case you want Direct support from Google then you may contact on <span className="text-blue-600">1800 108 7879</span> also chat available through Admin console by Help option 24*7.
-                </p>
                 <p className="text-gray-700 mt-3">
                   For faster resolution, please provide your ticket number, domain name, full name, and mobile number.
                 </p>

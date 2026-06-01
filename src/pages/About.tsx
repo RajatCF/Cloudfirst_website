@@ -191,14 +191,14 @@ const About = () => {
           </section>
 
           <section className="bg-white border-b border-gray-100">
-            <div className="max-w-[1400px] mx-auto px-6 lg:px-10 py-16">
-              <div className="grid grid-cols-1 lg:grid-cols-[0.95fr_1.05fr] gap-10 items-center">
-                <div className="overflow-hidden w-full max-w-sm md:max-w-md mx-auto">
-                  <div className="h-[420px] md:h-[520px] w-full">
+            <div className="max-w-[1400px] mx-auto px-6 lg:pr-10 lg:pl-20 py-16">
+              <div className="grid grid-cols-1 lg:grid-cols-[340px_1fr] gap-10 lg:gap-14 items-start">
+                <div className="overflow-hidden w-full max-w-[260px] md:max-w-[300px] mx-auto lg:mx-0 lg:sticky lg:top-28">
+                  <div className="h-[320px] md:h-[400px] w-full">
                     <img
-                      src="https://cdn.cloudfirst.tech/All_image/Our_leadership.png"
+                      src="https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/new_leader_img.png"
                       alt="Our leadership"
-                      className="w-full h-full object-cover object-[50%_35%]"
+                      className="w-full h-full object-cover object-[50%_15%]"
                       loading="lazy"
                       onError={(e) => {
                         e.currentTarget.src = "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80";
@@ -218,13 +218,15 @@ const About = () => {
                   </div>
                 </div>
 
-                <div>
-                  <div className="space-y-5 text-gray-700 leading-relaxed text-[18px]">
+                <div className="w-full mx-auto lg:mx-0 lg:pl-6 lg:-mt-3">
+                  <div className="space-y-4 text-gray-700 leading-[1.7] text-[14px] md:text-[15px]">
                     <div className="space-y-1">
-                      <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+                      <h2 className="text-2xl md:text-3xl font-bold text-gray-900" style={{ fontFamily: "'Georgia', serif" }}>
                         Ashish Srivastava
                       </h2>
-                      <div className="text-blue-600 font-medium">Founder &amp; CTO</div>
+                      <div className="text-blue-600 font-semibold text-sm" style={{ fontFamily: "'Georgia', serif" }}>
+                        Founder &amp; CTO
+                      </div>
                     </div>
                     <p>
                       CloudFirst Technology® is redefining the future of IT and cloud innovation under the dynamic leadership of Ashish Srivastava. Based in Mumbai, Ashish is a technology visionary with over 15 years of experience transforming the IT landscape across both the public and private sectors. He is recognized for pioneering projects in AI, cloud infrastructure, security, and digital transformation, serving international clients from the US to Australia and delivering high-impact solutions to numerous Indian government ministries.

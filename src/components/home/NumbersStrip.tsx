@@ -11,7 +11,7 @@ const NumbersStrip = () => {
   const stripRef = useRef<HTMLDivElement>(null);
 
   const statistics = [
-    { value: "7000+", label: "Customers", count: counts.customers, isStatic: false },
+    { value: "6300+", label: "Customers", count: counts.customers, isStatic: false },
     { value: "16+", label: "Years of building", count: counts.years, isStatic: false },
     { value: "50+", label: "Awards and Certificates", count: counts.awards, isStatic: false },
     { value: "50+", label: "Services", count: counts.services, isStatic: false }
@@ -40,7 +40,7 @@ const NumbersStrip = () => {
               }, 16);
             };
 
-            animateCount(7000, 'customers', 2500);
+            animateCount(6300, 'customers', 2500);
             animateCount(16, 'years', 1500);
             animateCount(50, 'awards', 1500);
             animateCount(50, 'services', 1800);

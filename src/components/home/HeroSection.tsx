@@ -3,7 +3,7 @@ import gsap from 'gsap';
 import { Link } from 'react-router-dom';
  
 const STATS = [
-  { value: '7000+', label: 'Enterprise Clients' },
+  { value: '6300+', label: 'Enterprise Clients' },
   { value: '99.99%', label: 'Uptime SLA' },
   { value: '24/7', label: 'Expert Support' },
   { value: '50+', label: 'Certifications' },
@@ -384,7 +384,7 @@ const HeroSection = ({ isPageReady }: HeroSectionProps) => {
                 style={{ fontSize: '1.05rem', lineHeight: 1.75, color: '#ffffff', maxWidth: 480 }}
               >
                 Enterprise-grade cloud security, compliance automation, and AI-driven data
-                governance — trusted by 7000+ organizations worldwide.
+                governance — trusted by 6300+ organizations worldwide.
               </p>
  
               {/* CTAs */}

@@ -5,7 +5,7 @@ import { Send, MapPin, Phone, Mail, Calendar } from 'lucide-react';
 const clamp = (v: number, min: number, max: number) => Math.min(max, Math.max(min, v));
 
 const corporateOffice = {
-  heading: 'Corporate Office – Bengaluru',
+  heading: 'Bengaluru',
   lines: [
     'CloudFirst Technology Pvt. Ltd.',
     'Awfis Sabari complex , Residencial road , MG Road , Bengaluru,  - 560025',
