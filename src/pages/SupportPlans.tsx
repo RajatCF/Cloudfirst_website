@@ -242,6 +242,9 @@ const SupportPlans = () => {
                   <div>
                     <span className="font-semibold">Call Support:</span> Reach out to us at <span className="text-blue-600">+91 8448440769</span> for immediate assistance.
                   </div>
+                  <div className="text-gray-700">
+                    Chat is also available through the Admin console via the Help option 24/7. Only valid for the paid users.
+                  </div>
                 </div>
 
                 <p className="text-gray-700 mt-3">
