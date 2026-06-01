@@ -196,7 +196,7 @@ const About = () => {
                 <div className="overflow-hidden w-full max-w-[260px] md:max-w-[300px] mx-auto lg:mx-0 lg:sticky lg:top-28">
                   <div className="h-[320px] md:h-[400px] w-full">
                     <img
-                      src="https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/new_leader_img.png"
+                      src="/final%20image.png"
                       alt="Our leadership"
                       className="w-full h-full object-cover object-[50%_15%]"
                       loading="lazy"

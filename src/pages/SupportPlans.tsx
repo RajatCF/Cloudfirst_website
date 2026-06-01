@@ -188,7 +188,7 @@ const SupportPlans = () => {
           </div>
 
           <div className="mt-6 text-center text-red-600 font-semibold text-sm">
-            [Note: Support is not applicable to Microsoft.]
+            [Note: *Support is not applicable to Microsoft]
           </div>
 
           <div className="mt-14 space-y-6 text-gray-700">
