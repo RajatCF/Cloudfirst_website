@@ -1,6 +1,7 @@
 import React from 'react';
 import Layout from '@/components/Layout';
 import { Link } from 'react-router-dom';
+import FaqSection, { getFaqsByPath } from '@/components/FaqSection';
 
 const CloudMigration = () => {
   return (
@@ -79,6 +80,8 @@ const CloudMigration = () => {
             </div>
           </div>
         </section>
+
+        <FaqSection title="Frequently Asked Questions" faqs={getFaqsByPath("/solutions/cloud-migration")} className="bg-transparent" />
 
       </div>
     </Layout>

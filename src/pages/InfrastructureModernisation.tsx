@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
+import FaqSection, { getFaqsByPath } from "@/components/FaqSection";
 
 const beforeAfter = [
   { before: "Manually provisioned VMs", after: "Infrastructure-as-Code with Terraform / Pulumi" },
@@ -82,6 +83,8 @@ const InfrastructureModernisation: React.FC = () => {
           ))}
         </div>
       </div>
+
+      <FaqSection title="Frequently Asked Questions" faqs={getFaqsByPath("/solutions/infrastructure-modernisation")} className="bg-bright-blue/5" />
 
       {/* CTA */}
       <div className="max-w-6xl mx-auto px-6 pb-16">

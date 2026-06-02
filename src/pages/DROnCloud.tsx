@@ -1,5 +1,6 @@
 import Layout from "@/components/Layout";
 import { Cog, GraduationCap, Headphones, Layers, SlidersHorizontal, Wrench } from "lucide-react";
+import FaqSection, { getFaqsByPath } from "@/components/FaqSection";
 
 const items = [
   { label: "DR\nImplementation", color: "from-red-500 to-orange-400", Icon: Wrench, pos: "top-2 left-1/2 -translate-x-1/2" },
@@ -127,6 +128,8 @@ const DROnCloud = () => {
             </p>
           </div>
         </section>
+
+        <FaqSection title="Frequently Asked Questions" faqs={getFaqsByPath("/solutions/dr-on-cloud")} className="bg-white" />
       </div>
     </Layout>
   );

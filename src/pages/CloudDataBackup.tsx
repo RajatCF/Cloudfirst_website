@@ -1,6 +1,7 @@
 import Layout from "@/components/Layout";
 import { ArrowRight, CheckCircle2, ShieldCheck, HardDrive, RefreshCcw, BellRing, Scale } from "lucide-react";
 import { Link } from "react-router-dom";
+import FaqSection, { getFaqsByPath } from "@/components/FaqSection";
 
 const highlights = [
   {
@@ -123,6 +124,8 @@ const CloudDataBackup = () => {
           </div>
         </div>
       </section>
+
+      <FaqSection title="Frequently Asked Questions" faqs={getFaqsByPath("/solutions/cloud-data-backup")} className="bg-white" />
 
       <section className="relative overflow-hidden bg-white">
         <div className="pointer-events-none absolute inset-0">

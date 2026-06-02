@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import { AlertTriangle, Bug, FileSearch, KeyRound, Network, ShieldCheck, Siren } from "lucide-react";
+import FaqSection, { getFaqsByPath } from "@/components/FaqSection";
 
 const frameworks = [
   { name: "ISO 27001", desc: "Information security management system" },
@@ -275,6 +276,8 @@ const CloudSecurityCompliance: React.FC = () => {
           ))}
         </div>
       </div>
+
+      <FaqSection title="Frequently Asked Questions" faqs={getFaqsByPath("/solutions/cloud-security-compliance")} className="bg-bright-blue/5" />
 
       {/* CTA */}
       <div className="max-w-6xl mx-auto px-6 pb-16">

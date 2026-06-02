@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
+import FaqSection, { getFaqsByPath } from "@/components/FaqSection";
 
 const savingsAreas = [
   { area: "Right-sizing", saving: "Up to 40%", icon: "📐", desc: "Most cloud workloads run on instances 2–3× larger than needed. We analyse utilisation data and right-size every resource with zero performance impact." },
@@ -93,6 +94,8 @@ const CostOptimisation: React.FC = () => {
           </div>
         </div>
       </div>
+
+      <FaqSection title="Frequently Asked Questions" faqs={getFaqsByPath("/solutions/cost-optimisation")} className="bg-bright-blue/5" />
 
       {/* CTA */}
       <div className="max-w-6xl mx-auto px-6 py-16">
