@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
+import FaqSection, { getFaqsByPath } from "@/components/FaqSection";
 
 const waves = [
   { wave: "Wave 1", title: "Quick wins & low-risk workloads", desc: "Dev/test environments, web servers, and stateless apps. Build team confidence and establish operational patterns before moving critical workloads." },
@@ -125,6 +126,8 @@ const MigrationPlanning: React.FC = () => {
           </div>
         </div>
       </div>
+
+      <FaqSection title="Frequently Asked Questions" faqs={getFaqsByPath("/services/migration-planning")} className="bg-white" />
 
       {/* CTA */}
       <div className="max-w-6xl mx-auto px-6 py-16">

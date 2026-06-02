@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
+import FaqSection, { getFaqsByPath } from "@/components/FaqSection";
 
 const reviewAreas = [
   { icon: "🏗️", title: "Compute & Resource Design", desc: "VM sizing, instance families, reserved capacity planning, and multi-region placement for resilience and performance." },
@@ -121,6 +122,8 @@ const ArchitectureReview: React.FC = () => {
           ))}
         </div>
       </div>
+
+      <FaqSection title="Frequently Asked Questions" faqs={getFaqsByPath("/services/architecture-review")} className="bg-white" />
 
       {/* CTA */}
       <div className="max-w-6xl mx-auto px-6 pb-16">

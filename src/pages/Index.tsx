@@ -8,6 +8,7 @@ import PresidentialRecognition from '@/components/home/PresidentialRecognition';
 import ScrollingTestimonials from '@/components/home/ScrollingTestimonials';
 import NumbersStrip from '@/components/home/NumbersStrip';
 import { Link } from 'react-router-dom';
+import FaqSection, { homeFaqs } from '@/components/FaqSection';
 
 const Index = () => {
   const Divider = () => (
@@ -79,6 +80,7 @@ const Index = () => {
     { key: 'testimonials', node: <ScrollingTestimonials /> },
     { key: 'partners', node: <OurClientsLogos /> },
     { key: 'campaign', node: <CampaignSection /> },
+    { key: 'faq', node: <FaqSection title="Frequently Asked Questions" faqs={homeFaqs} /> },
     { key: 'numbers', node: <NumbersStrip /> },
   ];
 

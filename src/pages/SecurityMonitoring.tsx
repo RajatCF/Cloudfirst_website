@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
+import FaqSection, { getFaqsByPath } from "@/components/FaqSection";
 
 const detectionCapabilities = [
   { icon: "🔍", title: "Log aggregation & SIEM", desc: "Centralise logs from all cloud services, applications, and network devices into a unified SIEM with correlation rules tuned to your environment." },
@@ -90,6 +91,8 @@ const SecurityMonitoring: React.FC = () => {
           </div>
         </div>
       </div>
+
+      <FaqSection title="Frequently Asked Questions" faqs={getFaqsByPath("/services/security-monitoring")} className="bg-white" />
 
       {/* CTA */}
       <div className="max-w-6xl mx-auto px-6 pb-16">

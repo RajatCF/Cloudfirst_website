@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
+import FaqSection, { getFaqsByPath } from "@/components/FaqSection";
 
 const pillars = [
   { icon: "🎯", title: "Business Alignment", desc: "Cloud decisions mapped to revenue targets, growth milestones, and risk tolerance — not just technical preference." },
@@ -133,6 +134,8 @@ const CloudStrategyRoadmap: React.FC = () => {
           </div>
         </div>
       </div>
+
+      <FaqSection title="Frequently Asked Questions" faqs={getFaqsByPath("/services/cloud-strategy")} className="bg-bright-blue/5" />
     </div>
   );
 };

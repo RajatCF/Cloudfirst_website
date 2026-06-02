@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
+import FaqSection, { getFaqsByPath } from "@/components/FaqSection";
 
 const capabilities = [
   { icon: "📊", title: "Cost visibility dashboards", desc: "Real-time spend dashboards broken down by team, product, environment, and service — so every stakeholder sees their cloud cost." },
@@ -93,6 +94,8 @@ const FinopsBillingManagement: React.FC = () => {
           ))}
         </div>
       </div>
+
+      <FaqSection title="Frequently Asked Questions" faqs={getFaqsByPath("/services/finops")} className="bg-white" />
 
       {/* CTA */}
       <div className="max-w-6xl mx-auto px-6 pb-16">

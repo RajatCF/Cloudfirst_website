@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
+import FaqSection, { getFaqsByPath } from "@/components/FaqSection";
 
 const operationsAreas = [
   { title: "Proactive monitoring", desc: "24/7 observability across compute, storage, network, and application layers — with alert fatigue reduction and intelligent noise suppression.", icon: "📡" },
@@ -97,6 +98,8 @@ const ManagedCloudOperations: React.FC = () => {
           </div>
         </div>
       </div>
+
+      <FaqSection title="Frequently Asked Questions" faqs={getFaqsByPath("/services/managed-cloud-operations")} className="bg-[#f7f8fa]" />
 
       {/* CTA */}
       <div className="max-w-6xl mx-auto px-6 py-16">
