@@ -39,11 +39,16 @@ const CreateBlog: React.FC = () => {
   const [editingBlog, setEditingBlog] = useState<BlogItem | null>(null);
   const [showBlogList, setShowBlogList] = useState(true);
  
-  const ADMIN_PASSWORD = 'cloudfirst@123';
+  const ADMIN_PASSWORD = (import.meta.env.VITE_BLOG_ADMIN_PASSWORD ?? '').trim();
  
   const handlePasswordSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setPasswordError('');
+    if (!ADMIN_PASSWORD) {
+      setPasswordError('Admin password is not configured.');
+      setPassword('');
+      return;
+    }
    
     if (password.trim() === ADMIN_PASSWORD) {
       setIsAuthenticated(true);

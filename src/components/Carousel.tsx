@@ -88,11 +88,6 @@ const Carousel: React.FC<CarouselProps> = ({ items }) => {
                   <p className="text-sm text-white mb-4 leading-relaxed">
                     {items[active]?.excerpt}
                   </p>
-                  <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-white">
-                    <span>{items[active]?.date}</span>
-                    <span>{items[active]?.readTime}</span>
-                  </div>
-                  <button className="mt-4 btn-primary w-fit px-6 py-2">Read more →</button>
                 </div>
               </div>
             </div>
@@ -159,13 +154,6 @@ const Carousel: React.FC<CarouselProps> = ({ items }) => {
                       <p className="text-sm text-white mb-4 leading-relaxed">
                         {item.excerpt.length > 80 ? item.excerpt.slice(0, 80) + '...' : item.excerpt}
                       </p>
-                      <div className="flex items-center gap-4 text-xs text-white">
-                        <span>{item.date}</span>
-                        <span className="flex items-center gap-1">
-                          <span>{item.readTime}</span>
-                        </span>
-                      </div>
-                      <button className="mt-4 btn-primary w-fit px-6 py-2">Read more →</button>
                     </div>
                   </div>
                 </div>

@@ -300,7 +300,7 @@ const BlogsPost: React.FC = () => {
           
           {/* Content */}
           <div className="relative z-10 max-w-5xl mx-auto px-4 h-full flex items-center">
-            <div className="text-left max-w-4xl">
+            <div className="text-left max-w-5xl">
               {/* Back Button */}
               <button
                 onClick={() => navigate('/blog')}
@@ -346,7 +346,7 @@ const BlogsPost: React.FC = () => {
         </section>
 
         {/* Article Content */}
-        <section className="max-w-4xl mx-auto px-4 py-16">
+        <section className="max-w-5xl lg:max-w-6xl mx-auto px-4 py-16">
           <div className="bg-white rounded-3xl shadow-lg border border-gray-100 p-8 md:p-12">
             
             {/* Featured Image */}
@@ -361,9 +361,10 @@ const BlogsPost: React.FC = () => {
             )}
             
             {/* Article Body */}
-            <article className="prose prose-lg max-w-none">
+            <article className="prose prose-lg max-w-none break-words">
               <div 
-                className="text-gray-700 leading-relaxed font-light text-lg"
+                className="text-gray-700 leading-relaxed font-light text-lg break-words"
+                style={{ overflowWrap: 'anywhere', wordBreak: 'break-word' }}
                 dangerouslySetInnerHTML={{ __html: blog.content }}
               />
             </article>
@@ -401,7 +402,7 @@ const BlogsPost: React.FC = () => {
         </section>
 
         {/* Navigation */}
-        <section className="max-w-4xl mx-auto px-4 pb-16">
+        <section className="max-w-5xl lg:max-w-6xl mx-auto px-4 pb-16">
           <div className="flex justify-center">
             <button
               onClick={() => navigate('/blog')}

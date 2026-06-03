@@ -140,18 +140,12 @@ const CloudDataBackup = () => {
           <p className="text-gray-600 text-lg max-w-2xl mx-auto mb-8">
             Get clarity on backup coverage, RPO gaps, restore readiness, and the controls needed to stay resilient and compliant.
           </p>
-          <div className="flex flex-wrap gap-4 justify-center">
+          <div className="flex justify-center">
             <Link
               to="/contact"
               className="inline-flex items-center gap-2 px-7 py-3.5 bg-bright-blue hover:bg-bright-blue/90 text-white text-sm font-bold rounded-lg transition-colors"
             >
               Request assessment <ArrowRight className="w-4 h-4" />
-            </Link>
-            <Link
-              to="/"
-              className="inline-flex items-center gap-2 px-7 py-3.5 border border-gray-200 hover:border-gray-300 text-gray-700 text-sm font-medium rounded-lg transition-colors"
-            >
-              Explore more solutions
             </Link>
           </div>
         </div>

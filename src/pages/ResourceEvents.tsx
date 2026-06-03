@@ -1046,13 +1046,6 @@ const renderGallery = () => {
               <h1 className="text-5xl md:text-6xl font-bold mb-6">
                 <span className="text-white">Events & Highlights</span>
               </h1>
-              <div className="flex items-center justify-center mb-6">
-                <div className="inline-flex items-center gap-2 rounded-md bg-white/90 px-4 py-2 text-xs font-medium text-gray-700">
-                  <span>Home</span>
-                  <span className="text-gray-400">›</span>
-                  <span>Events</span>
-                </div>
-              </div>
               <p className="text-xl md:text-2xl max-w-4xl mx-auto opacity-90">
                 Explore moments, conferences, and milestones where CloudFirst made an impact.
                 Discover our journey through event photos and highlights.

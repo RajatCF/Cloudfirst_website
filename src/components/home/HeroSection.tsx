@@ -161,15 +161,15 @@ const HeroSection = ({ isPageReady }: HeroSectionProps) => {
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
     const headlineSpans = headlineRef.current?.querySelectorAll('span');
  
-    tl.fromTo(taglineRef.current,  { y: -20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 })
-      .fromTo(headlineRef.current, { y: 40,  opacity: 0 }, { y: 0, opacity: 1, duration: 0.8 }, '-=0.2');
+    tl.fromTo(taglineRef.current,  { y: -18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.38 })
+      .fromTo(headlineRef.current, { y: 32,  opacity: 0 }, { y: 0, opacity: 1, duration: 0.52 }, '-=0.18');
  
     if (headlineSpans && headlineSpans.length) {
       tl.fromTo(
         headlineSpans,
         { scale: 0.92, opacity: 0, y: 20 },
-        { scale: 1, opacity: 1, y: 0, duration: 0.85, stagger: 0.1, ease: 'back.out(1.4)' },
-        '-=0.55'
+        { scale: 1, opacity: 1, y: 0, duration: 0.55, stagger: 0.06, ease: 'back.out(1.35)' },
+        '-=0.34'
       );
     }
  
@@ -178,13 +178,13 @@ const HeroSection = ({ isPageReady }: HeroSectionProps) => {
       tl.fromTo(
         cloudBurstRef.current,
         { opacity: 1, scale: 0.75, filter: 'blur(0px)' },
-        { opacity: 0.92, scale: 1.15, filter: 'blur(1px)', duration: 0.55, ease: 'power2.out' },
-        '+=0.1'
+        { opacity: 0.92, scale: 1.15, filter: 'blur(1px)', duration: 0.38, ease: 'power2.out' },
+        '+=0.02'
       ).fromTo(
         cloudTextRef.current,
         { opacity: 0, scale: 0.65, y: 12 },
-        { opacity: 1, scale: 1, y: 0, duration: 0.7, ease: 'back.out(1.5)' },
-        '-=0.2'
+        { opacity: 1, scale: 1, y: 0, duration: 0.48, ease: 'back.out(1.45)' },
+        '-=0.14'
       );
  
       gsap.to(cloudBurstRef.current, {
@@ -222,10 +222,10 @@ const HeroSection = ({ isPageReady }: HeroSectionProps) => {
       gsap.set(planeRef.current, { display: 'none' });
     }
  
-    tl.fromTo(subRef.current,      { y: 25,  opacity: 0 }, { y: 0, opacity: 1, duration: 0.7 }, '-=0.4')
-      .fromTo(ctaRef.current,      { y: 25,  opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, '-=0.3')
-      .fromTo(statRefs.current,    { y: 25,  opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, stagger: 0.1 }, '-=0.3')
-      .fromTo(formRef.current,     { x: 50,  opacity: 0 }, { x: 0, opacity: 1, duration: 0.9 }, '-=0.8');
+    tl.fromTo(subRef.current,      { y: 20,  opacity: 0 }, { y: 0, opacity: 1, duration: 0.45 }, '-=0.28')
+      .fromTo(ctaRef.current,      { y: 18,  opacity: 0 }, { y: 0, opacity: 1, duration: 0.4 }, '-=0.22')
+      .fromTo(statRefs.current,    { y: 18,  opacity: 0 }, { y: 0, opacity: 1, duration: 0.42, stagger: 0.06 }, '-=0.22')
+      .fromTo(formRef.current,     { x: 32,  opacity: 0 }, { x: 0, opacity: 1, duration: 0.38 }, '-=1.05');
   }, [isPageReady]);
  
   return (

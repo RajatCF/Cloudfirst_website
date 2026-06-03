@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import Layout from '@/components/Layout';
-import Masonry from 'react-masonry-css';
 import Carousel from '@/components/Carousel';
-import { Clock } from 'lucide-react';
 
 const categories = ['All', 'FinOps', 'DevOps', 'Security', 'AI/ML', 'Cloud', 'Data'];
 
@@ -24,6 +22,7 @@ const articles = [
 const Insights = () => {
   const [activeCategory, setActiveCategory] = useState('All');
   const filtered = activeCategory === 'All' ? articles : articles.filter(a => a.category === activeCategory);
+  const carouselItems = articles.slice(0, 4);
 
   
   return (
@@ -37,7 +36,7 @@ const Insights = () => {
 
           {/* Carousel */}
           <Carousel
-            items={articles.map((a, i) => ({
+            items={carouselItems.map((a, i) => ({
               ...a,
               type: a.category === 'FinOps' ? 'case study' : 'news',
               image: [
@@ -45,15 +44,7 @@ const Insights = () => {
                 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80',
                 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=800&q=80',
                 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80',
-                'https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=800&q=80',
-                'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=800&q=80',
-                'https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=800&q=80',
-                'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80',
-                'https://images.unsplash.com/photo-1535223288311-4d6a0c4e7c09?auto=format&fit=crop&w=800&q=80',
-                'https://images.unsplash.com/photo-1465101046530-73398c7f1d71?auto=format&fit=crop&w=800&q=80',
-                'https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=800&q=80',
-                'https://images.unsplash.com/photo-1482062364825-616fd23b8fc1?auto=format&fit=crop&w=800&q=80',
-              ][i % 12]
+              ][i % 4]
             }))}
           />
 
@@ -72,30 +63,41 @@ const Insights = () => {
             ))}
           </div>
 
-          {/* Masonry Grid */}
-          <Masonry
-            breakpointCols={{ default: 3, 1024: 2, 640: 1 }}
-            className="masonry-grid"
-            columnClassName="masonry-grid_column"
-          >
+          {/* Cards grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
             {filtered.map((article, i) => (
-              <div key={i} className="card-lift mb-6 p-6 rounded-2xl border border-border bg-card cursor-pointer group">
-                <span className="inline-block px-3 py-1 rounded-full text-xs font-medium bg-bright-blue/10 text-bright-blue mb-4">
+              <div
+                key={i}
+                className="card-lift h-[220px] sm:h-[230px] p-6 rounded-2xl border border-border bg-card cursor-pointer group flex flex-col"
+              >
+                <span className="inline-block w-fit px-3 py-1 rounded-full text-xs font-medium bg-bright-blue/10 text-bright-blue mb-4">
                   {article.category}
                 </span>
-                <h3 className="text-lg font-display font-bold mb-3 group-hover:text-bright-blue transition-colors leading-snug">
+                <h3
+                  className="text-lg font-display font-bold mb-3 group-hover:text-bright-blue transition-colors leading-snug"
+                  style={{
+                    display: '-webkit-box',
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: 'vertical',
+                    overflow: 'hidden',
+                  }}
+                >
                   {article.title}
                 </h3>
-                <p className="text-sm text-muted-foreground mb-4 leading-relaxed">{article.excerpt}</p>
-                <div className="flex items-center gap-4 text-xs text-muted-foreground">
-                  <span>{article.date}</span>
-                  <span className="flex items-center gap-1">
-                    <Clock className="w-3 h-3" /> {article.readTime}
-                  </span>
-                </div>
+                <p
+                  className="text-sm text-muted-foreground leading-relaxed"
+                  style={{
+                    display: '-webkit-box',
+                    WebkitLineClamp: 3,
+                    WebkitBoxOrient: 'vertical',
+                    overflow: 'hidden',
+                  }}
+                >
+                  {article.excerpt}
+                </p>
               </div>
             ))}
-          </Masonry>
+          </div>
         </div>
       </section>
     </Layout>
