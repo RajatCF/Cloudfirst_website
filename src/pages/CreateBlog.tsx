@@ -2,6 +2,8 @@ import React, { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import { ArrowLeft, Save, Upload, Eye, Clock, User, Tag, FileText, X, Edit2, Trash2, Plus } from 'lucide-react';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
  
 const API_URL = 'https://hor3mik7u1.execute-api.ap-south-1.amazonaws.com/Dev';
 const BLOG_API_URL = `${API_URL}/cloudfirst-blog`;
@@ -119,11 +121,12 @@ const CreateBlog: React.FC = () => {
   };
  
   const handleEditBlog = (blog: BlogItem) => {
+    const { inner } = unwrapAlignedContent(blog.content || '');
     setEditingBlog(blog);
     setFormData({
       title: blog.title,
       author: blog.author,
-      content: blog.content || '',
+      content: inner,
       category: blog.category,
       tags: blog.tags || [],
       imageUrl: blog.imageUrl || '',
@@ -206,11 +209,7 @@ const CreateBlog: React.FC = () => {
   const [newTag, setNewTag] = useState('');
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const categoryDropdownRef = useRef<HTMLDivElement | null>(null);
-
-  const editorRef = useRef<HTMLDivElement | null>(null);
-  const lastEditorInnerHtmlRef = useRef<string>('');
-  const selectionRangeRef = useRef<Range | null>(null);
-  const [editorAlign, setEditorAlign] = useState<'left' | 'center' | 'right' | 'justify'>('left');
+  const quillRef = useRef<ReactQuill | null>(null);
 
   const unwrapAlignedContent = (html: string) => {
     const trimmed = html.trim();
@@ -219,116 +218,53 @@ const CreateBlog: React.FC = () => {
     return { align: match[1].toLowerCase() as 'left' | 'center' | 'right' | 'justify', inner: match[2] };
   };
 
-  const wrapAlignedContent = (align: 'left' | 'center' | 'right' | 'justify', inner: string) => {
-    if (align === 'left') return inner;
-    const textAlign = align === 'justify' ? 'justify' : align;
-    const textAlignLast = align === 'justify' ? 'justify' : 'auto';
-    return `<div data-cf-align="${align}" style="text-align:${textAlign};text-align-last:${textAlignLast};">${inner}</div>`;
-  };
+  const applyHeadingToSelectionOnly = (headerValue: false | 2 | 3) => {
+    const quill = quillRef.current?.getEditor();
+    if (!quill) return;
 
-  const normalizeEditorHtml = (innerHtml: string) => {
-    const container = document.createElement('div');
-    container.innerHTML = innerHtml;
-
-    if (container.querySelector('p')) return innerHtml;
-
-    const nodes = Array.from(container.childNodes);
-    const canConvertTopLevelDivs = nodes.every((node) => {
-      if (node.nodeType === Node.TEXT_NODE) return (node.textContent || '').trim().length === 0;
-      if (node.nodeType !== Node.ELEMENT_NODE) return false;
-      const el = node as Element;
-      return el.tagName === 'DIV';
-    });
-    if (!canConvertTopLevelDivs) return innerHtml;
-
-    nodes.forEach((node) => {
-      if (node.nodeType !== Node.ELEMENT_NODE) return;
-      const el = node as Element;
-      if (el.tagName !== 'DIV') return;
-      const p = document.createElement('p');
-      p.innerHTML = el.innerHTML;
-      el.replaceWith(p);
-    });
-
-    return container.innerHTML;
-  };
-
-  useEffect(() => {
-    const { align, inner } = unwrapAlignedContent(formData.content || '');
-    if (align !== editorAlign) setEditorAlign(align);
-
-    const el = editorRef.current;
-    if (!el) return;
-
-    if (document.activeElement === el) return;
-
-    const normalized = normalizeEditorHtml(inner);
-    if (normalized !== lastEditorInnerHtmlRef.current && normalized !== el.innerHTML) {
-      el.innerHTML = normalized;
-      lastEditorInnerHtmlRef.current = normalized;
-    }
-  }, [formData.content]);
-
-  useEffect(() => {
-    try {
-      document.execCommand('defaultParagraphSeparator', false, 'p');
-    } catch {
-      // ignore
-    }
-  }, []);
-
-  useEffect(() => {
-    const onSelectionChange = () => {
-      const el = editorRef.current;
-      if (!el) return;
-      const sel = document.getSelection();
-      if (!sel || sel.rangeCount === 0) return;
-      const range = sel.getRangeAt(0);
-      const startNode = range.startContainer;
-      const endNode = range.endContainer;
-      const isInside = el.contains(startNode) || el.contains(endNode);
-      if (!isInside) return;
-      selectionRangeRef.current = range.cloneRange();
-    };
-
-    document.addEventListener('selectionchange', onSelectionChange);
-    return () => document.removeEventListener('selectionchange', onSelectionChange);
-  }, []);
-
-  const restoreEditorSelection = () => {
-    const el = editorRef.current;
-    if (!el) return;
-    const sel = document.getSelection();
-    if (!sel) return;
-    const range = selectionRangeRef.current;
+    quill.focus();
+    const range = quill.getSelection(true);
     if (!range) return;
-    el.focus();
-    sel.removeAllRanges();
-    sel.addRange(range);
-  };
 
-  const setAlignment = (align: 'left' | 'center' | 'right' | 'justify') => {
-    const inner = normalizeEditorHtml(editorRef.current?.innerHTML ?? '');
-    lastEditorInnerHtmlRef.current = inner;
-    setEditorAlign(align);
-    setFormData(prev => ({ ...prev, content: wrapAlignedContent(align, inner) }));
-  };
-
-  const execEditorCommand = (command: string, value?: string) => {
-    restoreEditorSelection();
-    if (command === 'foreColor') {
-      document.execCommand('styleWithCSS', false, 'true');
+    if (range.length === 0) {
+      quill.formatLine(range.index, 1, 'header', headerValue, 'user');
+      return;
     }
-    document.execCommand(command, false, value);
-    const inner = normalizeEditorHtml(editorRef.current?.innerHTML ?? '');
-    lastEditorInnerHtmlRef.current = inner;
-    setFormData(prev => ({ ...prev, content: wrapAlignedContent(editorAlign, inner) }));
-  };
 
-  const handleEditorInput = () => {
-    const inner = normalizeEditorHtml(editorRef.current?.innerHTML ?? '');
-    lastEditorInnerHtmlRef.current = inner;
-    setFormData(prev => ({ ...prev, content: wrapAlignedContent(editorAlign, inner) }));
+    const start = range.index;
+    const end = range.index + range.length;
+    const [startLine, startOffset] = quill.getLine(start);
+    const [endLine, endOffset] = quill.getLine(end);
+
+    if (!startLine || !endLine) {
+      quill.formatLine(range.index, range.length, 'header', headerValue, 'user');
+      return;
+    }
+
+    if (startLine !== endLine) {
+      quill.formatLine(range.index, range.length, 'header', headerValue, 'user');
+      return;
+    }
+
+    const lineStartIndex = quill.getIndex(startLine);
+    const lineTextLength = Math.max(0, startLine.length() - 1);
+    const selectionStartsAtLineStart = startOffset === 0;
+    const selectionEndsAtLineEnd = endOffset === lineTextLength;
+
+    if (selectionStartsAtLineStart && selectionEndsAtLineEnd) {
+      quill.formatLine(lineStartIndex, 1, 'header', headerValue, 'user');
+      return;
+    }
+
+    if (endOffset < lineTextLength) {
+      quill.insertText(lineStartIndex + endOffset, '\n', 'user');
+    }
+    if (startOffset > 0) {
+      quill.insertText(lineStartIndex + startOffset, '\n', 'user');
+    }
+
+    const formattedLineIndex = lineStartIndex + startOffset + (startOffset > 0 ? 1 : 0);
+    quill.formatLine(formattedLineIndex, 1, 'header', headerValue, 'user');
   };
 
   const addCategory = () => {
@@ -420,7 +356,8 @@ const CreateBlog: React.FC = () => {
  
   const calculateReadTime = (content: string) => {
     const wordsPerMinute = 200;
-    const words = content.trim().split(/\s+/).length;
+    const text = stripHtml(content);
+    const words = text.trim().split(/\s+/).filter(Boolean).length;
     const minutes = Math.ceil(words / wordsPerMinute);
     return `${minutes} min read`;
   };
@@ -1011,109 +948,79 @@ const CreateBlog: React.FC = () => {
                   <FileText className="w-4 h-4 inline mr-2" />
                   Blog Content *
                 </label>
-                <div className="border border-gray-300 rounded-xl overflow-hidden focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-transparent bg-white">
+                <div className="border border-gray-300 rounded-xl focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-transparent bg-white">
                   <div className="flex flex-wrap items-center gap-2 p-3 border-b border-gray-200 bg-gray-50">
-                    <button
-                      type="button"
-                      onClick={() => execEditorCommand('bold')}
-                      className="px-3 py-1.5 rounded-lg bg-white border border-gray-200 hover:bg-gray-100 text-sm font-semibold"
-                    >
-                      B
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => execEditorCommand('italic')}
-                      className="px-3 py-1.5 rounded-lg bg-white border border-gray-200 hover:bg-gray-100 text-sm italic font-medium"
-                    >
-                      I
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => execEditorCommand('underline')}
-                      className="px-3 py-1.5 rounded-lg bg-white border border-gray-200 hover:bg-gray-100 text-sm underline font-medium"
-                    >
-                      U
-                    </button>
-
-                    <input
-                      type="color"
-                      onChange={(e) => execEditorCommand('foreColor', e.target.value)}
-                      className="h-9 w-10 p-1 rounded-lg bg-white border border-gray-200"
-                      aria-label="Text color"
-                    />
-
                     <select
-                      onChange={(e) => execEditorCommand('formatBlock', e.target.value)}
-                      className="h-9 px-3 rounded-lg bg-white border border-gray-200 text-sm"
-                      defaultValue="p"
+                      className="h-9 px-3 rounded-lg bg-white border border-gray-200 text-sm text-gray-700 min-w-[140px]"
+                      defaultValue=""
+                      onChange={(e) => {
+                        const v = (e.target as HTMLSelectElement).value;
+                        if (v === '2') applyHeadingToSelectionOnly(2);
+                        else if (v === '3') applyHeadingToSelectionOnly(3);
+                        else applyHeadingToSelectionOnly(false);
+                        (e.target as HTMLSelectElement).value = '';
+                      }}
                     >
-                      <option value="p">Paragraph</option>
-                      <option value="h2">Heading 2</option>
-                      <option value="h3">Heading 3</option>
-                      <option value="blockquote">Quote</option>
+                      <option value="">Paragraph</option>
+                      <option value="2">Heading 2</option>
+                      <option value="3">Heading 3</option>
                     </select>
 
-                    <div className="h-6 w-px bg-gray-200 mx-1" />
+                    <div
+                      id="cf-quill-toolbar"
+                      className="ql-toolbar ql-snow flex flex-wrap items-center gap-2 p-0 border-0 bg-transparent"
+                    >
+                      <button type="button" className="ql-bold px-3 py-1.5 rounded-lg bg-white border border-gray-200 hover:bg-gray-100 text-sm font-semibold" />
+                      <button type="button" className="ql-italic px-3 py-1.5 rounded-lg bg-white border border-gray-200 hover:bg-gray-100 text-sm italic font-medium" />
+                      <button type="button" className="ql-underline px-3 py-1.5 rounded-lg bg-white border border-gray-200 hover:bg-gray-100 text-sm underline font-medium" />
 
-                    <button
-                      type="button"
-                      onClick={() => setAlignment('left')}
-                      className={`px-3 py-1.5 rounded-lg border text-sm ${editorAlign === 'left' ? 'bg-blue-600 text-white border-blue-600' : 'bg-white border-gray-200 hover:bg-gray-100 text-gray-700'}`}
-                    >
-                      Left
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setAlignment('center')}
-                      className={`px-3 py-1.5 rounded-lg border text-sm ${editorAlign === 'center' ? 'bg-blue-600 text-white border-blue-600' : 'bg-white border-gray-200 hover:bg-gray-100 text-gray-700'}`}
-                    >
-                      Center
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setAlignment('right')}
-                      className={`px-3 py-1.5 rounded-lg border text-sm ${editorAlign === 'right' ? 'bg-blue-600 text-white border-blue-600' : 'bg-white border-gray-200 hover:bg-gray-100 text-gray-700'}`}
-                    >
-                      Right
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setAlignment('justify')}
-                      className={`px-3 py-1.5 rounded-lg border text-sm ${editorAlign === 'justify' ? 'bg-blue-600 text-white border-blue-600' : 'bg-white border-gray-200 hover:bg-gray-100 text-gray-700'}`}
-                    >
-                      Justify
-                    </button>
+                      <button type="button" className="ql-list px-3 py-1.5 rounded-lg bg-white border border-gray-200 hover:bg-gray-100 text-sm font-medium text-gray-700" value="bullet" />
+                      <button type="button" className="ql-list px-3 py-1.5 rounded-lg bg-white border border-gray-200 hover:bg-gray-100 text-sm font-medium text-gray-700" value="ordered" />
 
-                    <div className="h-6 w-px bg-gray-200 mx-1" />
+                      <button type="button" className="ql-link px-3 py-1.5 rounded-lg bg-white border border-gray-200 hover:bg-gray-100 text-sm font-medium text-gray-700" />
 
-                    <button
-                      type="button"
-                      onClick={() => execEditorCommand('removeFormat')}
-                      className="px-3 py-1.5 rounded-lg bg-white border border-gray-200 hover:bg-gray-100 text-sm font-medium text-gray-700"
-                    >
-                      Clear
-                    </button>
+                      <button type="button" className="ql-blockquote px-3 py-1.5 rounded-lg bg-white border border-gray-200 hover:bg-gray-100 text-sm font-medium text-gray-700" />
+
+                      <select className="ql-align h-9 px-3 rounded-lg bg-white border border-gray-200 text-sm" defaultValue="">
+                        <option value="" />
+                        <option value="center" />
+                        <option value="right" />
+                        <option value="justify" />
+                      </select>
+
+                      <select className="ql-color h-9 px-3 rounded-lg bg-white border border-gray-200 text-sm" />
+
+                      <button type="button" className="ql-clean px-3 py-1.5 rounded-lg bg-white border border-gray-200 hover:bg-gray-100 text-sm font-medium text-gray-700">
+                        Clear
+                      </button>
+                    </div>
                   </div>
-
-                  <div
-                    ref={editorRef}
-                    contentEditable
-                    onInput={handleEditorInput}
-                    onMouseUp={() => {
-                      const sel = document.getSelection();
-                      if (!sel || sel.rangeCount === 0) return;
-                      selectionRangeRef.current = sel.getRangeAt(0).cloneRange();
+                  <ReactQuill
+                    ref={quillRef}
+                    theme="snow"
+                    value={formData.content}
+                    onChange={(value) => setFormData(prev => ({ ...prev, content: value }))}
+                    modules={{
+                      toolbar: {
+                        container: '#cf-quill-toolbar',
+                      },
+                      clipboard: { matchVisual: false },
                     }}
-                    onKeyUp={() => {
-                      const sel = document.getSelection();
-                      if (!sel || sel.rangeCount === 0) return;
-                      selectionRangeRef.current = sel.getRangeAt(0).cloneRange();
-                    }}
-                    className="w-full px-4 py-3 min-h-[300px] outline-none"
-                    style={{
-                      textAlign: editorAlign === 'justify' ? 'justify' : editorAlign,
-                      textAlignLast: editorAlign === 'justify' ? 'justify' : 'auto',
-                    }}
+                    formats={[
+                      'header',
+                      'bold',
+                      'italic',
+                      'underline',
+                      'list',
+                      'bullet',
+                      'blockquote',
+                      'link',
+                      'align',
+                      'color',
+                    ]}
+                    className="cf-quill-editor"
+                    style={{ minHeight: 320 }}
+                    placeholder="Write your blog content here..."
                   />
                 </div>
                 <p className="text-sm text-gray-500 mt-2">

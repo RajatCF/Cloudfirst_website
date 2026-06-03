@@ -293,3 +293,34 @@ html, body {
     background-clip: padding-box;
   }
 }
+
+.cf-quill-editor .ql-container {
+  border: 0;
+  height: 320px !important;
+  min-height: 320px !important;
+}
+
+.cf-quill-editor .ql-editor {
+  height: 320px !important;
+  min-height: 320px !important;
+  overflow-y: auto;
+}
+
+.cf-quill-editor .ql-editor h2 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+}
+
+.cf-quill-editor .ql-editor h3 {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+}
+
+.cf-quill-editor .ql-editor blockquote {
+  border-left: 4px solid hsl(var(--border));
+  padding-left: 1rem;
+  margin: 0.75rem 0;
+  color: hsl(var(--muted-foreground));
+}

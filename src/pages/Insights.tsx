@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import Layout from '@/components/Layout';
-import Carousel from '@/components/Carousel';
 
 const categories = ['All', 'FinOps', 'DevOps', 'Security', 'AI/ML', 'Cloud', 'Data'];
 
@@ -19,10 +18,30 @@ const articles = [
   { title: 'Real-Time ML Feature Stores on Kubernetes', category: 'AI/ML', date: 'Jan 22, 2026', readTime: '11 min', excerpt: 'Building low-latency feature serving infrastructure for production ML.' },
 ];
 
+const featuredImages = [
+  'https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/insights/image1.jpg',
+  'https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/insights/image2.jpg',
+  'https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/insights/image3.jpg',
+  'https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/insights/image4.jpg',
+  'https://cloudfirst-website-assets.s3.ap-south-1.amazonaws.com/All_image/insights/image5.jpg',
+];
+
 const Insights = () => {
   const [activeCategory, setActiveCategory] = useState('All');
   const filtered = activeCategory === 'All' ? articles : articles.filter(a => a.category === activeCategory);
-  const carouselItems = articles.slice(0, 4);
+  const featured = articles.slice(0, 4).map((a, idx) => ({ ...a, image: featuredImages[idx % featuredImages.length] }));
+  const visibleCards = filtered.slice(0, 6);
+
+  const getTagClassName = (category: string) => {
+    const key = category.toLowerCase();
+    if (key.includes('finops')) return 'bg-amber-50 text-amber-700 border border-amber-100';
+    if (key.includes('devops')) return 'bg-sky-50 text-sky-700 border border-sky-100';
+    if (key.includes('security')) return 'bg-emerald-50 text-emerald-700 border border-emerald-100';
+    if (key.includes('ai/ml') || key.includes('ai')) return 'bg-violet-50 text-violet-700 border border-violet-100';
+    if (key.includes('cloud')) return 'bg-blue-50 text-blue-700 border border-blue-100';
+    if (key.includes('data')) return 'bg-indigo-50 text-indigo-700 border border-indigo-100';
+    return 'bg-gray-50 text-gray-700 border border-gray-100';
+  };
 
   
   return (
@@ -34,19 +53,30 @@ const Insights = () => {
             <p className="text-lg text-muted-foreground">Deep dives into cloud, AI, and modern engineering practices.</p>
           </div>
 
-          {/* Carousel */}
-          <Carousel
-            items={carouselItems.map((a, i) => ({
-              ...a,
-              type: a.category === 'FinOps' ? 'case study' : 'news',
-              image: [
-                'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=800&q=80',
-                'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80',
-                'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=800&q=80',
-                'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80',
-              ][i % 4]
-            }))}
-          />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            {featured.map((item, idx) => (
+              <div
+                key={`${item.title}-${idx}`}
+                className="rounded-2xl overflow-hidden border border-border bg-card shadow-lg"
+              >
+                <div className="relative h-48 md:h-56">
+                  <img src={item.image} alt={item.title} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-5 text-white">
+                    <span className="inline-block px-3 py-1 rounded-full text-xs font-medium bg-white/15 border border-white/20">
+                      {item.category}
+                    </span>
+                    <div className="mt-3 text-lg md:text-xl font-semibold leading-snug">
+                      {item.title}
+                    </div>
+                    <div className="mt-2 text-sm text-white/85 leading-relaxed">
+                      {item.excerpt}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
 
           {/* Filters */}
           <div className="flex flex-wrap gap-2 mb-12">
@@ -64,13 +94,13 @@ const Insights = () => {
           </div>
 
           {/* Cards grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            {filtered.map((article, i) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {visibleCards.map((article, i) => (
               <div
                 key={i}
                 className="card-lift h-[220px] sm:h-[230px] p-6 rounded-2xl border border-border bg-card cursor-pointer group flex flex-col"
               >
-                <span className="inline-block w-fit px-3 py-1 rounded-full text-xs font-medium bg-bright-blue/10 text-bright-blue mb-4">
+                <span className={`inline-block w-fit px-3 py-1 rounded-full text-xs font-semibold mb-4 ${getTagClassName(article.category)}`}>
                   {article.category}
                 </span>
                 <h3

@@ -351,11 +351,11 @@ const BlogsPost: React.FC = () => {
             
             {/* Featured Image */}
             {blog.imageUrl && (
-              <div className="w-full h-64 md:h-80 rounded-2xl overflow-hidden mb-8 shadow-md">
+              <div className="w-full rounded-2xl overflow-hidden mb-8 shadow-md bg-gray-50">
                 <img 
                   src={blog.imageUrl}
                   alt={blog.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-auto block"
                 />
               </div>
             )}
