@@ -168,6 +168,36 @@ const SectionThemeController = () => {
   return null;
 };
 
+const CanonicalController = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    const baseUrl = "https://cloudfirst.tech";
+
+    const normalizedPath = (() => {
+      if (pathname === "/") return "/";
+      return pathname.replace(/\/+$/, "");
+    })();
+
+    const canonicalHref = (() => {
+      if (normalizedPath === "/") return `${baseUrl}/`;
+      if (normalizedPath === "/about") return `${baseUrl}/about`;
+      if (normalizedPath === "/contact") return `${baseUrl}/contact`;
+      return `${baseUrl}${normalizedPath}`;
+    })();
+
+    let link = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
+    if (!link) {
+      link = document.createElement("link");
+      link.setAttribute("rel", "canonical");
+      document.head.appendChild(link);
+    }
+    link.setAttribute("href", canonicalHref);
+  }, [pathname]);
+
+  return null;
+};
+
 const OgGreenTreeButton = () => {
   const navigate = useNavigate();
 
@@ -210,13 +240,15 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <SectionThemeController />
+        <CanonicalController />
         <ScrollToTop />
         <OgGreenTreeButton />
         <Suspense fallback={<RouteLoader />}>
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/industries" element={<Industries />} />
-            <Route path="/solutions" element={<Solutions />} />
+            <Route path="/solutions" element={<Navigate to="/solutions/cloud-migration" replace />} />
+            <Route path="/services" element={<Navigate to="/services/cloud-strategy" replace />} />
             <Route path="/insights" element={<Insights />} />
             <Route path="/insights/events" element={<ResourceEvents />} />
             <Route path="/events" element={<ResourceEvents />} />

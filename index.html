@@ -1,14 +1,41 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', 'GTM-PJ3BQMT5');
+    </script>
+    <!-- End Google Tag Manager -->
     <!-- Google tag (gtag.js) --> <script async src="https://www.googletagmanager.com/gtag/js?id=G-L5BMVYGP56"></script> <script>   window.dataLayer = window.dataLayer || [];   function gtag(){dataLayer.push(arguments);}   gtag('js', new Date());   gtag('config', 'G-L5BMVYGP56'); </script>
     <link rel="icon" href="https://cdn.cloudfirst.tech/All_image/new_faviconn.png" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- TODO: Set the document title to the name of your application -->
-    <title>CloudFirst Technology | Cloud Services & Digital Transformation Company</title>
-    <meta name="description" content="CloudFirst Technology provides cloud migration, optimization, and managed services across AWS, Azure, and Google Cloud. Secure, scalable, and cost-efficient solutions" />
+    <title>Cloud Services & Digital Transformation | CloudFirst Technology</title>
+    <meta name="description" content="AWS, Azure & Google Cloud experts — migrate, optimize, and manage your cloud infrastructure with CloudFirst. Get a free consultation today." />
     <meta name="author" content="Cloudfirst" />
+    <link rel="canonical" href="https://cloudfirst.tech/" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://cloudfirst.tech/#organization",
+        "name": "CloudFirst Technology",
+        "url": "https://cloudfirst.tech/",
+        "logo": "https://cdn.cloudfirst.tech/All_image/new_faviconn.png",
+        "description": "CloudFirst Technology provides cloud migration, optimization, and managed services across AWS, Azure, and Google Cloud."
+      }
+    </script>
 
     <!-- TODO: Update og:title to match your application name -->
     <meta property="og:title" content="CloudFirst Technology | Cloud Services & Digital Transformation" />
@@ -22,6 +49,16 @@
   </head>
 
   <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-PJ3BQMT5"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
