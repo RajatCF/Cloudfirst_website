@@ -5,6 +5,7 @@ import { Send, MapPin, Phone, Mail, Calendar } from 'lucide-react';
 const clamp = (v: number, min: number, max: number) => Math.min(max, Math.max(min, v));
 
 const corporateOffice = {
+  flagCode: 'in',
   heading: 'Bengaluru',
   lines: [
     'CloudFirst Technology Pvt. Ltd.',
@@ -25,6 +26,7 @@ const internationalOffices = [
       '+971 58 575 1693',
     ],
   },
+
   {
     flagCode: 'us',
     heading: 'United States',
@@ -34,6 +36,11 @@ const internationalOffices = [
     flagCode: 'sg',
     heading: 'Singapore',
     lines: ['10 Anson Road, International Plaza,', '079903, Singapore', '+91-844 844 0769'],
+  },
+    {
+    flagCode: 'gb',
+    heading: 'London, UK',
+    lines: ['gragAI FACTORY LTD', '20 WENLOCKROAD', 'LONDON N1 7GU', 'United Kingdom'],
   },
 ];
 
@@ -200,9 +207,16 @@ const Contact = () => {
               <div className="space-y-10">
                 <div>
                   <div className="flex gap-4">
-                    <MapPin className="w-5 h-5 text-bright-blue flex-shrink-0 mt-1" />
                     <div>
-                      <h3 className="font-display font-bold">{corporateOffice.heading}</h3>
+                      <div className="flex items-center gap-2">
+                        <img
+                          src={`https://flagcdn.com/24x18/${corporateOffice.flagCode}.png`}
+                          alt=""
+                          className="w-6 h-[18px] flex-shrink-0 rounded-sm object-cover"
+                          loading="lazy"
+                        />
+                        <h3 className="font-display font-bold">{corporateOffice.heading}</h3>
+                      </div>
                       <div className="mt-1 space-y-0.5">
                         {corporateOffice.lines.map((line) => (
                           <p key={line} className="text-sm text-muted-foreground">

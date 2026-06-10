@@ -7,6 +7,7 @@ import { lazy, Suspense, useEffect } from "react";
 import { Leaf } from "lucide-react";
 import ScrollToTop from "./components/ScrollToTop";
 import Footer from "./components/Footer";
+import FaqJsonLd from "./components/FaqJsonLd";
  
 // Lazy loaded components for better performance
 const Index = lazy(() => import("./pages/Index"));
@@ -241,6 +242,7 @@ const App = () => (
       <BrowserRouter>
         <SectionThemeController />
         <CanonicalController />
+        <FaqJsonLd />
         <ScrollToTop />
         <OgGreenTreeButton />
         <Suspense fallback={<RouteLoader />}>
