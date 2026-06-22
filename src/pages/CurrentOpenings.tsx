@@ -1,8 +1,11 @@
 import { motion } from 'framer-motion';
 import { Briefcase } from 'lucide-react';
 import Layout from '@/components/Layout';
+import JobOpeningsSection from '@/components/careers/JobOpeningsSection';
+import { useJobOpenings } from '@/hooks/useJobOpenings';
 
 const CurrentOpenings = () => {
+  const { data: jobOpenings = [], isLoading } = useJobOpenings();
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
     visible: { 
@@ -14,6 +17,8 @@ const CurrentOpenings = () => {
       }
     }
   };
+
+  const hasOpenings = !isLoading && jobOpenings.length > 0;
 
   return (
     <Layout>
@@ -31,14 +36,20 @@ const CurrentOpenings = () => {
               Current <span className="text-bright-blue">Openings</span>
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              We are not hiring at the moment.
+              {isLoading
+                ? 'Loading current openings...'
+                : hasOpenings
+                  ? `Join our team — ${jobOpenings.length} open position${jobOpenings.length !== 1 ? 's' : ''} available.`
+                  : 'We are not hiring at the moment.'}
             </p>
-            <div className="mt-8 flex items-center justify-center">
-              <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm">
-                <Briefcase className="w-5 h-5 text-bright-blue" />
-                <span className="text-gray-700 font-medium">No current opening</span>
+            {hasOpenings && (
+              <div className="mt-8 flex items-center justify-center">
+                <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm">
+                  <Briefcase className="w-5 h-5 text-bright-blue" />
+                  <span className="text-gray-700 font-medium">{jobOpenings.length} open position{jobOpenings.length !== 1 ? 's' : ''}</span>
+                </div>
               </div>
-            </div>
+            )}
           </motion.div>
         </div>
       </section>
@@ -46,34 +57,7 @@ const CurrentOpenings = () => {
       {/* Main Content Section */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4">
-          
-          {/* Section Title */}
-          <motion.div
-            className="text-center mb-16"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.1 }}
-            variants={fadeInUp}
-          >
-            <p className="text-gray-600 text-lg max-w-3xl mx-auto">
-              Explore exciting career opportunities and be part of our innovative team driving the future of cloud technology.
-            </p>
-          </motion.div>
-
-          <motion.div
-            className="max-w-3xl mx-auto"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.1 }}
-            variants={fadeInUp}
-          >
-            <div className="bg-white rounded-2xl border border-gray-200 shadow-lg p-8 sm:p-10 text-center">
-              <h2 className="text-3xl sm:text-4xl font-semibold text-gray-900 mb-4">No current opening</h2>
-              <p className="text-gray-600 text-lg leading-relaxed max-w-2xl mx-auto">
-                Please check back later for new opportunities.
-              </p>
-            </div>
-          </motion.div>
+          <JobOpeningsSection variant="full" />
         </div>
       </section>
 

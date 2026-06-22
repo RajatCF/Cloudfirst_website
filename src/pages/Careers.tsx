@@ -1,6 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
+import JobOpeningsSection from "@/components/careers/JobOpeningsSection";
+import { useJobOpenings } from "@/hooks/useJobOpenings";
 
 const values = [
   { icon: "🚀", title: "Deep technical craft", desc: "We care about doing things properly. Engineers here grow faster because they work on hard problems with smart people." },
@@ -9,10 +11,9 @@ const values = [
   { icon: "🤝", title: "Ownership culture", desc: "No micromanagement. You own your work, your customer relationships, and your professional development." },
 ];
 
-const openRoles: Array<{ team: string; title: string; location: string; type: string }> = [];
-
 const Careers: React.FC = () => {
   const navigate = useNavigate();
+  const { data: jobOpenings = [] } = useJobOpenings();
 
   return (
     <div className="min-h-screen bg-white">
@@ -72,37 +73,15 @@ const Careers: React.FC = () => {
       {/* Open roles */}
       <div className="bg-gray-50 border-y border-gray-100 py-16">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-2xl font-bold text-gray-900" style={{ fontFamily: "'Georgia', serif" }}>Current openings</h2>
-            {openRoles.length > 0 ? (
-              <button onClick={() => navigate("/current-openings")} className="text-sm text-blue-600 hover:text-blue-800 font-semibold">View all →</button>
-            ) : null}
-          </div>
-          {openRoles.length > 0 ? (
-            <div className="space-y-3">
-              {openRoles.map((role) => (
-                <div key={role.title} className="bg-white rounded-xl border border-gray-100 shadow-sm p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:border-blue-200 hover:shadow-md transition-all">
-                  <div className="flex items-center gap-4">
-                    <span className="text-[10px] font-bold text-blue-600 bg-blue-50 border border-blue-100 rounded px-2 py-0.5 uppercase tracking-wider flex-shrink-0">{role.team}</span>
-                    <div>
-                      <div className="text-sm font-bold text-gray-900">{role.title}</div>
-                      <div className="text-xs text-gray-400 mt-0.5">{role.location} · {role.type}</div>
-                    </div>
-                  </div>
-                  <button
-                    disabled
-                    className="flex-shrink-0 px-4 py-2 bg-blue-600 text-white text-xs font-bold rounded-lg transition-colors whitespace-nowrap cursor-not-allowed opacity-60"
-                    title="Applications currently closed"
-                  >
-                    Apply →
-                  </button>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-10 text-center">
-              <div className="text-lg font-bold text-gray-900">No current opening</div>
-              <div className="text-sm text-gray-500 mt-2">Please check back later.</div>
+          <JobOpeningsSection variant="compact" />
+          {jobOpenings.length > 0 && (
+            <div className="text-center mt-6">
+              <button
+                onClick={() => navigate("/current-openings")}
+                className="text-sm text-blue-600 hover:text-blue-800 font-semibold"
+              >
+                View all openings →
+              </button>
             </div>
           )}
         </div>

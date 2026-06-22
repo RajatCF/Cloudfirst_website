@@ -13,6 +13,8 @@ const Layout = ({ children }: LayoutProps) => {
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     });
 
+    window.__lenis = lenis;
+
     function raf(time: number) {
       lenis.raf(time);
       requestAnimationFrame(raf);
@@ -21,6 +23,7 @@ const Layout = ({ children }: LayoutProps) => {
     requestAnimationFrame(raf);
 
     return () => {
+      delete window.__lenis;
       lenis.destroy();
     };
   }, []);
