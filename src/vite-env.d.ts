@@ -15,5 +15,6 @@ interface Window {
   __lenis?: {
     stop: () => void;
     start: () => void;
+    scrollTo: (target: number | Element, options?: { immediate?: boolean; offset?: number }) => void;
   };
 }

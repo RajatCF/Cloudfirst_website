@@ -4,7 +4,8 @@ import Navbar from '../components/Navbar';
 import { ArrowLeft, Save, Upload, Eye, Clock, User, Tag, FileText, X, Edit2, Trash2, Plus } from 'lucide-react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
- 
+import { slugify } from '../lib/blogUtils';
+
 const API_URL = 'https://hor3mik7u1.execute-api.ap-south-1.amazonaws.com/Dev';
 const BLOG_API_URL = `${API_URL}/cloudfirst-blog`;
 const BLOG_CREATE_URL = `${API_URL}/cloudfirst-blogs`;
@@ -372,6 +373,7 @@ const CreateBlog: React.FC = () => {
       const nowIso = new Date().toISOString();
       const blogData = {
         title: formData.title,
+        slug: slugify(formData.title),
         content: formData.content,
         author: formData.author,
         tags: formData.tags,

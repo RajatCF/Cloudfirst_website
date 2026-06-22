@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
  
  
 import { Brain, User, Clock, ArrowRight, BookOpen, Search } from "lucide-react";
+import { buildBlogPath } from "@/lib/blogUtils";
  
 const API_URL = 'https://hor3mik7u1.execute-api.ap-south-1.amazonaws.com/Dev';
 const BLOG_API_URL = `${API_URL}/cloudfirst-blog`;
@@ -14,6 +15,7 @@ type Blog = {
   EntityType?: string;
   postId?: string;
   id?: string;
+  slug?: string;
   title: string;
   author: string;
   content: string;
@@ -153,6 +155,7 @@ const Blogs: React.FC = () => {
             EntityType: scalarString(item?.EntityType) || scalarString(item?.entityType),
             postId: scalarString(item?.postId) || rawId,
             id: scalarString(item?.id) || rawId,
+            slug: scalarString(item?.slug) || undefined,
             title: scalarString(item?.title) || scalarString(item?.post_title) || '',
             author: scalarString(item?.author) || scalarString(item?.post_author) || '',
             content: scalarString(item?.content) || scalarString(item?.post_content) || scalarString(item?.body) || '',
@@ -401,7 +404,7 @@ const Blogs: React.FC = () => {
                   </div>
                  
                   <button
-                    onClick={() => navigate(`/blog/${featuredBlog.id || featuredBlog.postId || featuredBlog.PK}`)}
+                    onClick={() => navigate(buildBlogPath(featuredBlog, blogs))}
                     className="inline-flex items-center gap-2 bg-gradient-to-r from-bright-blue to-light-blue text-white font-medium px-8 py-3 rounded-xl hover:from-bright-blue hover:to-light-blue transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
                   >
                     Read Full Article <ArrowRight className="w-4 h-4" />
@@ -486,7 +489,7 @@ const Blogs: React.FC = () => {
                         </div>
  
                         <button
-                          onClick={() => navigate(`/blog/${blog.id || blog.postId || blog.PK}`)}
+                          onClick={() => navigate(buildBlogPath(blog, blogs))}
                           className="text-blue-600 hover:text-blue-800 font-medium text-sm flex items-center gap-1 transition-all duration-300 hover:gap-2"
                         >
                           Read More <ArrowRight className="w-3 h-3" />

@@ -214,7 +214,7 @@ const menuConfig: Record<MenuKey, MenuConfig> = {
           items: [
             { label: 'Our clients', path: '/company/clients' },
             { label: 'Press & media', path: '/company/press-media' },
-            { label: 'Careers', path: '/company/careers' },
+            { label: 'Join Us', path: '/company/join-us' },
             { label: 'Support Plans', path: '/support-plans' },
             { label: 'Contact us', path: '/contact' },
           ],

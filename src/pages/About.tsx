@@ -1,6 +1,7 @@
 import Layout from '@/components/Layout';
 import { Globe, Award, Users, TrendingUp, ShieldCheck, Lightbulb, Heart, Star, ArrowRight, Linkedin } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 
 const S3_IMAGE_BASE = 'https://cdn.cloudfirst.tech/S3_image/';
@@ -119,6 +120,12 @@ const getPerspectiveType = (url: string) => {
 const About = () => {
   const { hash } = useLocation();
   const showLeadership = hash === '#our-leadership';
+
+  useEffect(() => {
+    if (!showLeadership) return;
+    window.__lenis?.scrollTo(0, { immediate: true });
+    window.scrollTo(0, 0);
+  }, [showLeadership]);
 
   return (
     <Layout>
@@ -574,7 +581,7 @@ const About = () => {
               Get in touch <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
-              to="/company/careers"
+              to="/company/join-us"
               className="inline-flex items-center gap-2 px-7 py-3.5 border border-white/20 hover:border-white/40 text-white/70 text-sm font-medium rounded-lg transition-colors"
             >
               View open roles

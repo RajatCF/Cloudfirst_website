@@ -2,16 +2,18 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { 
- 
-  User, 
-  Clock, 
-  
-  ArrowLeft, 
+import {
+  buildBlogPath,
+  parseBlogUrlParam,
+  resolveBlogIdFromParam,
+} from "@/lib/blogUtils";
+import {
+  User,
+  Clock,
+  ArrowLeft,
   Calendar,
   BookOpen,
-  
-  Tag
+  Tag,
 } from "lucide-react";
 
 const API_URL = 'https://hor3mik7u1.execute-api.ap-south-1.amazonaws.com/Dev';
@@ -23,6 +25,7 @@ type Blog = {
   EntityType: string;
   postId: string;
   title: string;
+  slug?: string;
   author: string;
   content: string;
   readTime: string;
@@ -34,8 +37,9 @@ type Blog = {
 };
 
 const BlogsPost: React.FC = () => {
-  const { id } = useParams<{ id: string }>();
+  const { slug: slugParam } = useParams<{ slug: string }>();
   const [blog, setBlog] = useState<Blog | null>(null);
+  const [allBlogs, setAllBlogs] = useState<Blog[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string>('');
   const navigate = useNavigate();
@@ -119,6 +123,7 @@ const BlogsPost: React.FC = () => {
       EntityType: scalarString(item?.EntityType) || scalarString(item?.entityType) || 'blog',
       postId: scalarString(item?.postId) || rawId,
       title: scalarString(item?.title) || scalarString(item?.post_title) || '',
+      slug: scalarString(item?.slug) || undefined,
       author: scalarString(item?.author) || scalarString(item?.post_author) || '',
       content: scalarString(item?.content) || scalarString(item?.post_content) || scalarString(item?.body) || '',
       readTime:
@@ -163,16 +168,46 @@ const BlogsPost: React.FC = () => {
   };
 
   useEffect(() => {
-    if (!id) return;
-    
-    const fetchBlogById = async () => {
+    if (!slugParam) return;
+
+    const fetchBlog = async () => {
       try {
         setLoading(true);
-        const response = await fetch(`${BLOG_API_URL}/${id}`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+        setError("");
+
+        const listResponse = await fetch(BLOG_API_URL, {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        });
+
+        let blogsForLookup: Blog[] = [];
+        if (listResponse.ok) {
+          const listData = await listResponse.json();
+          const blogsArray = listData.data || listData || [];
+          blogsForLookup = blogsArray.map((item: unknown) => normalizeBlog(item));
+          setAllBlogs(blogsForLookup);
+        }
+
+        const parsed = parseBlogUrlParam(slugParam);
+        const blogId =
+          parsed.id ||
+          resolveBlogIdFromParam(
+            slugParam,
+            blogsForLookup.map((item) => ({
+              title: item.title,
+              id: item.postId,
+              postId: item.postId,
+              PK: item.PK,
+            })),
+          );
+
+        if (!blogId) {
+          throw new Error("Blog not found");
+        }
+
+        const response = await fetch(`${BLOG_API_URL}/${blogId}`, {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
         });
 
         if (!response.ok) {
@@ -180,26 +215,29 @@ const BlogsPost: React.FC = () => {
         }
 
         const responseData = await response.json();
-        console.log('Blog API Response:', responseData);
-        console.log('Response structure:', JSON.stringify(responseData, null, 2));
-        
         const raw = extractBlogPayload(responseData);
         if (!raw) {
           setError("Failed to load blog post");
           setBlog(null);
           return;
         }
+
         const normalized = normalizeBlog(raw);
         if (!normalized.title && !normalized.content) {
-          const alt = extractBlogPayload((responseData as any)?.data ?? (responseData as any)?.Item ?? (responseData as any)?.blog ?? (responseData as any)?.body);
+          const alt = extractBlogPayload(
+            (responseData as { data?: unknown; Item?: unknown; blog?: unknown; body?: unknown })?.data ??
+              (responseData as { Item?: unknown }).Item ??
+              (responseData as { blog?: unknown }).blog ??
+              (responseData as { body?: unknown }).body,
+          );
           if (alt) {
             setBlog(normalizeBlog(alt));
             return;
           }
         }
         setBlog(normalized);
-      } catch (error) {
-        console.error("Error fetching blog:", error);
+      } catch (fetchError) {
+        console.error("Error fetching blog:", fetchError);
         setError("Failed to load blog post");
         setBlog(null);
       } finally {
@@ -207,8 +245,28 @@ const BlogsPost: React.FC = () => {
       }
     };
 
-    fetchBlogById();
-  }, [id]);
+    fetchBlog();
+  }, [slugParam]);
+
+  useEffect(() => {
+    if (!blog || !slugParam) return;
+
+    const canonicalPath = buildBlogPath(
+      { title: blog.title, slug: blog.slug, id: blog.postId, postId: blog.postId, PK: blog.PK },
+      allBlogs.map((item) => ({
+        title: item.title,
+        slug: item.slug,
+        id: item.postId,
+        postId: item.postId,
+        PK: item.PK,
+      })),
+    );
+    const canonicalSlug = canonicalPath.replace("/blog/", "");
+
+    if (slugParam !== canonicalSlug) {
+      navigate(canonicalPath, { replace: true });
+    }
+  }, [blog, slugParam, allBlogs, navigate]);
 
   const formatDate = (dateString?: string) => {
     if (!dateString) return '';

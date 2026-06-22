@@ -308,7 +308,8 @@ const App = () => (
  
             <Route path="/company/partners" element={<OurPartners />} />
             <Route path="/company/clients" element={<OurClients />} />
-            <Route path="/company/careers" element={<Careers />} />
+            <Route path="/company/join-us" element={<Careers />} />
+            <Route path="/company/careers" element={<Navigate to="/company/join-us" replace />} />
             <Route path="/company/hiring" element={<Hiring />} />
             <Route path="/company/press-media" element={<PressMedia />} />
             <Route path="/support-plans" element={<SupportPlans />} />
@@ -321,7 +322,7 @@ const App = () => (
            
             {/* Blog Pages */}
             <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:id" element={<BlogPost />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/admin/blog" element={<CreateBlog />} />
             <Route path="/create-blog" element={<Navigate to="/admin/blog" replace />} />
            
