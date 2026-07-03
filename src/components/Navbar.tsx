@@ -215,7 +215,6 @@ const menuConfig: Record<MenuKey, MenuConfig> = {
             { label: 'Our clients', path: '/company/clients' },
             { label: 'Press & media', path: '/company/press-media' },
             { label: 'Join Us', path: '/company/join-us' },
-            { label: 'Support Plans', path: '/support-plans' },
             { label: 'Contact us', path: '/contact' },
           ],
         },

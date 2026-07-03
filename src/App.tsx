@@ -65,7 +65,6 @@ const OurClients = lazy(() => import("./pages/OurClients"));
 const Careers = lazy(() => import("./pages/Careers"));
 const Hiring = lazy(() => import("./pages/Hiring"));
 const PressMedia = lazy(() => import("./pages/PressMedia"));
-const SupportPlans = lazy(() => import("./pages/SupportPlans"));
 const GoGlobalAward = lazy(() => import("./pages/GoGlobalAward"));
 const Reinforce360TM = lazy(() => import("./pages/Reinforce360TM"));
 const Blog = lazy(() => import("./pages/Blog"));
@@ -107,7 +106,6 @@ const SectionThemeController = () => {
         pathname.startsWith("/company") ||
         pathname.startsWith("/about") ||
         pathname.startsWith("/contact") ||
-        pathname.startsWith("/support-plans") ||
         pathname.startsWith("/privacy-policy") ||
         pathname.startsWith("/terms-of-service") ||
         pathname.startsWith("/go-global-award") ||
@@ -312,7 +310,6 @@ const App = () => (
             <Route path="/company/careers" element={<Navigate to="/company/join-us" replace />} />
             <Route path="/company/hiring" element={<Hiring />} />
             <Route path="/company/press-media" element={<PressMedia />} />
-            <Route path="/support-plans" element={<SupportPlans />} />
  
             {/* Go Global Award Dedicated Page */}
             <Route path="/go-global-award" element={<GoGlobalAward />} />
