@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import {
   buildBlogPath,
-  parseBlogUrlParam,
+  getBlogSlug,
   resolveBlogIdFromParam,
 } from "@/lib/blogUtils";
 import {
@@ -154,16 +154,30 @@ const BlogsPost: React.FC = () => {
     let data = tryParseJson(responseData);
 
     if (data && typeof data === 'object') {
-      if (typeof (data as any).body === 'string') {
+      // Detail API returns Lambda proxy envelope: { statusCode, headers, body: { blog } | { error } }
+      const statusCode = (data as any).statusCode;
+      if (typeof statusCode === 'number' && 'body' in (data as object)) {
+        if (statusCode >= 400) return null;
+        const body = tryParseJson((data as any).body);
+        data = body;
+      } else if (typeof (data as any).body === 'string') {
         const parsedBody = tryParseJson((data as any).body);
         if (parsedBody && parsedBody !== (data as any).body) data = parsedBody;
       }
 
-      const wrapped = (data as any).data ?? (data as any).Item ?? (data as any).blog;
-      if (wrapped !== undefined) data = tryParseJson(wrapped);
+      if (data && typeof data === 'object') {
+        const wrapped =
+          (data as any).data ??
+          (data as any).Item ??
+          (data as any).blog;
+        if (wrapped !== undefined) data = tryParseJson(wrapped);
+      }
     }
 
     if (Array.isArray(data)) return data[0] ?? null;
+    if (data && typeof data === 'object' && (data as any).error && !(data as any).title) {
+      return null;
+    }
     return data ?? null;
   };
 
@@ -188,54 +202,65 @@ const BlogsPost: React.FC = () => {
           setAllBlogs(blogsForLookup);
         }
 
-        const parsed = parseBlogUrlParam(slugParam);
-        const blogId =
-          parsed.id ||
-          resolveBlogIdFromParam(
-            slugParam,
-            blogsForLookup.map((item) => ({
-              title: item.title,
-              id: item.postId,
-              postId: item.postId,
-              PK: item.PK,
-            })),
-          );
+        const lookupSources = blogsForLookup.map((item) => ({
+          title: item.title,
+          slug: item.slug,
+          id: item.postId || item.PK,
+          postId: item.postId,
+          PK: item.PK,
+        }));
 
-        if (!blogId) {
+        const blogId = resolveBlogIdFromParam(slugParam, lookupSources);
+
+        // Prefer the list item when available (includes full content) so a detail
+        // API envelope/parse issue never blocks opening a known post.
+        const fromList = blogId
+          ? blogsForLookup.find((item) => item.postId === blogId)
+          : blogsForLookup.find(
+              (item) =>
+                getBlogSlug({ title: item.title, slug: item.slug, id: item.postId, postId: item.postId, PK: item.PK }) ===
+                slugParam,
+            );
+
+        if (fromList?.title || fromList?.content) {
+          setBlog(fromList);
+          // Still refresh from detail API when possible, but don't fail the page if it 404s.
+        }
+
+        if (!blogId && !fromList) {
           throw new Error("Blog not found");
         }
 
-        const response = await fetch(`${BLOG_API_URL}/${blogId}`, {
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-        });
+        if (blogId) {
+          const response = await fetch(`${BLOG_API_URL}/${blogId}`, {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+          });
 
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
+          const responseData = await response.json();
+          const raw = extractBlogPayload(responseData);
 
-        const responseData = await response.json();
-        const raw = extractBlogPayload(responseData);
-        if (!raw) {
+          if (raw) {
+            const normalized = normalizeBlog(raw);
+            if (normalized.title || normalized.content) {
+              setBlog(normalized);
+              return;
+            }
+          }
+
+          if (fromList?.title || fromList?.content) {
+            return;
+          }
+
           setError("Failed to load blog post");
           setBlog(null);
           return;
         }
 
-        const normalized = normalizeBlog(raw);
-        if (!normalized.title && !normalized.content) {
-          const alt = extractBlogPayload(
-            (responseData as { data?: unknown; Item?: unknown; blog?: unknown; body?: unknown })?.data ??
-              (responseData as { Item?: unknown }).Item ??
-              (responseData as { blog?: unknown }).blog ??
-              (responseData as { body?: unknown }).body,
-          );
-          if (alt) {
-            setBlog(normalizeBlog(alt));
-            return;
-          }
+        if (!fromList) {
+          setError("Failed to load blog post");
+          setBlog(null);
         }
-        setBlog(normalized);
       } catch (fetchError) {
         console.error("Error fetching blog:", fetchError);
         setError("Failed to load blog post");
